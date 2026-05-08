@@ -1,0 +1,1550 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bau & HOAI Revision</title>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,600&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f5f3ef;--bgc:#fff;--bgp:#faf9f7;--ink:#1a1814;--ink2:#4a4640;--ink3:#8a857e;--b:#e0dbd4;--bs:#c8c2bb;--ac:#1e3a5f;--acl:#e8edf5;--go:#b8932a;--gl:#fdf6e8;--re:#b83232;--rl:#fbe8e8;--or:#c4601a;--ol:#fdf0e8;--gr:#2a6e3f;--grl:#e8f5ed;--r:4px;--rm:8px;}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--ink);font-size:14px;line-height:1.5;min-height:100vh;}
+.shell{display:flex;height:100vh;overflow:hidden;}
+.sidebar{width:228px;flex-shrink:0;background:var(--ac);display:flex;flex-direction:column;overflow-y:auto;}
+.slogo{padding:18px 16px 14px;border-bottom:1px solid rgba(255,255,255,.08);}
+.slogo-mark{font-family:'Fraunces',serif;font-size:9px;font-weight:600;color:rgba(255,255,255,.4);letter-spacing:.15em;text-transform:uppercase;margin-bottom:4px;}
+.slogo-text{font-family:'Fraunces',serif;font-size:16px;font-weight:300;color:#fff;line-height:1.2;}
+
+/* PROJECT SWITCHER */
+.psw{padding:10px 12px;border-bottom:1px solid rgba(255,255,255,.08);}
+.psw-label{font-size:9px;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.32);margin-bottom:5px;}
+.psw-row{display:flex;gap:5px;align-items:center;}
+.psw-sel{flex:1;font-family:'DM Sans',sans-serif;font-size:11.5px;padding:5px 8px;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.14);border-radius:var(--r);color:#fff;cursor:pointer;outline:none;appearance:none;}
+.psw-sel option{background:#1e3a5f;}
+.psw-btn{width:24px;height:24px;border-radius:var(--r);border:1px solid rgba(255,255,255,.18);background:rgba(255,255,255,.07);color:rgba(255,255,255,.65);cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:13px;flex-shrink:0;transition:all .15s;}
+.psw-btn:hover{background:rgba(255,255,255,.18);color:#fff;}
+.psw-acts{display:flex;gap:4px;margin-top:6px;}
+.psw-act{flex:1;font-family:'DM Sans',sans-serif;font-size:10px;padding:4px 0;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:var(--r);color:rgba(255,255,255,.55);cursor:pointer;text-align:center;transition:all .15s;}
+.psw-act:hover{background:rgba(255,255,255,.14);color:#fff;}
+.psw-ind{font-size:9px;color:rgba(255,255,255,.3);margin-top:5px;text-align:right;font-family:'IBM Plex Mono',monospace;transition:color .3s;}
+.psw-ind.ok{color:rgba(100,220,140,.65);}
+
+.snav{padding:10px 0;flex:1;}
+.snav-lbl{font-size:9px;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.28);padding:12px 16px 5px;}
+.ni{display:flex;align-items:center;gap:9px;padding:9px 16px;color:rgba(255,255,255,.58);cursor:pointer;transition:all .15s;font-size:13px;border-left:2px solid transparent;}
+.ni:hover{background:rgba(255,255,255,.06);color:rgba(255,255,255,.9);}
+.ni.active{background:rgba(255,255,255,.1);color:#fff;border-left-color:#e8c96d;}
+.ni svg{width:15px;height:15px;flex-shrink:0;}
+.nbadge{margin-left:auto;background:rgba(184,50,50,.85);color:#fff;font-size:10px;font-weight:500;padding:1px 6px;border-radius:10px;font-family:'IBM Plex Mono',monospace;}
+.sfooter{padding:13px 16px;border-top:1px solid rgba(255,255,255,.08);}
+.smeta{font-size:11px;color:rgba(255,255,255,.32);line-height:1.75;}
+.smeta strong{color:rgba(255,255,255,.58);font-weight:500;}
+
+.main{flex:1;overflow:hidden;display:flex;flex-direction:column;}
+.topbar{height:52px;background:var(--bgc);border-bottom:1px solid var(--b);display:flex;align-items:center;padding:0 24px;gap:14px;flex-shrink:0;}
+.tb-title{font-family:'Fraunces',serif;font-size:15px;font-weight:600;}
+.tb-sub{font-size:11px;color:var(--ink3);font-family:'IBM Plex Mono',monospace;}
+.tb-acts{margin-left:auto;display:flex;gap:8px;align-items:center;}
+
+.btn{display:inline-flex;align-items:center;gap:6px;padding:7px 14px;border-radius:var(--rm);font-size:12px;font-weight:500;cursor:pointer;border:1px solid transparent;transition:all .15s;font-family:'DM Sans',sans-serif;}
+.bg{background:none;border-color:var(--bs);color:var(--ink2);}.bg:hover{background:var(--bg);}
+.bp{background:var(--ac);color:#fff;border-color:var(--ac);}.bp:hover{background:#15304e;}
+.bgo{background:var(--go);color:#fff;border-color:var(--go);}.bgo:hover{background:#a07d22;}
+.sm{padding:5px 10px;font-size:11px;}
+.sdot{width:7px;height:7px;border-radius:50%;display:inline-block;flex-shrink:0;}
+.dr{background:var(--re);}.do{background:var(--or);}.dg{background:var(--go);}.dgr{background:var(--gr);}.dgy{background:var(--ink3);}
+
+.content{flex:1;overflow-y:auto;padding:24px;display:flex;flex-direction:column;gap:20px;}
+.view{display:none;}.view.active{display:contents;}
+.krow{display:grid;grid-template-columns:repeat(5,1fr);gap:12px;}
+.kcard{background:var(--bgc);border:1px solid var(--b);border-radius:var(--rm);padding:14px 16px;position:relative;overflow:hidden;}
+.kcard::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;}
+.kcard.ar::before{background:var(--re);}.kcard.ao::before{background:var(--or);}
+.kcard.ag::before{background:var(--go);}.kcard.agr::before{background:var(--gr);}.kcard.ab::before{background:var(--ac);}
+.klbl{font-size:10px;font-weight:500;letter-spacing:.06em;text-transform:uppercase;color:var(--ink3);margin-bottom:6px;}
+.kval{font-family:'Fraunces',serif;font-size:28px;font-weight:600;line-height:1;}
+.ksub{font-size:11px;color:var(--ink3);margin-top:4px;font-family:'IBM Plex Mono',monospace;}
+.prow{display:grid;grid-template-columns:1fr 320px;gap:16px;}
+.panel{background:var(--bgc);border:1px solid var(--b);border-radius:var(--rm);overflow:hidden;}
+.ph{display:flex;align-items:center;padding:13px 18px;border-bottom:1px solid var(--b);gap:10px;}
+.pt{font-family:'Fraunces',serif;font-size:14px;font-weight:600;}
+.pc{font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--ink3);background:var(--bg);padding:2px 8px;border-radius:10px;border:1px solid var(--b);}
+.tw{overflow-x:auto;}
+table{width:100%;border-collapse:collapse;font-size:12.5px;}
+th{text-align:left;padding:9px 14px;font-size:10px;font-weight:500;letter-spacing:.06em;text-transform:uppercase;color:var(--ink3);background:var(--bgp);border-bottom:1px solid var(--b);white-space:nowrap;}
+td{padding:10px 14px;border-bottom:1px solid var(--b);vertical-align:middle;color:var(--ink2);}
+tr:last-child td{border-bottom:none;}tr:hover td{background:var(--bgp);cursor:pointer;}
+.tid{font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--ink3);}
+.ttl{font-weight:500;color:var(--ink);}.ttl small{display:block;font-weight:400;color:var(--ink3);font-size:11px;margin-top:1px;}
+.badge{display:inline-flex;align-items:center;gap:4px;padding:3px 8px;border-radius:var(--r);font-size:10px;font-weight:500;white-space:nowrap;}
+.bre{background:var(--rl);color:var(--re);}.bor{background:var(--ol);color:var(--or);}.bgo2{background:var(--gl);color:var(--go);}
+.bgr2{background:var(--grl);color:var(--gr);}.bbl{background:var(--acl);color:var(--ac);}.bgy{background:var(--bg);color:var(--ink3);border:1px solid var(--b);}
+.pt2{height:4px;background:var(--b);border-radius:2px;overflow:hidden;margin-top:4px;}
+.pf{height:100%;border-radius:2px;}
+.ai{display:flex;gap:12px;padding:10px 18px;border-bottom:1px solid var(--b);}
+.ai:last-child{border-bottom:none;}
+.aidot{width:6px;height:6px;border-radius:50%;margin-top:5px;flex-shrink:0;}
+.aitx{font-size:12.5px;color:var(--ink2);line-height:1.4;}
+.aitx strong{color:var(--ink);font-weight:500;}
+.aimeta{font-size:10px;color:var(--ink3);margin-top:2px;font-family:'IBM Plex Mono',monospace;}
+
+.mo{display:none;position:fixed;inset:0;background:rgba(26,24,20,.45);z-index:100;align-items:center;justify-content:center;padding:20px;}
+.mo.open{display:flex;}
+.modal{background:var(--bgc);border-radius:var(--rm);box-shadow:0 4px 24px rgba(26,24,20,.15);width:680px;max-width:100%;max-height:92vh;display:flex;flex-direction:column;overflow:hidden;}
+.mh{display:flex;align-items:center;padding:16px 20px;border-bottom:1px solid var(--b);gap:12px;}
+.mt{font-family:'Fraunces',serif;font-size:15px;font-weight:600;flex:1;}
+.mcl{width:28px;height:28px;border-radius:var(--r);border:1px solid var(--b);background:none;cursor:pointer;display:flex;align-items:center;justify-content:center;color:var(--ink3);font-size:16px;transition:all .15s;}
+.mcl:hover{background:var(--bg);}
+.mb{flex:1;overflow-y:auto;padding:20px;}
+.mf{padding:14px 20px;border-top:1px solid var(--b);display:flex;gap:8px;justify-content:flex-end;}
+.fg{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
+.fgr{display:flex;flex-direction:column;gap:5px;}.fgr.full{grid-column:1/-1;}
+label{font-size:11px;font-weight:500;letter-spacing:.04em;text-transform:uppercase;color:var(--ink3);}
+input,select,textarea{font-family:'DM Sans',sans-serif;font-size:13px;padding:8px 11px;border:1px solid var(--bs);border-radius:var(--r);background:var(--bgp);color:var(--ink);transition:border-color .15s;outline:none;width:100%;}
+input:focus,select:focus,textarea:focus{border-color:var(--ac);background:var(--bgc);}
+textarea{resize:vertical;min-height:72px;}
+.aip{background:var(--acl);border:1px solid #c8d8ec;border-radius:var(--rm);padding:14px;margin-top:12px;}
+.air{margin-top:10px;padding:12px 14px;background:var(--bgc);border:1px solid var(--b);border-radius:var(--r);font-size:12.5px;line-height:1.6;color:var(--ink2);min-height:58px;white-space:pre-wrap;}
+
+.trcols{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;}
+.trcol{background:var(--bgc);border:1px solid var(--b);border-radius:var(--rm);overflow:hidden;min-height:400px;}
+.trch{padding:12px 14px;border-bottom:1px solid var(--b);display:flex;align-items:center;gap:8px;}
+.trcn{font-size:12px;font-weight:500;}
+.trcc{font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--ink3);margin-left:auto;}
+.trcitems{padding:10px;display:flex;flex-direction:column;gap:8px;}
+.tcard{background:var(--bgp);border:1px solid var(--b);border-radius:var(--r);padding:10px 12px;cursor:pointer;transition:border-color .15s;}
+.tcard:hover{border-color:var(--ac);}
+.tcid{font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--ink3);margin-bottom:3px;}
+.tctitle{font-size:12px;font-weight:500;line-height:1.3;margin-bottom:6px;}
+.tcdue{font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--ink3);margin-top:5px;}
+.tcdue.ov{color:var(--re);}
+
+.chat-msgs{flex:1;overflow-y:auto;padding:16px;display:flex;flex-direction:column;gap:12px;min-height:280px;}
+.cmsg{max-width:85%;padding:10px 14px;border-radius:var(--rm);font-size:13px;line-height:1.5;}
+.cmsg.u{align-self:flex-end;background:var(--ac);color:#fff;}
+.cmsg.a{align-self:flex-start;background:var(--bgp);border:1px solid var(--b);color:var(--ink2);white-space:pre-wrap;}
+.msrc{font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--ink3);margin-bottom:4px;}
+.cinp{display:flex;gap:8px;padding:12px 16px;border-top:1px solid var(--b);}
+.cinp input{flex:1;}
+
+.rpaper{background:#fff;max-width:840px;margin:0 auto;box-shadow:0 2px 20px rgba(26,24,20,.12);border-radius:2px;}
+.rcov{background:var(--ac);color:#fff;padding:48px 60px 38px;}
+.rcbdg{font-size:9px;font-weight:500;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.42);border-top:1px solid rgba(255,255,255,.15);border-bottom:1px solid rgba(255,255,255,.15);padding:7px 0;margin-bottom:26px;display:flex;gap:24px;}
+.rctitle{font-family:'Fraunces',serif;font-size:32px;font-weight:300;line-height:1.15;margin-bottom:8px;white-space:pre-line;}
+.rcsub{font-size:14px;color:rgba(255,255,255,.58);margin-bottom:38px;}
+.rcmeta{display:grid;grid-template-columns:1fr 1fr 1fr;border-top:1px solid rgba(255,255,255,.15);padding-top:18px;}
+.rcml{font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.38);margin-bottom:3px;}
+.rcmv{font-size:13px;color:rgba(255,255,255,.88);}
+.rsec{padding:34px 60px;border-bottom:1px solid var(--b);}
+.rsec:last-child{border-bottom:none;}
+.rsnum{font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--ink3);letter-spacing:.08em;margin-bottom:4px;}
+.rstitle{font-family:'Fraunces',serif;font-size:19px;font-weight:600;margin-bottom:14px;padding-bottom:10px;border-bottom:1.5px solid var(--ink);}
+.rfind{border:1px solid var(--b);border-radius:var(--rm);margin-bottom:14px;overflow:hidden;}
+.rfh{display:flex;align-items:center;gap:10px;padding:10px 16px;background:var(--bgp);border-bottom:1px solid var(--b);}
+.rfid{font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--ink3);}
+.rftitle{font-weight:500;font-size:13px;flex:1;}
+.rfb{padding:14px 16px;}
+.rfl{margin-bottom:9px;}.rfl:last-child{margin-bottom:0;}
+.rfll{font-size:10px;text-transform:uppercase;letter-spacing:.06em;color:var(--ink3);font-weight:500;margin-bottom:3px;}
+.rflv{font-size:13px;color:var(--ink2);line-height:1.5;}
+.rsg{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin-bottom:18px;}
+.rst{text-align:center;padding:14px;background:var(--bgp);border:1px solid var(--b);border-radius:var(--r);}
+.rstn{font-family:'Fraunces',serif;font-size:26px;font-weight:600;}
+.rstl{font-size:11px;color:var(--ink3);margin-top:2px;}
+
+/* PROJ LIST MODAL */
+.pjlist{display:flex;flex-direction:column;gap:6px;margin-bottom:14px;}
+.pjitem{display:flex;align-items:center;gap:10px;padding:10px 12px;border:1px solid var(--b);border-radius:var(--rm);cursor:pointer;transition:all .15s;}
+.pjitem:hover,.pjitem.cur{border-color:var(--ac);background:var(--acl);}
+.pjname{font-weight:500;font-size:13px;flex:1;}
+.pjmeta{font-size:11px;color:var(--ink3);font-family:'IBM Plex Mono',monospace;}
+.pjbtns{display:flex;gap:4px;}
+
+.fl{display:flex;}.aic{align-items:center;}.g8{gap:8px;}.mla{margin-left:auto;}
+.tm{color:var(--ink3);}.mono{font-family:'IBM Plex Mono',monospace;}.xs{font-size:11px;}
+.dvd{height:1px;background:var(--b);margin:14px 0;}.fw{width:100%;}
+
+/* RECENT PROJECTS WIDGET */
+.rp-widget{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:0;}
+.rp-card{background:var(--bgc);border:1px solid var(--b);border-radius:var(--rm);padding:14px 16px;cursor:pointer;transition:all .15s;position:relative;overflow:hidden;}
+.rp-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:var(--ac);opacity:.4;transition:opacity .15s;}
+.rp-card:hover{border-color:var(--ac);box-shadow:0 2px 8px rgba(30,58,95,.08);}
+.rp-card:hover::before{opacity:1;}
+.rp-card.active-proj{border-color:var(--ac);background:var(--acl);}
+.rp-card.active-proj::before{opacity:1;background:var(--ac);}
+.rp-card-label{font-size:9px;font-weight:500;letter-spacing:.08em;text-transform:uppercase;color:var(--ink3);margin-bottom:5px;}
+.rp-card-name{font-family:'Fraunces',serif;font-size:14px;font-weight:600;color:var(--ink);line-height:1.3;margin-bottom:8px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.rp-card-meta{font-size:10px;color:var(--ink3);font-family:'IBM Plex Mono',monospace;line-height:1.6;}
+.rp-card-stats{display:flex;gap:6px;margin-top:8px;flex-wrap:wrap;}
+.rp-stat{display:inline-flex;align-items:center;gap:3px;font-size:10px;font-weight:500;padding:2px 7px;border-radius:var(--r);}
+
+/* INLINE PROJECT NAME EDIT */
+.proj-name-row{display:flex;align-items:center;gap:6px;padding:8px 12px;border-bottom:1px solid rgba(255,255,255,.06);}
+.proj-name-inp{flex:1;font-family:'DM Sans',sans-serif;font-size:12px;padding:4px 8px;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.15);border-radius:var(--r);color:#fff;outline:none;transition:border-color .15s;}
+.proj-name-inp::placeholder{color:rgba(255,255,255,.3);}
+.proj-name-inp:focus{border-color:rgba(255,255,255,.4);background:rgba(255,255,255,.15);}
+.proj-name-save{font-family:'DM Sans',sans-serif;font-size:10px;padding:4px 9px;background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.2);border-radius:var(--r);color:#fff;cursor:pointer;transition:all .15s;flex-shrink:0;}
+.proj-name-save:hover{background:rgba(255,255,255,.25);}
+.proj-name-hint{font-size:9px;color:rgba(255,255,255,.3);padding:0 12px 6px;font-family:'IBM Plex Mono',monospace;}
+
+/* API PANEL */
+.apipanel{padding:10px 12px;border-top:1px solid rgba(255,255,255,.08);}
+.api-label{font-size:9px;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.32);margin-bottom:6px;}
+.api-status{display:flex;align-items:center;gap:6px;margin-bottom:8px;}
+.api-dot{width:7px;height:7px;border-radius:50%;flex-shrink:0;transition:background .4s;}
+.api-dot.disconnected{background:rgba(255,255,255,.2);}
+.api-dot.checking{background:var(--go);animation:apipulse .8s ease-in-out infinite;}
+.api-dot.connected{background:#4ade80;}
+.api-dot.error{background:#f87171;}
+@keyframes apipulse{0%,100%{opacity:1;}50%{opacity:.3;}}
+.api-status-text{font-size:10px;font-family:'IBM Plex Mono',monospace;color:rgba(255,255,255,.45);transition:color .3s;}
+.api-status-text.connected{color:#4ade80;}
+.api-status-text.error{color:#f87171;}
+.api-status-text.checking{color:var(--go);}
+.api-key-wrap{position:relative;margin-bottom:6px;}
+.api-key-inp{width:100%;font-family:'IBM Plex Mono',monospace;font-size:11px;padding:6px 30px 6px 8px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.12);border-radius:var(--r);color:rgba(255,255,255,.8);outline:none;letter-spacing:.04em;transition:border-color .15s;}
+.api-key-inp::placeholder{color:rgba(255,255,255,.25);letter-spacing:0;}
+.api-key-inp:focus{border-color:rgba(255,255,255,.3);background:rgba(255,255,255,.12);}
+.api-key-inp.has-key{letter-spacing:.1em;}
+.api-eye{position:absolute;right:6px;top:50%;transform:translateY(-50%);background:none;border:none;cursor:pointer;color:rgba(255,255,255,.35);font-size:12px;padding:2px;}
+.api-eye:hover{color:rgba(255,255,255,.7);}
+.api-btns{display:flex;gap:4px;}
+.api-btn{flex:1;font-family:'DM Sans',sans-serif;font-size:10px;font-weight:500;padding:5px 4px;border-radius:var(--r);cursor:pointer;text-align:center;transition:all .15s;white-space:nowrap;}
+.api-btn-check{background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.2);color:rgba(255,255,255,.8);}
+.api-btn-check:hover{background:rgba(255,255,255,.2);color:#fff;}
+.api-btn-check:disabled{opacity:.4;cursor:not-allowed;}
+.api-btn-disc{background:rgba(184,50,50,.2);border:1px solid rgba(184,50,50,.35);color:rgba(255,130,130,.9);}
+.api-btn-disc:hover{background:rgba(184,50,50,.35);}
+.api-btn-disc:disabled{opacity:.3;cursor:not-allowed;}
+.api-model{font-size:9px;color:rgba(255,255,255,.25);margin-top:5px;font-family:'IBM Plex Mono',monospace;text-align:right;}
+
+/* REPORT PRINT */
+@media print{
+  .sidebar,.topbar,.tb-acts,.psw,.apipanel,.sfooter,.rpt-toolbar{display:none!important;}
+  .rpaper{box-shadow:none;max-width:100%;margin:0;}
+  .rsec{padding:28px 48px;}
+  .rcov{padding:40px 48px 32px;}
+  body{background:#fff;}
+}
+
+/* REPORT EXTRA STYLES */
+.rpt-toolbar{display:flex;align-items:center;gap:10px;margin-bottom:18px;flex-wrap:wrap;}
+.rpt-status{display:flex;align-items:center;gap:8px;}
+.rpt-gen-btn{display:inline-flex;align-items:center;gap:7px;padding:9px 18px;border-radius:var(--rm);font-size:13px;font-weight:500;cursor:pointer;border:none;transition:all .2s;font-family:'DM Sans',sans-serif;}
+.rpt-gen-btn.primary{background:var(--ac);color:#fff;}
+.rpt-gen-btn.primary:hover{background:#15304e;}
+.rpt-gen-btn.secondary{background:var(--go);color:#fff;}
+.rpt-gen-btn.secondary:hover{background:#9a7a22;}
+.rpt-gen-btn.outline{background:none;border:1px solid var(--bs);color:var(--ink2);}
+.rpt-gen-btn.outline:hover{background:var(--bg);}
+.rpt-gen-btn:disabled{opacity:.45;cursor:not-allowed;}
+.rpt-gen-btn .spin{display:inline-block;width:13px;height:13px;border:2px solid rgba(255,255,255,.4);border-top-color:#fff;border-radius:50%;animation:spin .7s linear infinite;}
+@keyframes spin{to{transform:rotate(360deg);}}
+
+.rskm{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin:16px 0;}
+.rskm-card{border-radius:var(--rm);padding:14px 16px;text-align:center;border:1px solid var(--b);}
+.rskm-num{font-family:'Fraunces',serif;font-size:32px;font-weight:600;line-height:1;}
+.rskm-lbl{font-size:11px;color:var(--ink3);margin-top:4px;font-family:'IBM Plex Mono',monospace;}
+
+.rmatrix{width:100%;border-collapse:collapse;font-size:12px;margin:12px 0;}
+.rmatrix th{text-align:left;padding:8px 12px;font-size:10px;font-weight:500;letter-spacing:.06em;text-transform:uppercase;background:var(--ac);color:#fff;border:none;}
+.rmatrix td{padding:9px 12px;border-bottom:1px solid var(--b);vertical-align:top;}
+.rmatrix tr:nth-child(even) td{background:var(--bgp);}
+.rmatrix tr:hover td{background:var(--acl);}
+
+.rfind-card{border:1px solid var(--b);border-radius:var(--rm);margin-bottom:16px;overflow:hidden;}
+.rfind-head{display:flex;align-items:center;gap:10px;padding:11px 16px;border-bottom:1px solid var(--b);}
+.rfind-body{display:grid;grid-template-columns:160px 1fr;gap:0;font-size:12.5px;}
+.rfind-body .lbl{background:var(--bgp);padding:8px 12px;color:var(--ink3);font-size:10px;font-weight:500;text-transform:uppercase;letter-spacing:.05em;border-bottom:1px solid var(--b);}
+.rfind-body .val{padding:8px 12px;color:var(--ink2);border-bottom:1px solid var(--b);line-height:1.5;}
+.rfind-body .lbl.wide,.rfind-body .val.wide{grid-column:1/-1;}
+.rfind-body .lbl.wide{background:var(--bgp);}
+
+.massn-table{width:100%;border-collapse:collapse;font-size:11.5px;margin:12px 0;}
+.massn-table th{text-align:left;padding:8px 10px;font-size:10px;font-weight:500;text-transform:uppercase;letter-spacing:.05em;background:var(--ac);color:#fff;}
+.massn-table td{padding:8px 10px;border-bottom:1px solid var(--b);vertical-align:top;}
+.massn-table tr:nth-child(even) td{background:var(--bgp);}
+.massn-check{width:16px;height:16px;border:1.5px solid var(--bs);border-radius:3px;display:inline-block;}
+
+.hoai-table{width:100%;border-collapse:collapse;font-size:13px;margin:12px 0;}
+.hoai-table td{padding:10px 14px;border-bottom:1px solid var(--b);}
+.hoai-table tr:nth-child(even) td{background:var(--bgp);}
+.hoai-table .hoai-lbl{font-weight:500;color:var(--ink2);width:55%;}
+.hoai-table .hoai-val{color:var(--ink);text-align:right;}
+.hoai-table .hoai-val.alert{color:var(--re);font-weight:600;}
+
+.sig-block{display:grid;grid-template-columns:1fr 80px 1fr;gap:0;margin-top:60px;}
+.sig-line{border-top:2px solid var(--ink);padding-top:10px;margin-top:80px;}
+.sig-name{font-weight:500;font-size:13px;margin-bottom:2px;}
+.sig-role{font-size:11px;color:var(--ink3);}
+
+.alert-box{border-left:4px solid var(--re);background:var(--rl);border-radius:0 var(--rm) var(--rm) 0;padding:14px 18px;margin:16px 0;}
+.alert-box.navy{border-left-color:var(--ac);background:var(--acl);}
+.alert-box-title{font-size:11px;font-weight:500;text-transform:uppercase;letter-spacing:.06em;color:var(--re);margin-bottom:6px;}
+.alert-box.navy .alert-box-title{color:var(--ac);}
+.alert-box-text{font-size:13px;color:var(--ink2);line-height:1.6;}
+</style>
+</head>
+<body>
+<div class="shell">
+
+<nav class="sidebar">
+  <div class="slogo">
+    <div class="slogo-mark">Revisionssystem</div>
+    <div class="slogo-text">Bau &amp;<br>HOAI Revision</div>
+  </div>
+
+  <div class="psw">
+    <div class="psw-label">Aktives Projekt</div>
+    <div class="psw-row">
+      <select class="psw-sel" id="psel" onchange="switchProj(this.value)"></select>
+      <button class="psw-btn" title="Alle Projekte" onclick="openM('plist')">☰</button>
+    </div>
+    <div class="psw-acts">
+      <button class="psw-act" onclick="newProj()">+ Neu</button>
+      <button class="psw-act" onclick="exportProj()">↓ Export</button>
+      <button class="psw-act" onclick="document.getElementById('impfile').click()">↑ Import</button>
+    </div>
+    <input type="file" id="impfile" accept=".json" style="display:none" onchange="importProj(event)">
+    <div class="psw-ind" id="sind">Bereit</div>
+  </div>
+
+  <!-- INLINE PROJECT NAME -->
+  <div class="proj-name-row">
+    <input class="proj-name-inp" type="text" id="proj-name-inp" placeholder="Projektname eingeben..." oninput="onProjNameInput()" onkeydown="if(event.key==='Enter')saveProjNameInline()">
+    <button class="proj-name-save" onclick="saveProjNameInline()" title="Name speichern">✓</button>
+  </div>
+  <div class="proj-name-hint" id="proj-name-hint"></div>
+
+  <div class="snav">
+    <div class="snav-lbl">Übersicht</div>
+    <div class="ni active" id="n-dash" onclick="gv('dashboard')">
+      <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="1" y="1" width="6" height="6" rx="1"/><rect x="9" y="1" width="6" height="6" rx="1"/><rect x="1" y="9" width="6" height="6" rx="1"/><rect x="9" y="9" width="6" height="6" rx="1"/></svg>
+      Dashboard
+    </div>
+    <div class="snav-lbl">Prüfung</div>
+    <div class="ni" id="n-fest" onclick="gv('fest')">
+      <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 4h10M3 8h10M3 12h6"/></svg>
+      Feststellungen
+      <span class="nbadge" id="nbadge">0</span>
+    </div>
+    <div class="ni" id="n-track" onclick="gv('track')">
+      <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="8" cy="8" r="7"/><path d="M8 4v4l3 2"/></svg>
+      Nachverfolgung
+    </div>
+    <div class="ni" id="n-ki" onclick="gv('ki')">
+      <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M8 2a6 6 0 100 12A6 6 0 008 2z"/><path d="M6 6.5c.3-.8 1.2-1.5 2-1.5 1 0 2 .7 2 1.7 0 1.5-2 2-2 3.3M8 12v.5"/></svg>
+      KI-Assistent
+    </div>
+    <div class="snav-lbl">Abschluss</div>
+    <div class="ni" id="n-rpt" onclick="gv('rpt')">
+      <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="1" width="12" height="14" rx="1"/><path d="M5 5h6M5 8h6M5 11h4"/></svg>
+      Revisionsbericht
+    </div>
+  </div>
+  <!-- API CONNECTION PANEL -->
+  <div class="apipanel">
+    <div class="api-label">KI-API Verbindung</div>
+    <div class="api-status">
+      <div class="api-dot disconnected" id="api-dot"></div>
+      <span class="api-status-text" id="api-stxt">Nicht verbunden</span>
+    </div>
+    <div class="api-key-wrap">
+      <input class="api-key-inp" type="password" id="api-key" placeholder="sk-ant-api03-..." autocomplete="off" oninput="onApiKeyInput()">
+      <button class="api-eye" id="api-eye" onclick="toggleApiVis()" title="Anzeigen/Verbergen">&#9679;</button>
+    </div>
+    <div class="api-btns">
+      <button class="api-btn api-btn-check" id="api-check-btn" onclick="checkApiConnection()" disabled>Verbindung pr&#252;fen</button>
+      <button class="api-btn api-btn-disc" id="api-disc-btn" onclick="disconnectApi()" disabled>Trennen</button>
+    </div>
+    <div class="api-model" id="api-model"></div>
+  </div>
+
+  <div class="sfooter">
+    <div class="smeta" id="smeta">Kein Projekt geladen</div>
+  </div>
+</nav>
+
+<div class="main">
+  <div class="topbar">
+    <div>
+      <div class="tb-title" id="tbtitle">Dashboard</div>
+      <div class="tb-sub" id="tbsub">Bau- und HOAI-Revision</div>
+    </div>
+    <div class="tb-acts">
+      <button class="btn bg sm" onclick="gv('ki')">KI fragen</button>
+      <button class="btn bg sm" onclick="openM('neue')">+ Feststellung</button>
+      <button class="btn bgo sm" onclick="gv('rpt')">Bericht generieren</button>
+    </div>
+  </div>
+
+  <div class="content">
+
+    <!-- DASHBOARD -->
+    <div class="view active" id="view-dashboard">
+
+      <!-- RECENT PROJECTS WIDGET -->
+      <div class="rp-widget" id="rp-widget"></div>
+
+      <div class="krow">
+        <div class="kcard ar"><div class="klbl">Kritisch</div><div class="kval" id="kkrit">0</div><div class="ksub">Sofortmaßnahmen</div></div>
+        <div class="kcard ao"><div class="klbl">Erheblich</div><div class="kval" id="kerheb">0</div><div class="ksub">Wesentliche Mängel</div></div>
+        <div class="kcard ag"><div class="klbl">Hinweise</div><div class="kval" id="khinw">0</div><div class="ksub">Optimierungsbedarf</div></div>
+        <div class="kcard agr"><div class="klbl">Erledigt</div><div class="kval" id="kerl">0</div><div class="ksub" id="kerlsub">von 0 gesamt</div></div>
+        <div class="kcard ab"><div class="klbl">Konformität</div><div class="kval" id="kkonf">–</div><div class="ksub" id="kkonfsub">Noch keine Daten</div></div>
+      </div>
+      <div class="prow">
+        <div class="panel">
+          <div class="ph"><div class="pt">Aktuelle Feststellungen</div><div class="pc" id="dcount">0 offen</div><button class="btn bg sm mla" onclick="gv('fest')">Alle →</button></div>
+          <div class="tw"><table><thead><tr><th>ID</th><th>Feststellung</th><th>Bereich</th><th>Schwere</th><th>Status</th></tr></thead><tbody id="dtable"></tbody></table></div>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:12px;">
+          <div class="panel"><div class="ph"><div class="pt">LP-Prüffortschritt</div></div><div style="padding:14px 18px;display:flex;flex-direction:column;gap:12px;" id="lprog"></div></div>
+          <div class="panel" style="flex:1;"><div class="ph"><div class="pt">Aktivitäten</div></div><div id="actlist"></div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- FESTSTELLUNGEN -->
+    <div class="view" id="view-fest">
+      <div class="panel">
+        <div class="ph">
+          <div class="pt">Alle Feststellungen</div><div class="pc" id="fcount">0</div>
+          <div class="mla fl g8">
+            <select id="fsw" onchange="rdFest()" style="font-size:12px;padding:5px 8px;"><option value="">Alle Schweren</option><option>Kritisch</option><option>Erheblich</option><option>Hinweis</option></select>
+            <select id="fst" onchange="rdFest()" style="font-size:12px;padding:5px 8px;"><option value="">Alle Status</option><option>Offen</option><option>In Bearbeitung</option><option>Stellungnahme</option><option>Erledigt</option></select>
+            <button class="btn bp sm" onclick="openM('neue')">+ Neue Feststellung</button>
+          </div>
+        </div>
+        <div class="tw"><table><thead><tr><th>ID</th><th>Feststellung</th><th>HOAI</th><th>Bereich</th><th>Schwere</th><th>Status</th><th>Frist</th><th>Verantw.</th></tr></thead><tbody id="ftable"></tbody></table></div>
+      </div>
+    </div>
+
+    <!-- TRACKING -->
+    <div class="view" id="view-track">
+      <div class="trcols">
+        <div class="trcol"><div class="trch"><span class="sdot dr"></span><span class="trcn">Offen</span><span class="trcc" id="tco">0</span></div><div class="trcitems" id="tro"></div></div>
+        <div class="trcol"><div class="trch"><span class="sdot dg"></span><span class="trcn">In Bearbeitung</span><span class="trcc" id="tcb">0</span></div><div class="trcitems" id="trb"></div></div>
+        <div class="trcol"><div class="trch"><span class="sdot do"></span><span class="trcn">Stellungnahme</span><span class="trcc" id="tcs">0</span></div><div class="trcitems" id="trs"></div></div>
+        <div class="trcol"><div class="trch"><span class="sdot dgr"></span><span class="trcn">Erledigt</span><span class="trcc" id="tce">0</span></div><div class="trcitems" id="tre"></div></div>
+      </div>
+    </div>
+
+    <!-- KI -->
+    <div class="view" id="view-ki">
+      <div style="display:grid;grid-template-columns:1fr 330px;gap:16px;">
+        <div class="panel" style="display:flex;flex-direction:column;">
+          <div class="ph"><span class="badge bbl">KI</span><div class="pt">Revisions-Assistent</div></div>
+          <div class="chat-msgs" id="chatmsgs"><div class="cmsg a"><div class="msrc">KI-Assistent · Bau & HOAI</div>Guten Tag! Stellen Sie Fragen zu Feststellungen, HOAI-Paragraphen oder Fristen, oder nutzen Sie die Schnellanalyse.</div></div>
+          <div class="cinp"><input type="text" id="chin" placeholder="Frage zur Revision..." onkeydown="if(event.key==='Enter')sendChat()"><button class="btn bp" onclick="sendChat()">Senden</button></div>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:12px;">
+          <div class="panel">
+            <div class="ph"><div class="pt">Schnellanalyse</div></div>
+            <div style="padding:12px;display:flex;flex-direction:column;gap:6px;">
+              <button class="btn bg fw" style="justify-content:flex-start;" onclick="kiA('hoai')">§ HOAI-Konformität</button>
+              <button class="btn bg fw" style="justify-content:flex-start;" onclick="kiA('risiko')">⚠ Risikoanalyse</button>
+              <button class="btn bg fw" style="justify-content:flex-start;" onclick="kiA('frist')">⏱ Fristenprüfung</button>
+              <button class="btn bg fw" style="justify-content:flex-start;" onclick="kiA('summ')">▤ Zusammenfassung</button>
+            </div>
+          </div>
+          <div class="panel" style="flex:1;"><div class="ph"><div class="pt">Analyseergebnis</div></div><div id="kiresult" style="padding:14px;font-size:12.5px;color:var(--ink2);line-height:1.6;white-space:pre-wrap;min-height:100px;"><span style="color:var(--ink3);">Analyse auswählen...</span></div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- BERICHT -->
+    <div class="view" id="view-rpt">
+
+      <!-- TOOLBAR -->
+      <div class="rpt-toolbar">
+        <div class="rpt-status">
+          <span class="badge bgy" id="rpt-badge">Entwurf</span>
+          <span style="font-size:12px;color:var(--ink3);" id="rptdate">Revisionsbericht</span>
+        </div>
+        <button class="rpt-gen-btn primary" id="rpt-ai-btn" onclick="generateRptAI()">
+          <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="8" cy="8" r="6"/><path d="M5 8h6M8 5v6"/></svg>
+          KI-Bericht generieren
+        </button>
+        <button class="rpt-gen-btn secondary" onclick="exportDocx()">
+          <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 12h10M8 2v8M5 7l3 3 3-3"/></svg>
+          .docx herunterladen
+        </button>
+        <button class="rpt-gen-btn outline" onclick="window.print()">
+          <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="6" width="10" height="7" rx="1"/><path d="M5 6V3h6v3M5 11h6"/></svg>
+          PDF drucken
+        </button>
+        <button class="rpt-gen-btn outline" onclick="toggleRptFreigabe()">Freigeben</button>
+      </div>
+
+      <div class="rpaper" id="rpt-paper">
+        <div class="rcov">
+          <div class="rcbdg"><span>Revisionsbericht</span><span>Bau &amp; HOAI § 34 ff.</span><span>Vertraulich</span></div>
+          <div class="rctitle" id="rtitle">Revisionsbericht</div>
+          <div class="rcsub" id="rsub">Bau- und HOAI-Revision</div>
+          <div class="rcmeta">
+            <div><div class="rcml">Auftraggeber</div><div class="rcmv" id="rag">–</div></div>
+            <div><div class="rcml">Prüfstelle</div><div class="rcmv" id="rpf">–</div></div>
+            <div><div class="rcml">Berichtsdatum</div><div class="rcmv" id="rdt">–</div></div>
+          </div>
+        </div>
+
+        <div class="rsec">
+          <div class="rsnum">01</div>
+          <div class="rstitle">Executive Summary</div>
+          <p style="font-size:13px;line-height:1.8;color:var(--ink2);margin-bottom:14px;" id="rsumm">–</p>
+          <div class="rskm">
+            <div class="rskm-card" style="background:var(--rl);border-color:#f5c0c0;">
+              <div class="rskm-num" style="color:var(--re);" id="rkrit">0</div>
+              <div class="rskm-lbl">Kritische Feststellungen</div>
+            </div>
+            <div class="rskm-card" style="background:var(--ol);">
+              <div class="rskm-num" style="color:var(--or);" id="rerheb">0</div>
+              <div class="rskm-lbl">Erhebliche Mängel</div>
+            </div>
+            <div class="rskm-card" style="background:var(--gl);">
+              <div class="rskm-num" style="color:var(--go);" id="rhinw">0</div>
+              <div class="rskm-lbl">Hinweise</div>
+            </div>
+            <div class="rskm-card" style="background:var(--grl);">
+              <div class="rskm-num" style="color:var(--gr);" id="rerl">0</div>
+              <div class="rskm-lbl">Erledigt</div>
+            </div>
+          </div>
+          <div id="rpt-exec-ai" style="font-size:13px;line-height:1.8;color:var(--ink2);white-space:pre-wrap;margin-top:12px;"></div>
+          <div class="alert-box" id="rpt-sofort" style="display:none;">
+            <div class="alert-box-title">Sofortmassnahmen erforderlich</div>
+            <div class="alert-box-text" id="rpt-sofort-text"></div>
+          </div>
+        </div>
+
+        <div class="rsec">
+          <div class="rsnum">02</div>
+          <div class="rstitle">Risikomatrix – Gesamtübersicht</div>
+          <p style="font-size:13px;color:var(--ink2);margin-bottom:12px;">Vollständiger Überblick aller Feststellungen mit Schweregrad, Risiko und Frist:</p>
+          <table class="rmatrix">
+            <thead><tr><th>ID</th><th>Feststellung</th><th>Bereich</th><th>Schwere</th><th>Risiko</th><th>Status</th><th>Frist</th></tr></thead>
+            <tbody id="rpt-matrix"></tbody>
+          </table>
+        </div>
+
+        <div class="rsec">
+          <div class="rsnum">03</div>
+          <div class="rstitle">Feststellungen – Detailbericht</div>
+          <div id="rpt-findings-detail"></div>
+        </div>
+
+        <div class="rsec">
+          <div class="rsnum">04</div>
+          <div class="rstitle">HOAI-Honorarprüfung</div>
+          <p style="font-size:13px;line-height:1.8;color:var(--ink2);margin-bottom:12px;" id="rpt-hoai-intro">–</p>
+          <table class="hoai-table" id="rpt-hoai-table"></table>
+          <div style="margin-top:12px;font-size:13px;color:var(--ink2);line-height:1.6;" id="rpt-hoai-bew"></div>
+        </div>
+
+        <div class="rsec">
+          <div class="rsnum">05</div>
+          <div class="rstitle">Maßnahmenplan mit Fristenübersicht</div>
+          <p style="font-size:13px;color:var(--ink2);margin-bottom:12px;">Steuerungs- und Kontrollinstrument der Geschäftsführung. Spalte "Erl." nach Abschluss der Maßnahme abzeichnen.</p>
+          <table class="massn-table">
+            <thead><tr><th>ID</th><th>Maßnahme / Empfehlung</th><th>Verantw.</th><th>Frist</th><th>Priorität</th><th>Status</th><th style="width:40px;">Erl.</th></tr></thead>
+            <tbody id="rpt-massn"></tbody>
+          </table>
+        </div>
+
+        <div class="rsec">
+          <div class="rsnum">06</div>
+          <div class="rstitle">Gesamtbewertung &amp; Empfehlungen</div>
+          <p style="font-size:13px;line-height:1.8;color:var(--ink2);margin-bottom:14px;" id="rpt-gesamt">–</p>
+          <div class="alert-box navy">
+            <div class="alert-box-title">Empfehlung der Revisionsstelle</div>
+            <div class="alert-box-text" id="rpt-empfehlung">–</div>
+          </div>
+          <div id="rpt-gesamt-ai" style="font-size:13px;line-height:1.8;color:var(--ink2);white-space:pre-wrap;margin-top:14px;"></div>
+        </div>
+
+        <div class="rsec">
+          <div class="rsnum">07</div>
+          <div class="rstitle">Schlussbestätigung und Unterschriften</div>
+          <p style="font-size:13px;color:var(--ink2);margin-bottom:8px;">Mit Unterzeichnung bestätigt die Geschäftsführung die Kenntnisnahme der Feststellungen und Handlungsempfehlungen der Revisionsstelle.</p>
+          <div class="sig-block">
+            <div>
+              <div class="sig-line"></div>
+              <div class="sig-name" id="sig-pruefer">–</div>
+              <div class="sig-role">Revisionsstelle · Ort, Datum</div>
+            </div>
+            <div></div>
+            <div>
+              <div class="sig-line"></div>
+              <div class="sig-name">Geschäftsführung</div>
+              <div class="sig-role" id="sig-ag">–</div>
+            </div>
+          </div>
+          <div style="margin-top:40px;padding-top:16px;border-top:1px solid var(--b);font-size:11px;color:var(--ink3);line-height:1.7;" id="rpt-footer-text">–</div>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+</div>
+</div>
+
+<!-- MODAL: Projektliste -->
+<div class="mo" id="modal-plist">
+  <div class="modal" style="width:560px;">
+    <div class="mh"><div class="mt">Projekte verwalten</div><button class="mcl" onclick="closeM('plist')">✕</button></div>
+    <div class="mb">
+      <div class="pjlist" id="pjlistel"></div>
+      <div class="dvd"></div>
+      <div class="fgr"><label>Neues Projekt anlegen</label>
+        <div class="fl g8"><input type="text" id="npname" placeholder="Projektname, z.B. Neubau MFH Lindenstraße"><button class="btn bp sm" onclick="createProjModal()" style="white-space:nowrap;flex-shrink:0;">Anlegen</button></div>
+      </div>
+    </div>
+    <div class="mf"><button class="btn bg" onclick="closeM('plist')">Schließen</button></div>
+  </div>
+</div>
+
+<!-- MODAL: Projekt bearbeiten -->
+<div class="mo" id="modal-pedit">
+  <div class="modal" style="width:520px;">
+    <div class="mh"><div class="mt">Projektdetails</div><button class="mcl" onclick="closeM('pedit')">✕</button></div>
+    <div class="mb">
+      <div class="fg">
+        <div class="fgr full"><label>Projektname</label><input id="pe-name" type="text"></div>
+        <div class="fgr full"><label>Auftraggeber</label><input id="pe-ag" type="text"></div>
+        <div class="fgr"><label>Prüfer / Kanzlei</label><input id="pe-pf" type="text"></div>
+        <div class="fgr"><label>Prüfdatum</label><input id="pe-dt" type="date"></div>
+        <div class="fgr full"><label>Leistungsphasen</label><input id="pe-lp" type="text" placeholder="z.B. LP 5–8 HOAI"></div>
+      </div>
+    </div>
+    <div class="mf"><button class="btn bg" onclick="closeM('pedit')">Abbrechen</button><button class="btn bp" onclick="savePedit()">Speichern</button></div>
+  </div>
+</div>
+
+<!-- MODAL: Neue Feststellung -->
+<div class="mo" id="modal-neue">
+  <div class="modal">
+    <div class="mh"><div class="mt">Neue Feststellung erfassen</div><button class="mcl" onclick="closeM('neue')">✕</button></div>
+    <div class="mb">
+      <div class="fg">
+        <div class="fgr"><label>HOAI-Paragraph</label><select id="nf-hoai"><option>§ 34 – Leistungsbild Gebäude</option><option>§ 35 – Besondere Leistungen</option><option>§ 50 – Tragwerksplanung</option><option>§ 5 – Honorarzone</option></select></div>
+        <div class="fgr"><label>Leistungsphase</label><select id="nf-lp"><option>LP 5 – Ausführungsplanung</option><option>LP 6 – Vorbereitung Vergabe</option><option>LP 7 – Mitwirkung Vergabe</option><option>LP 8 – Objektüberwachung</option></select></div>
+        <div class="fgr full"><label>Titel</label><input type="text" id="nf-titel" placeholder="Kurze, präzise Bezeichnung"></div>
+        <div class="fgr full"><label>Sachverhalt</label><textarea id="nf-beschr" placeholder="Detaillierte Beschreibung, Fundstellen..."></textarea></div>
+        <div class="fgr"><label>Schwere</label><select id="nf-sw"><option>Kritisch</option><option>Erheblich</option><option>Hinweis</option></select></div>
+        <div class="fgr"><label>Bereich</label><select id="nf-br"><option>Tragwerk / Statik</option><option>Brandschutz</option><option>HOAI-Honorar</option><option>Planung / Zeichnung</option><option>Vergabe / Vertrag</option><option>Ausführung</option></select></div>
+        <div class="fgr"><label>Frist</label><input type="date" id="nf-frist"></div>
+        <div class="fgr"><label>Verantwortlich</label><input type="text" id="nf-ver" placeholder="Büro / Person"></div>
+        <div class="fgr full"><label>Empfehlung / Maßnahme</label><textarea id="nf-empf" placeholder="Konkrete Handlungsempfehlung..."></textarea></div>
+      </div>
+      <div class="aip">
+        <div class="fl aic g8" style="margin-bottom:10px;"><span class="badge bbl" style="font-size:10px;">KI</span><span style="font-size:13px;font-weight:500;">Formulierungshilfe</span></div>
+        <div class="fl g8"><input type="text" id="ai-inp" placeholder="Mangel kurz schildern – KI formuliert professionell..." onkeydown="if(event.key==='Enter')kiForm()"><button class="btn bp sm" onclick="kiForm()" style="white-space:nowrap;flex-shrink:0;">Formulieren</button></div>
+        <div class="air" id="ai-resp">KI-Vorschlag erscheint hier...</div>
+      </div>
+    </div>
+    <div class="mf"><button class="btn bg" onclick="closeM('neue')">Abbrechen</button><button class="btn bp" onclick="saveFest()">Feststellung speichern</button></div>
+  </div>
+</div>
+
+<!-- MODAL: Detail -->
+<div class="mo" id="modal-det">
+  <div class="modal">
+    <div class="mh"><div class="mt" id="detTitle">Detail</div><button class="mcl" onclick="closeM('det')">✕</button></div>
+    <div class="mb" id="detBody"></div>
+    <div class="mf"><button class="btn bg" onclick="closeM('det')">Schließen</button></div>
+  </div>
+</div>
+
+<script>
+// ═══════════════════════════════════════════
+// STORAGE
+// ═══════════════════════════════════════════
+const SK = 'bau_rev_v2';
+function loadS(){ try{ return JSON.parse(localStorage.getItem(SK)); }catch(e){ return null; } }
+function saveS(){
+  try{ localStorage.setItem(SK, JSON.stringify(S)); ind('Gespeichert ✓', true); }
+  catch(e){ ind('Speicherfehler!', false); }
+}
+function ind(msg, ok){
+  const el=document.getElementById('sind');
+  el.textContent=msg; el.className='psw-ind'+(ok?' ok':'');
+  setTimeout(()=>{ el.textContent='Autosave aktiv'; el.className='psw-ind'; }, 2000);
+}
+
+// ═══════════════════════════════════════════
+// DEMO DATA
+// ═══════════════════════════════════════════
+const DEMO = [
+  {id:'F-001',titel:'Fehlende statische Nachweise – Deckenaufbau OG 3',kurz:'Statik nicht vorgelegt',hoai:'§ 34 LP 5',bereich:'Tragwerk',schwere:'Kritisch',status:'Offen',frist:'2025-04-14',verantw:'Büro Schulz',beschr:'Die statischen Berechnungen für den Deckenaufbau OG 3 wurden nicht vorgelegt. Schalungszeichnungen weichen sicherheitsrelevant ab.',empf:'Baustopp bis Vorlage der Nachweise. Prüfingenieur beauftragen (§ 66 BayBO).',esk:true},
+  {id:'F-002',titel:'Brandschutzkonzept nicht HOAI-konform',kurz:'Rettungswegplanung mangelhaft',hoai:'§ 34 LP 5',bereich:'Brandschutz',schwere:'Kritisch',status:'In Bearbeitung',frist:'2025-04-21',verantw:'Büro Meier',beschr:'Brandschutzkonzept entspricht nicht BayBO 2022. Rettungswegplanung Treppenhaus 2 mangelhaft.',empf:'Überarbeitung durch Brandschutzingenieur. Behördliche Stellungnahme.',esk:false},
+  {id:'F-003',titel:'Honorarüberschreitung LP 6 – Vorbereitung Vergabe',kurz:'HOAI-Tafelwert +12,4%',hoai:'§ 34 LP 6',bereich:'HOAI-Honorar',schwere:'Erheblich',status:'Stellungnahme',frist:'2025-04-28',verantw:'Architekt Schulz',beschr:'Honorar übersteigt HOAI-Tafelwert HZ III um 12,4 % (EUR 38.200,–). Keine Vereinbarung besonderer Leistungen.',empf:'Rückforderung EUR 38.200,– bei Folgeabrechnung.',esk:false},
+  {id:'F-004',titel:'Leistungsverzeichnis unvollständig',kurz:'Positionen Außenanlagen fehlen',hoai:'§ 34 LP 6',bereich:'Vergabe',schwere:'Erheblich',status:'Offen',frist:'2025-04-18',verantw:'Büro Schulz',beschr:'LV fehlen Positionen für Außenanlagen und Haustechnik.',empf:'LV ergänzen. Ausschreibungswiederholung prüfen.',esk:false},
+  {id:'F-005',titel:'Vergabevermerk nicht dokumentiert',kurz:'Bieterauswahl fehlt',hoai:'§ 34 LP 7',bereich:'Vergabe',schwere:'Hinweis',status:'In Bearbeitung',frist:'2025-04-22',verantw:'Büro Schulz',beschr:'Vergabevermerk für Los Rohbau nicht vorhanden.',empf:'Vergabevermerk nacherstellen.',esk:false},
+  {id:'F-006',titel:'Brandschutznachweis LP 5 nachgereicht',kurz:'Erledigt',hoai:'§ 34 LP 5',bereich:'Brandschutz',schwere:'Erheblich',status:'Erledigt',frist:'2025-04-01',verantw:'Büro Meier',beschr:'Brandschutznachweis nicht fristgerecht eingereicht. Am 06.04.2025 nachgereicht.',empf:'Dokument liegt vor – erledigt.',esk:false},
+];
+
+function mkProj(name){
+  return {id:Date.now().toString(36)+Math.random().toString(36).slice(2),name:name||'Neues Projekt',auftraggeber:'',pruefer:'',datum:new Date().toISOString().split('T')[0],lp:'LP 5–8 HOAI',feststellungen:[],akt:[],created:new Date().toISOString(),modified:new Date().toISOString()};
+}
+
+// ═══════════════════════════════════════════
+// GLOBAL STATE
+// ═══════════════════════════════════════════
+let S = loadS();
+if(!S){
+  const demo = mkProj('Musterprojekt – MFH Lindenstraße');
+  demo.auftraggeber='Stadtbau GmbH München'; demo.pruefer='Dr. M. Hoffmann'; demo.datum='2025-04-07';
+  demo.feststellungen=JSON.parse(JSON.stringify(DEMO));
+  demo.akt=[
+    {txt:'F-001 als kritisch eingestuft – Statiknachweis fehlt',dot:'dr',ts:'Heute, 09:14 · Dr. Hoffmann'},
+    {txt:'F-006 erledigt – Brandschutznachweis nachgereicht',dot:'dgr',ts:'Gestern, 16:42 · Büro Meier'},
+    {txt:'F-002 Frist überschritten – Eskalation',dot:'do',ts:'05.04.2025 · System'},
+  ];
+  S={aid:demo.id,projs:[demo]};
+  saveS();
+}
+if(!S.projs.find(p=>p.id===S.aid)) S.aid=S.projs[0]?.id;
+
+function AP(){ return S.projs.find(p=>p.id===S.aid)||S.projs[0]; }
+function D(){ return AP()?.feststellungen||[]; }
+function persist(){ const p=AP(); if(p) p.modified=new Date().toISOString(); saveS(); }
+
+// ═══════════════════════════════════════════
+// PROJECT MANAGEMENT
+// ═══════════════════════════════════════════
+function rdPSel(){
+  const sel=document.getElementById('psel');
+  sel.innerHTML=S.projs.map(p=>`<option value="${p.id}"${p.id===S.aid?' selected':''}>${p.name}</option>`).join('');
+}
+
+function rdMeta(){
+  const p=AP(); if(!p) return;
+  document.getElementById('smeta').innerHTML=`<strong>Projekt:</strong> ${p.name}<br><strong>Prüfer:</strong> ${p.pruefer||'–'}<br><strong>Stand:</strong> ${p.datum?new Date(p.datum).toLocaleDateString('de-DE'):'–'}`;
+  document.getElementById('tbsub').textContent=`Bau- und HOAI-Revision · ${p.name}`;
+}
+
+function switchProj(id){ S.aid=id; saveS(); rdPSel(); rdMeta(); rdAll(); }
+
+function newProj(){
+  const name=prompt('Projektname:'); if(!name) return;
+  const p=mkProj(name.trim()); S.projs.push(p); S.aid=p.id; saveS(); rdPSel(); rdMeta(); rdAll();
+}
+
+function createProjModal(){
+  const name=document.getElementById('npname').value.trim(); if(!name) return;
+  const p=mkProj(name); S.projs.push(p); S.aid=p.id; saveS();
+  document.getElementById('npname').value='';
+  rdPSel(); rdMeta(); rdAll(); rdProjList();
+}
+
+function delProj(id){
+  if(S.projs.length<=1){alert('Mindestens ein Projekt muss verbleiben.');return;}
+  const p=S.projs.find(x=>x.id===id);
+  if(!confirm(`Projekt "${p?.name}" wirklich löschen?`)) return;
+  S.projs=S.projs.filter(x=>x.id!==id);
+  if(S.aid===id) S.aid=S.projs[0].id;
+  saveS(); rdPSel(); rdMeta(); rdAll(); rdProjList();
+}
+
+function openPedit(id){
+  const p=S.projs.find(x=>x.id===id); if(!p) return;
+  document.getElementById('pe-name').value=p.name;
+  document.getElementById('pe-ag').value=p.auftraggeber||'';
+  document.getElementById('pe-pf').value=p.pruefer||'';
+  document.getElementById('pe-dt').value=p.datum||'';
+  document.getElementById('pe-lp').value=p.lp||'';
+  document.getElementById('modal-pedit').dataset.eid=id;
+  closeM('plist'); openM('pedit');
+}
+
+function savePedit(){
+  const id=document.getElementById('modal-pedit').dataset.eid;
+  const p=S.projs.find(x=>x.id===id); if(!p) return;
+  p.name=document.getElementById('pe-name').value||p.name;
+  p.auftraggeber=document.getElementById('pe-ag').value;
+  p.pruefer=document.getElementById('pe-pf').value;
+  p.datum=document.getElementById('pe-dt').value;
+  p.lp=document.getElementById('pe-lp').value;
+  persist(); closeM('pedit'); rdPSel(); rdMeta(); rdAll(); openM('plist'); rdProjList();
+}
+
+function rdProjList(){
+  document.getElementById('pjlistel').innerHTML=S.projs.map(p=>{
+    const cur=p.id===S.aid;
+    const fc=p.feststellungen?.length||0;
+    const dt=p.modified?new Date(p.modified).toLocaleDateString('de-DE'):'–';
+    return `<div class="pjitem${cur?' cur':''}" onclick="switchProj('${p.id}');closeM('plist');">
+      <div style="flex:1;"><div class="pjname">${p.name}</div><div class="pjmeta">${fc} Festst. · ${dt}${p.pruefer?' · '+p.pruefer:''}</div></div>
+      <div class="pjbtns" onclick="event.stopPropagation()">
+        <button class="btn bg sm" onclick="exportProjId('${p.id}')">↓</button>
+        <button class="btn bg sm" onclick="openPedit('${p.id}')">✎</button>
+        <button class="btn bg sm" style="color:var(--re)" onclick="delProj('${p.id}')">✕</button>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+// ═══════════════════════════════════════════
+// EXPORT / IMPORT
+// ═══════════════════════════════════════════
+function exportProj(){ exportProjId(S.aid); }
+function exportProjId(id){
+  const p=S.projs.find(x=>x.id===id); if(!p) return;
+  const blob=new Blob([JSON.stringify(p,null,2)],{type:'application/json'});
+  const a=document.createElement('a');
+  a.href=URL.createObjectURL(blob);
+  a.download=`revision_${p.name.replace(/[^a-z0-9]/gi,'_')}_${new Date().toISOString().split('T')[0]}.json`;
+  a.click(); URL.revokeObjectURL(a.href);
+}
+function importProj(ev){
+  const file=ev.target.files[0]; if(!file) return;
+  const rd=new FileReader();
+  rd.onload=e=>{
+    try{
+      const p=JSON.parse(e.target.result);
+      if(!p.name||!Array.isArray(p.feststellungen)) throw new Error('Ungültiges Format');
+      p.id=Date.now().toString(36)+Math.random().toString(36).slice(2);
+      p.modified=new Date().toISOString();
+      S.projs.push(p); S.aid=p.id; saveS();
+      rdPSel(); rdMeta(); rdAll(); alert(`Projekt "${p.name}" importiert.`);
+    }catch(e){ alert('Import-Fehler: '+e.message); }
+  };
+  rd.readAsText(file); ev.target.value='';
+}
+
+// ═══════════════════════════════════════════
+// HELPERS
+// ═══════════════════════════════════════════
+const SC={Kritisch:'bre',Erheblich:'bor',Hinweis:'bgo2'};
+const SS={Erledigt:'bgr2','In Bearbeitung':'bbl',Stellungnahme:'bgo2',Offen:'bgy'};
+const SD={Kritisch:'dr',Erheblich:'do',Hinweis:'dg'};
+function sC(s){return SC[s]||'bgy';} function stC(s){return SS[s]||'bgy';} function sdot(s){return SD[s]||'dgy';}
+function fs(f){return f?new Date(f).toLocaleDateString('de-DE'):'–';}
+function ov(f,s){return s!=='Erledigt'&&f&&new Date(f)<new Date();}
+
+// ═══════════════════════════════════════════
+// NAVIGATION
+// ═══════════════════════════════════════════
+function gv(v){
+  document.querySelectorAll('.view').forEach(e=>e.classList.remove('active'));
+  document.querySelectorAll('.ni').forEach(e=>e.classList.remove('active'));
+  const el=document.getElementById('view-'+v); if(el) el.classList.add('active');
+  const ni=document.getElementById('n-'+({dashboard:'dash',fest:'fest',track:'track',ki:'ki',rpt:'rpt'}[v]||v));
+  if(ni) ni.classList.add('active');
+  const T={dashboard:'Dashboard',fest:'Feststellungen',track:'Nachverfolgung',ki:'KI-Assistent',rpt:'Revisionsbericht'};
+  document.getElementById('tbtitle').textContent=T[v]||v;
+  if(v==='dashboard') rdDash();
+  if(v==='fest') rdFest();
+  if(v==='track') rdTrack();
+  if(v==='rpt') rdRpt();
+}
+
+// ═══════════════════════════════════════════
+// RENDER
+// ═══════════════════════════════════════════
+function rdAll(){ rdDash(); rdFest(); rdTrack(); rdRpt(); }
+
+function rdDash(){
+  const d=D(), open=d.filter(f=>f.status!=='Erledigt');
+  const krit=d.filter(f=>f.schwere==='Kritisch'&&f.status!=='Erledigt').length;
+  const erheb=d.filter(f=>f.schwere==='Erheblich'&&f.status!=='Erledigt').length;
+  const hinw=d.filter(f=>f.schwere==='Hinweis'&&f.status!=='Erledigt').length;
+  const erl=d.filter(f=>f.status==='Erledigt').length;
+  document.getElementById('kkrit').textContent=krit;
+  document.getElementById('kerheb').textContent=erheb;
+  document.getElementById('khinw').textContent=hinw;
+  document.getElementById('kerl').textContent=erl;
+  document.getElementById('kerlsub').textContent='von '+d.length+' gesamt';
+  document.getElementById('dcount').textContent=open.length+' offen';
+  document.getElementById('nbadge').textContent=open.length;
+  if(d.length>0){ const p=Math.round(erl/d.length*100); document.getElementById('kkonf').textContent=p+'%'; document.getElementById('kkonfsub').textContent=erl+' von '+d.length+' abgeschlossen'; }
+  else{ document.getElementById('kkonf').textContent='–'; document.getElementById('kkonfsub').textContent='Noch keine Daten'; }
+  // LP Progress
+  const lps=[['LP 5','Ausführungsplanung','var(--gr)'],['LP 6','Vorbereitung Vergabe','var(--go)'],['LP 7','Mitwirkung Vergabe','var(--or)'],['LP 8','Objektüberwachung','var(--re)']];
+  document.getElementById('lprog').innerHTML = d.length===0 ? '<p style="font-size:12px;color:var(--ink3);">Keine Feststellungen.</p>' :
+    lps.map(([lp,name,col],i)=>{
+      const tot=d.filter(f=>f.hoai&&f.hoai.includes('LP '+(i+5))).length;
+      const dn=d.filter(f=>f.hoai&&f.hoai.includes('LP '+(i+5))&&f.status==='Erledigt').length;
+      const pct=tot>0?Math.round(dn/tot*100):0;
+      return `<div><div class="fl aic g8" style="margin-bottom:4px;"><span style="font-size:12px;color:var(--ink2);">${lp} – ${name}</span><span class="xs mono mla tm">${tot>0?pct+'%':'–'}</span></div><div class="pt2"><div class="pf" style="width:${pct}%;background:${col};"></div></div></div>`;
+    }).join('');
+  // Activity
+  const acts=(AP().akt||[]).slice(-6).reverse();
+  document.getElementById('actlist').innerHTML=acts.length
+    ? acts.map(a=>`<div class="ai"><div class="aidot ${a.dot}"></div><div><div class="aitx">${a.txt}</div><div class="aimeta">${a.ts}</div></div></div>`).join('')
+    : '<p style="padding:16px 18px;font-size:12px;color:var(--ink3);">Keine Aktivitäten.</p>';
+  // Table
+  document.getElementById('dtable').innerHTML=open.slice(0,7).map(f=>`
+    <tr onclick="openDet('${f.id}')">
+      <td class="tid">${f.id}</td>
+      <td class="ttl">${f.titel}<small>${f.hoai||''}</small></td>
+      <td><span class="badge bgy" style="font-size:9px;">${f.bereich}</span></td>
+      <td><span class="badge ${sC(f.schwere)}"><span class="sdot ${sdot(f.schwere)}"></span>${f.schwere}</span></td>
+      <td><span class="badge ${stC(f.status)}">${f.status}</span></td>
+    </tr>`).join('')||'<tr><td colspan="5" style="text-align:center;color:var(--ink3);padding:20px;">Keine offenen Feststellungen</td></tr>';
+}
+
+function rdFest(){
+  const sw=document.getElementById('fsw')?.value||'';
+  const st=document.getElementById('fst')?.value||'';
+  let d=D();
+  if(sw) d=d.filter(f=>f.schwere===sw);
+  if(st) d=d.filter(f=>f.status===st);
+  document.getElementById('fcount').textContent=d.length+' gesamt';
+  document.getElementById('ftable').innerHTML=d.length?d.map(f=>{
+    const o=ov(f.frist,f.status);
+    return `<tr onclick="openDet('${f.id}')">
+      <td class="tid">${f.id}${f.esk?'<span class="badge bre" style="font-size:9px;margin-left:4px;">ESK</span>':''}</td>
+      <td class="ttl" style="max-width:220px;">${f.titel}<small>${f.kurz||''}</small></td>
+      <td class="xs mono tm">${f.hoai||''}</td>
+      <td><span class="badge bgy" style="font-size:9px;">${f.bereich}</span></td>
+      <td><span class="badge ${sC(f.schwere)}"><span class="sdot ${sdot(f.schwere)}"></span>${f.schwere}</span></td>
+      <td><span class="badge ${stC(f.status)}">${f.status}</span></td>
+      <td class="xs mono" style="${o?'color:var(--re);':''}">${fs(f.frist)}</td>
+      <td class="xs">${f.verantw||'–'}</td>
+    </tr>`;
+  }).join(''):'<tr><td colspan="8" style="text-align:center;color:var(--ink3);padding:20px;">Keine Feststellungen</td></tr>';
+}
+
+function rdTrack(){
+  const gr={O:[],B:[],S:[],E:[]};
+  const mp={'Offen':'O','In Bearbeitung':'B','Stellungnahme':'S','Erledigt':'E'};
+  D().forEach(f=>{ const k=mp[f.status]; if(k) gr[k].push(f); });
+  const ks={O:'o',B:'b',S:'s',E:'e'};
+  Object.entries(gr).forEach(([g,items])=>{
+    const k=ks[g];
+    document.getElementById('tc'+k).textContent=items.length;
+    document.getElementById('tr'+k).innerHTML=items.map(f=>{
+      const o=ov(f.frist,f.status);
+      return `<div class="tcard" onclick="openDet('${f.id}')">
+        <div class="tcid">${f.id}</div><div class="tctitle">${f.titel}</div>
+        <div style="display:flex;gap:4px;flex-wrap:wrap;">
+          <span class="badge ${sC(f.schwere)}" style="font-size:9px;">${f.schwere}</span>
+          <span class="badge bgy" style="font-size:9px;">${f.bereich}</span>
+        </div>
+        <div class="tcdue${o?' ov':''}">Frist: ${fs(f.frist)}</div>
+      </div>`;
+    }).join('');
+  });
+}
+
+function rdRpt(){
+  const p=AP(); const d=D();
+  const erl=d.filter(f=>f.status==='Erledigt').length;
+  const krit=d.filter(f=>f.schwere==='Kritisch');
+  const erheb=d.filter(f=>f.schwere==='Erheblich');
+  const hinw=d.filter(f=>f.schwere==='Hinweis');
+  const open=d.filter(f=>f.status!=='Erledigt');
+  const pct=d.length>0?Math.round(erl/d.length*100):0;
+  const dt=p.datum?new Date(p.datum).toLocaleDateString('de-DE',{day:'2-digit',month:'long',year:'numeric'}):'–';
+
+  // Header
+  const set=(id,v)=>{const el=document.getElementById(id);if(el)el.textContent=v;};
+  const setHTML=(id,v)=>{const el=document.getElementById(id);if(el)el.innerHTML=v;};
+  set('rtitle','Revisionsbericht\n'+p.name);
+  set('rsub','Bau- und HOAI-Revision · '+(p.lp||''));
+  set('rag',p.auftraggeber||'–');
+  set('rpf',p.pruefer||'–');
+  set('rdt',dt);
+  set('rptdate','Revisionsbericht · '+dt);
+  set('sig-pruefer',p.pruefer||'–');
+  set('sig-ag',p.auftraggeber||'–');
+  set('rpt-footer-text','Revisionsbericht erstellt durch '+(p.pruefer||'–')+' · '+(p.kanzlei||p.auftraggeber||'') +'. Aktenzeichen: '+(p.az||'–')+'. Stand: '+dt+'. Vertraulich – nur für die Geschäftsführung.');
+
+  // KPIs
+  set('rkrit',String(krit.filter(f=>f.status!=='Erledigt').length));
+  set('rerheb',String(erheb.filter(f=>f.status!=='Erledigt').length));
+  set('rhinw',String(hinw.filter(f=>f.status!=='Erledigt').length));
+  set('rerl',String(erl));
+
+  // Summary
+  set('rsumm', d.length>0
+    ? `Die Bau- und HOAI-Revision "${p.name}" umfasst die Prüfung der ${p.lp||'Leistungsphasen'}. Es wurden ${d.length} Feststellungen erhoben, davon ${krit.length} kritische und ${erheb.length} erhebliche Mängel. Abschlussquote: ${pct}%.`
+    : 'Noch keine Feststellungen erfasst.');
+
+  // Sofort-Alert
+  const critOpen=krit.filter(f=>f.status!=='Erledigt');
+  const sofort=document.getElementById('rpt-sofort');
+  if(sofort){
+    if(critOpen.length>0){
+      sofort.style.display='';
+      set('rpt-sofort-text',critOpen.map(f=>`• ${f.id}: ${f.titel} (Frist: ${fs(f.frist)})`).join('\n'));
+    } else { sofort.style.display='none'; }
+  }
+
+  // Risikomatrix
+  const SC2={Kritisch:'bre',Erheblich:'bor',Hinweis:'bgo2'};
+  const SR={Hoch:'bre',Mittel:'bor',Niedrig:'bgr2'};
+  const tbody=document.getElementById('rpt-matrix');
+  if(tbody) tbody.innerHTML=d.length?d.map((f,i)=>`
+    <tr>
+      <td style="font-family:'IBM Plex Mono',monospace;font-size:11px;font-weight:600;color:var(--ac);">${f.id}</td>
+      <td style="font-weight:500;color:var(--ink);max-width:220px;">${f.titel}</td>
+      <td style="font-size:11px;color:var(--ink3);">${f.bereich}</td>
+      <td><span class="badge ${SC2[f.schwere]||'bgy'}">${f.schwere}</span></td>
+      <td><span class="badge ${SR[f.risiko]||'bgy'}">${f.risiko||'–'}</span></td>
+      <td><span class="badge ${stC(f.status)}">${f.status}</span></td>
+      <td style="font-family:'IBM Plex Mono',monospace;font-size:11px;${ov(f.frist,f.status)?'color:var(--re);font-weight:600;':''}">${fs(f.frist)}</td>
+    </tr>`).join(''):'<tr><td colspan="7" style="text-align:center;color:var(--ink3);padding:20px;">Keine Feststellungen</td></tr>';
+
+  // Findings detail
+  const fd=document.getElementById('rpt-findings-detail');
+  if(fd) fd.innerHTML=d.length?d.map(f=>{
+    const sc2={Kritisch:'var(--re)',Erheblich:'var(--or)',Hinweis:'var(--go)'};
+    const bg2={Kritisch:'var(--rl)',Erheblich:'var(--ol)',Hinweis:'var(--gl)'};
+    const fc=sc2[f.schwere]||'var(--ink3)';
+    const fbg=bg2[f.schwere]||'var(--bg)';
+    return `<div class="rfind-card">
+      <div class="rfind-head" style="background:${fbg};border-left:4px solid ${fc};">
+        <span style="font-family:'IBM Plex Mono',monospace;font-size:11px;color:${fc};font-weight:600;">${f.id}</span>
+        <span style="font-weight:600;font-size:13px;flex:1;color:var(--ink);">${f.titel}</span>
+        <span class="badge ${SC2[f.schwere]||'bgy'}">${f.schwere}</span>
+        ${f.esk?'<span class="badge bre" style="font-size:9px;">ESK</span>':''}
+      </div>
+      <div class="rfind-body">
+        <div class="lbl">HOAI-Bezug</div><div class="val">${f.hoai||'–'}</div>
+        <div class="lbl">Bereich</div><div class="val">${f.bereich}</div>
+        <div class="lbl">Verantwortlich</div><div class="val">${f.verantw||'–'}</div>
+        <div class="lbl">Frist</div><div class="val" style="${ov(f.frist,f.status)?'color:var(--re);font-weight:600;':''}">${fs(f.frist)}${ov(f.frist,f.status)?' · Überfällig':''}</div>
+        <div class="lbl">Risiko</div><div class="val">${f.risiko||'–'}</div>
+        <div class="lbl wide" style="border-top:2px solid var(--b);">SACHVERHALT</div>
+        <div class="val wide" style="line-height:1.6;border-top:2px solid var(--b);">${f.beschr||'–'}</div>
+        <div class="lbl wide">EMPFEHLUNG</div>
+        <div class="val wide" style="line-height:1.6;">${f.empf||'–'}</div>
+      </div>
+    </div>`;
+  }).join(''):'<p style="color:var(--ink3);font-size:13px;">Keine Feststellungen erfasst.</p>';
+
+  // HOAI
+  const hoaiRows=[
+    ['Anrechenbare Kosten (§ 4 HOAI)', p.hoai_anrechenbar ? 'EUR '+Number(p.hoai_anrechenbar).toLocaleString('de-DE')+',–' : '–', false],
+    ['Vereinbartes Honorar (gesamt)',  p.hoai_vereinbart  ? 'EUR '+Number(p.hoai_vereinbart).toLocaleString('de-DE')+',–'  : '–', false],
+    ['HOAI-Tafelwert Honorarzone '+(p.hz||'III'), p.hoai_tafelwert ? 'EUR '+Number(p.hoai_tafelwert).toLocaleString('de-DE')+',–' : '–', false],
+    ['Differenz / Überschreitung', p.hoai_differenz ? 'EUR '+Number(p.hoai_differenz).toLocaleString('de-DE')+',–' : '–', true],
+    ['Empfohlener Rückforderungsbetrag', p.hoai_differenz ? 'EUR '+Number(p.hoai_differenz).toLocaleString('de-DE')+',–' : '–', true],
+  ];
+  const ht=document.getElementById('rpt-hoai-table');
+  if(ht) ht.innerHTML=hoaiRows.map((r,i)=>`
+    <tr>
+      <td class="hoai-lbl" style="${i%2===0?'':'background:var(--bgp);'}">${r[0]}</td>
+      <td class="hoai-val ${r[2]?'alert':''}" style="${i%2===0?'':'background:var(--bgp);'}">${r[1]}</td>
+    </tr>`).join('');
+  set('rpt-hoai-intro',`Die Honorarabrechnung wurde anhand der anrechenbaren Kosten gemäß § 4 HOAI und der vereinbarten Honorarzone ${p.hz||'III'} überprüft.`);
+  set('rpt-hoai-bew', p.hoai_differenz
+    ? `Der Überschreitungsbetrag von EUR ${Number(p.hoai_differenz).toLocaleString('de-DE')},– ist bei fehlender Vereinbarung besonderer Leistungen nicht gerechtfertigt und geltend zu machen.`
+    : 'Honorardaten im Projekt hinterlegen (Projektdetails → ✎) um die HOAI-Prüfung auszufüllen.');
+
+  // Maßnahmenplan
+  const pm=document.getElementById('rpt-massn');
+  if(pm) pm.innerHTML=d.length?d.map((f,i)=>{
+    const prio=f.schwere==='Kritisch'?'Sofort':f.schwere==='Erheblich'?'Dringend':'Normal';
+    const prioc=f.schwere==='Kritisch'?'bre':f.schwere==='Erheblich'?'bor':'bgr2';
+    return `<tr style="${i%2===0?'':'background:var(--bgp);'}">
+      <td style="font-family:'IBM Plex Mono',monospace;font-size:11px;font-weight:600;color:var(--ac);">${f.id}</td>
+      <td style="font-size:11.5px;color:var(--ink2);">${f.empf||'–'}</td>
+      <td style="font-size:11.5px;color:var(--ink3);">${f.verantw||'–'}</td>
+      <td style="font-size:11.5px;font-weight:600;color:var(--re);">${fs(f.frist)}</td>
+      <td><span class="badge ${prioc}" style="font-size:10px;">${prio}</span></td>
+      <td><span class="badge ${stC(f.status)}" style="font-size:10px;">${f.status}</span></td>
+      <td><span class="massn-check"></span></td>
+    </tr>`;
+  }).join(''):'<tr><td colspan="7" style="text-align:center;color:var(--ink3);padding:20px;">Keine Feststellungen</td></tr>';
+
+  // Gesamtbewertung
+  const critN=krit.filter(f=>f.status!=='Erledigt').length;
+  const erhebN=erheb.filter(f=>f.status!=='Erledigt').length;
+  set('rpt-gesamt', critN>0
+    ? `Das Revisionsergebnis zeigt ${critN} kritische und ${erhebN} erhebliche Mängel, die ein unmittelbares Handeln der Geschäftsführung erfordern. Die Abschlussquote beträgt ${pct}%.`
+    : erhebN>0 ? `Es wurden ${erhebN} erhebliche Mängel festgestellt, die zeitnah zu beheben sind. Abschlussquote: ${pct}%.`
+    : `Keine wesentlichen Mängel offen. Abschlussquote: ${pct}%. Das Projekt befindet sich in ordnungsgemäßem Revisionsstand.`);
+  set('rpt-empfehlung', critN>0
+    ? `Partieller Baustopp in betroffenen Bereichen. Krisenabstimmung mit Auftraggeber, Architekt und Tragwerksplaner innerhalb 5 Werktagen. Honorarkorrektur EUR ${p.hoai_differenz?Number(p.hoai_differenz).toLocaleString('de-DE'):0},– geltend machen.`
+    : `Kontinuierliche Nachverfolgung der offenen Feststellungen. Nächste Revisionsrunde in KW ${new Date().toLocaleDateString('de-DE',{week:'numeric'})}.`);
+
+  // Update badge
+  const badge=document.getElementById('rpt-badge');
+  if(badge){ badge.textContent='Entwurf'; badge.className='badge bgy'; }
+}
+
+// ── REPORT AI GENERATION ──
+async function generateRptAI(){
+  if(!API_CONNECTED){ alert('Bitte zuerst API-Verbindung herstellen (Seitenmenü).'); return; }
+  const btn=document.getElementById('rpt-ai-btn');
+  btn.disabled=true;
+  btn.innerHTML='<span class="spin"></span> KI generiert...';
+  const p=AP(); const d=D();
+  const krit=d.filter(f=>f.schwere==='Kritisch'&&f.status!=='Erledigt');
+  const open=d.filter(f=>f.status!=='Erledigt');
+  const prompt=`Du bist ein öbuv. Sachverständiger für Baurecht und HOAI. Erstelle für die Geschäftsführung einen professionellen Executive Summary und eine Gesamtbewertung auf Basis dieser Revisionsdaten:
+
+Projekt: ${p.name}
+Auftraggeber: ${p.auftraggeber||'–'}
+Prüfer: ${p.pruefer||'–'}
+Feststellungen: ${d.length} gesamt, ${open.length} offen, ${krit.length} kritisch
+Kritische Feststellungen: ${krit.map(f=>f.id+': '+f.titel).join('; ')||'keine'}
+
+Antworte mit JSON: {"summary": "3-4 Sätze Executive Summary", "gesamtbewertung": "3-4 Sätze fachliche Gesamtbewertung mit Handlungsempfehlung"}`;
+
+  try{
+    const resp=await fetch('https://api.anthropic.com/v1/messages',{
+      method:'POST',
+      headers:{'Content-Type':'application/json','x-api-key':document.getElementById('api-key').value.trim(),'anthropic-version':'2023-06-01','anthropic-dangerous-direct-browser-access':'true'},
+      body:JSON.stringify({model:'claude-haiku-4-5-20251001',max_tokens:600,system:'Antworte ausschließlich mit validem JSON, kein Markdown.',messages:[{role:'user',content:prompt}]})
+    });
+    if(resp.ok){
+      const data=await resp.json();
+      const text=data.content?.[0]?.text||'{}';
+      try{
+        const j=JSON.parse(text.replace(/```json|```/g,'').trim());
+        const es=document.getElementById('rpt-exec-ai');
+        if(es&&j.summary) es.textContent=j.summary;
+        const ga=document.getElementById('rpt-gesamt-ai');
+        if(ga&&j.gesamtbewertung) ga.textContent=j.gesamtbewertung;
+        const badge=document.getElementById('rpt-badge');
+        if(badge){badge.textContent='KI-generiert';badge.className='badge bbl';}
+      }catch(e){ alert('KI-Antwort konnte nicht geparst werden.'); }
+    } else { alert('API-Fehler: '+resp.status); }
+  }catch(e){ alert('Netzwerkfehler: '+e.message); }
+  btn.disabled=false;
+  btn.innerHTML='<svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="8" cy="8" r="6"/><path d="M5 8h6M8 5v6"/></svg> KI-Bericht generieren';
+}
+
+// ── DOCX EXPORT ──
+function exportDocx(){
+  // Generate report data and trigger server-side or provide instructions
+  const p=AP(); const d=D();
+  const json=JSON.stringify({project:p,feststellungen:d,generated:new Date().toISOString()},null,2);
+  const blob=new Blob([json],{type:'application/json'});
+  const a=document.createElement('a');
+  a.href=URL.createObjectURL(blob);
+  a.download='revisionsdaten_'+p.name.replace(/[^a-zA-Z0-9]/g,'_')+'.json';
+  a.click();
+  URL.revokeObjectURL(a.href);
+  // Show download info
+  setTimeout(()=>{
+    alert('Revisionsdaten exportiert.\n\nFür den professionellen .docx-Bericht:\n• Öffnen Sie die heruntergeladene JSON-Datei mit dem beiliegenden gen_report.js Skript.\n\nAlternativ: PDF über "PDF drucken" direkt aus dem Browser erstellen.');
+  },200);
+}
+
+// ── FREIGABE TOGGLE ──
+function toggleRptFreigabe(){
+  const badge=document.getElementById('rpt-badge');
+  if(!badge) return;
+  if(badge.textContent==='Freigegeben'){ badge.textContent='Entwurf'; badge.className='badge bgy'; }
+  else { badge.textContent='Freigegeben'; badge.className='badge bgr2'; }
+}
+
+
+
+// ═══════════════════════════════════════════
+// FESTSTELLUNG CRUD
+// ═══════════════════════════════════════════
+function saveFest(){
+  const p=AP();
+  const titel=document.getElementById('nf-titel').value.trim()||'Neue Feststellung';
+  const nextId='F-'+String(p.feststellungen.length+1).padStart(3,'0');
+  p.feststellungen.push({
+    id:nextId, titel, kurz:titel.substring(0,45),
+    hoai:document.getElementById('nf-hoai').value,
+    bereich:document.getElementById('nf-br').value,
+    schwere:document.getElementById('nf-sw').value,
+    status:'Offen',
+    frist:document.getElementById('nf-frist').value||new Date(Date.now()+14*86400000).toISOString().split('T')[0],
+    verantw:document.getElementById('nf-ver').value||'–',
+    beschr:document.getElementById('nf-beschr').value,
+    empf:document.getElementById('nf-empf').value,
+    esk:false
+  });
+  addAkt(`${nextId} erfasst – ${titel}`, 'dg');
+  persist(); closeM('neue');
+  ['nf-titel','nf-beschr','nf-empf','nf-ver'].forEach(i=>{ const el=document.getElementById(i); if(el) el.value=''; });
+  rdAll();
+}
+
+function addAkt(txt, dot){
+  const p=AP(); if(!p.akt) p.akt=[];
+  p.akt.push({txt, dot:dot||'dgy', ts:new Date().toLocaleString('de-DE',{day:'2-digit',month:'2-digit',year:'numeric',hour:'2-digit',minute:'2-digit'})});
+  if(p.akt.length>25) p.akt=p.akt.slice(-25);
+}
+
+function openDet(id){
+  const f=D().find(x=>x.id===id); if(!f) return;
+  document.getElementById('detTitle').textContent=f.id+' · '+f.titel;
+  const o=ov(f.frist,f.status);
+  document.getElementById('detBody').innerHTML=`
+    <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px;">
+      <span class="badge ${sC(f.schwere)}"><span class="sdot ${sdot(f.schwere)}"></span>${f.schwere}</span>
+      <span class="badge ${stC(f.status)}">${f.status}</span>
+      <span class="badge bgy">${f.bereich}</span>
+      <span class="badge bbl">${f.hoai||''}</span>
+      ${f.esk?'<span class="badge bre">Eskaliert</span>':''}
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px;">
+      <div><div class="rfll" style="margin-bottom:3px;">Verantwortlich</div><div style="font-size:13px;">${f.verantw||'–'}</div></div>
+      <div><div class="rfll" style="margin-bottom:3px;">Frist</div><div style="font-size:13px;${o?'color:var(--re);font-weight:500;':''}">${fs(f.frist)}${o?' · Überfällig':''}</div></div>
+    </div>
+    <div class="dvd"></div>
+    <div style="margin-bottom:12px;"><div class="rfll" style="margin-bottom:4px;">Sachverhalt</div><div style="font-size:13px;color:var(--ink2);line-height:1.6;">${f.beschr||'–'}</div></div>
+    <div style="margin-bottom:16px;"><div class="rfll" style="margin-bottom:4px;">Empfehlung</div><div style="font-size:13px;color:var(--ink2);line-height:1.6;">${f.empf||'–'}</div></div>
+    <div class="dvd"></div>
+    <div class="rfll" style="margin-bottom:8px;">Status ändern</div>
+    <div style="display:flex;gap:8px;flex-wrap:wrap;">
+      <button class="btn bg sm" onclick="updSt('${f.id}','Offen')">Offen</button>
+      <button class="btn bg sm" onclick="updSt('${f.id}','In Bearbeitung')">In Bearbeitung</button>
+      <button class="btn bg sm" onclick="updSt('${f.id}','Stellungnahme')">Stellungnahme</button>
+      <button class="btn bg sm" style="color:var(--gr);border-color:var(--gr);" onclick="updSt('${f.id}','Erledigt')">✓ Erledigt</button>
+    </div>`;
+  openM('det');
+}
+
+function updSt(id,s){
+  const f=D().find(x=>x.id===id); if(!f) return;
+  f.status=s; addAkt(`${id} → ${s}`, s==='Erledigt'?'dgr':s==='Offen'?'dr':'dg');
+  persist(); closeM('det'); rdAll();
+}
+
+// ═══════════════════════════════════════════
+// MODALS
+// ═══════════════════════════════════════════
+function openM(n){ if(n==='plist') rdProjList(); document.getElementById('modal-'+n).classList.add('open'); }
+function closeM(n){ document.getElementById('modal-'+n).classList.remove('open'); }
+document.querySelectorAll('.mo').forEach(el=>el.addEventListener('click',function(e){if(e.target===this)this.classList.remove('open');}));
+
+// ═══════════════════════════════════════════
+// KI
+// ═══════════════════════════════════════════
+function kiA(t){
+  const d=D(), open=d.filter(f=>f.status!=='Erledigt');
+  const krit=d.filter(f=>f.schwere==='Kritisch'&&f.status!=='Erledigt');
+  const today=new Date();
+  const overdue=open.filter(f=>f.frist&&new Date(f.frist)<today);
+  const el=document.getElementById('kiresult'); el.textContent='Analyse läuft...';
+  const R={
+    hoai:d.length===0?'Noch keine Feststellungen erfasst.':`HOAI-Konformitätsprüfung:\n\nFeststellungen gesamt: ${d.length}\nKritisch (offen): ${krit.length}\nErledigt: ${d.filter(f=>f.status==='Erledigt').length}\nKonformitätsquote: ${Math.round(d.filter(f=>f.status==='Erledigt').length/d.length*100)}%\n\nOffene kritische Feststellungen:\n${krit.map(f=>`• ${f.id}: ${f.titel} (${fs(f.frist)})`).join('\n')||'Keine'}`,
+    risiko:`Risikoanalyse (${open.length} offen):\n\n${open.filter(f=>f.schwere==='Kritisch').map(f=>`🔴 HOCH: ${f.id} – ${f.titel}`).join('\n')||'Keine kritischen Feststellungen'}\n${open.filter(f=>f.schwere==='Erheblich').map(f=>`🟠 MITTEL: ${f.id} – ${f.titel}`).join('\n')}\n${open.filter(f=>f.schwere==='Hinweis').map(f=>`🟡 NIEDRIG: ${f.id} – ${f.titel}`).join('\n')}\n\n${overdue.length>0?'⚠ '+overdue.length+' Feststellung(en) überfällig!':'Alle Fristen eingehalten.'}`,
+    frist:`Fristenprüfung per ${today.toLocaleDateString('de-DE')}:\n\n${overdue.length>0?overdue.map(f=>`⛔ ${f.id} ÜBERFÄLLIG (${fs(f.frist)})\n   ${f.titel}`).join('\n'):'Keine überfälligen Feststellungen.'}\n\nDemnächst fällig (30 Tage):\n${open.filter(f=>{const d=new Date(f.frist);return f.frist&&d>today&&d<new Date(Date.now()+30*86400000);}).map(f=>`⏱ ${f.id} – ${fs(f.frist)} – ${f.titel}`).join('\n')||'Keine'}`,
+    summ:`Zusammenfassung – ${AP().name}:\n\nPrüfer: ${AP().pruefer||'–'}\nFeststellungen: ${d.length} gesamt, ${open.length} offen\nKritisch: ${krit.length} · Überfällig: ${overdue.length}\nQuote: ${d.length>0?Math.round(d.filter(f=>f.status==='Erledigt').length/d.length*100)+'%':'–'}\n\nHauptrisiken:\n${krit.slice(0,4).map(f=>`• ${f.id}: ${f.titel}`).join('\n')||'Keine kritischen Feststellungen'}`,
+  };
+  setTimeout(()=>{ el.textContent=R[t]||'...'; }, 650);
+}
+
+const KB={'statik':'§ 34 Abs. 3 Nr. 1 HOAI: Statische Nachweise sind Grundleistung LP 5. Kein Baufortschritt ohne Nachweis. Prüfingenieur nach § 66 BayBO beauftragen.','brandschutz':'Brandschutz: § 34 HOAI i.V.m. BayBO. Rettungswegplanung und Feuerwiderstandsklassen durch Brandschutzingenieur nachweisen und behördlich abstimmen.','honorar':'§ 7 HOAI: Bei Überschreitung des Tafelwerts ohne Vereinbarung besonderer Leistungen ist die Differenz rückforderbar.','lp':'LP = Leistungsphase. § 34 HOAI: LP 5 = Ausführungsplanung, LP 6 = Vorbereitung Vergabe, LP 7 = Mitwirkung Vergabe, LP 8 = Objektüberwachung.','nachtrag':'VOB/B § 2: Nachträge ohne Begründung und Mengenermittlung sind abzulehnen oder zu kürzen.','vergabe':'LP 6/7: Vollständige Leistungsverzeichnisse und Vergabevermerke erforderlich. Bieterauswahl dokumentieren.'};
+
+function sendChat(){
+  const inp=document.getElementById('chin'); const val=inp.value.trim(); if(!val) return;
+  inp.value=''; const msgs=document.getElementById('chatmsgs');
+  msgs.innerHTML+=`<div class="cmsg u">${val}</div>`;
+  let reply='Zu dieser Frage empfehle ich die Prüfung der konkreten Revisionsunterlagen. Nutzen Sie die Schnellanalyse für eine strukturierte Auswertung.';
+  const q=val.toLowerCase();
+  for(const[k,r]of Object.entries(KB)){ if(q.includes(k)){reply=r;break;} }
+  if(q.includes('kritisch')){const k=D().filter(f=>f.schwere==='Kritisch'&&f.status!=='Erledigt');reply=k.length>0?`${k.length} kritische Feststellung(en) offen:\n${k.map(f=>`• ${f.id}: ${f.titel} (Frist: ${fs(f.frist)})`).join('\n')}`:'Keine offenen kritischen Feststellungen.';}
+  if(q.includes('projekt')){ reply=`Aktives Projekt: ${AP().name}\nFeststellungen: ${D().length}\nPrüfer: ${AP().pruefer||'–'}\nTipp: Im Seitenmenü können Sie beliebig viele Projekte anlegen, wechseln, exportieren und importieren.`; }
+  setTimeout(()=>{ msgs.innerHTML+=`<div class="cmsg a"><div class="msrc">KI-Assistent · Bau & HOAI</div>${reply}</div>`; msgs.scrollTop=msgs.scrollHeight; },600);
+  msgs.scrollTop=msgs.scrollHeight;
+}
+
+const KF=['Feststellung: Im Rahmen der Revision wurde festgestellt, dass die geforderten Nachweise nicht vorliegen. Die Ausführungsunterlagen weichen von den genehmigten Planunterlagen in sicherheitsrelevanter Weise ab.\n\nEmpfehlung: Vorlage geprüfter Nachweise durch zugelassenen Fachplaner bis [Datum]. Baustopp in betroffenen Bereichen bis Nachweis erbracht.','Feststellung: Die Prüfung ergab, dass die abgerechneten Leistungen die vereinbarten Grundleistungen gemäß HOAI übersteigen, ohne dass eine Vereinbarung über besondere Leistungen vorliegt.\n\nEmpfehlung: Anpassung der Honorarrechnung entsprechend HOAI-Tafelwert. Fehlende Unterlagen innerhalb von 14 Werktagen nachzureichen.'];
+function kiForm(){ const el=document.getElementById('ai-resp'); if(!document.getElementById('ai-inp').value.trim()) return; el.textContent='Formulierung wird erstellt...'; setTimeout(()=>{ el.textContent=KF[Math.floor(Math.random()*KF.length)]; },900); }
+
+// ═══════════════════════════════════════════
+// API CONNECTION
+// ═══════════════════════════════════════════
+const API_STORE_KEY = 'bau_rev_apikey';
+let API_CONNECTED = false;
+let API_KEY_VAL = '';
+let API_KEY_VISIBLE = false;
+
+// Restore saved key on load
+(function(){
+  try {
+    const saved = localStorage.getItem(API_STORE_KEY);
+    if (saved) {
+      API_KEY_VAL = saved;
+      const inp = document.getElementById('api-key');
+      inp.value = saved;
+      inp.classList.add('has-key');
+      document.getElementById('api-check-btn').disabled = false;
+      setApiStatus('saved', 'Schlüssel gespeichert');
+    }
+  } catch(e) {}
+})();
+
+function onApiKeyInput() {
+  const val = document.getElementById('api-key').value.trim();
+  API_KEY_VAL = val;
+  const checkBtn = document.getElementById('api-check-btn');
+  checkBtn.disabled = val.length < 10;
+  if (val.length > 0) document.getElementById('api-key').classList.add('has-key');
+  else document.getElementById('api-key').classList.remove('has-key');
+  if (API_CONNECTED) {
+    API_CONNECTED = false;
+    setApiStatus('disconnected', 'Nicht verbunden');
+    document.getElementById('api-disc-btn').disabled = true;
+    document.getElementById('api-model').textContent = '';
+  }
+}
+
+function toggleApiVis() {
+  API_KEY_VISIBLE = !API_KEY_VISIBLE;
+  const inp = document.getElementById('api-key');
+  inp.type = API_KEY_VISIBLE ? 'text' : 'password';
+  document.getElementById('api-eye').textContent = API_KEY_VISIBLE ? '○' : '●';
+}
+
+function setApiStatus(state, text) {
+  const dot = document.getElementById('api-dot');
+  const stxt = document.getElementById('api-stxt');
+  dot.className = 'api-dot';
+  stxt.className = 'api-status-text';
+  if (state === 'connected') { dot.classList.add('connected'); stxt.classList.add('connected'); }
+  else if (state === 'error') { dot.classList.add('error'); stxt.classList.add('error'); }
+  else if (state === 'checking') { dot.classList.add('checking'); stxt.classList.add('checking'); }
+  else if (state === 'saved') { dot.classList.add('checking'); }
+  else { dot.classList.add('disconnected'); }
+  stxt.textContent = text;
+}
+
+async function checkApiConnection() {
+  const key = document.getElementById('api-key').value.trim();
+  if (!key || key.length < 10) return;
+  const checkBtn = document.getElementById('api-check-btn');
+  const discBtn = document.getElementById('api-disc-btn');
+  checkBtn.disabled = true;
+  checkBtn.textContent = 'Prüfe...';
+  setApiStatus('checking', 'Verbindung wird geprüft...');
+  document.getElementById('api-model').textContent = '';
+  try {
+    const resp = await fetch('https://api.anthropic.com/v1/messages', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'x-api-key': key,
+        'anthropic-version': '2023-06-01',
+        'anthropic-dangerous-direct-browser-access': 'true'
+      },
+      body: JSON.stringify({
+        model: 'claude-haiku-4-5-20251001',
+        max_tokens: 20,
+        messages: [{ role: 'user', content: 'Antworte nur: OK' }]
+      })
+    });
+    if (resp.ok) {
+      const data = await resp.json();
+      const model = data.model || 'claude-haiku-4-5-20251001';
+      API_CONNECTED = true;
+      API_KEY_VAL = key;
+      try { localStorage.setItem(API_STORE_KEY, key); } catch(e) {}
+      setApiStatus('connected', 'Verbindung OK');
+      document.getElementById('api-model').textContent = model;
+      discBtn.disabled = false;
+      checkBtn.textContent = 'Verbindung prüfen';
+      checkBtn.disabled = false;
+      // Enable live AI in chat
+      enableLiveAI(true);
+    } else {
+      const err = await resp.json().catch(() => ({}));
+      const msg = err?.error?.message || ('HTTP ' + resp.status);
+      API_CONNECTED = false;
+      setApiStatus('error', 'Fehler: ' + (resp.status === 401 ? 'Ungültiger API-Key' : resp.status === 429 ? 'Rate Limit' : msg.substring(0,30)));
+      checkBtn.disabled = false;
+      checkBtn.textContent = 'Verbindung prüfen';
+    }
+  } catch(e) {
+    API_CONNECTED = false;
+    setApiStatus('error', 'Netzwerkfehler');
+    checkBtn.disabled = false;
+    checkBtn.textContent = 'Verbindung prüfen';
+  }
+}
+
+function disconnectApi() {
+  API_CONNECTED = false;
+  API_KEY_VAL = '';
+  document.getElementById('api-key').value = '';
+  document.getElementById('api-key').classList.remove('has-key');
+  document.getElementById('api-check-btn').disabled = true;
+  document.getElementById('api-disc-btn').disabled = true;
+  document.getElementById('api-model').textContent = '';
+  setApiStatus('disconnected', 'Nicht verbunden');
+  try { localStorage.removeItem(API_STORE_KEY); } catch(e) {}
+  enableLiveAI(false);
+}
+
+function enableLiveAI(on) {
+  // Update KI chat placeholder to reflect live status
+  const inp = document.getElementById('chin');
+  if (inp) inp.placeholder = on ? 'Live-Frage an Claude stellen...' : 'Frage zur Revision...';
+  // Update KI panel header badge
+  const badge = document.querySelector('.cmsg.a .msrc');
+  if (badge) badge.textContent = on ? 'Claude API · Live' : 'KI-Assistent · Bau & HOAI';
+}
+
+// Override sendChat for live API when connected
+const _sendChat_orig = sendChat;
+window.sendChat = async function() {
+  if (!API_CONNECTED) { _sendChat_orig(); return; }
+  const inp = document.getElementById('chin');
+  const val = inp.value.trim(); if (!val) return;
+  inp.value = '';
+  const msgs = document.getElementById('chatmsgs');
+  msgs.innerHTML += `<div class="cmsg u">${val}</div>`;
+  const thinking = document.createElement('div');
+  thinking.className = 'cmsg a';
+  thinking.innerHTML = '<div class="msrc">Claude API · Live</div><span style="color:var(--ink3);">&#9646;&#9646;&#9646;</span>';
+  msgs.appendChild(thinking);
+  msgs.scrollTop = msgs.scrollHeight;
+
+  // Build context from current project
+  const p = AP(); const d = D();
+  const ctx = `Du bist ein Experte für Bau- und HOAI-Revision. Aktuelles Projekt: "${p.name}". Auftraggeber: ${p.auftraggeber||'–'}. Prüfer: ${p.pruefer||'–'}. Feststellungen: ${d.length} gesamt, ${d.filter(f=>f.status!=='Erledigt').length} offen, davon ${d.filter(f=>f.schwere==='Kritisch'&&f.status!=='Erledigt').length} kritisch. Beantworte Fragen präzise und professionell auf Deutsch.`;
+
+  try {
+    const resp = await fetch('https://api.anthropic.com/v1/messages', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'x-api-key': document.getElementById('api-key').value.trim(),
+        'anthropic-version': '2023-06-01',
+        'anthropic-dangerous-direct-browser-access': 'true'
+      },
+      body: JSON.stringify({
+        model: 'claude-haiku-4-5-20251001',
+        max_tokens: 500,
+        system: ctx,
+        messages: [{ role: 'user', content: val }]
+      })
+    });
+    if (resp.ok) {
+      const data = await resp.json();
+      const reply = data.content?.[0]?.text || '(Keine Antwort)';
+      thinking.innerHTML = `<div class="msrc">Claude API · Live · ${data.model||''}</div>${reply}`;
+    } else {
+      const err = await resp.json().catch(()=>({}));
+      if (resp.status === 401) { API_CONNECTED = false; setApiStatus('error','API-Key ungültig'); enableLiveAI(false); }
+      thinking.innerHTML = `<div class="msrc">Fehler</div>${err?.error?.message||'API-Fehler '+resp.status}`;
+    }
+  } catch(e) {
+    thinking.innerHTML = `<div class="msrc">Fehler</div>Netzwerkfehler: ${e.message}`;
+  }
+  msgs.scrollTop = msgs.scrollHeight;
+};
+
+// Also wire live AI into the KI Formulierungshilfe
+const _kiForm_orig = kiForm;
+window.kiForm = async function() {
+  if (!API_CONNECTED) { _kiForm_orig(); return; }
+  const inp = document.getElementById('ai-inp').value.trim();
+  if (!inp) return;
+  const el = document.getElementById('ai-resp');
+  el.textContent = 'Claude formuliert...';
+  try {
+    const resp = await fetch('https://api.anthropic.com/v1/messages', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'x-api-key': document.getElementById('api-key').value.trim(),
+        'anthropic-version': '2023-06-01',
+        'anthropic-dangerous-direct-browser-access': 'true'
+      },
+      body: JSON.stringify({
+        model: 'claude-haiku-4-5-20251001',
+        max_tokens: 400,
+        system: 'Du bist Revisionsexperte (HOAI/Bau). Formuliere den geschilderten Mangel als professionelle Revisionsfeststellung mit Sachverhalt und Empfehlung. Deutsch, präzise, revisionssicher.',
+        messages: [{ role: 'user', content: inp }]
+      })
+    });
+    if (resp.ok) {
+      const data = await resp.json();
+      el.textContent = data.content?.[0]?.text || '(Keine Antwort)';
+    } else {
+      el.textContent = 'API-Fehler: ' + resp.status;
+    }
+  } catch(e) { el.textContent = 'Netzwerkfehler: ' + e.message; }
+};
+
+// ═══════════════════════════════════════════
+// RECENT PROJECTS WIDGET
+// ═══════════════════════════════════════════
+function rdRecentProjects() {
+  const el = document.getElementById('rp-widget');
+  if (!el) return;
+  // Sort by modified date, take last 3
+  const sorted = [...S.projs]
+    .sort((a,b) => new Date(b.modified||0) - new Date(a.modified||0))
+    .slice(0, 3);
+  el.innerHTML = sorted.map(p => {
+    const isActive = p.id === S.aid;
+    const d = p.feststellungen || [];
+    const open = d.filter(f => f.status !== 'Erledigt').length;
+    const krit = d.filter(f => f.schwere === 'Kritisch' && f.status !== 'Erledigt').length;
+    const erl = d.filter(f => f.status === 'Erledigt').length;
+    const dt = p.modified ? new Date(p.modified).toLocaleDateString('de-DE') : '–';
+    const ag = p.auftraggeber ? p.auftraggeber : '–';
+    return `<div class="rp-card${isActive?' active-proj':''}" onclick="switchProj('${p.id}')">
+      <div class="rp-card-label">${isActive ? 'Aktives Projekt' : 'Zuletzt bearbeitet'}</div>
+      <div class="rp-card-name" title="${p.name}">${p.name}</div>
+      <div class="rp-card-meta">${ag}<br>${dt}</div>
+      <div class="rp-card-stats">
+        ${krit>0?`<span class="rp-stat bre"><span class="sdot dr" style="width:5px;height:5px;"></span>${krit} krit.</span>`:''}
+        <span class="rp-stat bgy">${open} offen</span>
+        ${erl>0?`<span class="rp-stat bgr2">&#10003; ${erl}</span>`:''}
+      </div>
+    </div>`;
+  }).join('');
+}
+
+// ═══════════════════════════════════════════
+// INLINE PROJECT NAME EDIT
+// ═══════════════════════════════════════════
+function rdProjNameInp() {
+  const p = AP(); if (!p) return;
+  const inp = document.getElementById('proj-name-inp');
+  const hint = document.getElementById('proj-name-hint');
+  if (inp) inp.value = p.name || '';
+  if (hint) hint.textContent = p.auftraggeber ? 'AG: ' + p.auftraggeber : 'Projektname bearbeiten & ✓ drücken';
+}
+
+function onProjNameInput() {
+  const hint = document.getElementById('proj-name-hint');
+  if (hint) hint.textContent = 'Enter oder ✓ zum Speichern';
+}
+
+function saveProjNameInline() {
+  const inp = document.getElementById('proj-name-inp');
+  const val = inp ? inp.value.trim() : '';
+  if (!val) return;
+  const p = AP(); if (!p) return;
+  p.name = val;
+  persist();
+  rdPSel();
+  rdMeta();
+  rdRecentProjects();
+  rdRpt();
+  const hint = document.getElementById('proj-name-hint');
+  if (hint) { hint.textContent = 'Gespeichert ✓'; hint.style.color = 'rgba(100,220,140,.7)'; setTimeout(() => { hint.textContent = p.auftraggeber ? 'AG: ' + p.auftraggeber : ''; hint.style.color = ''; }, 1500); }
+}
+
+// Patch switchProj to also update name input
+const _switchProj_orig = switchProj;
+window.switchProj = function(id) {
+  _switchProj_orig(id);
+  rdProjNameInp();
+  rdRecentProjects();
+};
+
+// Patch rdAll to include recent projects
+const _rdAll_orig = rdAll;
+window.rdAll = function() {
+  _rdAll_orig();
+  rdRecentProjects();
+  rdProjNameInp();
+};
+
+// INIT
+rdPSel(); rdMeta(); rdAll();
+document.getElementById('sind').textContent='Autosave aktiv';
+</script>
+</body>
+</html>
