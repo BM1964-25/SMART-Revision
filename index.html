@@ -283,6 +283,148 @@ textarea{resize:vertical;min-height:72px;}
 .alert-box-title{font-size:11px;font-weight:500;text-transform:uppercase;letter-spacing:.06em;color:var(--re);margin-bottom:6px;}
 .alert-box.navy .alert-box-title{color:var(--ac);}
 .alert-box-text{font-size:13px;color:var(--ink2);line-height:1.6;}
+/* ══════════════════════════════════════════════
+   MANDATSKLÄRUNG STYLES
+══════════════════════════════════════════════ */
+.mk-phase-nav{display:flex;gap:0;border-bottom:1px solid var(--b);overflow-x:auto;background:var(--bgp);}
+.mk-tab{padding:10px 14px;font-size:11px;font-weight:500;letter-spacing:.04em;text-transform:uppercase;color:var(--ink3);border:none;background:none;cursor:pointer;border-bottom:3px solid transparent;margin-bottom:-1px;white-space:nowrap;transition:all .2s;display:flex;align-items:center;gap:5px;}
+.mk-tab:hover{color:var(--ink);background:rgba(30,58,95,.04);}
+.mk-tab.active{color:var(--ac);border-bottom-color:var(--go);}
+.mk-tab.done{color:var(--gr);}
+.mk-tab-dot{width:6px;height:6px;border-radius:50%;background:var(--b);display:inline-block;transition:background .2s;}
+.mk-tab.done .mk-tab-dot{background:var(--gr);}
+.mk-tab.active .mk-tab-dot{background:var(--go);}
+.mk-phase-body{padding:20px;}
+.mk-phase-hdr{display:flex;align-items:center;gap:12px;margin-bottom:16px;}
+.mk-phase-icon{width:38px;height:38px;border-radius:var(--rm);background:var(--acl);border:1.5px solid #c8d8ec;display:flex;align-items:center;justify-content:center;color:var(--ac);font-size:16px;flex-shrink:0;}
+.mk-phase-meta h3{font-family:'Fraunces',serif;font-size:15px;font-weight:600;color:var(--ink);margin:0 0 2px;}
+.mk-phase-meta p{font-size:12px;color:var(--ink3);margin:0;}
+.mk-items{display:flex;flex-direction:column;gap:8px;}
+/* Accordion card */
+.mk-card{border:1px solid var(--b);border-radius:var(--rm);background:var(--bgc);overflow:hidden;transition:border-color .15s;}
+.mk-card:hover{border-color:#c8d8ec;}
+.mk-card.answered{border-color:var(--gr);}
+.mk-card.expanded{border-color:var(--ac);box-shadow:0 2px 10px rgba(30,58,95,.08);}
+.mk-card-header{display:flex;align-items:flex-start;gap:10px;padding:11px 13px;cursor:pointer;user-select:none;}
+.mk-check{width:17px;height:17px;border-radius:4px;border:1.5px solid var(--bs);background:var(--bgp);flex-shrink:0;margin-top:1px;display:flex;align-items:center;justify-content:center;font-size:10px;color:transparent;transition:all .18s;}
+.mk-card.answered .mk-check{background:var(--gr);border-color:var(--gr);color:#fff;}
+.mk-card-hdr-content{flex:1;min-width:0;}
+.mk-item-q{font-size:13px;font-weight:500;color:var(--ink);line-height:1.4;margin:0 0 2px;}
+.mk-card.answered .mk-item-q{color:var(--gr);}
+.mk-card.answered .mk-answer-preview{display:block;}
+.mk-answer-preview{display:none;font-size:11.5px;color:var(--ink3);line-height:1.4;margin-top:3px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:520px;}
+.mk-item-hint-inline{font-size:11px;color:var(--ink3);font-style:italic;margin-top:2px;}
+.mk-card-right{display:flex;align-items:center;gap:6px;flex-shrink:0;}
+.mk-tag{font-size:10px;font-weight:500;letter-spacing:.03em;text-transform:uppercase;padding:2px 7px;border-radius:var(--r);white-space:nowrap;}
+.mk-tag-p{background:var(--rl);color:var(--re);}
+.mk-tag-k{background:var(--gl);color:var(--go);border:0.5px solid #e8c96d;}
+.mk-tag-o{background:var(--acl);color:var(--ac);}
+.mk-chevron{font-size:12px;color:var(--ink3);transition:transform .2s;flex-shrink:0;}
+.mk-card.expanded .mk-chevron{transform:rotate(180deg);}
+/* Accordion body */
+.mk-card-body{display:none;border-top:1px solid var(--b);padding:14px 14px 14px 40px;background:var(--bgp);}
+.mk-card.expanded .mk-card-body{display:block;}
+.mk-body-hint{font-size:11.5px;color:var(--ink3);margin-bottom:10px;font-style:italic;padding:7px 10px;background:var(--acl);border-radius:var(--r);border-left:3px solid var(--ac);}
+.mk-answer-wrap{margin-bottom:10px;}
+.mk-answer-label{font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:.06em;color:var(--ink3);margin-bottom:5px;}
+.mk-answer-textarea{width:100%;font-family:'DM Sans',sans-serif;font-size:13px;padding:9px 11px;border:1px solid var(--bs);border-radius:var(--r);background:var(--bgc);color:var(--ink);resize:vertical;min-height:72px;outline:none;transition:border-color .15s;line-height:1.5;}
+.mk-answer-textarea:focus{border-color:var(--ac);}
+.mk-body-actions{display:flex;gap:8px;align-items:center;}
+.mk-save-btn{padding:6px 14px;border-radius:var(--r);font-size:12px;font-weight:500;cursor:pointer;border:none;background:var(--ac);color:#fff;transition:opacity .15s;}
+.mk-save-btn:hover{opacity:.85;}
+.mk-clear-btn{padding:6px 10px;border-radius:var(--r);font-size:12px;font-weight:500;cursor:pointer;border:1px solid var(--bs);background:none;color:var(--ink3);transition:all .15s;}
+.mk-clear-btn:hover{color:var(--re);border-color:var(--re);}
+.mk-saved-hint{font-size:11px;color:var(--gr);font-weight:500;}
+/* Nav + progress */
+.mk-nav-row{display:flex;justify-content:space-between;align-items:center;margin-top:16px;padding-top:14px;border-top:1px solid var(--b);}
+.mk-nav-count{font-size:12px;color:var(--ink3);}
+.mk-summary-box{background:var(--grl);border:1px solid #a3d4b0;border-radius:var(--rm);padding:12px 14px;margin-top:12px;font-size:12px;color:#1a3d25;line-height:1.5;}
+.mk-progress-bar{height:4px;background:var(--b);border-radius:2px;overflow:hidden;margin:8px 0 0;}
+.mk-progress-fill{height:100%;background:var(--go);border-radius:2px;transition:width .4s;}
+.mk-export-box{background:var(--acl);border:1px solid #c8d8ec;border-radius:var(--rm);padding:14px 18px;margin-top:16px;}
+.mk-export-box h4{font-size:13px;font-weight:600;color:var(--ac);margin:0 0 6px;}
+.mk-export-box p{font-size:12px;color:var(--ink2);margin:0 0 10px;line-height:1.5;}
+/* Option chips */
+.mk-opts{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:12px;}
+.mk-opt{padding:5px 11px;border-radius:20px;font-size:12px;font-weight:500;cursor:pointer;border:1.5px solid var(--bs);background:var(--bgc);color:var(--ink2);transition:all .15s;user-select:none;line-height:1.3;}
+.mk-opt:hover{border-color:var(--ac);color:var(--ac);background:var(--acl);}
+.mk-opt.selected{background:var(--ac);color:#fff;border-color:var(--ac);}
+.mk-opts-label{font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:.06em;color:var(--ink3);margin-bottom:7px;}
+.mk-divider{display:flex;align-items:center;gap:8px;margin:10px 0 8px;}
+.mk-divider-line{flex:1;height:1px;background:var(--b);}
+.mk-divider-txt{font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:.06em;color:var(--ink3);}
+/* Report section 00 */
+.mk-rpt-section{margin-bottom:0;}
+.mk-rpt-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px;}
+.mk-rpt-item{background:var(--bgp);border:1px solid var(--b);border-radius:var(--r);padding:11px 14px;}
+.mk-rpt-q{font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:.06em;color:var(--ink3);margin-bottom:5px;}
+.mk-rpt-a{font-size:13px;color:var(--ink2);line-height:1.5;}
+.mk-rpt-empty{font-size:13px;color:var(--ink3);font-style:italic;}
+
+/* ══════════════════════════════════════════════
+   FRISTENKALENDER STYLES
+══════════════════════════════════════════════ */
+.fk-toolbar{display:flex;align-items:center;gap:10px;margin-bottom:16px;flex-wrap:wrap;}
+.fk-filter-btn{padding:6px 14px;border-radius:var(--rm);font-size:12px;font-weight:500;cursor:pointer;border:1px solid var(--bs);background:var(--bgc);color:var(--ink2);transition:all .15s;}
+.fk-filter-btn:hover{border-color:var(--ac);color:var(--ac);}
+.fk-filter-btn.active{background:var(--ac);color:#fff;border-color:var(--ac);}
+.fk-lanes{display:flex;flex-direction:column;gap:10px;}
+.fk-lane{background:var(--bgc);border:1px solid var(--b);border-radius:var(--rm);overflow:hidden;}
+.fk-lane-hdr{display:flex;align-items:center;gap:10px;padding:11px 16px;border-bottom:1px solid var(--b);}
+.fk-lane-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0;}
+.fk-lane-title{font-family:'Fraunces',serif;font-size:13px;font-weight:600;color:var(--ink);}
+.fk-lane-count{font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--ink3);margin-left:auto;background:var(--bg);padding:2px 8px;border-radius:10px;border:1px solid var(--b);}
+.fk-items{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:10px;padding:12px 14px;}
+.fk-card{border:1px solid var(--b);border-radius:var(--r);padding:10px 12px;background:var(--bgp);cursor:pointer;transition:border-color .15s;}
+.fk-card:hover{border-color:var(--ac);}
+.fk-card-id{font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--ink3);margin-bottom:3px;}
+.fk-card-title{font-size:12px;font-weight:500;color:var(--ink);line-height:1.3;margin-bottom:6px;}
+.fk-card-date{font-family:'IBM Plex Mono',monospace;font-size:11px;font-weight:600;}
+.fk-card-meta{font-size:10px;color:var(--ink3);margin-top:4px;}
+.fk-empty{padding:24px;text-align:center;color:var(--ink3);font-size:13px;font-style:italic;}
+.fk-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:16px;}
+.fk-stat{background:var(--bgc);border:1px solid var(--b);border-radius:var(--rm);padding:12px 14px;text-align:center;}
+.fk-stat-val{font-family:'Fraunces',serif;font-size:24px;font-weight:600;line-height:1;}
+.fk-stat-lbl{font-size:10px;color:var(--ink3);margin-top:3px;font-family:'IBM Plex Mono',monospace;}
+
+/* ══════════════════════════════════════════════
+   HOAI LP-PRÜFLISTEN STYLES
+══════════════════════════════════════════════ */
+.lp-nav{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:16px;}
+.lp-btn{padding:7px 14px;border-radius:var(--rm);font-size:12px;font-weight:500;cursor:pointer;border:1px solid var(--bs);background:var(--bgc);color:var(--ink2);transition:all .15s;}
+.lp-btn:hover{border-color:var(--ac);color:var(--ac);}
+.lp-btn.active{background:var(--ac);color:#fff;border-color:var(--ac);}
+.lp-progress-row{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:16px;}
+.lp-pcard{background:var(--bgc);border:1px solid var(--b);border-radius:var(--rm);padding:12px 14px;}
+.lp-pcard-lp{font-size:10px;font-weight:500;text-transform:uppercase;letter-spacing:.06em;color:var(--ink3);margin-bottom:4px;}
+.lp-pcard-pct{font-family:'Fraunces',serif;font-size:22px;font-weight:600;color:var(--ac);line-height:1;}
+.lp-pcard-bar{height:3px;background:var(--b);border-radius:2px;margin-top:6px;overflow:hidden;}
+.lp-pcard-fill{height:100%;background:var(--ac);border-radius:2px;transition:width .3s;}
+.lp-content{background:var(--bgc);border:1px solid var(--b);border-radius:var(--rm);overflow:hidden;}
+.lp-content-hdr{display:flex;align-items:center;gap:12px;padding:14px 18px;border-bottom:1px solid var(--b);}
+.lp-content-title{font-family:'Fraunces',serif;font-size:15px;font-weight:600;flex:1;}
+.lp-content-pct{font-family:'IBM Plex Mono',monospace;font-size:12px;color:var(--ac);font-weight:600;background:var(--acl);padding:3px 10px;border-radius:10px;border:1px solid #c8d8ec;}
+.lp-groups{padding:16px;}
+.lp-group{margin-bottom:20px;}
+.lp-group:last-child{margin-bottom:0;}
+.lp-group-title{font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.07em;color:var(--ink3);margin-bottom:8px;padding-bottom:6px;border-bottom:1px solid var(--b);}
+.lp-checks{display:flex;flex-direction:column;gap:6px;}
+.lp-check-item{display:flex;align-items:flex-start;gap:9px;padding:9px 11px;border-radius:var(--r);border:1px solid var(--b);background:var(--bgp);cursor:pointer;transition:all .15s;}
+.lp-check-item:hover{border-color:#c8d8ec;background:var(--acl);}
+.lp-check-item.lp-done{border-color:var(--gr);background:var(--grl);}
+.lp-check-box{width:16px;height:16px;border-radius:3px;border:1.5px solid var(--bs);background:var(--bgc);flex-shrink:0;margin-top:1px;display:flex;align-items:center;justify-content:center;font-size:10px;color:transparent;transition:all .18s;}
+.lp-check-item.lp-done .lp-check-box{background:var(--gr);border-color:var(--gr);color:#fff;}
+.lp-check-text{font-size:12.5px;color:var(--ink2);line-height:1.4;flex:1;}
+.lp-check-item.lp-done .lp-check-text{color:var(--gr);}
+.lp-check-tag{font-size:10px;font-weight:500;padding:2px 6px;border-radius:var(--r);background:var(--bg);color:var(--ink3);border:1px solid var(--b);flex-shrink:0;white-space:nowrap;}
+.lp-check-item.lp-done .lp-check-tag{background:var(--grl);color:var(--gr);border-color:#a3d4b0;}
+
+/* ══════════════════════════════════════════════
+   PDF EXPORT BUTTON STYLES
+══════════════════════════════════════════════ */
+.rpt-gen-btn.pdf{background:var(--re);color:#fff;}
+.rpt-gen-btn.pdf:hover{background:#991c1c;}
+
 </style>
 </head>
 <body>
@@ -335,6 +477,19 @@ textarea{resize:vertical;min-height:72px;}
     <div class="ni" id="n-ki" onclick="gv('ki')">
       <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M8 2a6 6 0 100 12A6 6 0 008 2z"/><path d="M6 6.5c.3-.8 1.2-1.5 2-1.5 1 0 2 .7 2 1.7 0 1.5-2 2-2 3.3M8 12v.5"/></svg>
       KI-Assistent
+    </div>
+    <div class="snav-lbl">Vorbereitung</div>
+    <div class="ni" id="n-mk" onclick="gv('mk')">
+      <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 4h12M2 8h8M2 12h5"/><circle cx="12" cy="12" r="3"/><path d="M11 12l1 1 1.5-1.5"/></svg>
+      Mandatsklärung
+    </div>
+    <div class="ni" id="n-fk" onclick="gv('fk')">
+      <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="1" y="3" width="14" height="12" rx="1"/><path d="M5 1v4M11 1v4M1 7h14"/><rect x="4" y="9" width="2" height="2" rx=".3"/><rect x="7" y="9" width="2" height="2" rx=".3"/></svg>
+      Fristenkalender
+    </div>
+    <div class="ni" id="n-lp" onclick="gv('lp')">
+      <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 5l3 3 4-4"/><path d="M2 10l3 3 4-4"/><path d="M12 7h2M12 12h2"/></svg>
+      HOAI LP-Prüflisten
     </div>
     <div class="snav-lbl">Abschluss</div>
     <div class="ni" id="n-rpt" onclick="gv('rpt')">
@@ -470,9 +625,13 @@ textarea{resize:vertical;min-height:72px;}
           <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 12h10M8 2v8M5 7l3 3 3-3"/></svg>
           .docx herunterladen
         </button>
+        <button class="rpt-gen-btn pdf" onclick="exportPDF()">
+          <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 12h10M8 2v8M5 7l3 3 3-3"/></svg>
+          PDF exportieren
+        </button>
         <button class="rpt-gen-btn outline" onclick="window.print()">
           <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="6" width="10" height="7" rx="1"/><path d="M5 6V3h6v3M5 11h6"/></svg>
-          PDF drucken
+          Drucken
         </button>
         <button class="rpt-gen-btn outline" onclick="toggleRptFreigabe()">Freigeben</button>
       </div>
@@ -487,6 +646,13 @@ textarea{resize:vertical;min-height:72px;}
             <div><div class="rcml">Prüfstelle</div><div class="rcmv" id="rpf">–</div></div>
             <div><div class="rcml">Berichtsdatum</div><div class="rcmv" id="rdt">–</div></div>
           </div>
+        </div>
+
+        <div class="rsec" id="rpt-sec-mk" style="display:none;">
+          <div class="rsnum">00</div>
+          <div class="rstitle">Mandatsgrundlage &amp; Auftragsklärung</div>
+          <p style="font-size:13px;line-height:1.8;color:var(--ink2);margin-bottom:14px;" id="rpt-mk-intro">–</p>
+          <div id="rpt-mk-content" class="mk-rpt-section"></div>
         </div>
 
         <div class="rsec">
@@ -584,6 +750,59 @@ textarea{resize:vertical;min-height:72px;}
         </div>
       </div>
 
+    </div>
+
+    <!-- MANDATSKLÄRUNG -->
+    <div class="view" id="view-mk">
+      <div class="panel">
+        <div class="ph">
+          <div class="pt">Mandatsklärung</div>
+          <div class="pc" id="mk-prog-badge">0 / 0 beantwortet</div>
+          <div class="mla fl g8">
+            <button class="btn bg sm" onclick="mkExport()">Mandatsblatt exportieren</button>
+            <button class="btn bp sm" onclick="mkSaveToProject()">In Projekt übernehmen</button>
+          </div>
+        </div>
+        <div class="mk-progress-bar" style="height:6px;border-radius:0;margin:0;background:var(--b);">
+          <div class="mk-progress-fill" id="mk-prog-bar" style="width:0%;border-radius:0;"></div>
+        </div>
+        <div class="mk-phase-nav" id="mk-phase-nav"></div>
+        <div class="mk-phase-body" id="mk-phase-body"></div>
+      </div>
+    </div>
+
+    <!-- FRISTENKALENDER -->
+    <div class="view" id="view-fk">
+      <div class="fk-stats">
+        <div class="fk-stat"><div class="fk-stat-val" style="color:var(--re);" id="fk-ueberfaellig">0</div><div class="fk-stat-lbl">Überfällig</div></div>
+        <div class="fk-stat"><div class="fk-stat-val" style="color:var(--or);" id="fk-woche">0</div><div class="fk-stat-lbl">Diese Woche</div></div>
+        <div class="fk-stat"><div class="fk-stat-val" style="color:var(--go);" id="fk-monat">0</div><div class="fk-stat-lbl">Diesen Monat</div></div>
+        <div class="fk-stat"><div class="fk-stat-val" style="color:var(--gr);" id="fk-erledigt">0</div><div class="fk-stat-lbl">Erledigt</div></div>
+      </div>
+      <div class="fk-toolbar">
+        <span style="font-size:12px;color:var(--ink3);">Filtern:</span>
+        <button class="fk-filter-btn active" id="fkf-alle" onclick="fkFilter('alle')">Alle</button>
+        <button class="fk-filter-btn" id="fkf-ueberfaellig" onclick="fkFilter('ueberfaellig')">Überfällig</button>
+        <button class="fk-filter-btn" id="fkf-woche" onclick="fkFilter('woche')">Diese Woche</button>
+        <button class="fk-filter-btn" id="fkf-monat" onclick="fkFilter('monat')">Diesen Monat</button>
+        <button class="fk-filter-btn" id="fkf-offen" onclick="fkFilter('offen')">Alle Offenen</button>
+      </div>
+      <div class="fk-lanes" id="fk-lanes"></div>
+    </div>
+
+    <!-- HOAI LP-PRÜFLISTEN -->
+    <div class="view" id="view-lp">
+      <div class="lp-progress-row" id="lp-progress-row"></div>
+      <div class="lp-nav" id="lp-nav"></div>
+      <div class="lp-content">
+        <div class="lp-content-hdr">
+          <div class="lp-content-title" id="lp-content-title">LP auswählen</div>
+          <div class="lp-content-pct" id="lp-content-pct">0%</div>
+          <button class="btn bg sm" onclick="lpResetCurrent()" style="margin-left:8px;">Zurücksetzen</button>
+          <button class="btn bp sm" onclick="lpCheckAll()">Alle abhaken</button>
+        </div>
+        <div class="lp-groups" id="lp-groups"></div>
+      </div>
     </div>
 
   </div>
@@ -831,14 +1050,17 @@ function gv(v){
   document.querySelectorAll('.view').forEach(e=>e.classList.remove('active'));
   document.querySelectorAll('.ni').forEach(e=>e.classList.remove('active'));
   const el=document.getElementById('view-'+v); if(el) el.classList.add('active');
-  const ni=document.getElementById('n-'+({dashboard:'dash',fest:'fest',track:'track',ki:'ki',rpt:'rpt'}[v]||v));
+  const ni=document.getElementById('n-'+({dashboard:'dash',fest:'fest',track:'track',ki:'ki',rpt:'rpt',mk:'mk',fk:'fk',lp:'lp'}[v]||v));
   if(ni) ni.classList.add('active');
-  const T={dashboard:'Dashboard',fest:'Feststellungen',track:'Nachverfolgung',ki:'KI-Assistent',rpt:'Revisionsbericht'};
+  const T={dashboard:'Dashboard',fest:'Feststellungen',track:'Nachverfolgung',ki:'KI-Assistent',rpt:'Revisionsbericht',mk:'Mandatsklärung',fk:'Fristenkalender',lp:'HOAI LP-Prüflisten'};
   document.getElementById('tbtitle').textContent=T[v]||v;
   if(v==='dashboard') rdDash();
   if(v==='fest') rdFest();
   if(v==='track') rdTrack();
   if(v==='rpt') rdRpt();
+  if(v==='mk') mkRender();
+  if(v==='fk') fkRender();
+  if(v==='lp') lpRender();
 }
 
 // ═══════════════════════════════════════════
@@ -952,6 +1174,41 @@ function rdRpt(){
   set('sig-pruefer',p.pruefer||'–');
   set('sig-ag',p.auftraggeber||'–');
   set('rpt-footer-text','Revisionsbericht erstellt durch '+(p.pruefer||'–')+' · '+(p.kanzlei||p.auftraggeber||'') +'. Aktenzeichen: '+(p.az||'–')+'. Stand: '+dt+'. Vertraulich – nur für die Geschäftsführung.');
+
+  // ── MANDATSGRUNDLAGE Section 00 ──
+  const mkSec=document.getElementById('rpt-sec-mk');
+  const mkContent=document.getElementById('rpt-mk-content');
+  const mkIntro=document.getElementById('rpt-mk-intro');
+  const hasMkData=mkAnswers.some(phase=>phase&&phase.some(a=>a&&a.trim()))||mkChecks.some(phase=>phase&&phase.some(Boolean));
+  if(mkSec){
+    if(hasMkData){
+      mkSec.style.display='';
+      if(mkIntro) mkIntro.textContent='Die nachfolgenden Angaben wurden im Rahmen der Mandatsklärung mit dem Auftraggeber erhoben und bilden die Grundlage des vorliegenden Revisionsberichts. Stand: '+(p.mandatsklaerungDatum||new Date().toLocaleDateString('de-DE'))+'. Vollständigkeit: '+(p.mandatsklaerungPct||'–');
+      if(mkContent){
+        let html='';
+        MK_PHASES.forEach((ph,pi)=>{
+          const phAnswers=mkAnswers[pi]||[];
+          const hasPhaseData=ph.items.some((_,ii)=>mkChecks[pi][ii]||phAnswers[ii]);
+          if(!hasPhaseData) return;
+          html+='<div style="margin-bottom:18px;">'
+            +'<div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--ac);margin-bottom:8px;padding-bottom:5px;border-bottom:1.5px solid var(--ac);">'+(pi+1)+'. '+ph.title+'</div>'
+            +'<div class="mk-rpt-grid">';
+          ph.items.forEach((item,ii)=>{
+            const chk=mkChecks[pi][ii]; const ans=phAnswers[ii]||'';
+            if(!chk&&!ans) return;
+            html+='<div class="mk-rpt-item">'
+              +'<div class="mk-rpt-q">'+item.q+'</div>'
+              +'<div class="mk-rpt-a">'+(ans||'<span class="mk-rpt-empty">Beantwortet (keine Notiz)</span>')+'</div>'
+              +'</div>';
+          });
+          html+='</div></div>';
+        });
+        mkContent.innerHTML=html||'<p class="mk-rpt-empty">Mandatsklärung noch nicht abgeschlossen.</p>';
+      }
+    } else {
+      mkSec.style.display='none';
+    }
+  }
 
   // KPIs
   set('rkrit',String(krit.filter(f=>f.status!=='Erledigt').length));
@@ -1526,12 +1783,17 @@ function saveProjNameInline() {
   if (hint) { hint.textContent = 'Gespeichert ✓'; hint.style.color = 'rgba(100,220,140,.7)'; setTimeout(() => { hint.textContent = p.auftraggeber ? 'AG: ' + p.auftraggeber : ''; hint.style.color = ''; }, 1500); }
 }
 
-// Patch switchProj to also update name input
+// Patch switchProj to also update name input + restore MK state
 const _switchProj_orig = switchProj;
 window.switchProj = function(id) {
   _switchProj_orig(id);
   rdProjNameInp();
   rdRecentProjects();
+  mkChecks=MK_PHASES.map(p=>p.items.map(()=>false));
+  mkAnswers=MK_PHASES.map(p=>p.items.map(()=>''));
+  mkSelOpts=MK_PHASES.map(p=>p.items.map(()=>[]));
+  mkCurrent=0; mkOpenItem=null;
+  mkRestoreFromProject();
 };
 
 // Patch rdAll to include recent projects
@@ -1542,8 +1804,681 @@ window.rdAll = function() {
   rdProjNameInp();
 };
 
+
+// ═══════════════════════════════════════════
+// PDF EXPORT (jsPDF)
+// ═══════════════════════════════════════════
+async function exportPDF(){
+  const p=AP(); const d=D();
+  // Load jsPDF dynamically
+  if(!window.jspdf){
+    await new Promise((res,rej)=>{
+      const s=document.createElement('script');
+      s.src='https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js';
+      s.onload=res; s.onerror=rej;
+      document.head.appendChild(s);
+    });
+  }
+  const {jsPDF}=window.jspdf;
+  const pdf=new jsPDF({orientation:'portrait',unit:'mm',format:'a4'});
+  const W=210, M=20, CW=W-2*M;
+  let y=M;
+  const dt=p.datum?new Date(p.datum).toLocaleDateString('de-DE',{day:'2-digit',month:'long',year:'numeric'}):'–';
+
+  function newPage(){ pdf.addPage(); y=M; }
+  function checkY(needed=20){ if(y+needed>280) newPage(); }
+  function h1(txt){ checkY(12); pdf.setFont('helvetica','bold'); pdf.setFontSize(16); pdf.setTextColor(30,58,95); pdf.text(txt,M,y); y+=8; }
+  function h2(txt){ checkY(10); pdf.setFont('helvetica','bold'); pdf.setFontSize(12); pdf.setTextColor(30,58,95); pdf.text(txt,M,y); y+=7; }
+  function h3(txt){ checkY(8); pdf.setFont('helvetica','bold'); pdf.setFontSize(10); pdf.setTextColor(80,80,80); pdf.text(txt,M,y); y+=6; }
+  function body(txt,indent=0){ checkY(6); pdf.setFont('helvetica','normal'); pdf.setFontSize(10); pdf.setTextColor(40,40,40); const lines=pdf.splitTextToSize(txt,CW-indent); lines.forEach(l=>{ checkY(5); pdf.text(l,M+indent,y); y+=5; }); }
+  function sep(){ checkY(4); pdf.setDrawColor(220,220,220); pdf.line(M,y,W-M,y); y+=5; }
+  function kpiRow(items){ checkY(18); const bw=CW/items.length; items.forEach((it,i)=>{ const x=M+i*bw; pdf.setFillColor(232,237,245); pdf.roundedRect(x,y,bw-3,16,2,2,'F'); pdf.setFont('helvetica','bold'); pdf.setFontSize(18); pdf.setTextColor(30,58,95); pdf.text(String(it.val),x+bw/2-1.5,y+10,{align:'center'}); pdf.setFont('helvetica','normal'); pdf.setFontSize(8); pdf.setTextColor(100,100,100); pdf.text(it.lbl,x+bw/2-1.5,y+15,{align:'center'}); }); y+=22; }
+
+  // COVER
+  pdf.setFillColor(30,58,95); pdf.rect(0,0,W,50,'F');
+  pdf.setFillColor(184,147,42); pdf.rect(0,50,W,2,'F');
+  pdf.setFont('helvetica','bold'); pdf.setFontSize(9); pdf.setTextColor(255,255,255); pdf.setAlpha(0.5);
+  pdf.text('REVISIONSBERICHT  ·  BAU & HOAI § 34 ff.  ·  VERTRAULICH',M,14);
+  pdf.setAlpha(1);
+  pdf.setFont('helvetica','bold'); pdf.setFontSize(22); pdf.setTextColor(255,255,255);
+  pdf.text('Revisionsbericht',M,26);
+  pdf.setFont('helvetica','normal'); pdf.setFontSize(14); pdf.setTextColor(184,147,42);
+  pdf.text(p.name||'Projekt',M,35);
+  pdf.setFontSize(10); pdf.setTextColor(200,210,225);
+  pdf.text('Bau- und HOAI-Revision · '+(p.lp||''),M,44);
+  // Meta
+  pdf.setFontSize(9); pdf.setTextColor(80,90,110);
+  y=60;
+  [{l:'Auftraggeber',v:p.auftraggeber||'–'},{l:'Prüfstelle',v:p.pruefer||'–'},{l:'Berichtsdatum',v:dt}].forEach((m,i)=>{
+    const x=M+i*62;
+    pdf.setFont('helvetica','bold'); pdf.text(m.l.toUpperCase(),x,y);
+    pdf.setFont('helvetica','normal'); pdf.text(m.v,x,y+5);
+  });
+  y=78; sep();
+
+  // SECTION 00 – MANDATSGRUNDLAGE
+  const hasMkPdf=mkAnswers.some(ph=>ph&&ph.some(a=>a&&a.trim()))||mkChecks.some(ph=>ph&&ph.some(Boolean));
+  if(hasMkPdf){
+    h1('00  Mandatsgrundlage & Auftragsklärung');
+    body('Die folgenden Angaben wurden im Rahmen der Mandatsklärung mit dem Auftraggeber erhoben. Stand: '+(p.mandatsklaerungDatum||dt)+'.');
+    y+=4;
+    MK_PHASES.forEach((ph,pi)=>{
+      const phAnswers=mkAnswers[pi]||[];
+      const hasPhase=ph.items.some((_,ii)=>mkChecks[pi][ii]||phAnswers[ii]);
+      if(!hasPhase) return;
+      checkY(8); h3((pi+1)+'. '+ph.title);
+      ph.items.forEach((item,ii)=>{
+        const chk=mkChecks[pi][ii]; const ans=phAnswers[ii]||'';
+        if(!chk&&!ans) return;
+        checkY(12);
+        pdf.setFont('helvetica','bold'); pdf.setFontSize(8.5); pdf.setTextColor(30,58,95);
+        const qLines=pdf.splitTextToSize((chk?'✓ ':'◦ ')+item.q, CW-8);
+        qLines.forEach(l=>{ checkY(5); pdf.text(l,M+4,y); y+=5; });
+        if(ans){
+          pdf.setFont('helvetica','normal'); pdf.setFontSize(8); pdf.setTextColor(60,60,60);
+          const aLines=pdf.splitTextToSize('→ '+ans, CW-12);
+          aLines.forEach(l=>{ checkY(4.5); pdf.text(l,M+8,y); y+=4.5; });
+        }
+        y+=2;
+      });
+    });
+    sep();
+  }
+
+  // SECTION 1 – SUMMARY
+  h1('01  Executive Summary');
+  const erl=d.filter(f=>f.status==='Erledigt').length;
+  const krit=d.filter(f=>f.schwere==='Kritisch'&&f.status!=='Erledigt').length;
+  const erheb=d.filter(f=>f.schwere==='Erheblich'&&f.status!=='Erledigt').length;
+  const hinw=d.filter(f=>f.schwere==='Hinweis'&&f.status!=='Erledigt').length;
+  const pct=d.length>0?Math.round(erl/d.length*100):0;
+  body(`Die Revision "${p.name}" umfasst ${d.length} Feststellungen. ${krit} kritische und ${erheb} erhebliche Mängel sind offen. Abschlussquote: ${pct}%.`);
+  y+=4;
+  kpiRow([{val:krit,lbl:'Kritisch'},{val:erheb,lbl:'Erheblich'},{val:hinw,lbl:'Hinweise'},{val:erl,lbl:'Erledigt'}]);
+  sep();
+
+  // SECTION 2 – RISK MATRIX
+  h1('02  Risikomatrix');
+  const cols=['ID','Feststellung','Bereich','Schwere','Status','Frist'];
+  const cw=[20,75,28,22,28,20];
+  checkY(10);
+  pdf.setFillColor(30,58,95); pdf.rect(M,y,CW,8,'F');
+  pdf.setFont('helvetica','bold'); pdf.setFontSize(8.5); pdf.setTextColor(255,255,255);
+  let cx=M; cols.forEach((c,i)=>{ pdf.text(c,cx+2,y+5.5); cx+=cw[i]; }); y+=10;
+  d.forEach((f,ri)=>{
+    checkY(8);
+    const bg=ri%2===0?[255,255,255]:[248,247,245];
+    pdf.setFillColor(...bg); pdf.rect(M,y,CW,8,'F');
+    pdf.setFont('helvetica','normal'); pdf.setFontSize(8); pdf.setTextColor(40,40,40);
+    const row=[f.id,f.titel.substring(0,38),f.bereich,f.schwere,f.status,f.frist?new Date(f.frist).toLocaleDateString('de-DE'):'–'];
+    cx=M; row.forEach((v,i)=>{ pdf.text(String(v),cx+2,y+5.5); cx+=cw[i]; }); y+=8;
+  });
+  y+=4; sep();
+
+  // SECTION 3 – DETAIL
+  h1('03  Feststellungen – Detailbericht');
+  d.forEach(f=>{
+    checkY(35);
+    const scColors={Kritisch:[184,50,50],Erheblich:[196,96,26],Hinweis:[184,147,42]};
+    const sc=scColors[f.schwere]||[100,100,100];
+    pdf.setFillColor(sc[0],sc[1],sc[2]); pdf.rect(M,y,3,18,'F');
+    pdf.setFont('helvetica','bold'); pdf.setFontSize(10); pdf.setTextColor(30,58,95);
+    pdf.text(f.id+'  '+f.titel.substring(0,60),M+5,y+6);
+    pdf.setFont('helvetica','normal'); pdf.setFontSize(8.5); pdf.setTextColor(90,90,90);
+    pdf.text(`${f.hoai||''} · ${f.bereich} · ${f.schwere} · ${f.status} · Frist: ${f.frist?new Date(f.frist).toLocaleDateString('de-DE'):'–'}`,M+5,y+11);
+    pdf.text(`Verantwortlich: ${f.verantw||'–'}`,M+5,y+16); y+=22;
+    h3('Sachverhalt:'); body(f.beschr||'–',4);
+    h3('Empfehlung:'); body(f.empf||'–',4);
+    y+=4;
+  });
+  sep();
+
+  // SECTION 4 – MASSNAHMEN
+  h1('04  Maßnahmenplan');
+  const mcols=['ID','Empfehlung','Verantw.','Frist','Priorität'];
+  const mcw=[20,90,30,25,25];
+  checkY(10);
+  pdf.setFillColor(30,58,95); pdf.rect(M,y,CW,8,'F');
+  pdf.setFont('helvetica','bold'); pdf.setFontSize(8.5); pdf.setTextColor(255,255,255);
+  cx=M; mcols.forEach((c,i)=>{ pdf.text(c,cx+2,y+5.5); cx+=mcw[i]; }); y+=10;
+  d.forEach((f,ri)=>{
+    checkY(8);
+    const bg=ri%2===0?[255,255,255]:[248,247,245];
+    pdf.setFillColor(...bg); pdf.rect(M,y,CW,8,'F');
+    pdf.setFont('helvetica','normal'); pdf.setFontSize(8); pdf.setTextColor(40,40,40);
+    const prio=f.schwere==='Kritisch'?'Sofort':f.schwere==='Erheblich'?'Dringend':'Normal';
+    const row=[f.id,(f.empf||'–').substring(0,52),f.verantw||'–',f.frist?new Date(f.frist).toLocaleDateString('de-DE'):'–',prio];
+    cx=M; row.forEach((v,i)=>{ pdf.text(String(v),cx+2,y+5.5); cx+=mcw[i]; }); y+=8;
+  });
+  sep();
+
+  // SIGNATURES
+  checkY(60);
+  h1('05  Schlussbestätigung und Unterschriften');
+  body('Mit Unterzeichnung bestätigt die Geschäftsführung die Kenntnisnahme der Feststellungen.');
+  y+=25;
+  pdf.setDrawColor(30,58,95); pdf.setLineWidth(0.7);
+  pdf.line(M,y,M+80,y);
+  pdf.line(W-M-80,y,W-M,y);
+  pdf.setFont('helvetica','normal'); pdf.setFontSize(9); pdf.setTextColor(80,80,80);
+  pdf.text(p.pruefer||'Revisionsstelle',M,y+5);
+  pdf.text('Ort, Datum',M,y+9);
+  pdf.text('Geschäftsführung',W-M-80,y+5);
+  pdf.text(p.auftraggeber||'–',W-M-80,y+9);
+  y+=20;
+
+  // FOOTER on all pages
+  const totalPages=pdf.internal.getNumberOfPages();
+  for(let i=1;i<=totalPages;i++){
+    pdf.setPage(i);
+    pdf.setFillColor(240,239,236); pdf.rect(0,287,W,10,'F');
+    pdf.setDrawColor(220,215,208); pdf.line(0,287,W,287);
+    pdf.setFont('helvetica','normal'); pdf.setFontSize(7.5); pdf.setTextColor(100,95,85);
+    pdf.text(`${p.name} · ${p.lp||''} · ${dt}`,M,293);
+    pdf.text(`${i} / ${totalPages}`,W/2,293,{align:'center'});
+    pdf.text('© Bernhard Metzger · BuiltSmart Hub · www.built-smart-hub.com',W-M,293,{align:'right'});
+  }
+
+  pdf.save(`Revisionsbericht_${(p.name||'Projekt').replace(/[^a-zA-Z0-9]/g,'_')}_${new Date().toISOString().split('T')[0]}.pdf`);
+}
+
+// ═══════════════════════════════════════════
+// MANDATSKLÄRUNG
+// ═══════════════════════════════════════════
+const MK_PHASES = [
+  {icon:'🏗',title:'Kontext & Auftraggeber',sub:'Wer ist der Mandant, was ist das Projekt?',items:[
+    {q:'In welcher Rolle sprechen Sie uns an?',hint:'Bitte Rolle des Mandanten klarstellen – bestimmt Haftung, Vollmacht und Auftragsverhältnis.',tag:'p',opts:['Bauherr / Eigentümer','Investor / Kapitalanleger','Generalunternehmer (GU)','Finanzierer / Bank','Verwalter / WEG','Projektsteuerer','Öffentlicher Auftraggeber']},
+    {q:'Um welche Immobilie / welches Projekt handelt es sich?',hint:'Nutzungsart, Standort und Größenordnung bestimmen Prüfumfang und HOAI-Relevanz.',tag:'p',opts:['Mehrfamilienhaus (MFH)','Einfamilienhaus / Villa','Büro- / Gewerbegebäude','Einzelhandel / Shopping','Industrie- / Logistikbau','Öffentliches Gebäude','Sanierung / Bestandsbau','Gemischte Nutzung']},
+    {q:'In welchem Stadium befindet sich das Vorhaben?',hint:'Stadium bestimmt welche HOAI-Leistungsphasen und VOB-Regelungen greifen.',tag:'p',opts:['Planung (LP 1–4)','Ausführungsvorbereitung (LP 5–6)','Laufende Bauausführung (LP 7–8)','Abgeschlossenes Projekt','Bestand / Nachgewährleistung','Kauf- / Due-Diligence-Phase']},
+    {q:'Gibt es weitere Beteiligte, die wir kennen sollten?',hint:'Vollständige Beteiligtenliste vermeidet Interessenkonflikte und klärt Auskunftspflichten.',tag:'o',opts:['Mitinvestoren / Co-Eigentümer','Kreditgebende Bank','Zuständige Behörde / Baurechtsamt','Mieter / Nutzer','Versicherung','Weitere Gutachter / Sachverständige','Keine weiteren Beteiligten']},
+  ]},
+  {icon:'❓',title:'Anlass & Problemstellung',sub:'Was hat die Anfrage ausgelöst?',items:[
+    {q:'Was hat Sie veranlasst, eine Baurevision in Betracht zu ziehen?',hint:'Der Auslöser bestimmt Schwerpunkt, Dringlichkeit und Art der Revision.',tag:'p',opts:['Kostenüberschreitung / Nachträge','Qualitäts- / Ausführungsmängel','Honorarstreit mit Planer','Terminverzug / Bauzeitverlängerung','Pflichtrevision (Bank / Investor)','Verdacht auf Abrechnungsbetrug','Vorbereitung Gewährleistungsabnahme','Due Diligence vor Kauf']},
+    {q:'Liegen bereits konkrete Beanstandungen oder Schadensmeldungen vor?',hint:'Vorhandene Dokumentation reduziert Ermittlungsaufwand und stärkt Rechtsposition.',tag:'p',opts:['Mängelrügen schriftlich vorhanden','Gutachten Dritter vorliegt','Anwaltsschreiben / Mahnung liegt vor','Sachverständigengutachten in Auftrag','Fotodokumentation vorhanden','Bautagesberichte vorhanden','Noch keine formalen Beanstandungen']},
+    {q:'Steht ein gerichtliches oder außergerichtliches Verfahren im Raum?',hint:'Gerichtliches Verfahren erhöht Anforderungen an Beweissicherung und Dokumentation erheblich.',tag:'k',opts:['Gerichtliches Verfahren läuft','Schiedsverfahren / Schlichtung geplant','Außergerichtliche Einigung angestrebt','Verjährungsunterbrechung erforderlich','Kein Verfahren – vorbeugend','Verfahren möglich, noch offen']},
+    {q:'Gab es bereits frühere Prüfungen oder Gutachten?',hint:'Frühere Prüfergebnisse können Grundlage oder Einschränkung für neue Revision sein.',tag:'o',opts:['Ja – Ergebnisse liegen vor','Ja – Ergebnisse unbekannt / nicht zugänglich','Nein – erste Prüfung','Interne Prüfung ohne Ergebnis']},
+  ]},
+  {icon:'🎯',title:'Ziel & Erwartung',sub:'Was soll die Revision leisten?',items:[
+    {q:'Was ist das primäre Ziel der Baurevision?',hint:'Klares Ziel verhindert Leistungsausweitung (Scope Creep) und ermöglicht präzise Angebotskalkulation.',tag:'p',opts:['Mängelerfassung & -dokumentation','Kostenprüfung / Honorarrevision','Terminanalyse / Bauzeitverzug','Qualitätsprüfung Ausführung','Beweissicherung für Verfahren','HOAI-Konformitätsprüfung','Vollständige Bau- & Honorarrevision','Risikoanalyse vor Übernahme']},
+    {q:'Welches Ergebnis / Dokument erwarten Sie am Ende?',hint:'Gewünschte Dokumentenart beeinflusst Aufwand, Format und rechtliche Anforderungen.',tag:'p',opts:['Formeller Revisionsbericht','Sachverständigengutachten (öbuv.)','Mängelprotokoll / Mängelliste','Kostenspiegel / Abweichungsanalyse','Kurzstellungnahme / Memo','Präsentation für Geschäftsführung','Gutachten für Gericht / Schiedsstelle']},
+    {q:'Vor wem oder wofür soll das Ergebnis standhalten?',hint:'Adressat bestimmt Anforderungen an Objektivität, Form und rechtliche Belastbarkeit.',tag:'k',opts:['Interne Entscheidung / Management','Kreditgebende Bank / Finanzierung','Versicherung / Schadensregulierung','Finanzamt / steuerliche Zwecke','Gericht / Schiedsgericht','Verhandlung mit Auftragnehmer','Kein spezifischer Adressat']},
+    {q:'Gibt es klare Prioritäten – Kosten, Qualität oder Termine?',hint:'Priorisierung ermöglicht ressourceneffiziente Schwerpunktsetzung.',tag:'o',opts:['Kosten haben höchste Priorität','Qualität / Mängel im Fokus','Terminanalyse / Verzug im Fokus','HOAI-Honorar im Fokus','Alle Bereiche gleichwertig','Noch nicht festgelegt']},
+  ]},
+  {icon:'📁',title:'Unterlagen & Datenlage',sub:'Was liegt vor, was fehlt?',items:[
+    {q:'Welche Vertragsunterlagen sind vorhanden?',hint:'Vollständige Vertragsunterlagen sind Pflichtbasis – fehlende Dokumente erhöhen Prüfaufwand.',tag:'p',opts:['Bauvertrag (BGB / VOB/B)','GU-Vertrag vollständig','Leistungsverzeichnis (LV) vorhanden','Baubeschreibung vorhanden','Nachtragsvereinbarungen dokumentiert','HOAI-Honorarvereinbarung','Alle Vertragsunterlagen vollständig','Vertragsunterlagen unvollständig']},
+    {q:'Existieren Planunterlagen (Ausführungs-, Werkstattpläne)?',hint:'Planvollständigkeit und -aktualität sind Voraussetzung für valide Mängelbeurteilung.',tag:'p',opts:['Ausführungspläne vollständig (LP 5)','Werkstattpläne vorhanden','Pläne unvollständig / veraltet','Pläne teilweise vorhanden','As-built-Pläne vorhanden','Keine Pläne verfügbar']},
+    {q:'Liegen Abrechnungen oder Rechnungen vor?',hint:'Rechnungsunterlagen sind Grundlage der HOAI- und Kostenprüfung.',tag:'p',opts:['Schlussrechnung(en) vorhanden','Abschlagsrechnungen vollständig','Massenberechnungen vorhanden','Einheitspreisspiegel vorhanden','Abrechnungen teilweise vorhanden','Keine Abrechnungsunterlagen']},
+    {q:'Sind Bautagesberichte, Protokolle oder Fotodokumentation verfügbar?',hint:'Baubegleitende Dokumentation ist entscheidend für Terminanalyse und Beweissicherung.',tag:'k',opts:['Bautagesberichte vollständig','Baubesprechungsprotokolle vorhanden','Fotodokumentation vorhanden','Abnahmeprotokoll vorhanden','Nur lückenhafte Dokumentation','Keine Baudokumentation']},
+    {q:'Welche Unterlagen fehlen noch oder sind schwer zugänglich?',hint:'Fehlende Unterlagen müssen bei der Angebotskalkulation als Risiko berücksichtigt werden.',tag:'o',opts:['Statische Berechnungen fehlen','TGA-Pläne nicht zugänglich','GU-Nachunternehmerverträge fehlen','Baudokumentation unvollständig','Unterlagen beim Insolvenzverwalter','Alle wesentlichen Unterlagen vorhanden','Zugangsbeschränkung durch Gegenseite']},
+  ]},
+  {icon:'⏱',title:'Umfang & Rahmenbedingungen',sub:'Grenzen, Fristen und Zugang definieren',items:[
+    {q:'Welche Gewerke oder Bereiche sollen geprüft werden?',hint:'Klare Gewerkedefinition verhindert Leistungsausweitung und ermöglicht Festpreis.',tag:'p',opts:['Vollständige Revision aller Gewerke','Rohbau / Tragwerk / Statik','Ausbau (Trockenbau, Boden, Fassade)','Technische Gebäudeausrüstung (TGA)','Außenanlagen','HOAI-Honorar aller Planer','Nur kritische Schwerpunkte']},
+    {q:'Gibt es eine Frist, bis wann Ergebnisse vorliegen müssen?',hint:'Terminvorgaben bestimmen Personalressourcen und Angebotskonditionen.',tag:'p',opts:['Sofort / dringend (< 2 Wochen)','Kurzfristig (2–4 Wochen)','Mittelfristig (1–3 Monate)','Verjährungsfrist beachten','Gerichtstermin / Deadline fixiert','Keine feste Frist']},
+    {q:'Ist eine Ortsbegehung möglich? Wer gewährt Zutritt?',hint:'Begehung ist oft unverzichtbar – Zugangsprobleme sind vorab vertraglich zu klären.',tag:'p',opts:['Begehung jederzeit möglich','Begehung nur mit Ankündigung','Zutritt durch Eigentümer geregelt','Zutritt durch Mieter / Nutzer','Baustelle läuft – Sicherheitseinweisung nötig','Kein Zutritt möglich (Aktenlage)']},
+    {q:'Sind Drittparteien einzubinden (z.B. Fachingenieurbüros)?',hint:'Fachplaner-Einbindung erhöht Prüfqualität, aber auch Kosten und Koordinationsaufwand.',tag:'o',opts:['Tragwerksplaner / Statik','TGA-Ingenieur (HLS / ELT)','Brandschutzingenieur','Bauphysik / Schallschutz','Keine Drittparteien nötig','Noch offen']},
+    {q:'Gibt es budget- oder honorarseitige Rahmenvorgaben?',hint:'Budgetrahmen ermöglicht passgenaues Angebot und verhindert spätere Nachverhandlungen.',tag:'o',opts:['Pauschalhonorar gewünscht','Stundenhonorar akzeptiert','Budget bis 5.000 EUR','Budget 5.000–15.000 EUR','Budget 15.000–50.000 EUR','Budget > 50.000 EUR','Noch kein Budget definiert']},
+  ]},
+  {icon:'💶',title:'Angebotsgrundlage',sub:'Alle Parameter für das Angebot klären',items:[
+    {q:'Soll das Angebot als Pauschal- oder Stundenhonorar erfolgen?',hint:'Pauschalhonorar bei klar definiertem Umfang, Stundenhonorar bei unklarer Datenlage.',tag:'p',opts:['Pauschalhonorar (bevorzugt)','Stundenhonorar mit Kostendach','Kombiniert (Pauschal + Stunden für Extras)','Erfolgshonorar anteilig','Noch nicht entschieden']},
+    {q:'Wer ist der formale Auftraggeber / Rechnungsempfänger?',hint:'Klärung der Auftraggeberidentität verhindert spätere Haftungs- und Zahlungsprobleme.',tag:'p',opts:['Privatperson / natürliche Person','GmbH / GmbH & Co. KG','AG / Aktiengesellschaft','Öffentliche Hand / Kommune','GbR / Personengesellschaft','Gleich wie Gesprächspartner','Abweichend – noch zu klären']},
+    {q:'Bis wann wird eine Angebotsentscheidung getroffen?',hint:'Klarer Entscheidungstermin ermöglicht Ressourcenplanung und Projektstart.',tag:'k',opts:['Sofort / diese Woche','Innerhalb 2 Wochen','Innerhalb 1 Monat','Keine feste Frist','Abhängig von internen Abstimmungen']},
+    {q:'Gibt es Wettbewerber / Vergleichsangebote?',hint:'Kenntnis von Wettbewerbern hilft bei Positionierung und Argumentationsvorbereitung.',tag:'o',opts:['Nein – exklusives Gespräch','Ja – 1 Vergleichsangebot','Ja – mehrere Angebote','Öffentliche Ausschreibung','Nicht bekannt']},
+    {q:'Besteht Interesse an einem Folgeauftrag (Begleitung, Beratung)?',hint:'Folgeauftrag kann in Angebot als Option vorgesehen werden.',tag:'o',opts:['Ja – laufende Baubegleitung','Ja – Fristentracking & Nachverfolgung','Ja – weitere Revisionsrunden','Ja – Gerichts- / Schiedsbegleitung','Nein – nur Einzelmandat','Noch offen']},
+  ]},
+];
+
+let mkCurrent=0;
+let mkChecks=MK_PHASES.map(p=>p.items.map(()=>false));
+let mkAnswers=MK_PHASES.map(p=>p.items.map(()=>''));
+let mkSelOpts=MK_PHASES.map(p=>p.items.map(()=>[]));  // selected option indices per item
+
+function mkTotal(){ return mkChecks.flat().length; }
+function mkTotalDone(){ return mkChecks.flat().filter(Boolean).length; }
+function mkPhaseDone(i){ return mkChecks[i].filter(Boolean).length; }
+
+function mkRender(){
+  const ph=MK_PHASES; const total=mkTotal(); const done=mkTotalDone();
+  const pct=total>0?Math.round(done/total*100):0;
+  const bar=document.getElementById('mk-prog-bar');
+  const badge=document.getElementById('mk-prog-badge');
+  if(bar) bar.style.width=pct+'%';
+  if(badge) badge.textContent=done+' / '+total+' beantwortet · '+pct+'%';
+
+  const nav=document.getElementById('mk-phase-nav');
+  if(nav) nav.innerHTML=ph.map((p,i)=>{
+    const pdone=mkPhaseDone(i)===p.items.length;
+    const hasAnswers=mkAnswers[i]&&mkAnswers[i].some(a=>a&&a.trim());
+    return '<button class="mk-tab'+(i===mkCurrent?' active':'')+(pdone?' done':'')+(hasAnswers&&!pdone?' answered-partial':'')+'" onclick="mkGoPhase('+i+')">'
+      +'<span class="mk-tab-dot"></span>'+(i+1)+'. '+p.title.split('&')[0].trim()+'</button>';
+  }).join('');
+
+  const p2=ph[mkCurrent];
+  const pdone=mkPhaseDone(mkCurrent);
+  const ptotal=p2.items.length;
+  const tagLabels={p:'Pflicht',k:'Schlüsselfrage',o:'Optional'};
+  const tagClasses={p:'mk-tag-p',k:'mk-tag-k',o:'mk-tag-o'};
+  const answers=mkAnswers[mkCurrent]||[];
+
+  const bodyEl=document.getElementById('mk-phase-body');
+  if(!bodyEl) return;
+
+  bodyEl.innerHTML='<div class="mk-phase-hdr">'
+    +'<div class="mk-phase-icon">'+p2.icon+'</div>'
+    +'<div class="mk-phase-meta"><h3>'+p2.title+'</h3><p>'+p2.sub+'</p></div>'
+    +'</div>'
+    +'<div class="mk-items">'
+    +p2.items.map((item,idx)=>{
+      const chk=mkChecks[mkCurrent][idx];
+      const ans=answers[idx]||'';
+      const isOpen=mkOpenItem===mkCurrent+'-'+idx;
+      return '<div class="mk-card'+(chk?' answered':'')+(isOpen?' expanded':'')+'" id="mki-'+mkCurrent+'-'+idx+'">'
+        +'<div class="mk-card-header" onclick="mkToggleOpen('+mkCurrent+','+idx+')">'
+        +'<div class="mk-check">'+(chk?'&#10003;':'')+'</div>'
+        +'<div class="mk-card-hdr-content">'
+        +'<div class="mk-item-q">'+item.q+'</div>'
+        +(ans?'<div class="mk-answer-preview">'+ans.replace(/</g,'&lt;').substring(0,80)+(ans.length>80?'…':'')+'</div>':'')
+        +(isOpen?'':'<div class="mk-item-hint-inline">'+item.hint+'</div>')
+        +'</div>'
+        +'<div class="mk-card-right">'
+        +'<span class="mk-tag '+tagClasses[item.tag]+'">'+tagLabels[item.tag]+'</span>'
+        +'<span class="mk-chevron">&#8964;</span>'
+        +'</div>'
+        +'</div>'
+        +(()=>{
+          const selOpts=mkSelOpts[mkCurrent][idx]||[];
+          const optChips=item.opts?item.opts.map((o,oi)=>{
+            const sel=selOpts.includes(oi);
+            return '<button class="mk-opt'+(sel?' selected':'')+'" onclick="mkToggleOpt('+mkCurrent+','+idx+','+oi+',event)">'+o+'</button>';
+          }).join(''):'';
+          return '<div class="mk-card-body">'
+            +'<div class="mk-body-hint">'+item.hint+'</div>'
+            +(item.opts?'<div class="mk-opts-label">Vorschläge anklicken (Mehrfachauswahl möglich)</div>'
+              +'<div class="mk-opts" id="mkpts-'+mkCurrent+'-'+idx+'">'+optChips+'</div>'
+              +'<div class="mk-divider"><div class="mk-divider-line"></div><div class="mk-divider-txt">+ eigene Notiz</div><div class="mk-divider-line"></div></div>'
+              :'')
+            +'<div class="mk-answer-wrap">'
+            +'<textarea class="mk-answer-textarea" id="mktxt-'+mkCurrent+'-'+idx+'" placeholder="Eigene Antwort oder Ergänzung hier eintragen..." oninput="mkAutoSave('+mkCurrent+','+idx+')">'+ans.replace(/</g,'&lt;')+'</textarea>'
+            +'</div>'
+            +'<div class="mk-body-actions">'
+            +'<button class="mk-save-btn" onclick="mkSaveAnswer('+mkCurrent+','+idx+')">&#10003; Speichern</button>'
+            +((ans||(selOpts&&selOpts.length))?'<button class="mk-clear-btn" onclick="mkClearAnswer('+mkCurrent+','+idx+')">Alles löschen</button>':'')
+            +'<span class="mk-saved-hint" id="mkhint-'+mkCurrent+'-'+idx+'"></span>'
+            +'</div>'
+            +'</div>';
+        })()
+        +'</div>';
+    }).join('')
+    +'</div>'
+    +(pdone&&answers.filter(a=>a&&a.trim()).length>0?'<div class="mk-summary-box"><strong>Phase abgeschlossen.</strong> Alle '+ptotal+' Fragen beantwortet und Antworten gespeichert.</div>':'')
+    +'<div class="mk-nav-row">'
+    +'<button class="btn bg sm" onclick="mkGoPhase('+(mkCurrent-1)+')"'+(mkCurrent===0?' disabled':'')+'>&#8592; Zurück</button>'
+    +'<span class="mk-nav-count">'+pdone+' / '+ptotal+' beantwortet · '+answers.filter(a=>a&&a.trim()).length+' mit Antwort</span>'
+    +(mkCurrent<ph.length-1
+      ?'<button class="btn bp sm" onclick="mkGoPhase('+(mkCurrent+1)+')">Nächste Phase &#8594;</button>'
+      :'<button class="btn bgo sm" onclick="mkSaveToProject()">In Bericht übernehmen &#8594;</button>')
+    +'</div>';
+}
+
+let mkOpenItem=null;
+
+function mkToggleOpen(pi,idx){
+  const key=pi+'-'+idx;
+  if(mkOpenItem===key){ mkOpenItem=null; }
+  else { mkOpenItem=key; }
+  mkRender();
+  // Scroll to opened card
+  if(mkOpenItem){
+    setTimeout(()=>{
+      const el=document.getElementById('mki-'+key);
+      if(el) el.scrollIntoView({behavior:'smooth',block:'nearest'});
+    },50);
+  }
+}
+
+function mkAutoSave(pi,idx){
+  const ta=document.getElementById('mktxt-'+pi+'-'+idx);
+  if(!ta) return;
+  if(!mkAnswers[pi]) mkAnswers[pi]=[];
+  mkAnswers[pi][idx]=ta.value;
+  mkUpdateChecked(pi,idx);
+}
+
+function mkToggleOpt(pi,idx,oi,ev){
+  if(ev) ev.stopPropagation();
+  if(!mkSelOpts[pi]) mkSelOpts[pi]=MK_PHASES[pi].items.map(()=>[]);
+  if(!mkSelOpts[pi][idx]) mkSelOpts[pi][idx]=[];
+  const arr=mkSelOpts[pi][idx];
+  const pos=arr.indexOf(oi);
+  if(pos>=0) arr.splice(pos,1); else arr.push(oi);
+  // Update chip visual immediately
+  const btn=ev&&ev.target;
+  if(btn) btn.classList.toggle('selected', arr.includes(oi));
+  mkUpdateChecked(pi,idx);
+}
+
+function mkUpdateChecked(pi,idx){
+  if(!mkAnswers[pi]) mkAnswers[pi]=[];
+  if(!mkSelOpts[pi]) mkSelOpts[pi]=[];
+  const hasNote=mkAnswers[pi][idx]&&mkAnswers[pi][idx].trim();
+  const hasOpts=mkSelOpts[pi][idx]&&mkSelOpts[pi][idx].length>0;
+  const hasAny=hasNote||hasOpts;
+  mkChecks[pi][idx]=!!hasAny;
+  // Update card visual inline
+  const card=document.getElementById('mki-'+pi+'-'+idx);
+  if(card){
+    card.classList.toggle('answered',!!hasAny);
+    const chkEl=card.querySelector('.mk-check');
+    if(chkEl) chkEl.innerHTML=hasAny?'&#10003;':'';
+    // Update preview
+    const prev=card.querySelector('.mk-answer-preview');
+    if(prev){
+      const optLabels=(mkSelOpts[pi][idx]||[]).map(oi=>MK_PHASES[pi].items[idx].opts[oi]).join(', ');
+      const note=mkAnswers[pi][idx]||'';
+      const preview=[optLabels,note].filter(Boolean).join(' · ').substring(0,80);
+      prev.textContent=preview;
+      prev.style.display=preview?'block':'none';
+    }
+  }
+  // Update progress
+  const done=mkTotalDone(); const total=mkTotal();
+  const pct=total>0?Math.round(done/total*100):0;
+  const badge=document.getElementById('mk-prog-badge');
+  if(badge) badge.textContent=done+' / '+total+' beantwortet · '+pct+'%';
+  const bar=document.getElementById('mk-prog-bar');
+  if(bar) bar.style.width=pct+'%';
+}
+
+function mkSaveAnswer(pi,idx){
+  const ta=document.getElementById('mktxt-'+pi+'-'+idx);
+  if(ta){
+    if(!mkAnswers[pi]) mkAnswers[pi]=[];
+    mkAnswers[pi][idx]=ta.value;
+  }
+  mkUpdateChecked(pi,idx);
+  // Persist to project
+  const p=AP(); if(p){
+    p.mkAnswers=mkAnswers.map(a=>a?[...a]:[]);
+    p.mkChecks=mkChecks.map(c=>c?[...c]:[]);
+    p.mkSelOpts=mkSelOpts.map(a=>a?a.map(b=>b?[...b]:[]):[]);
+    persist();
+  }
+  const hint=document.getElementById('mkhint-'+pi+'-'+idx);
+  if(hint){ hint.textContent='Gespeichert ✓'; setTimeout(()=>{ hint.textContent=''; },1200); }
+}
+
+function mkClearAnswer(pi,idx){
+  if(mkAnswers[pi]) mkAnswers[pi][idx]='';
+  if(mkSelOpts[pi]) mkSelOpts[pi][idx]=[];
+  mkChecks[pi][idx]=false;
+  const p=AP(); if(p){
+    p.mkAnswers=mkAnswers.map(a=>a?[...a]:[]);
+    p.mkChecks=mkChecks.map(c=>c?[...c]:[]);
+    p.mkSelOpts=mkSelOpts.map(a=>a?a.map(b=>b?[...b]:[]):[]);
+    persist();
+  }
+  mkRender();
+}
+
+function mkGoPhase(i){ if(i<0||i>=MK_PHASES.length) return; mkCurrent=i; mkOpenItem=null; mkRender(); }
+
+function mkSaveToProject(){
+  const p=AP(); if(!p) return;
+  p.mkAnswers=mkAnswers.map(a=>a?[...a]:[]);
+  p.mkChecks=mkChecks.map(c=>c?[...c]:[]);
+  p.mkSelOpts=mkSelOpts.map(a=>a?a.map(b=>b?[...b]:[]):[]);
+  const lines=[];
+  MK_PHASES.forEach((ph,pi)=>{
+    const phAnswers=mkAnswers[pi]||[];
+    const phSel=mkSelOpts[pi]||[];
+    const hasAny=ph.items.some((_,ii)=>mkChecks[pi][ii]);
+    if(!hasAny) return;
+    lines.push('=== '+ph.title+' ===');
+    ph.items.forEach((item,ii)=>{
+      if(!mkChecks[pi][ii]) return;
+      const selLabels=(phSel[ii]||[]).map(oi=>item.opts?item.opts[oi]:'').filter(Boolean).join(', ');
+      const note=phAnswers[ii]||'';
+      const combined=[selLabels,note].filter(Boolean).join(' · ');
+      lines.push('[✓] '+item.q+(combined?'\n    → '+combined:''));
+    });
+    lines.push('');
+  });
+  p.mandatsklaerung=lines.join('\n');
+  p.mandatsklaerungDatum=new Date().toLocaleDateString('de-DE');
+  p.mandatsklaerungPct=Math.round(mkTotalDone()/mkTotal()*100)+'%';
+  persist();
+  addAkt('Mandatsklärung in Bericht übernommen ('+mkTotalDone()+'/'+mkTotal()+')', 'dg');
+  rdRpt();
+  const hint=document.getElementById('mk-prog-badge');
+  if(hint){ const orig=hint.textContent; hint.textContent='\u2713 In Revisionsbericht übernommen!'; hint.style.color='var(--gr)'; setTimeout(()=>{ hint.textContent=orig; hint.style.color=''; },2500); }
+}
+
+function mkExport(){
+  const lines=['MANDATSKLÄRUNG – BAUREVISION','Bau & HOAI Revisionssystem','','Projekt: '+(AP().name||'–'),'Auftraggeber: '+(AP().auftraggeber||'–'),'Prüfer: '+(AP().pruefer||'–'),'Datum: '+new Date().toLocaleDateString('de-DE'),'',''];
+  MK_PHASES.forEach((ph,pi)=>{
+    const phAnswers=mkAnswers[pi]||[];
+    lines.push('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
+    lines.push((pi+1)+'. '+ph.title);
+    lines.push(ph.sub);
+    lines.push('');
+    ph.items.forEach((item,ii)=>{
+      const chk=mkChecks[pi][ii]; const ans=phAnswers[ii]||'';
+      const phSel2=mkSelOpts[pi]||[];
+      const selLbls=(phSel2[ii]||[]).map(oi=>item.opts?item.opts[oi]:'').filter(Boolean).join(', ');
+      lines.push((chk?'☑ ':'☐ ')+item.q+'  ['+{p:'Pflicht',k:'Schlüsselfrage',o:'Optional'}[item.tag]+']');
+      if(selLbls){ lines.push(''); lines.push('   Auswahl: '+selLbls); }
+      if(ans){ lines.push(''); lines.push('   Notiz: '+ans); }
+      if(!selLbls&&!ans){ lines.push('   ↳ Hinweis: '+item.hint); }
+      lines.push('');
+    });
+  });
+  lines.push('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
+  lines.push('FORTSCHRITT: '+mkTotalDone()+' / '+mkTotal()+' ('+Math.round(mkTotalDone()/mkTotal()*100)+'%)');
+  const blob=new Blob([lines.join('\n')],{type:'text/plain;charset=utf-8'});
+  const a=document.createElement('a');
+  a.href=URL.createObjectURL(blob);
+  a.download='Mandatsklaerung_'+(AP().name||'Projekt').replace(/[^a-zA-Z0-9]/g,'_')+'.txt';
+  a.click(); URL.revokeObjectURL(a.href);
+}
+
+// ═══════════════════════════════════════════
+// FRISTENKALENDER
+// ═══════════════════════════════════════════
+let fkActiveFilter='alle';
+
+function fkFilter(f){ fkActiveFilter=f; document.querySelectorAll('.fk-filter-btn').forEach(b=>b.classList.remove('active')); const btn=document.getElementById('fkf-'+f); if(btn) btn.classList.add('active'); fkRender(); }
+
+function fkRender(){
+  const d=D(); const today=new Date(); today.setHours(0,0,0,0);
+  const weekEnd=new Date(today); weekEnd.setDate(weekEnd.getDate()+7);
+  const monthEnd=new Date(today); monthEnd.setDate(monthEnd.getDate()+30);
+
+  const ueberfaellig=d.filter(f=>f.status!=='Erledigt'&&f.frist&&new Date(f.frist)<today);
+  const dieseWoche=d.filter(f=>f.status!=='Erledigt'&&f.frist&&new Date(f.frist)>=today&&new Date(f.frist)<weekEnd);
+  const diesenMonat=d.filter(f=>f.status!=='Erledigt'&&f.frist&&new Date(f.frist)>=weekEnd&&new Date(f.frist)<monthEnd);
+  const erledigt=d.filter(f=>f.status==='Erledigt');
+  const spaeter=d.filter(f=>f.status!=='Erledigt'&&f.frist&&new Date(f.frist)>=monthEnd);
+  const ohneFrist=d.filter(f=>f.status!=='Erledigt'&&!f.frist);
+
+  const set=(id,v)=>{const el=document.getElementById(id);if(el)el.textContent=v;};
+  set('fk-ueberfaellig',ueberfaellig.length);
+  set('fk-woche',dieseWoche.length);
+  set('fk-monat',diesenMonat.length);
+  set('fk-erledigt',erledigt.length);
+
+  const lanes=[];
+  function mkCards(items){
+    if(!items.length) return '<div class="fk-empty">Keine Einträge</div>';
+    return '<div class="fk-items">'+items.map(f=>{
+      const o=f.frist&&new Date(f.frist)<today&&f.status!=='Erledigt';
+      const fdStr=f.frist?new Date(f.frist).toLocaleDateString('de-DE'):'–';
+      const col=o?'var(--re)':f.schwere==='Kritisch'?'var(--re)':f.schwere==='Erheblich'?'var(--or)':'var(--ink3)';
+      return '<div class="fk-card" onclick="openDet(\''+f.id+'\')">'
+        +'<div class="fk-card-id">'+f.id+'</div>'
+        +'<div class="fk-card-title">'+f.titel+'</div>'
+        +'<div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:5px;">'
+        +'<span class="badge '+sC(f.schwere)+'" style="font-size:10px;">'+f.schwere+'</span>'
+        +'<span class="badge '+stC(f.status)+'" style="font-size:10px;">'+f.status+'</span>'
+        +'</div>'
+        +'<div class="fk-card-date" style="color:'+col+';">Frist: '+fdStr+'</div>'
+        +'<div class="fk-card-meta">'+f.verantw+'</div>'
+        +'</div>';
+    }).join('')+'</div>';
+  }
+
+  const allLanes=[
+    {id:'ue',items:ueberfaellig,dot:'var(--re)',title:'Überfällig',filter:'ueberfaellig'},
+    {id:'wk',items:dieseWoche,dot:'var(--or)',title:'Diese Woche',filter:'woche'},
+    {id:'mt',items:diesenMonat,dot:'var(--go)',title:'Diesen Monat',filter:'monat'},
+    {id:'sp',items:spaeter,dot:'var(--ac)',title:'Später / Kein Datum zugewiesen',filter:'offen'},
+    {id:'er',items:erledigt,dot:'var(--gr)',title:'Erledigt',filter:'alle'},
+  ];
+
+  const visible=fkActiveFilter==='alle'?allLanes
+    :fkActiveFilter==='ueberfaellig'?[allLanes[0]]
+    :fkActiveFilter==='woche'?[allLanes[0],allLanes[1]]
+    :fkActiveFilter==='monat'?[allLanes[0],allLanes[1],allLanes[2]]
+    :[allLanes[0],allLanes[1],allLanes[2],allLanes[3]];
+
+  document.getElementById('fk-lanes').innerHTML=visible.map(lane=>`
+    <div class="fk-lane">
+      <div class="fk-lane-hdr">
+        <div class="fk-lane-dot" style="background:${lane.dot};"></div>
+        <div class="fk-lane-title">${lane.title}</div>
+        <div class="fk-lane-count">${lane.items.length}</div>
+      </div>
+      ${mkCards(lane.items)}
+    </div>`).join('');
+}
+
+// ═══════════════════════════════════════════
+// HOAI LP-PRÜFLISTEN
+// ═══════════════════════════════════════════
+const LP_DATA={
+  'LP 1':{title:'LP 1 – Grundlagenermittlung',groups:[
+    {title:'Bedarfsermittlung',items:['Bedarfsprogramm mit Bauherr abgestimmt','Grundstücksunterlagen beschafft und geprüft','Nutzungsanforderungen dokumentiert','Budget- und Terminrahmen festgelegt']},
+    {title:'Behörden & Recht',items:['Behördliche Vorgaben und Restriktionen ermittelt','Bebauungsplan und Flächennutzungsplan geprüft','Denkmalschutz und Altlasten recherchiert']},
+    {title:'Dokumentation',items:['Leistungsumfang Grundlagenermittlung schriftlich bestätigt','Honorarvereinbarung LP 1 abgeschlossen','Ergebnisdokumentation erstellt']},
+  ]},
+  'LP 2':{title:'LP 2 – Vorplanung',groups:[
+    {title:'Entwurf',items:['Mindestens 1 Vorentwurf mit Varianten vorgelegt','Flächenberechnungen (BGF, NF, BRI) erstellt','Technische Machbarkeit geprüft']},
+    {title:'Kosten',items:['Kostenschätzung nach DIN 276 erstellt','Kostenrahmen mit Bauherr abgestimmt','Finanzierungsplan vorläufig freigegeben']},
+    {title:'Planung',items:['Planungskonzept Tragwerk abgestimmt','TGA-Konzept (HLS, ELT) vorgelegt','Brandschutzkonzept-Ansatz geprüft']},
+  ]},
+  'LP 3':{title:'LP 3 – Entwurfsplanung',groups:[
+    {title:'Entwurfsunterlagen',items:['Vollständige Entwurfszeichnungen 1:100 vorgelegt','Raumplanung und Grundrisse abgestimmt','Schnitte und Ansichten vollständig']},
+    {title:'Kosten & Termine',items:['Kostenberechnung nach DIN 276 erstellt','Projektterminplan aktualisiert','Bausoll dokumentiert']},
+    {title:'Fachplaner',items:['Tragwerksplanung integriert','TGA-Entwurf koordiniert','Brandschutzkonzept abgestimmt','Schallschutznachweis konzeptionell geprüft']},
+  ]},
+  'LP 4':{title:'LP 4 – Genehmigungsplanung',groups:[
+    {title:'Bauantrag',items:['Bauantrag vollständig eingereicht','Lageplan vom Vermesser beglaubigt','Standsicherheitsnachweis eingereicht']},
+    {title:'Nachweise',items:['Brandschutznachweis eingereicht','Wärmeschutznachweis (GEG) eingereicht','Schallschutznachweis eingereicht']},
+    {title:'Bescheide',items:['Baugenehmigung erhalten und geprüft','Auflagen aus Baugenehmigung dokumentiert','Nebenbestimmungen in Planung integriert']},
+  ]},
+  'LP 5':{title:'LP 5 – Ausführungsplanung',groups:[
+    {title:'Ausführungszeichnungen',items:['Schalungspläne 1:50 vollständig','Bewehrungspläne geprüft und freigegeben','Montagepläne Stahl/Holz vorhanden','Werkstattpläne Fassade koordiniert','Pläne TGA (HLS/ELT) vollständig']},
+    {title:'Statik & Prüfung',items:['Statische Berechnungen vollständig vorgelegt','Prüfingenieur Statik beauftragt und Prüfvermerk vorhanden','Standsicherheitsnachweis genehmigt']},
+    {title:'Koordination',items:['Plankoordination Fachplaner abgeschlossen','Kollisionsprüfung Gewerke durchgeführt','Ausführungsterminplan aktualisiert']},
+  ]},
+  'LP 6':{title:'LP 6 – Vorbereitung der Vergabe',groups:[
+    {title:'Leistungsverzeichnisse',items:['LV Rohbau vollständig und mit Massen hinterlegt','LV Ausbau Gewerke vollständig','LV TGA (HLS, ELT, Aufzug) vollständig','LV Außenanlagen erstellt','Positionen auf Vollständigkeit geprüft']},
+    {title:'Vergabeunterlagen',items:['Bewerbungsbedingungen erstellt','Besondere Vertragsbedingungen (BVB) eingebunden','VOB/B und ZVB einbezogen','Technische Vertragsbedingungen vollständig']},
+    {title:'HOAI-Prüfung',items:['Honorarermittlung nach HOAI § 34 nachvollziehbar','Honorarzone dokumentiert und begründet','Anrechenbare Kosten korrekt ermittelt']},
+  ]},
+  'LP 7':{title:'LP 7 – Mitwirkung bei der Vergabe',groups:[
+    {title:'Ausschreibung',items:['Angebote fristgerecht eingegangen','Angebotsspiegel erstellt','Nebenangebote geprüft und bewertet']},
+    {title:'Vergabe',items:['Bieterauswahl dokumentiert (Vergabevermerk)','Preisprüfung nach § 60 VgV / VOB/A abgeschlossen','Vergabeempfehlung an Auftraggeber erteilt']},
+    {title:'Verträge',items:['Bauverträge VOB/B konform aufgesetzt','Nachunternehmerverträge geprüft','Sicherheitsleistungen (§ 17 VOB/B) vereinbart']},
+  ]},
+  'LP 8':{title:'LP 8 – Objektüberwachung',groups:[
+    {title:'Bauüberwachung',items:['Bautagesberichte geführt und abgezeichnet','Baustellenbegehungen protokolliert','Nachtragsmanagement dokumentiert','Mengen- und Massenprüfung laufend']},
+    {title:'Abnahmen',items:['Teilabnahmen mit Protokoll durchgeführt','Mängelrügen schriftlich erteilt','Gesamtabnahme mit Protokoll vollzogen','Mängelliste (Abnahmeprotokoll) vollständig']},
+    {title:'Abschluss',items:['Schlussrechnungsprüfung abgeschlossen','As-built Pläne eingefordert und geprüft','Gewährleistungsfristen dokumentiert','Betriebsanleitungen und Wartungsunterlagen übergeben']},
+  ]},
+};
+
+let lpActive='LP 5';
+let lpChecks={};
+Object.keys(LP_DATA).forEach(lp=>{ lpChecks[lp]=LP_DATA[lp].groups.map(g=>g.items.map(()=>false)); });
+
+function lpPct(lp){ const all=lpChecks[lp].flat(); return all.length?Math.round(all.filter(Boolean).length/all.length*100):0; }
+
+function lpRender(){
+  // Progress cards
+  const prow=document.getElementById('lp-progress-row');
+  if(prow) prow.innerHTML=Object.keys(LP_DATA).slice(0,4).map(lp=>{
+    const pct=lpPct(lp);
+    return '<div class="lp-pcard"><div class="lp-pcard-lp">'+lp+'</div><div class="lp-pcard-pct">'+pct+'%</div>'
+      +'<div class="lp-pcard-bar"><div class="lp-pcard-fill" style="width:'+pct+'%;"></div></div></div>';
+  }).join('');
+
+  // Nav buttons
+  const nav=document.getElementById('lp-nav');
+  if(nav) nav.innerHTML=Object.keys(LP_DATA).map(lp=>'<button class="lp-btn'+(lp===lpActive?' active':'')+'" onclick="lpSetActive(\''+lp+'\')">'
+    +lp+' <span style="font-size:10px;opacity:.7;">('+lpPct(lp)+'%)</span></button>').join('');
+
+  // Content
+  const data=LP_DATA[lpActive];
+  const pct=lpPct(lpActive);
+  const el=document.getElementById('lp-content-title');
+  if(el) el.textContent=data.title;
+  const pe=document.getElementById('lp-content-pct');
+  if(pe){ pe.textContent=pct+'%'; pe.style.background=pct===100?'var(--grl)':'var(--acl)'; pe.style.color=pct===100?'var(--gr)':'var(--ac)'; }
+
+  const groups=document.getElementById('lp-groups');
+  if(!groups) return;
+  groups.innerHTML=data.groups.map((g,gi)=>'<div class="lp-group"><div class="lp-group-title">'+g.title+'</div>'
+    +'<div class="lp-checks">'+g.items.map((item,ii)=>{
+      const chk=lpChecks[lpActive][gi][ii];
+      return '<div class="lp-check-item'+(chk?' lp-done':'')+'" onclick="lpToggle('+gi+','+ii+')">'
+        +'<div class="lp-check-box">'+(chk?'✓':'')+'</div>'
+        +'<div class="lp-check-text">'+item+'</div>'
+        +'<span class="lp-check-tag">'+lpActive+'</span>'
+        +'</div>';
+    }).join('')+'</div></div>').join('');
+}
+
+function lpSetActive(lp){ lpActive=lp; lpRender(); }
+
+function lpToggle(gi,ii){
+  lpChecks[lpActive][gi][ii]=!lpChecks[lpActive][gi][ii];
+  const p=AP(); if(!p) return;
+  if(!p.lpChecks) p.lpChecks={};
+  p.lpChecks[lpActive]=lpChecks[lpActive];
+  persist(); lpRender();
+}
+
+function lpResetCurrent(){
+  if(!confirm('Alle Häkchen für '+lpActive+' zurücksetzen?')) return;
+  lpChecks[lpActive]=LP_DATA[lpActive].groups.map(g=>g.items.map(()=>false));
+  const p=AP(); if(p){ if(!p.lpChecks) p.lpChecks={}; p.lpChecks[lpActive]=lpChecks[lpActive]; persist(); }
+  lpRender();
+}
+
+function lpCheckAll(){
+  lpChecks[lpActive]=LP_DATA[lpActive].groups.map(g=>g.items.map(()=>true));
+  const p=AP(); if(p){ if(!p.lpChecks) p.lpChecks={}; p.lpChecks[lpActive]=lpChecks[lpActive]; persist(); }
+  lpRender();
+}
+
+// Restore LP checks from project on load
+function lpRestoreFromProject(){
+  const p=AP(); if(!p||!p.lpChecks) return;
+  Object.keys(p.lpChecks).forEach(lp=>{ if(lpChecks[lp]) lpChecks[lp]=p.lpChecks[lp]; });
+}
+
+// Restore MK checks + answers + selOpts from project
+function mkRestoreFromProject(){
+  const p=AP(); if(!p) return;
+  if(p.mkChecks){ try{ mkChecks=MK_PHASES.map((ph,pi)=>ph.items.map((_,ii)=>!!(p.mkChecks[pi]&&p.mkChecks[pi][ii]))); }catch(e){} }
+  if(p.mkAnswers){ try{ mkAnswers=MK_PHASES.map((ph,pi)=>ph.items.map((_,ii)=>(p.mkAnswers[pi]&&p.mkAnswers[pi][ii])||'')); }catch(e){} }
+  if(p.mkSelOpts){ try{ mkSelOpts=MK_PHASES.map((ph,pi)=>ph.items.map((_,ii)=>Array.isArray(p.mkSelOpts[pi]&&p.mkSelOpts[pi][ii])?[...p.mkSelOpts[pi][ii]]:[])); }catch(e){} }
+}
+
+
 // INIT
 rdPSel(); rdMeta(); rdAll();
+lpRestoreFromProject();
+mkRestoreFromProject();
 document.getElementById('sind').textContent='Autosave aktiv';
 </script>
 </body>
