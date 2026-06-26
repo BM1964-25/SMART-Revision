@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Bau & HOAI Revision</title>
+<title>SMART Revision – KI-gestützte Bau- & HOAI-Revision</title>
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,600&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
 :root{--bg:#f5f3ef;--bgc:#fff;--bgp:#faf9f7;--ink:#1a1814;--ink2:#4a4640;--ink3:#8a857e;--b:#e0dbd4;--bs:#c8c2bb;--ac:#1e3a5f;--acl:#e8edf5;--go:#b8932a;--gl:#fdf6e8;--re:#b83232;--rl:#fbe8e8;--or:#c4601a;--ol:#fdf0e8;--gr:#2a6e3f;--grl:#e8f5ed;--r:4px;--rm:8px;}
@@ -13,7 +13,8 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--ink);font
 .sidebar{width:228px;flex-shrink:0;background:var(--ac);display:flex;flex-direction:column;overflow-y:auto;}
 .slogo{padding:18px 16px 14px;border-bottom:1px solid rgba(255,255,255,.08);}
 .slogo-mark{font-family:'Fraunces',serif;font-size:9px;font-weight:600;color:rgba(255,255,255,.4);letter-spacing:.15em;text-transform:uppercase;margin-bottom:4px;}
-.slogo-text{font-family:'Fraunces',serif;font-size:16px;font-weight:300;color:#fff;line-height:1.2;}
+.slogo-text{font-family:'Fraunces',serif;font-size:20px;font-weight:600;color:#fff;line-height:1.1;letter-spacing:-.01em;}
+.slogo-desc{font-size:10px;color:rgba(255,255,255,.45);margin-top:5px;line-height:1.4;letter-spacing:.02em;}
 
 /* PROJECT SWITCHER */
 .psw{padding:10px 12px;border-bottom:1px solid rgba(255,255,255,.08);}
@@ -432,8 +433,9 @@ textarea{resize:vertical;min-height:72px;}
 
 <nav class="sidebar">
   <div class="slogo">
-    <div class="slogo-mark">Revisionssystem</div>
-    <div class="slogo-text">Bau &amp;<br>HOAI Revision</div>
+    <div class="slogo-mark">BuiltSmart Hub</div>
+    <div class="slogo-text">SMART<br>Revision</div>
+    <div class="slogo-desc">KI-gestützte Bau- &amp; HOAI-Revision</div>
   </div>
 
   <div class="psw">
@@ -524,7 +526,7 @@ textarea{resize:vertical;min-height:72px;}
   <div class="topbar">
     <div>
       <div class="tb-title" id="tbtitle">Dashboard</div>
-      <div class="tb-sub" id="tbsub">Bau- und HOAI-Revision</div>
+      <div class="tb-sub" id="tbsub">KI-gestützte Bau- &amp; HOAI-Revision · BuiltSmart Hub</div>
     </div>
     <div class="tb-acts">
       <button class="btn bg sm" onclick="gv('ki')">KI fragen</button>
@@ -537,6 +539,34 @@ textarea{resize:vertical;min-height:72px;}
 
     <!-- DASHBOARD -->
     <div class="view active" id="view-dashboard">
+
+      <!-- SMART REVISION HERO BANNER -->
+      <div style="background:linear-gradient(135deg,#0f2444 0%,#1e3a5f 60%,#1a3258 100%);border-radius:10px;padding:22px 28px;display:flex;align-items:center;gap:24px;margin-bottom:4px;position:relative;overflow:hidden;">
+        <div style="position:absolute;right:-20px;top:-20px;width:160px;height:160px;border-radius:50%;background:rgba(255,255,255,.03);pointer-events:none;"></div>
+        <div style="position:absolute;right:60px;bottom:-40px;width:100px;height:100px;border-radius:50%;background:rgba(184,147,42,.07);pointer-events:none;"></div>
+        <div style="flex:1;min-width:0;">
+          <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px;">
+            <span style="font-family:'Fraunces',serif;font-size:22px;font-weight:600;color:#fff;letter-spacing:-.01em;">SMART Revision</span>
+            <span style="font-size:10px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;background:rgba(184,147,42,.2);color:#e8c96d;border:1px solid rgba(184,147,42,.35);border-radius:4px;padding:2px 8px;">Beta</span>
+          </div>
+          <div style="font-size:13px;color:rgba(255,255,255,.7);line-height:1.6;max-width:640px;">
+            KI-gestützte Bau- und HOAI-Revision für die Bau- und Immobilienwirtschaft. Erfassen Sie Feststellungen strukturiert nach HOAI § 34 ff., verfolgen Sie Fristen und Maßnahmen nach, und generieren Sie in Minuten einen professionellen Revisionsbericht – ergänzt durch KI-Formulierungshilfe und Mandatsklärung.
+          </div>
+          <div style="display:flex;gap:16px;margin-top:12px;flex-wrap:wrap;">
+            <span style="display:flex;align-items:center;gap:5px;font-size:11px;color:rgba(255,255,255,.5);"><span style="width:6px;height:6px;border-radius:50%;background:#4ade80;display:inline-block;"></span>HOAI § 34 ff. konform</span>
+            <span style="display:flex;align-items:center;gap:5px;font-size:11px;color:rgba(255,255,255,.5);"><span style="width:6px;height:6px;border-radius:50%;background:#4ade80;display:inline-block;"></span>VOB/B Feststellungen</span>
+            <span style="display:flex;align-items:center;gap:5px;font-size:11px;color:rgba(255,255,255,.5);"><span style="width:6px;height:6px;border-radius:50%;background:#4ade80;display:inline-block;"></span>KI-Revisionsassistent</span>
+            <span style="display:flex;align-items:center;gap:5px;font-size:11px;color:rgba(255,255,255,.5);"><span style="width:6px;height:6px;border-radius:50%;background:#4ade80;display:inline-block;"></span>PDF-Revisionsbericht</span>
+            <span style="display:flex;align-items:center;gap:5px;font-size:11px;color:rgba(255,255,255,.5);"><span style="width:6px;height:6px;border-radius:50%;background:#4ade80;display:inline-block;"></span>Fristenkalender</span>
+          </div>
+        </div>
+        <div style="flex-shrink:0;text-align:right;">
+          <div style="font-size:9px;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.35);margin-bottom:4px;">Powered by</div>
+          <div style="font-family:'Fraunces',serif;font-size:13px;font-weight:600;color:rgba(255,255,255,.65);">BuiltSmart Hub</div>
+          <div style="font-size:10px;color:rgba(255,255,255,.3);margin-top:2px;">© Bernhard Metzger</div>
+          <button onclick="gv('mk')" style="margin-top:14px;padding:8px 16px;background:var(--go);color:#1a1814;border:none;border-radius:6px;font-family:'DM Sans',sans-serif;font-size:12px;font-weight:600;cursor:pointer;letter-spacing:.02em;transition:opacity .15s;" onmouseover="this.style.opacity=.85" onmouseout="this.style.opacity=1">Mandatsklärung starten →</button>
+        </div>
+      </div>
 
       <!-- RECENT PROJECTS WIDGET -->
       <div class="rp-widget" id="rp-widget"></div>
@@ -590,7 +620,7 @@ textarea{resize:vertical;min-height:72px;}
       <div style="display:grid;grid-template-columns:1fr 330px;gap:16px;">
         <div class="panel" style="display:flex;flex-direction:column;">
           <div class="ph"><span class="badge bbl">KI</span><div class="pt">Revisions-Assistent</div></div>
-          <div class="chat-msgs" id="chatmsgs"><div class="cmsg a"><div class="msrc">KI-Assistent · Bau & HOAI</div>Guten Tag! Stellen Sie Fragen zu Feststellungen, HOAI-Paragraphen oder Fristen, oder nutzen Sie die Schnellanalyse.</div></div>
+          <div class="chat-msgs" id="chatmsgs"><div class="cmsg a"><div class="msrc">KI-Assistent · Bau & HOAI</div>Guten Tag! Ich bin Ihr KI-Revisionsassistent für SMART Revision. Stellen Sie Fragen zu Feststellungen, HOAI-Paragrafen, Fristen oder lassen Sie sich eine Risikoanalyse erstellen.</div></div>
           <div class="cinp"><input type="text" id="chin" placeholder="Frage zur Revision..." onkeydown="if(event.key==='Enter')sendChat()"><button class="btn bp" onclick="sendChat()">Senden</button></div>
         </div>
         <div style="display:flex;flex-direction:column;gap:12px;">
@@ -638,7 +668,7 @@ textarea{resize:vertical;min-height:72px;}
 
       <div class="rpaper" id="rpt-paper">
         <div class="rcov">
-          <div class="rcbdg"><span>Revisionsbericht</span><span>Bau &amp; HOAI § 34 ff.</span><span>Vertraulich</span></div>
+          <div class="rcbdg"><span>SMART Revision</span><span>Bau- &amp; HOAI-Revision § 34 ff.</span><span>Powered by BuiltSmart Hub</span><span>Vertraulich</span></div>
           <div class="rctitle" id="rtitle">Revisionsbericht</div>
           <div class="rcsub" id="rsub">Bau- und HOAI-Revision</div>
           <div class="rcmeta">
@@ -941,7 +971,7 @@ function rdPSel(){
 function rdMeta(){
   const p=AP(); if(!p) return;
   document.getElementById('smeta').innerHTML=`<strong>Projekt:</strong> ${p.name}<br><strong>Prüfer:</strong> ${p.pruefer||'–'}<br><strong>Stand:</strong> ${p.datum?new Date(p.datum).toLocaleDateString('de-DE'):'–'}`;
-  document.getElementById('tbsub').textContent=`Bau- und HOAI-Revision · ${p.name}`;
+  document.getElementById('tbsub').textContent=`SMART Revision · Bau- & HOAI-Prüfung · ${p.name}`;
 }
 
 function switchProj(id){ S.aid=id; saveS(); rdPSel(); rdMeta(); rdAll(); }
