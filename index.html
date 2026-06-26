@@ -546,6 +546,72 @@ textarea{resize:vertical;min-height:72px;}
 .pl2-sev-h{background:var(--acl);color:var(--ac);}
 .pl2-empty{padding:24px;text-align:center;color:var(--ink3);font-size:13px;font-style:italic;}
 
+
+/* ═══════════════════════════════════════════
+   HILFE-PANEL
+═══════════════════════════════════════════ */
+.hilfe-overlay{position:fixed;inset:0;background:rgba(26,24,20,.35);z-index:200;opacity:0;pointer-events:none;transition:opacity .25s;}
+.hilfe-overlay.open{opacity:1;pointer-events:all;}
+.hilfe-panel{position:fixed;top:0;right:0;bottom:0;width:min(680px,100vw);background:var(--bgc);box-shadow:-4px 0 32px rgba(0,0,0,.18);z-index:201;display:flex;flex-direction:column;transform:translateX(100%);transition:transform .3s cubic-bezier(.4,0,.2,1);}
+.hilfe-panel.open{transform:translateX(0);}
+.hilfe-hdr{background:var(--ac);color:#fff;padding:16px 20px;display:flex;align-items:center;gap:12px;flex-shrink:0;border-bottom:3px solid var(--go);}
+.hilfe-hdr-icon{width:36px;height:36px;background:rgba(255,255,255,.15);border-radius:8px;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.hilfe-hdr-text{flex:1;}
+.hilfe-hdr-title{font-family:'Fraunces',serif;font-size:18px;font-weight:600;line-height:1.1;}
+.hilfe-hdr-sub{font-size:11px;opacity:.7;margin-top:2px;}
+.hilfe-close{background:none;border:none;cursor:pointer;color:rgba(255,255,255,.7);font-size:22px;line-height:1;padding:4px 6px;border-radius:4px;transition:all .15s;flex-shrink:0;}
+.hilfe-close:hover{background:rgba(255,255,255,.15);color:#fff;}
+.hilfe-ki-badge{display:inline-flex;align-items:center;gap:5px;padding:4px 10px;border-radius:4px;font-size:11px;font-weight:600;margin-top:8px;}
+.hilfe-ki-yes{background:rgba(13,122,78,.15);color:#4ade80;border:1px solid rgba(74,222,128,.25);}
+.hilfe-ki-note{background:rgba(184,147,42,.15);color:#e8c96d;border:1px solid rgba(232,201,109,.25);margin-left:6px;}
+.hilfe-search{padding:12px 16px;border-bottom:1px solid var(--b);flex-shrink:0;}
+.hilfe-search-inp{width:100%;background:var(--bg);border:1px solid var(--b);border-radius:var(--r);padding:7px 12px 7px 34px;font-size:13px;font-family:'DM Sans',sans-serif;color:var(--ink);outline:none;transition:border-color .15s;background-image:url("data:image/svg+xml,%3Csvg width='14' height='14' viewBox='0 0 16 16' fill='none' stroke='%236b7280' stroke-width='1.5' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='7' cy='7' r='5'/%3E%3Cpath d='M11 11l2.5 2.5'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:10px center;}
+.hilfe-search-inp:focus{border-color:var(--ac);}
+.hilfe-body{display:flex;flex:1;overflow:hidden;}
+.hilfe-nav{width:200px;flex-shrink:0;border-right:1px solid var(--b);overflow-y:auto;padding:10px 0;}
+.hilfe-nav-item{display:flex;align-items:center;gap:8px;padding:9px 16px;font-size:12.5px;font-weight:500;color:var(--ink2);cursor:pointer;transition:all .15s;border-left:3px solid transparent;user-select:none;}
+.hilfe-nav-item:hover{background:var(--bg);color:var(--ink);}
+.hilfe-nav-item.active{background:var(--acl);color:var(--ac);border-left-color:var(--ac);font-weight:600;}
+.hilfe-nav-icon{font-size:14px;flex-shrink:0;}
+.hilfe-content{flex:1;overflow-y:auto;padding:24px 24px 40px;}
+.hilfe-chapter{display:none;}
+.hilfe-chapter.active{display:block;}
+.hilfe-chapter h2{font-family:'Fraunces',serif;font-size:18px;font-weight:600;color:var(--ink);margin-bottom:4px;}
+.hilfe-chapter .ch-sub{font-size:12px;color:var(--ink3);margin-bottom:20px;padding-bottom:12px;border-bottom:1px solid var(--b);}
+.hilfe-chapter h3{font-size:13.5px;font-weight:700;color:var(--ac);margin:20px 0 8px;display:flex;align-items:center;gap:7px;}
+.hilfe-chapter h3::before{content:'';display:inline-block;width:3px;height:14px;background:var(--ac);border-radius:2px;flex-shrink:0;}
+.hilfe-chapter p{font-size:13px;color:var(--ink2);line-height:1.7;margin-bottom:10px;}
+.hilfe-chapter ul{padding-left:0;margin-bottom:12px;display:flex;flex-direction:column;gap:5px;}
+.hilfe-chapter ul li{font-size:13px;color:var(--ink2);line-height:1.6;padding:6px 10px 6px 14px;background:var(--bg);border-radius:var(--r);border-left:2px solid var(--b);list-style:none;position:relative;}
+.hilfe-chapter ul li::before{content:'›';position:absolute;left:5px;color:var(--ac);font-weight:700;}
+.hilfe-step{display:flex;gap:12px;margin-bottom:10px;align-items:flex-start;}
+.hilfe-step-num{width:24px;height:24px;background:var(--ac);color:#fff;border-radius:50%;font-size:11px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px;}
+.hilfe-step-txt{flex:1;font-size:13px;color:var(--ink2);line-height:1.6;}
+.hilfe-step-txt strong{color:var(--ink);display:block;margin-bottom:2px;}
+.hilfe-callout{background:var(--acl);border:1px solid #c8d8ec;border-radius:var(--rm);padding:12px 15px;margin:12px 0;font-size:12.5px;color:var(--ink2);line-height:1.7;}
+.hilfe-callout strong{color:var(--ac);}
+.hilfe-callout-warn{background:#fff8e6;border-color:#f0c060;color:#6b4f0a;}
+.hilfe-callout-warn strong{color:#92400e;}
+.hilfe-callout-green{background:var(--grl);border-color:#a3d4b0;color:#1a3d25;}
+.hilfe-callout-green strong{color:var(--gr);}
+.hilfe-ki-list{background:var(--navy-light, #e8edf5);border:1px solid #c8d8ec;border-radius:var(--rm);padding:12px 15px;margin:12px 0;}
+.hilfe-ki-list-title{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--ac);margin-bottom:8px;}
+.hilfe-ki-tag{display:inline-flex;align-items:center;gap:4px;background:var(--ac);color:#fff;font-size:10.5px;font-weight:600;padding:2px 8px;border-radius:3px;margin:2px 3px 2px 0;}
+.hilfe-ki-tag.optional{background:var(--bgc);color:var(--ac);border:1px solid var(--ac);}
+.hilfe-badge-row{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:14px;}
+.hilfe-badge{display:inline-flex;align-items:center;gap:4px;padding:4px 10px;border-radius:20px;font-size:11px;font-weight:600;border:1px solid;}
+.hilfe-badge-green{background:#f0fdf4;color:#15803d;border-color:#bbf7d0;}
+.hilfe-badge-blue{background:var(--acl);color:var(--ac);border-color:#c8d8ec;}
+.hilfe-badge-gold{background:#fef3c7;color:#92400e;border-color:#fde68a;}
+.hilfe-search-hl{background:#fef08a;border-radius:2px;}
+.hilfe-no-results{text-align:center;padding:40px 20px;color:var(--ink3);font-style:italic;}
+@media(max-width:600px){
+  .hilfe-nav{width:160px;}
+  .hilfe-content{padding:16px 14px 32px;}
+  .hilfe-chapter h2{font-size:16px;}
+  .hilfe-panel{width:100vw;}
+}
+
 </style>
 </head>
 <body>
@@ -652,6 +718,10 @@ textarea{resize:vertical;min-height:72px;}
       <button class="btn bg sm" onclick="gv('ki')">KI fragen</button>
       <button class="btn bg sm" onclick="openM('neue')">+ Feststellung</button>
       <button class="btn bgo sm" onclick="gv('rpt')">Bericht generieren</button>
+      <button class="btn bg sm" onclick="openHilfe()" style="border-color:rgba(255,255,255,.3);display:flex;align-items:center;gap:5px;">
+        <svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="8" cy="8" r="6"/><path d="M6.5 6.5C6.5 5.4 7.1 4.8 8 4.8s1.5.6 1.5 1.5C9.5 7.5 8 8 8 9M8 11v.5"/></svg>
+        Hilfe
+      </button>
     </div>
   </div>
 
@@ -949,6 +1019,364 @@ textarea{resize:vertical;min-height:72px;}
         <div class="pl2-body" id="pl2-body"></div>
       </div>
     </div>
+
+
+<!-- HILFE-OVERLAY -->
+<div class="hilfe-overlay" id="hilfe-overlay" onclick="closeHilfe()"></div>
+
+<!-- HILFE-PANEL -->
+<div class="hilfe-panel" id="hilfe-panel">
+  <div class="hilfe-hdr">
+    <div class="hilfe-hdr-icon">
+      <svg width="18" height="18" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="8" cy="8" r="6"/><path d="M6.5 6.5C6.5 5.4 7.1 4.8 8 4.8s1.5.6 1.5 1.5C9.5 7.5 8 8 8 9M8 11v.5"/></svg>
+    </div>
+    <div class="hilfe-hdr-text">
+      <div class="hilfe-hdr-title">Hilfe &amp; Bedienungsanleitung</div>
+      <div class="hilfe-hdr-sub">SMART Revision &middot; BuiltSmart Hub &middot; &copy; Bernhard Metzger</div>
+      <div style="margin-top:7px;display:flex;flex-wrap:wrap;gap:4px;">
+        <span class="hilfe-ki-badge hilfe-ki-yes">&#10003; Ohne KI nutzbar &ndash; Kernfunktionen laufen vollst&auml;ndig ohne API-Key</span>
+        <span class="hilfe-ki-badge hilfe-ki-note">&#9889; KI-Funktionen optional &ndash; erfordern Anthropic API-Key</span>
+      </div>
+    </div>
+    <button class="hilfe-close" onclick="closeHilfe()" title="Hilfe schlie&szlig;en">&times;</button>
+  </div>
+  <div class="hilfe-search">
+    <input class="hilfe-search-inp" id="hilfe-search" type="text" placeholder="In der Hilfe suchen &hellip;" oninput="hilfeSearch(this.value)">
+  </div>
+  <div class="hilfe-body">
+    <nav class="hilfe-nav" id="hilfe-nav">
+      <div class="hilfe-nav-item active" onclick="hilfeChapter('ueberblick')" data-ch="ueberblick"><span class="hilfe-nav-icon">&#128196;</span>1. &Uuml;berblick</div>
+      <div class="hilfe-nav-item" onclick="hilfeChapter('einrichtung')" data-ch="einrichtung"><span class="hilfe-nav-icon">&#128273;</span>2. Einrichtung &amp; Zugang</div>
+      <div class="hilfe-nav-item" onclick="hilfeChapter('schnellstart')" data-ch="schnellstart"><span class="hilfe-nav-icon">&#9889;</span>3. Schnellstart</div>
+      <div class="hilfe-nav-item" onclick="hilfeChapter('bedienung')" data-ch="bedienung"><span class="hilfe-nav-icon">&#128421;</span>4. Bedienoberfl&auml;che</div>
+      <div class="hilfe-nav-item" onclick="hilfeChapter('funktionen')" data-ch="funktionen"><span class="hilfe-nav-icon">&#11088;</span>5. Wichtige Funktionen</div>
+      <div class="hilfe-nav-item" onclick="hilfeChapter('workflow')" data-ch="workflow"><span class="hilfe-nav-icon">&#128260;</span>6. Typischer Workflow</div>
+      <div class="hilfe-nav-item" onclick="hilfeChapter('eingaben')" data-ch="eingaben"><span class="hilfe-nav-icon">&#9998;</span>7. Eingaben &amp; Daten</div>
+      <div class="hilfe-nav-item" onclick="hilfeChapter('ergebnisse')" data-ch="ergebnisse"><span class="hilfe-nav-icon">&#128202;</span>8. Ergebnisse verstehen</div>
+      <div class="hilfe-nav-item" onclick="hilfeChapter('fehler')" data-ch="fehler"><span class="hilfe-nav-icon">&#128736;</span>9. Fehler &amp; L&ouml;sungen</div>
+      <div class="hilfe-nav-item" onclick="hilfeChapter('version')" data-ch="version"><span class="hilfe-nav-icon">&#128196;</span>10. Version &amp; Hinweise</div>
+    </nav>
+    <div class="hilfe-content" id="hilfe-content">
+
+      <!-- 1. ÜBERBLICK -->
+      <div class="hilfe-chapter active" id="hch-ueberblick">
+        <h2>1. &Uuml;berblick</h2>
+        <div class="ch-sub">Was SMART Revision ist und kann</div>
+        <div class="hilfe-badge-row">
+          <span class="hilfe-badge hilfe-badge-green">&#10003; Kernfunktionen ohne KI</span>
+          <span class="hilfe-badge hilfe-badge-blue">KI optional</span>
+          <span class="hilfe-badge hilfe-badge-gold">HOAI &sect; 34 ff. &middot; VOB/B &middot; DIIR</span>
+        </div>
+        <p><strong>SMART Revision</strong> ist eine KI-gest&uuml;tzte Webanwendung f&uuml;r die professionelle Bau- und HOAI-Revision. Die App unterst&uuml;tzt Revisoren, Gutachter, Bauherren und Investoren bei der strukturierten Erfassung, Bewertung und Nachverfolgung von Revisionsfeststellungen.</p>
+        <h3>Was die App kann</h3>
+        <ul>
+          <li><strong>Feststellungen erfassen</strong> &ndash; strukturiert nach Schwere (Kritisch / Erheblich / Hinweis)</li>
+          <li><strong>HOAI &sect; 34 ff. Konformit&auml;t pr&uuml;fen</strong> &ndash; alle Leistungsphasen LP 1&ndash;8</li>
+          <li><strong>VOB/B-konforme Dokumentation</strong> &ndash; M&auml;ngel, Fristen, Nachtr&auml;ge</li>
+          <li><strong>Mandatskl&auml;rung</strong> &ndash; strukturierter 7-Phasen-Gespr&auml;chsleitfaden</li>
+          <li><strong>DIIR-Pr&uuml;flisten</strong> &ndash; 10 Prüflisten mit 200+ Pr&uuml;fpunkten nach DIIR-Revisionsstandard</li>
+          <li><strong>Fristenkalender</strong> &ndash; &Uuml;bersicht aller Fristen mit Ampelsystem</li>
+          <li><strong>Revisionsbericht</strong> &ndash; PDF-Export mit Deckblatt, Risikomatrix und Ma&szlig;nahmenplan</li>
+          <li><strong>Kundenportal</strong> &ndash; HTML-Export f&uuml;r Auftraggeber zur Fortschrittskontrolle</li>
+          <li><strong>KI-Assistent (optional)</strong> &ndash; HOAI/VOB-konforme Formulierungen per Claude API</li>
+        </ul>
+        <div class="hilfe-ki-list">
+          <div class="hilfe-ki-list-title">&#9889; KI-unterst&uuml;tzte Funktionen (optional &ndash; erfordern API-Key)</div>
+          <span class="hilfe-ki-tag optional">Sachverhalt formulieren</span>
+          <span class="hilfe-ki-tag optional">Empfehlung formulieren</span>
+          <span class="hilfe-ki-tag optional">HOAI-Feststellung</span>
+          <span class="hilfe-ki-tag optional">VOB/B-Feststellung</span>
+          <span class="hilfe-ki-tag optional">M&auml;ngelr&uuml;ge</span>
+          <span class="hilfe-ki-tag optional">Beweissicherung</span>
+          <span class="hilfe-ki-tag optional">Risikoanalyse</span>
+          <span class="hilfe-ki-tag optional">Executive Summary</span>
+          <span class="hilfe-ki-tag optional">Fristenanalyse</span>
+          <span class="hilfe-ki-tag optional">HOAI-Konformit&auml;tspr&uuml;fung</span>
+        </div>
+        <div class="hilfe-callout hilfe-callout-green">
+          <strong>Hinweis:</strong> Alle Kernfunktionen &ndash; Feststellungen erfassen, Mandatskl&auml;rung, Pr&uuml;flisten, Fristenkalender, Bericht generieren, Kundenportal exportieren &ndash; funktionieren vollst&auml;ndig <strong>ohne KI und ohne API-Key</strong>. Der API-Key wird ausschlie&szlig;lich f&uuml;r die KI-Formulierungsfunktionen im Bereich &bdquo;KI-Assistent&rdquo; ben&ouml;tigt.
+        </div>
+      </div>
+
+      <!-- 2. EINRICHTUNG & ZUGANG -->
+      <div class="hilfe-chapter" id="hch-einrichtung">
+        <h2>2. Einrichtung &amp; Zugang</h2>
+        <div class="ch-sub">Lizenzschl&uuml;ssel, API-Key und Warum beides n&ouml;tig ist</div>
+        <div class="hilfe-callout">
+          <strong>Lizenzschl&uuml;ssel und API-Key erf&uuml;llen unterschiedliche Aufgaben:</strong><br>
+          Der <strong>Lizenzschl&uuml;ssel</strong> aktiviert die Nutzung dieser App. Er best&auml;tigt, dass Sie berechtigt sind, die Software zu verwenden.<br><br>
+          Der <strong>API-Key</strong> verbindet die App mit Ihrem Anthropic-Konto. Er ist erforderlich, damit KI-Funktionen ausgef&uuml;hrt werden k&ouml;nnen. Auch bei einer bezahlten App-Lizenz wird ein eigener API-Key ben&ouml;tigt, weil die Nutzung der KI-Modelle technisch und abrechnungstechnisch getrennt &uuml;ber Anthropic erfolgt.
+        </div>
+        <h3>a) Lizenzschl&uuml;ssel aktivieren</h3>
+        <p>Den Lizenzschl&uuml;ssel tragen Sie im Einstellungsbereich der App ein (Sidebar unten &rarr; Einstellungen). Der Lizenzschl&uuml;ssel muss einmalig bei der ersten Nutzung eingegeben werden.</p>
+        <ul>
+          <li><strong>Was er freischaltet:</strong> Die vollst&auml;ndige Nutzung der App-Funktionen gem&auml;&szlig; Ihrem Lizenzmodell</li>
+          <li><strong>Was er nicht ersetzt:</strong> Den Anthropic API-Key f&uuml;r KI-Funktionen</li>
+          <li><strong>Wo eintragen:</strong> Sidebar &rarr; Einstellungen / API-Konfiguration</li>
+          <li><strong>Lizenzmodell:</strong> Jahreslizenz &euro; 97/Jahr &middot; 7-Tage-Testphase</li>
+        </ul>
+        <h3>b) API-Key erstellen &ndash; Schritt f&uuml;r Schritt</h3>
+        <div class="hilfe-step"><div class="hilfe-step-num">1</div><div class="hilfe-step-txt"><strong>Anthropic Console &ouml;ffnen</strong>Gehen Sie zu <a href="https://console.anthropic.com" target="_blank" style="color:var(--ac)">console.anthropic.com</a> in Ihrem Browser.</div></div>
+        <div class="hilfe-step"><div class="hilfe-step-num">2</div><div class="hilfe-step-txt"><strong>Konto erstellen oder einloggen</strong>Registrieren Sie sich mit E-Mail-Adresse oder melden Sie sich an Ihrem bestehenden Anthropic-Konto an.</div></div>
+        <div class="hilfe-step"><div class="hilfe-step-num">3</div><div class="hilfe-step-txt"><strong>Bereich &bdquo;API Keys&rdquo; &ouml;ffnen</strong>Klicken Sie links im Men&uuml; auf &bdquo;API Keys&rdquo;.</div></div>
+        <div class="hilfe-step"><div class="hilfe-step-num">4</div><div class="hilfe-step-txt"><strong>Neuen API-Key erstellen</strong>Klicken Sie auf &bdquo;Create Key&rdquo;, vergeben Sie einen Namen (z.B. &bdquo;SMART Revision&rdquo;) und best&auml;tigen Sie.</div></div>
+        <div class="hilfe-step"><div class="hilfe-step-num">5</div><div class="hilfe-step-txt"><strong>API-Key kopieren</strong>Kopieren Sie den angezeigten Schl&uuml;ssel sofort. Er beginnt mit &bdquo;sk-ant-&hellip;&rdquo;.</div></div>
+        <div class="hilfe-step"><div class="hilfe-step-num">6</div><div class="hilfe-step-txt"><strong>API-Key in der App eintragen</strong>F&uuml;gen Sie den Schl&uuml;ssel in das API-Key-Feld in der Sidebar (unten) ein und klicken Sie &bdquo;Verbinden&rdquo;.</div></div>
+        <div class="hilfe-callout hilfe-callout-warn">
+          <strong>&#9888; Wichtig:</strong> Der API-Key wird h&auml;ufig nur einmal vollst&auml;ndig angezeigt und sollte sicher gespeichert werden (z.B. in einem Passwort-Manager). Verlieren Sie den Key, m&uuml;ssen Sie einen neuen erstellen.
+        </div>
+        <h3>c) Warum ein API-Key erforderlich ist</h3>
+        <ul>
+          <li>Die App nutzt KI-Funktionen &uuml;ber die Anthropic API (Claude-Modelle)</li>
+          <li>Der API-Key verbindet die App mit Ihrem pers&ouml;nlichen Anthropic-Konto</li>
+          <li>KI-Anfragen werden dadurch Ihrem eigenen Anthropic-Konto zugeordnet und abgerechnet</li>
+          <li>Ohne API-Key k&ouml;nnen KI-Formulierungen und Analysen nicht ausgef&uuml;hrt werden</li>
+          <li>Die Kernfunktionen der App laufen jedoch vollst&auml;ndig ohne API-Key</li>
+        </ul>
+        <h3>d) Warum auch bei bezahltem App-Abo ein API-Key n&ouml;tig ist</h3>
+        <ul>
+          <li><strong>App-Lizenz</strong> bezahlt die Nutzung der Software (BuiltSmart Hub)</li>
+          <li><strong>Anthropic API-Nutzung</strong> wird separat &uuml;ber Ihr Anthropic-Konto abgerechnet</li>
+          <li>Beide Systeme sind technisch und abrechnungstechnisch vollst&auml;ndig getrennt</li>
+          <li>Deshalb ist auch bei bezahlter App-Lizenz ein eigener API-Key erforderlich</li>
+        </ul>
+        <h3>e) Warum Anthropic verwendet wird</h3>
+        <ul>
+          <li><strong>Qualit&auml;t:</strong> Claude-Modelle sind besonders stark bei strukturiertem Arbeiten, Textanalyse und professionellen Workflows</li>
+          <li><strong>L&auml;ngere Dokumente:</strong> Claude eignet sich f&uuml;r komplexe Eingaben und nachvollziehbare, pr&auml;zise Ausgaben</li>
+          <li><strong>Sicherheit:</strong> Anthropic legt gro&szlig;en Wert auf Sicherheit, Zuverl&auml;ssigkeit und verantwortungsvolle KI-Nutzung</li>
+          <li><strong>Kontrolle:</strong> &Uuml;ber den eigenen API-Key behalten Sie volle Kontrolle &uuml;ber Nutzung und Abrechnung</li>
+          <li><strong>Integration:</strong> Die Anthropic API erm&ouml;glicht eine stabile Integration in professionelle Anwendungen</li>
+        </ul>
+      </div>
+
+      <!-- 3. SCHNELLSTART -->
+      <div class="hilfe-chapter" id="hch-schnellstart">
+        <h2>3. Schnellstart</h2>
+        <div class="ch-sub">In 5 Schritten zur ersten Revisionsfeststellung</div>
+        <div class="hilfe-callout hilfe-callout-green">
+          <strong>Hinweis:</strong> Schritte 1 und 2 sind nur f&uuml;r KI-Funktionen erforderlich. Alle anderen Funktionen stehen sofort bereit.
+        </div>
+        <div class="hilfe-step"><div class="hilfe-step-num">1</div><div class="hilfe-step-txt"><strong>Lizenzschl&uuml;ssel aktivieren (f&uuml;r vollst&auml;ndigen Zugang)</strong>Sidebar unten &rarr; Einstellungen &rarr; Lizenzschl&uuml;ssel eintragen. Siehe Kapitel 2 &bdquo;Einrichtung &amp; Zugang&rdquo;.</div></div>
+        <div class="hilfe-step"><div class="hilfe-step-num">2</div><div class="hilfe-step-txt"><strong>API-Key eintragen (optional &ndash; nur f&uuml;r KI-Funktionen)</strong>Sidebar unten &rarr; API-Konfiguration &rarr; Schl&uuml;ssel einf&uuml;gen &rarr; &bdquo;Verbinden&rdquo;. Siehe Kapitel 2b.</div></div>
+        <div class="hilfe-step"><div class="hilfe-step-num">3</div><div class="hilfe-step-txt"><strong>Neues Projekt anlegen</strong>Dashboard &rarr; &bdquo;+ Neu&rdquo; &rarr; Projektname, Auftraggeber, Leistungsphase, BGF eintragen &rarr; Speichern.</div></div>
+        <div class="hilfe-step"><div class="hilfe-step-num">4</div><div class="hilfe-step-txt"><strong>Erste Feststellung erfassen</strong>Topbar &rarr; &bdquo;+ Feststellung&rdquo; &rarr; Formular ausf&uuml;llen (Titel, Schwere, Bereich, HOAI-Paragraf, Sachverhalt, Empfehlung, Frist).</div></div>
+        <div class="hilfe-step"><div class="hilfe-step-num">5</div><div class="hilfe-step-txt"><strong>Revisionsbericht generieren und exportieren</strong>Topbar &rarr; &bdquo;Bericht generieren&rdquo; &rarr; PDF exportieren oder Kundenportal-HTML herunterladen.</div></div>
+        <h3>Empfohlene Reihenfolge bei neuen Projekten</h3>
+        <ul>
+          <li>Mandatskl&auml;rung durchf&uuml;hren &rarr; In Bericht &uuml;bernehmen</li>
+          <li>Feststellungen erfassen und klassifizieren</li>
+          <li>DIIR-Pr&uuml;flisten abarbeiten</li>
+          <li>Fristen setzen und im Fristenkalender verfolgen</li>
+          <li>KI-Assistent f&uuml;r Formulierungen nutzen (optional)</li>
+          <li>Revisionsbericht als PDF exportieren</li>
+          <li>Kundenportal-HTML an Auftraggeber senden</li>
+        </ul>
+      </div>
+
+      <!-- 4. BEDIENOBERFLÄCHE -->
+      <div class="hilfe-chapter" id="hch-bedienung">
+        <h2>4. Bedienoberfl&auml;che</h2>
+        <div class="ch-sub">Aufbau und Navigation der App</div>
+        <h3>Sidebar (linke Navigation)</h3>
+        <ul>
+          <li><strong>SMART Revision Logo</strong> &ndash; Icon und App-Name oben; Toggle-Button zum Einklappen</li>
+          <li><strong>Projektverwaltung</strong> &ndash; Aktives Projekt w&auml;hlen, neu anlegen, importieren/exportieren</li>
+          <li><strong>&Uuml;bersicht</strong> &ndash; Dashboard mit KPI-Kacheln und Projektinformationen</li>
+          <li><strong>Pr&uuml;fung</strong> &ndash; Feststellungen, Nachverfolgung, KI-Assistent</li>
+          <li><strong>Vorbereitung</strong> &ndash; Mandatskl&auml;rung, Fristenkalender, Pr&uuml;flisten</li>
+          <li><strong>Abschluss</strong> &ndash; Revisionsbericht</li>
+          <li><strong>API-Konfiguration</strong> &ndash; Anthropic API-Key eintragen (Sidebar unten)</li>
+        </ul>
+        <h3>Topbar (obere Leiste)</h3>
+        <ul>
+          <li><strong>Aktueller Bereich</strong> &ndash; Titel und Untertitel links</li>
+          <li><strong>Mandatskl&auml;rung</strong> &ndash; Direktzugang (gold hervorgehoben)</li>
+          <li><strong>KI fragen</strong> &ndash; Chat mit KI-Assistent &ouml;ffnen</li>
+          <li><strong>+ Feststellung</strong> &ndash; Neue Feststellung schnell erfassen</li>
+          <li><strong>Bericht generieren</strong> &ndash; Zum Revisionsbericht wechseln</li>
+          <li><strong>Hilfe</strong> &ndash; Dieses Hilfepanel &ouml;ffnen</li>
+        </ul>
+        <h3>Sidebar einklappen</h3>
+        <p>Der Toggle-Button oben rechts in der Sidebar klappt die Navigation auf Icons zusammen. Der Zustand wird gespeichert. Im eingeklappten Zustand zeigen Tooltips die Namen der Navigationspunkte.</p>
+      </div>
+
+      <!-- 5. WICHTIGE FUNKTIONEN -->
+      <div class="hilfe-chapter" id="hch-funktionen">
+        <h2>5. Wichtige Funktionen</h2>
+        <div class="ch-sub">Alle Kernfunktionen im &Uuml;berblick</div>
+        <h3>Feststellungen</h3>
+        <p>Kern der App. Jede Feststellung hat: ID (automatisch), Titel, Bereich, Schwere (Kritisch/Erheblich/Hinweis), Status, HOAI-Paragraf, Sachverhalt, Empfehlung, Verantwortlichen, Frist und Erl&auml;uterungen.</p>
+        <div class="hilfe-ki-list">
+          <div class="hilfe-ki-list-title">KI-Unterst&uuml;tzung (optional)</div>
+          <span class="hilfe-ki-tag optional">Sachverhalt auto-formulieren</span>
+          <span class="hilfe-ki-tag optional">Empfehlung auto-formulieren</span>
+          <span class="hilfe-ki-tag optional">VOB/B-konforme Feststellung</span>
+          <span class="hilfe-ki-tag optional">HOAI-konforme Feststellung</span>
+        </div>
+        <h3>Mandatskl&auml;rung</h3>
+        <p>7-Phasen-Gespr&auml;chsleitfaden mit aufklappbaren Fragen, Vorschlag-Chips zum Anklicken und Notizfeldern. Ergebnisse flie&szlig;en in Abschnitt 00 des Revisionsberichts.</p>
+        <h3>DIIR-Pr&uuml;flisten</h3>
+        <p>10 Pr&uuml;flisten mit 200+ Pr&uuml;fpunkten nach DIIR-Revisionsstandard. Jeder Punkt mit Muss/Soll/Kann-Kennzeichnung und Paragrafenreferenz. Fortschritt wird pro Projekt gespeichert.</p>
+        <h3>Fristenkalender</h3>
+        <p>Alle Feststellungsfristen nach &Uuml;berf&auml;lligkeit, Diese Woche, Diesen Monat und Erledigt gruppiert. Ampelfarben und Filteroptionen.</p>
+        <h3>KI-Assistent</h3>
+        <div class="hilfe-ki-list">
+          <div class="hilfe-ki-list-title">&#9889; Alle KI-Funktionen (erfordern API-Key)</div>
+          <span class="hilfe-ki-tag optional">HOAI &sect; 34 ff. Konformit&auml;t</span>
+          <span class="hilfe-ki-tag optional">VOB/B Feststellungen</span>
+          <span class="hilfe-ki-tag optional">Risikoanalyse</span>
+          <span class="hilfe-ki-tag optional">Fristenpr&uuml;fung</span>
+          <span class="hilfe-ki-tag optional">Zusammenfassung</span>
+          <span class="hilfe-ki-tag optional">M&auml;ngelr&uuml;ge</span>
+          <span class="hilfe-ki-tag optional">Beweissicherung</span>
+          <span class="hilfe-ki-tag optional">Executive Summary</span>
+        </div>
+        <h3>Revisionsbericht &amp; Exporte</h3>
+        <ul>
+          <li><strong>PDF-Export</strong> &ndash; Vollst&auml;ndiger mehrseitiger Bericht mit Deckblatt, Mandatsgrundlage (Abschnitt 00), Risikomatrix, Detailbericht, Ma&szlig;nahmenplan, Unterschriftenblock</li>
+          <li><strong>Kundenportal-HTML</strong> &ndash; Standalone-Datei f&uuml;r Auftraggeber; Feststellungen abhaken mit Datum, Dashboard, Filter, Drucken</li>
+          <li><strong>Papiervorlage</strong> &ndash; Druckbarer A4-Bogen der Mandatskl&auml;rung f&uuml;r h&auml;ndisches Ausf&uuml;llen</li>
+        </ul>
+      </div>
+
+      <!-- 6. TYPISCHER WORKFLOW -->
+      <div class="hilfe-chapter" id="hch-workflow">
+        <h2>6. Typischer Workflow</h2>
+        <div class="ch-sub">Empfohlene Vorgehensweise f&uuml;r ein Revisionsprojekt</div>
+        <div class="hilfe-step"><div class="hilfe-step-num">1</div><div class="hilfe-step-txt"><strong>Projekt anlegen</strong>Dashboard &rarr; &bdquo;+ Neu&rdquo;: Projektname, Auftraggeber, Leistungsphase, BGF, Pr&uuml;fer, Datum eintragen.</div></div>
+        <div class="hilfe-step"><div class="hilfe-step-num">2</div><div class="hilfe-step-txt"><strong>Mandatskl&auml;rung durchf&uuml;hren</strong>Mandatskl&auml;rung &rarr; alle 7 Phasen mit dem Auftraggeber besprechen, Antworten erfassen &rarr; &bdquo;In Bericht &uuml;bernehmen&rdquo;.</div></div>
+        <div class="hilfe-step"><div class="hilfe-step-num">3</div><div class="hilfe-step-txt"><strong>Feststellungen erfassen</strong>&bdquo;+ Feststellung&rdquo; in der Topbar f&uuml;r jede Feststellung. KI-Assistent f&uuml;r Formulierungen nutzen (optional).</div></div>
+        <div class="hilfe-step"><div class="hilfe-step-num">4</div><div class="hilfe-step-txt"><strong>DIIR-Pr&uuml;flisten abarbeiten</strong>Pr&uuml;flisten &rarr; relevante Listen ausw&auml;hlen &rarr; Pr&uuml;fpunkte abhaken. Fortschritt wird automatisch gespeichert.</div></div>
+        <div class="hilfe-step"><div class="hilfe-step-num">5</div><div class="hilfe-step-txt"><strong>Fristen &uuml;berwachen</strong>Fristenkalender &rarr; &uuml;berf&auml;llige und bald f&auml;llige Feststellungen pr&uuml;fen und eskalieren.</div></div>
+        <div class="hilfe-step"><div class="hilfe-step-num">6</div><div class="hilfe-step-txt"><strong>Revisionsbericht erstellen</strong>&bdquo;Bericht generieren&rdquo; &rarr; KI-Zusammenfassung (optional) &rarr; PDF exportieren.</div></div>
+        <div class="hilfe-step"><div class="hilfe-step-num">7</div><div class="hilfe-step-txt"><strong>Kundenportal versenden</strong>Revisionsbericht &rarr; &bdquo;Kundenportal exportieren&rdquo; &rarr; HTML-Datei per E-Mail an Auftraggeber senden.</div></div>
+      </div>
+
+      <!-- 7. EINGABEN & DATEN -->
+      <div class="hilfe-chapter" id="hch-eingaben">
+        <h2>7. Eingaben &amp; Daten</h2>
+        <div class="ch-sub">Wo Daten gespeichert werden und wie Import/Export funktioniert</div>
+        <h3>Datenspeicherung</h3>
+        <div class="hilfe-callout">
+          <strong>Alle Daten bleiben lokal.</strong> SMART Revision speichert alle Projektdaten ausschlie&szlig;lich im localStorage Ihres Browsers. Es werden keine Daten an externe Server &uuml;bertragen (au&szlig;er KI-Anfragen an die Anthropic API, wenn Sie den KI-Assistent nutzen).
+        </div>
+        <ul>
+          <li><strong>Projekte</strong> &ndash; Als JSON im localStorage des Browsers gespeichert</li>
+          <li><strong>Pr&uuml;flisten-Fortschritt</strong> &ndash; Im aktiven Projekt gespeichert</li>
+          <li><strong>Mandatskl&auml;rung</strong> &ndash; Antworten und Auswahlen im Projekt gespeichert</li>
+          <li><strong>API-Key</strong> &ndash; Im localStorage gespeichert (nur lokal, nie &uuml;bertragen)</li>
+        </ul>
+        <h3>Import &amp; Export</h3>
+        <ul>
+          <li><strong>Projekt exportieren</strong> &ndash; Sidebar &rarr; &bdquo;&darr; Export&rdquo; &rarr; JSON-Datei herunterladen</li>
+          <li><strong>Projekt importieren</strong> &ndash; Sidebar &rarr; &bdquo;&uarr; Import&rdquo; &rarr; JSON-Datei ausw&auml;hlen</li>
+          <li><strong>PDF-Export</strong> &ndash; Revisionsbericht &rarr; &bdquo;PDF exportieren&rdquo;</li>
+          <li><strong>Kundenportal-HTML</strong> &ndash; Revisionsbericht &rarr; &bdquo;Kundenportal exportieren&rdquo;</li>
+          <li><strong>DIIR-Pr&uuml;flisten Export</strong> &ndash; Pr&uuml;flisten &rarr; &bdquo;&darr; Export&rdquo; als Textdatei</li>
+        </ul>
+        <div class="hilfe-callout hilfe-callout-warn">
+          <strong>&#9888; Wichtig:</strong> Beim L&ouml;schen des Browser-Cache gehen alle lokal gespeicherten Projektdaten verloren. Exportieren Sie wichtige Projekte regelm&auml;&szlig;ig als JSON-Datei.
+        </div>
+      </div>
+
+      <!-- 8. ERGEBNISSE VERSTEHEN -->
+      <div class="hilfe-chapter" id="hch-ergebnisse">
+        <h2>8. Ergebnisse verstehen</h2>
+        <div class="ch-sub">KPI-Kacheln, Schweregrade und Konformit&auml;tsquote erkl&auml;rt</div>
+        <h3>Dashboard-KPI-Kacheln</h3>
+        <ul>
+          <li><strong style="color:var(--re)">Kritisch</strong> &ndash; Sofortma&szlig;nahmen erforderlich; erhebliche Rechts- oder Qualit&auml;tsrisiken</li>
+          <li><strong style="color:var(--or)">Erheblich</strong> &ndash; Wesentliche M&auml;ngel; kurzfristiger Handlungsbedarf</li>
+          <li><strong style="color:var(--go)">Hinweise</strong> &ndash; Optimierungsbedarf; mittelfristig zu adressieren</li>
+          <li><strong style="color:var(--gr)">Erledigt</strong> &ndash; Feststellungen mit Status &bdquo;Erledigt&rdquo;</li>
+          <li><strong style="color:var(--ac)">Konformit&auml;t %</strong> &ndash; Anteil erledigter Feststellungen an der Gesamtzahl</li>
+        </ul>
+        <h3>Pr&uuml;flisten-Kennzeichnung</h3>
+        <ul>
+          <li><strong style="color:var(--re)">Muss</strong> &ndash; Pflichtanforderung nach DIIR / HOAI / VOB/B; nicht erf&uuml;llt = kritische Feststellung</li>
+          <li><strong style="color:#92400e">Soll</strong> &ndash; Empfehlung nach Best Practice; Abweichung dokumentieren</li>
+          <li><strong style="color:var(--ac)">Kann</strong> &ndash; Optionale Verbesserung; bei Bedarf ber&uuml;cksichtigen</li>
+        </ul>
+        <h3>Revisionsbericht-Abschnitte</h3>
+        <ul>
+          <li><strong>Abschnitt 00</strong> &ndash; Mandatsgrundlage aus der Mandatskl&auml;rung (nur wenn ausgef&uuml;llt)</li>
+          <li><strong>Abschnitt 01</strong> &ndash; Executive Summary mit KPI-&Uuml;bersicht</li>
+          <li><strong>Abschnitt 02</strong> &ndash; Risikomatrix aller Feststellungen tabellarisch</li>
+          <li><strong>Abschnitt 03</strong> &ndash; Detailbericht mit Sachverhalt und Empfehlung je Feststellung</li>
+          <li><strong>Abschnitt 04</strong> &ndash; Ma&szlig;nahmenplan mit Verantwortlichen und Fristen</li>
+          <li><strong>Abschnitt 05</strong> &ndash; Schlussbet&auml;tigung und Unterschriftenblock</li>
+        </ul>
+      </div>
+
+      <!-- 9. FEHLER & LÖSUNGEN -->
+      <div class="hilfe-chapter" id="hch-fehler">
+        <h2>9. Fehler &amp; L&ouml;sungen</h2>
+        <div class="ch-sub">H&auml;ufige Probleme und wie Sie diese beheben</div>
+        <h3>KI-Assistent antwortet nicht</h3>
+        <ul>
+          <li>Pr&uuml;fen Sie, ob ein API-Key eingetragen ist (Sidebar unten)</li>
+          <li>Stellen Sie sicher, dass der Key mit &bdquo;sk-ant-&rdquo; beginnt</li>
+          <li>Pr&uuml;fen Sie Ihr Anthropic-Kontoguthaben unter <a href="https://console.anthropic.com" target="_blank" style="color:var(--ac)">console.anthropic.com</a></li>
+          <li>Pop-up-Blocker k&ouml;nnen KI-Anfragen blockieren &ndash; bitte deaktivieren</li>
+        </ul>
+        <h3>Daten fehlen nach Browser-Neustart</h3>
+        <ul>
+          <li>Inkognito-Modus / privates Fenster l&ouml;scht localStorage &ndash; normalen Browser verwenden</li>
+          <li>Browser-Cache wurde gel&ouml;scht &ndash; Projekte regelm&auml;&szlig;ig als JSON exportieren</li>
+          <li>Anderer Browser verwendet &ndash; localStorage ist browserspezifisch</li>
+        </ul>
+        <h3>PDF-Export funktioniert nicht</h3>
+        <ul>
+          <li>Pop-ups m&uuml;ssen f&uuml;r diese Seite erlaubt sein</li>
+          <li>Safari: Einstellungen &rarr; Websites &rarr; Pop-ups erlauben</li>
+          <li>Mindestens eine Feststellung muss vorhanden sein</li>
+        </ul>
+        <h3>Kundenportal-Download startet nicht</h3>
+        <ul>
+          <li>Pop-ups f&uuml;r diese Seite erlauben (wie PDF-Export)</li>
+          <li>Mindestens eine Feststellung muss im Projekt vorhanden sein</li>
+        </ul>
+        <h3>Sidebar ist verschwunden</h3>
+        <ul>
+          <li>Toggle-Button oben in der Sidebar klicken, um sie wieder auszuklappen</li>
+          <li>Bei schmalen Bildschirmen kann die Sidebar automatisch eingeklappt sein</li>
+        </ul>
+      </div>
+
+      <!-- 10. VERSION & HINWEISE -->
+      <div class="hilfe-chapter" id="hch-version">
+        <h2>10. Version &amp; Hinweise</h2>
+        <div class="ch-sub">Versionshinweise, Haftungsausschluss und Kontakt</div>
+        <h3>Version</h3>
+        <ul>
+          <li><strong>Produkt:</strong> SMART Revision</li>
+          <li><strong>Hersteller:</strong> BuiltSmart Hub &middot; &copy; Bernhard Metzger</li>
+          <li><strong>Website:</strong> <a href="https://www.built-smart-hub.com" target="_blank" style="color:var(--ac)">www.built-smart-hub.com</a></li>
+          <li><strong>KI-Modell:</strong> Claude Sonnet (Anthropic) &ndash; Stand: 2025/2026</li>
+          <li><strong>Lizenzmodell:</strong> Jahreslizenz &euro; 97/Jahr &middot; 7-Tage-Testphase</li>
+        </ul>
+        <h3>Rechtlicher Hinweis</h3>
+        <div class="hilfe-callout hilfe-callout-warn">
+          <strong>&#9888; Haftungsausschluss:</strong> Die von der App generierten Texte, Formulierungen und Analysen &ndash; insbesondere KI-generierte Inhalte &ndash; ersetzen keine rechtliche oder bautechnische Fachberatung. Alle Ergebnisse sind vom Nutzer eigenverantwortlich zu pr&uuml;fen und anzupassen. BuiltSmart Hub &uuml;bernimmt keine Haftung f&uuml;r die inhaltliche Richtigkeit KI-generierter Ausgaben.
+        </div>
+        <h3>Datenschutz</h3>
+        <ul>
+          <li>Alle Projektdaten verbleiben lokal im Browser (localStorage)</li>
+          <li>KI-Anfragen werden verschl&uuml;sselt an die Anthropic API &uuml;bertragen</li>
+          <li>Es werden keine Daten an BuiltSmart Hub-Server gesendet</li>
+          <li>Anthropic-Datenschutzrichtlinien gelten f&uuml;r KI-Anfragen</li>
+        </ul>
+        <h3>Support &amp; Kontakt</h3>
+        <ul>
+          <li><a href="https://www.built-smart-hub.com" target="_blank" style="color:var(--ac)">www.built-smart-hub.com</a></li>
+          <li>Bei technischen Fragen: Kontaktformular auf der Website</li>
+        </ul>
+      </div>
+
+    </div><!-- hilfe-content -->
+  </div><!-- hilfe-body -->
+</div><!-- hilfe-panel -->
 
 
 <!-- MODAL: Projektliste -->
@@ -2927,5 +3355,46 @@ function pl2SaveToProject(){
   var ov=document.getElementById('pl2-overall');
   if(ov){var o=ov.textContent;ov.textContent='✓ Gespeichert!';ov.style.color='var(--gr)';setTimeout(function(){ov.textContent=o;ov.style.color='';},1800);}
 }
+
+
+// HILFE-PANEL
+function openHilfe(){
+  document.getElementById('hilfe-overlay').classList.add('open');
+  document.getElementById('hilfe-panel').classList.add('open');
+  var si=document.getElementById('hilfe-search');
+  if(si){si.value='';hilfeSearch('');}
+}
+function closeHilfe(){
+  document.getElementById('hilfe-overlay').classList.remove('open');
+  document.getElementById('hilfe-panel').classList.remove('open');
+}
+function hilfeChapter(id){
+  document.querySelectorAll('.hilfe-chapter').forEach(function(el){el.classList.remove('active');});
+  document.querySelectorAll('.hilfe-nav-item').forEach(function(el){el.classList.remove('active');});
+  var ch=document.getElementById('hch-'+id);
+  if(ch)ch.classList.add('active');
+  var nav=document.querySelector('[data-ch="'+id+'"]');
+  if(nav)nav.classList.add('active');
+  var c=document.getElementById('hilfe-content');
+  if(c)c.scrollTop=0;
+}
+function hilfeSearch(q){
+  q=(q||'').trim().toLowerCase();
+  if(!q)return;
+  var found=false;
+  document.querySelectorAll('.hilfe-chapter').forEach(function(ch){
+    var txt=(ch.textContent||ch.innerText||'');
+    if(!found&&txt.toLowerCase().indexOf(q)>=0){
+      found=true;
+      hilfeChapter(ch.id.replace('hch-',''));
+    }
+  });
+}
+document.addEventListener('keydown',function(e){
+  if(e.key==='Escape'){
+    var p=document.getElementById('hilfe-panel');
+    if(p&&p.classList.contains('open'))closeHilfe();
+  }
+});
 
 
