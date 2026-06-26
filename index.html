@@ -390,6 +390,54 @@ textarea{resize:vertical;min-height:72px;}
 .mk-rpt-a{font-size:13px;color:var(--ink2);line-height:1.5;}
 .mk-rpt-empty{font-size:13px;color:var(--ink3);font-style:italic;}
 
+/* ══════════════════════════════════════
+   PRÜFLISTEN (DIIR) STYLES
+══════════════════════════════════════ */
+.pl-header{display:flex;align-items:flex-start;justify-content:space-between;gap:16px;margin-bottom:14px;flex-wrap:wrap;}
+.pl-title-row{display:flex;flex-direction:column;gap:4px;}
+.pl-main-title{font-family:'Fraunces',serif;font-size:20px;font-weight:600;color:var(--ink);margin:0;}
+.pl-subtitle{font-size:11px;color:var(--ink3);letter-spacing:.02em;}
+.pl-actions{display:flex;gap:8px;align-items:center;}
+.pl-overall-bar{background:var(--bgc);border:1px solid var(--b);border-radius:var(--rm);padding:12px 16px;margin-bottom:16px;display:flex;align-items:center;gap:16px;flex-wrap:wrap;}
+.pl-overall-info{display:flex;flex-direction:column;gap:2px;min-width:120px;}
+.pl-overall-lbl{font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:.08em;color:var(--ink3);}
+.pl-overall-pct{font-family:'Fraunces',serif;font-size:22px;font-weight:600;color:var(--ac);line-height:1;}
+.pl-bar-track{flex:1;height:8px;background:var(--b);border-radius:4px;overflow:hidden;min-width:120px;}
+.pl-bar-fill{height:100%;background:linear-gradient(90deg,var(--ac),#2563eb);border-radius:4px;transition:width .4s ease;}
+.pl-overall-sub{font-size:11px;color:var(--ink3);white-space:nowrap;}
+.pl-tabs{display:flex;gap:0;flex-wrap:wrap;border-bottom:2px solid var(--b);margin-bottom:0;}
+.pl-tab{padding:9px 14px;font-size:11px;font-weight:600;letter-spacing:.03em;cursor:pointer;border:none;background:none;color:var(--ink3);border-bottom:3px solid transparent;margin-bottom:-2px;transition:all .18s;white-space:nowrap;display:flex;align-items:center;gap:6px;}
+.pl-tab:hover{color:var(--ink);background:var(--bgp);}
+.pl-tab.active{color:var(--ac);border-bottom-color:var(--ac);}
+.pl-tab-pct{font-size:9px;font-weight:500;padding:1px 5px;border-radius:8px;background:var(--bg);color:var(--ink3);border:1px solid var(--b);}
+.pl-tab.active .pl-tab-pct{background:var(--acl);color:var(--ac);border-color:#c8d8ec;}
+.pl-body{background:var(--bgc);border:1px solid var(--b);border-top:none;border-radius:0 0 var(--rm) var(--rm);overflow:hidden;}
+.pl-body-hdr{background:var(--ac);color:#fff;padding:12px 18px;display:flex;align-items:center;justify-content:space-between;gap:12px;}
+.pl-body-title{font-family:'Fraunces',serif;font-size:15px;font-weight:600;}
+.pl-body-meta{font-size:11px;opacity:.7;}
+.pl-body-pct-badge{font-family:'IBM Plex Mono',monospace;font-size:12px;font-weight:600;background:rgba(255,255,255,.15);padding:3px 10px;border-radius:10px;}
+.pl-groups{padding:16px 18px;display:flex;flex-direction:column;gap:20px;}
+.pl-group{border:1px solid var(--b);border-radius:var(--r);overflow:hidden;}
+.pl-group-hdr{background:var(--bgp);border-bottom:1px solid var(--b);padding:9px 14px;display:flex;align-items:center;gap:10px;}
+.pl-group-num{font-family:'IBM Plex Mono',monospace;font-size:10px;font-weight:700;color:var(--ac);background:var(--acl);padding:2px 7px;border-radius:3px;border:1px solid #c8d8ec;}
+.pl-group-name{font-size:12px;font-weight:700;color:var(--ink);flex:1;}
+.pl-group-prog{font-size:10px;color:var(--ink3);font-family:'IBM Plex Mono',monospace;}
+.pl-items{display:flex;flex-direction:column;}
+.pl-item{display:flex;align-items:flex-start;gap:10px;padding:10px 14px;border-bottom:1px solid var(--b);cursor:pointer;transition:background .12s;user-select:none;}
+.pl-item:last-child{border-bottom:none;}
+.pl-item:hover{background:var(--bgp);}
+.pl-item.done{background:#f0fdf4;}
+.pl-chk{width:17px;height:17px;border-radius:4px;border:1.5px solid var(--bs);background:var(--bgc);flex-shrink:0;margin-top:1px;display:flex;align-items:center;justify-content:center;font-size:10px;color:transparent;transition:all .18s;}
+.pl-item.done .pl-chk{background:var(--gr);border-color:var(--gr);color:#fff;}
+.pl-item-content{flex:1;}
+.pl-item-text{font-size:12.5px;color:var(--ink2);line-height:1.45;}
+.pl-item.done .pl-item-text{color:var(--gr);text-decoration:line-through;text-decoration-color:rgba(13,122,78,.4);}
+.pl-item-ref{font-size:10px;color:var(--ink3);margin-top:2px;font-family:'IBM Plex Mono',monospace;}
+.pl-prio{font-size:9px;font-weight:700;padding:1px 6px;border-radius:3px;flex-shrink:0;margin-top:2px;white-space:nowrap;}
+.pl-prio.h{background:#fee2e2;color:#991b1b;}
+.pl-prio.m{background:#fef3c7;color:#92400e;}
+.pl-prio.l{background:#f1f5f9;color:#475569;}
+
 /* ══════════════════════════════════════════════
    FRISTENKALENDER STYLES
 ══════════════════════════════════════════════ */
@@ -453,6 +501,50 @@ textarea{resize:vertical;min-height:72px;}
 ══════════════════════════════════════════════ */
 .rpt-gen-btn.pdf{background:var(--re);color:#fff;}
 .rpt-gen-btn.pdf:hover{background:#991c1c;}
+
+
+/* ═══════════════════════════════════════════
+   PRÜFLISTEN (DIIR) STYLES
+═══════════════════════════════════════════ */
+.pl2-wrap{display:flex;flex-direction:column;height:100%;}
+.pl2-header{display:flex;align-items:flex-start;justify-content:space-between;gap:16px;margin-bottom:16px;flex-wrap:wrap;}
+.pl2-title{font-family:'Fraunces',serif;font-size:20px;font-weight:600;color:var(--ink);line-height:1.1;}
+.pl2-subtitle{font-size:11px;color:var(--ink3);margin-top:3px;letter-spacing:.02em;}
+.pl2-overall{font-family:'IBM Plex Mono',monospace;font-size:12px;font-weight:600;color:var(--ac);background:var(--acl);padding:4px 12px;border-radius:20px;border:1px solid #c8d8ec;white-space:nowrap;}
+.pl2-tabs{display:flex;gap:0;flex-wrap:wrap;border-bottom:1px solid var(--b);margin-bottom:0;}
+.pl2-tab{padding:9px 16px;font-size:11.5px;font-weight:500;cursor:pointer;border:none;background:none;color:var(--ink3);border-bottom:3px solid transparent;margin-bottom:-1px;transition:all .18s;display:flex;align-items:center;gap:6px;white-space:nowrap;}
+.pl2-tab:hover{color:var(--ink);background:rgba(0,0,0,.02);}
+.pl2-tab.active{color:var(--ac);border-bottom-color:var(--ac);font-weight:600;}
+.pl2-tab.done{color:var(--gr);}
+.pl2-tab-pct{font-size:10px;font-family:'IBM Plex Mono',monospace;opacity:.7;}
+.pl2-progress{height:4px;background:var(--b);border-radius:0;margin-bottom:20px;overflow:hidden;}
+.pl2-prog-fill{height:100%;background:linear-gradient(90deg,var(--ac),var(--gr));border-radius:2px;transition:width .4s ease;}
+.pl2-body{display:flex;flex-direction:column;gap:16px;}
+.pl2-section{background:var(--bgc);border:1px solid var(--b);border-radius:var(--rm);overflow:hidden;}
+.pl2-sec-hdr{display:flex;align-items:center;gap:10px;padding:11px 16px;background:var(--bg);border-bottom:1px solid var(--b);cursor:pointer;user-select:none;}
+.pl2-sec-hdr:hover{background:var(--acl);}
+.pl2-sec-icon{font-size:16px;flex-shrink:0;}
+.pl2-sec-title{font-size:12.5px;font-weight:700;color:var(--ink);flex:1;letter-spacing:.01em;}
+.pl2-sec-meta{font-size:10px;font-family:'IBM Plex Mono',monospace;color:var(--ink3);}
+.pl2-sec-pct{font-size:10px;font-weight:700;color:var(--ac);background:var(--acl);padding:2px 8px;border-radius:10px;border:1px solid #c8d8ec;font-family:'IBM Plex Mono',monospace;}
+.pl2-sec-pct.done{color:var(--gr);background:var(--grl);border-color:#a3d4b0;}
+.pl2-sec-chevron{color:var(--ink3);transition:transform .2s;font-size:13px;}
+.pl2-sec-open .pl2-sec-chevron{transform:rotate(180deg);}
+.pl2-items{padding:8px 12px 10px;}
+.pl2-item{display:flex;align-items:flex-start;gap:10px;padding:8px 10px;border-radius:var(--r);cursor:pointer;transition:background .12s;border:1px solid transparent;}
+.pl2-item:hover{background:var(--bg);border-color:var(--b);}
+.pl2-item.pl2-checked{background:var(--grl);border-color:#c6e8c9;}
+.pl2-cb{width:16px;height:16px;border-radius:3px;border:1.5px solid var(--bs);background:var(--bgc);flex-shrink:0;margin-top:2px;display:flex;align-items:center;justify-content:center;font-size:10px;color:transparent;transition:all .18s;}
+.pl2-item.pl2-checked .pl2-cb{background:var(--gr);border-color:var(--gr);color:#fff;}
+.pl2-item-body{flex:1;}
+.pl2-item-txt{font-size:12.5px;color:var(--ink2);line-height:1.45;}
+.pl2-item.pl2-checked .pl2-item-txt{color:var(--gr);}
+.pl2-item-ref{font-size:10px;color:var(--ink3);margin-top:2px;font-family:'IBM Plex Mono',monospace;}
+.pl2-item-sev{font-size:9px;font-weight:700;padding:1px 6px;border-radius:3px;flex-shrink:0;margin-top:3px;white-space:nowrap;}
+.pl2-sev-m{background:var(--rl);color:var(--re);}
+.pl2-sev-s{background:#fdf6e8;color:#92400e;}
+.pl2-sev-h{background:var(--acl);color:var(--ac);}
+.pl2-empty{padding:24px;text-align:center;color:var(--ink3);font-size:13px;font-style:italic;}
 
 </style>
 </head>
@@ -518,8 +610,8 @@ textarea{resize:vertical;min-height:72px;}
     <div class="ni" id="n-fk" title="Fristenkalender" onclick="gv('fk')">
       <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="1" y="3" width="14" height="12" rx="1"/><path d="M5 1v4M11 1v4M1 7h14"/><rect x="4" y="9" width="2" height="2" rx=".3"/><rect x="7" y="9" width="2" height="2" rx=".3"/></svg><span class="sidebar-show">Fristenkalender</span>
     </div>
-    <div class="ni" id="n-lp" title="HOAI LP-Prüflisten" onclick="gv('lp')">
-      <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 5l3 3 4-4"/><path d="M2 10l3 3 4-4"/><path d="M12 7h2M12 12h2"/></svg><span class="sidebar-show">HOAI LP-Prüflisten</span>
+    <div class="ni" id="n-lp" title="Prüflisten" onclick="gv('lp')">
+      <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 5l3 3 4-4"/><path d="M2 10l3 3 4-4"/><path d="M12 7h2M12 12h2"/></svg><span class="sidebar-show">Prüflisten</span>
     </div>
     <div class="snav-lbl">Abschluss</div>
     <div class="ni" id="n-rpt" title="Revisionsbericht" onclick="gv('rpt')">
@@ -835,24 +927,29 @@ textarea{resize:vertical;min-height:72px;}
       <div class="fk-lanes" id="fk-lanes"></div>
     </div>
 
-    <!-- HOAI LP-PRÜFLISTEN -->
+    <!-- PRÜFLISTEN NACH DIIR -->
     <div class="view" id="view-lp">
-      <div class="lp-progress-row" id="lp-progress-row"></div>
-      <div class="lp-nav" id="lp-nav"></div>
-      <div class="lp-content">
-        <div class="lp-content-hdr">
-          <div class="lp-content-title" id="lp-content-title">LP auswählen</div>
-          <div class="lp-content-pct" id="lp-content-pct">0%</div>
-          <button class="btn bg sm" onclick="lpResetCurrent()" style="margin-left:8px;">Zurücksetzen</button>
-          <button class="btn bp sm" onclick="lpCheckAll()">Alle abhaken</button>
+      <div class="pl2-wrap">
+        <div class="pl2-header">
+          <div>
+            <div class="pl2-title">Prüflisten</div>
+            <div class="pl2-subtitle">nach DIIR-Revisionsstandard · HOAI · VOB/B · BGB · DIN</div>
+          </div>
+          <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap;">
+            <span class="pl2-overall" id="pl2-overall">0 / 0 Prüfpunkte</span>
+            <button class="btn bg sm" onclick="pl2ResetActive()">Zurücksetzen</button>
+            <button class="btn bg sm" onclick="pl2ExportTxt()">&#8595; Export</button>
+            <button class="btn bp sm" onclick="pl2SaveToProject()">In Bericht übernehmen</button>
+          </div>
         </div>
-        <div class="lp-groups" id="lp-groups"></div>
+        <div class="pl2-tabs" id="pl2-tabs"></div>
+        <div class="pl2-progress">
+          <div class="pl2-prog-fill" id="pl2-prog-fill" style="width:0%"></div>
+        </div>
+        <div class="pl2-body" id="pl2-body"></div>
       </div>
     </div>
 
-  </div>
-</div>
-</div>
 
 <!-- MODAL: Projektliste -->
 <div class="mo" id="modal-plist">
@@ -1105,7 +1202,7 @@ function gv(v){
   if(v==='rpt') rdRpt();
   if(v==='mk') mkRender();
   if(v==='fk') fkRender();
-  if(v==='lp') lpRender();
+  if(v==='lp') pl2Render();
 }
 
 // ═══════════════════════════════════════════
@@ -2361,395 +2458,474 @@ function fkRender(){
 // ═══════════════════════════════════════════
 // HOAI LP-PRÜFLISTEN
 // ═══════════════════════════════════════════
-const LP_DATA={
-  'LP 1':{title:'LP 1 – Grundlagenermittlung',groups:[
-    {title:'Bedarfsermittlung',items:['Bedarfsprogramm mit Bauherr abgestimmt','Grundstücksunterlagen beschafft und geprüft','Nutzungsanforderungen dokumentiert','Budget- und Terminrahmen festgelegt']},
-    {title:'Behörden & Recht',items:['Behördliche Vorgaben und Restriktionen ermittelt','Bebauungsplan und Flächennutzungsplan geprüft','Denkmalschutz und Altlasten recherchiert']},
-    {title:'Dokumentation',items:['Leistungsumfang Grundlagenermittlung schriftlich bestätigt','Honorarvereinbarung LP 1 abgeschlossen','Ergebnisdokumentation erstellt']},
-  ]},
-  'LP 2':{title:'LP 2 – Vorplanung',groups:[
-    {title:'Entwurf',items:['Mindestens 1 Vorentwurf mit Varianten vorgelegt','Flächenberechnungen (BGF, NF, BRI) erstellt','Technische Machbarkeit geprüft']},
-    {title:'Kosten',items:['Kostenschätzung nach DIN 276 erstellt','Kostenrahmen mit Bauherr abgestimmt','Finanzierungsplan vorläufig freigegeben']},
-    {title:'Planung',items:['Planungskonzept Tragwerk abgestimmt','TGA-Konzept (HLS, ELT) vorgelegt','Brandschutzkonzept-Ansatz geprüft']},
-  ]},
-  'LP 3':{title:'LP 3 – Entwurfsplanung',groups:[
-    {title:'Entwurfsunterlagen',items:['Vollständige Entwurfszeichnungen 1:100 vorgelegt','Raumplanung und Grundrisse abgestimmt','Schnitte und Ansichten vollständig']},
-    {title:'Kosten & Termine',items:['Kostenberechnung nach DIN 276 erstellt','Projektterminplan aktualisiert','Bausoll dokumentiert']},
-    {title:'Fachplaner',items:['Tragwerksplanung integriert','TGA-Entwurf koordiniert','Brandschutzkonzept abgestimmt','Schallschutznachweis konzeptionell geprüft']},
-  ]},
-  'LP 4':{title:'LP 4 – Genehmigungsplanung',groups:[
-    {title:'Bauantrag',items:['Bauantrag vollständig eingereicht','Lageplan vom Vermesser beglaubigt','Standsicherheitsnachweis eingereicht']},
-    {title:'Nachweise',items:['Brandschutznachweis eingereicht','Wärmeschutznachweis (GEG) eingereicht','Schallschutznachweis eingereicht']},
-    {title:'Bescheide',items:['Baugenehmigung erhalten und geprüft','Auflagen aus Baugenehmigung dokumentiert','Nebenbestimmungen in Planung integriert']},
-  ]},
-  'LP 5':{title:'LP 5 – Ausführungsplanung',groups:[
-    {title:'Ausführungszeichnungen',items:['Schalungspläne 1:50 vollständig','Bewehrungspläne geprüft und freigegeben','Montagepläne Stahl/Holz vorhanden','Werkstattpläne Fassade koordiniert','Pläne TGA (HLS/ELT) vollständig']},
-    {title:'Statik & Prüfung',items:['Statische Berechnungen vollständig vorgelegt','Prüfingenieur Statik beauftragt und Prüfvermerk vorhanden','Standsicherheitsnachweis genehmigt']},
-    {title:'Koordination',items:['Plankoordination Fachplaner abgeschlossen','Kollisionsprüfung Gewerke durchgeführt','Ausführungsterminplan aktualisiert']},
-  ]},
-  'LP 6':{title:'LP 6 – Vorbereitung der Vergabe',groups:[
-    {title:'Leistungsverzeichnisse',items:['LV Rohbau vollständig und mit Massen hinterlegt','LV Ausbau Gewerke vollständig','LV TGA (HLS, ELT, Aufzug) vollständig','LV Außenanlagen erstellt','Positionen auf Vollständigkeit geprüft']},
-    {title:'Vergabeunterlagen',items:['Bewerbungsbedingungen erstellt','Besondere Vertragsbedingungen (BVB) eingebunden','VOB/B und ZVB einbezogen','Technische Vertragsbedingungen vollständig']},
-    {title:'HOAI-Prüfung',items:['Honorarermittlung nach HOAI § 34 nachvollziehbar','Honorarzone dokumentiert und begründet','Anrechenbare Kosten korrekt ermittelt']},
-  ]},
-  'LP 7':{title:'LP 7 – Mitwirkung bei der Vergabe',groups:[
-    {title:'Ausschreibung',items:['Angebote fristgerecht eingegangen','Angebotsspiegel erstellt','Nebenangebote geprüft und bewertet']},
-    {title:'Vergabe',items:['Bieterauswahl dokumentiert (Vergabevermerk)','Preisprüfung nach § 60 VgV / VOB/A abgeschlossen','Vergabeempfehlung an Auftraggeber erteilt']},
-    {title:'Verträge',items:['Bauverträge VOB/B konform aufgesetzt','Nachunternehmerverträge geprüft','Sicherheitsleistungen (§ 17 VOB/B) vereinbart']},
-  ]},
-  'LP 8':{title:'LP 8 – Objektüberwachung',groups:[
-    {title:'Bauüberwachung',items:['Bautagesberichte geführt und abgezeichnet','Baustellenbegehungen protokolliert','Nachtragsmanagement dokumentiert','Mengen- und Massenprüfung laufend']},
-    {title:'Abnahmen',items:['Teilabnahmen mit Protokoll durchgeführt','Mängelrügen schriftlich erteilt','Gesamtabnahme mit Protokoll vollzogen','Mängelliste (Abnahmeprotokoll) vollständig']},
-    {title:'Abschluss',items:['Schlussrechnungsprüfung abgeschlossen','As-built Pläne eingefordert und geprüft','Gewährleistungsfristen dokumentiert','Betriebsanleitungen und Wartungsunterlagen übergeben']},
-  ]},
-};
 
-let lpActive='LP 5';
-let lpChecks={};
-Object.keys(LP_DATA).forEach(lp=>{ lpChecks[lp]=LP_DATA[lp].groups.map(g=>g.items.map(()=>false)); });
+// ═══════════════════════════════════════════════════════════════
+// PRÜFLISTEN NACH DIIR-REVISIONSSTANDARD
+// ═══════════════════════════════════════════════════════════════
 
-function lpPct(lp){ const all=lpChecks[lp].flat(); return all.length?Math.round(all.filter(Boolean).length/all.length*100):0; }
+const PL2_DATA = [
+  {
+    id: 'diir1',
+    icon: '🏗',
+    title: 'Projektrevision – Grundlagen & Planung',
+    ref: 'DIIR RS Nr. 1 · HOAI § 34 ff.',
+    sections: [
+      { title: 'Auftragsklärung & Revisionsziel', items: [
+        { txt: 'Revisionsauftrag schriftlich erteilt und Ziele definiert', ref: 'DIIR RS 1, Tz. 3.1', sev: 'm' },
+        { txt: 'Revisionszeitraum und Prüfungsumfang dokumentiert', ref: 'DIIR RS 1, Tz. 3.2', sev: 'm' },
+        { txt: 'Auftraggeber und Ansprechpartner identifiziert', ref: 'DIIR RS 1, Tz. 3.3', sev: 'm' },
+        { txt: 'Interessenkonflikte des Revisors geprüft und ausgeschlossen', ref: 'DIIR RS 1, Tz. 2.4', sev: 'm' },
+        { txt: 'Revisionsmethodik festgelegt (dokumentenbasiert / Begehung / Befragung)', ref: 'DIIR RS 1, Tz. 4.1', sev: 's' },
+      ]},
+      { title: 'Planungsunterlagen & Vollständigkeit', items: [
+        { txt: 'Baugenehmigung mit allen Auflagen vorhanden und geprüft', ref: 'LBO § 72 ff.', sev: 'm' },
+        { txt: 'Ausführungspläne 1:50 vollständig und aktuell (LP 5 HOAI)', ref: 'HOAI § 34 LP 5', sev: 'm' },
+        { txt: 'Statische Berechnungen vorhanden und durch Prüfingenieur bestätigt', ref: 'LBO · BauPrüfVO', sev: 'm' },
+        { txt: 'Werkplanung mit Freigabevermerk des Planers vorhanden', ref: 'HOAI § 34 LP 5', sev: 's' },
+        { txt: 'Schnittstellenplanung zwischen Gewerken koordiniert', ref: 'DIIR RS 1, Tz. 4.3', sev: 's' },
+        { txt: 'Änderungen gegenüber Baugenehmigung dokumentiert und genehmigt', ref: 'LBO § 73', sev: 'm' },
+      ]},
+      { title: 'Vertragsgrundlagen', items: [
+        { txt: 'Bauvertrag (BGB / VOB/B) vorhanden und vollständig', ref: 'VOB/B § 1 · BGB § 631', sev: 'm' },
+        { txt: 'Leistungsverzeichnis mit Mengen und Einheitspreisen geprüft', ref: 'VOB/B § 2', sev: 'm' },
+        { txt: 'Baubeschreibung Bestandteil des Vertrages', ref: 'BGB § 633', sev: 'm' },
+        { txt: 'Nachtragsregelung im Vertrag vereinbart', ref: 'VOB/B § 2 Nr. 5', sev: 's' },
+        { txt: 'Sicherheitsleistungen (Vertragserfüllung / Gewährleistung) vereinbart', ref: 'VOB/B § 17', sev: 's' },
+        { txt: 'Bauzeit und Verzugsregelung vertraglich fixiert', ref: 'VOB/B § 5 · § 6', sev: 's' },
+      ]},
+    ]
+  },
+  {
+    id: 'diir2',
+    icon: '📐',
+    title: 'HOAI-Honorarprüfung',
+    ref: 'HOAI 2021 · DIIR RS Nr. 2',
+    sections: [
+      { title: 'Honorargrundlagen', items: [
+        { txt: 'Schriftliche Honorarvereinbarung bei Vertragsschluss vorhanden', ref: 'HOAI § 7 Abs. 1', sev: 'm' },
+        { txt: 'Anrechenbare Kosten korrekt nach DIN 276 ermittelt', ref: 'HOAI § 4 · DIN 276', sev: 'm' },
+        { txt: 'Honorarzone korrekt bestimmt und begründet', ref: 'HOAI § 35', sev: 'm' },
+        { txt: 'Leistungsphasen und Grundleistungen klar definiert', ref: 'HOAI § 34 Anlage 10', sev: 'm' },
+        { txt: 'Besondere Leistungen gesondert vereinbart und beauftragt', ref: 'HOAI § 3 Abs. 3', sev: 's' },
+        { txt: 'Umbauzuschlag geprüft und korrekt angesetzt (sofern Bestand)', ref: 'HOAI § 6 Abs. 2', sev: 's' },
+      ]},
+      { title: 'Leistungserbringung LP 1–4', items: [
+        { txt: 'LP 1: Grundlagenermittlung – Ergebnisprotokoll vorhanden', ref: 'HOAI § 34 LP 1', sev: 'm' },
+        { txt: 'LP 2: Vorplanung mit Variantenvergleich dokumentiert', ref: 'HOAI § 34 LP 2', sev: 'm' },
+        { txt: 'LP 3: Entwurf mit Kostenberechnung DIN 276 vorgelegt', ref: 'HOAI § 34 LP 3', sev: 'm' },
+        { txt: 'LP 4: Bauantrag vollständig eingereicht und bestätigt', ref: 'HOAI § 34 LP 4', sev: 'm' },
+        { txt: 'Testat des Auftraggebers je LP vorhanden', ref: 'DIIR RS 2, Tz. 3.2', sev: 's' },
+      ]},
+      { title: 'Leistungserbringung LP 5–8', items: [
+        { txt: 'LP 5: Ausführungspläne vollständig und freigegeben', ref: 'HOAI § 34 LP 5', sev: 'm' },
+        { txt: 'LP 6: LV vollständig, Mengen und Positionen plausibel', ref: 'HOAI § 34 LP 6', sev: 'm' },
+        { txt: 'LP 7: Vergabeverfahren dokumentiert und nachvollziehbar', ref: 'HOAI § 34 LP 7', sev: 'm' },
+        { txt: 'LP 8: Bauüberwachung durch befugten Fachmann durchgeführt', ref: 'HOAI § 34 LP 8', sev: 'm' },
+        { txt: 'Mängelprotokoll aus Abnahme vorhanden und nachverfolgt', ref: 'HOAI § 34 LP 8', sev: 'm' },
+        { txt: 'As-built-Dokumentation übergeben und quittiert', ref: 'HOAI § 34 LP 8', sev: 's' },
+      ]},
+      { title: 'Schlussrechnung & Abrechnung', items: [
+        { txt: 'Schlussrechnung prüfbar aufgestellt und fristgerecht eingereicht', ref: 'VOB/B § 14', sev: 'm' },
+        { txt: 'Abzüge (Abschlagszahlungen, Skonto) korrekt berücksichtigt', ref: 'VOB/B § 16', sev: 'm' },
+        { txt: 'Honorar-Endabrechnung mit Kostenfeststellung verglichen', ref: 'HOAI § 4 Abs. 3', sev: 'm' },
+        { txt: 'Mehrfachbeauftragung geprüft und ausgeschlossen', ref: 'DIIR RS 2, Tz. 4.1', sev: 's' },
+      ]},
+    ]
+  },
+  {
+    id: 'diir3',
+    icon: '🔨',
+    title: 'VOB/B – Ausführung & Mängelrecht',
+    ref: 'VOB/B · BGB § 633 ff. · DIIR RS Nr. 3',
+    sections: [
+      { title: 'Ausführungsqualität § 4 VOB/B', items: [
+        { txt: 'Ausführung entspricht dem vereinbarten Leistungsverzeichnis', ref: 'VOB/B § 4 Nr. 1', sev: 'm' },
+        { txt: 'Bedenkenanmeldungen des AN schriftlich dokumentiert', ref: 'VOB/B § 4 Nr. 3', sev: 'm' },
+        { txt: 'Materialverwendung geprüft (Lieferscheine, CE-Zertifikate)', ref: 'VOB/B § 4 Nr. 1', sev: 'm' },
+        { txt: 'Baustellenordnung und Verkehrssicherungspflicht eingehalten', ref: 'VOB/B § 4 Nr. 6', sev: 's' },
+        { txt: 'Schutzmaßnahmen für angrenzende Bauteile getroffen', ref: 'VOB/B § 4 Nr. 5', sev: 's' },
+        { txt: 'Nachunternehmer vom AG genehmigt', ref: 'VOB/B § 4 Nr. 8', sev: 's' },
+      ]},
+      { title: 'Abnahme § 12 VOB/B', items: [
+        { txt: 'Förmliche Abnahme mit Protokoll durchgeführt', ref: 'VOB/B § 12 Nr. 4', sev: 'm' },
+        { txt: 'Abnahmeverweigerung schriftlich begründet (soweit erfolgt)', ref: 'VOB/B § 12 Nr. 3', sev: 'm' },
+        { txt: 'Wesentliche Mängel bei Abnahme festgehalten und gerügt', ref: 'VOB/B § 12 Nr. 3', sev: 'm' },
+        { txt: 'Abnahmedatum (Beginn Gewährleistung) dokumentiert', ref: 'VOB/B § 12 Nr. 5', sev: 'm' },
+        { txt: 'Teilabnahmen für verdeckte Leistungen durchgeführt', ref: 'VOB/B § 12 Nr. 2', sev: 's' },
+      ]},
+      { title: 'Mängelrecht § 13 VOB/B', items: [
+        { txt: 'Mängelrügen schriftlich und fristgerecht erteilt', ref: 'VOB/B § 13 Nr. 5', sev: 'm' },
+        { txt: 'Mängelbeseitigungsfrist angemessen gesetzt (i.d.R. 2–4 Wochen)', ref: 'VOB/B § 13 Nr. 5 Abs. 1', sev: 'm' },
+        { txt: 'Mängelbeseitigung überprüft und abgenommen', ref: 'VOB/B § 13 Nr. 5', sev: 'm' },
+        { txt: 'Verjährungsfristen überwacht (4 Jahre VOB/B / 5 Jahre BGB)', ref: 'VOB/B § 13 Nr. 4 · BGB § 634a', sev: 'm' },
+        { txt: 'Kostenvorschuss oder Selbstvornahme geprüft (bei Verweigerung)', ref: 'VOB/B § 13 Nr. 5 Abs. 2', sev: 's' },
+        { txt: 'Schadensersatzansprüche wegen Mängeln geprüft', ref: 'VOB/B § 13 Nr. 7 · BGB § 634 Nr. 4', sev: 's' },
+      ]},
+      { title: 'Abrechnung § 14–16 VOB/B', items: [
+        { txt: 'Massenberechnungen nachvollziehbar und prüfbar aufgestellt', ref: 'VOB/B § 14 Nr. 1', sev: 'm' },
+        { txt: 'Aufmaß vor Ort erstellt und dokumentiert', ref: 'VOB/B § 14 Nr. 2', sev: 'm' },
+        { txt: 'Abschlagszahlungen fristgerecht geleistet (innerhalb 21 Tagen)', ref: 'VOB/B § 16 Nr. 1', sev: 's' },
+        { txt: 'Einbehalt (Sicherheitsleistung) korrekt berechnet', ref: 'VOB/B § 16 Nr. 1 Abs. 4', sev: 's' },
+        { txt: 'Prüfungsfrist für Schlussrechnung eingehalten (60 Tage)', ref: 'VOB/B § 16 Nr. 3', sev: 's' },
+      ]},
+    ]
+  },
+  {
+    id: 'diir4',
+    icon: '💶',
+    title: 'Kostenkontrolle & Nachträge',
+    ref: 'DIN 276 · VOB/B § 2 · DIIR RS Nr. 4',
+    sections: [
+      { title: 'Kostenplanung & Steuerung', items: [
+        { txt: 'Kostenrahmen (DIN 276 KG 200–700) bei Projektstart dokumentiert', ref: 'DIN 276 · HOAI § 34 LP 1', sev: 'm' },
+        { txt: 'Kostenschätzung LP 2 und Kostenberechnung LP 3 vorhanden', ref: 'HOAI § 34 LP 2–3', sev: 'm' },
+        { txt: 'Kostenanschlag LP 6/7 mit vergebenen Aufträgen abgeglichen', ref: 'HOAI § 34 LP 6', sev: 'm' },
+        { txt: 'Kostenfeststellung nach Abschluss erstellt', ref: 'HOAI § 34 LP 8', sev: 'm' },
+        { txt: 'Kostenabweichungen über 10% schriftlich begründet', ref: 'DIIR RS 4, Tz. 3.1', sev: 's' },
+        { txt: 'Kostenberichterstattung an Auftraggeber regelmäßig erfolgt', ref: 'DIIR RS 4, Tz. 4.2', sev: 's' },
+      ]},
+      { title: 'Nachtragsmanagement', items: [
+        { txt: 'Alle Nachträge schriftlich beauftragt und begründet', ref: 'VOB/B § 2 Nr. 5–6', sev: 'm' },
+        { txt: 'Nachtragsberechnung nachvollziehbar (Stundenlohn / EFB / Urkalkulation)', ref: 'VOB/B § 2 Nr. 5', sev: 'm' },
+        { txt: 'Bedenken gegen unberechtigte Nachträge schriftlich erhoben', ref: 'VOB/B § 2 Nr. 8', sev: 'm' },
+        { txt: 'Nachtragsvolumen im Verhältnis zum Hauptauftrag plausibel', ref: 'DIIR RS 4, Tz. 3.3', sev: 's' },
+        { txt: 'Nachtragsregister geführt und aktuell', ref: 'DIIR RS 4, Tz. 4.1', sev: 's' },
+        { txt: 'Massenänderungen nach § 2 Nr. 3 VOB/B geprüft', ref: 'VOB/B § 2 Nr. 3', sev: 's' },
+      ]},
+      { title: 'Rechnungsprüfung', items: [
+        { txt: 'Rechnungen sachlich und rechnerisch geprüft', ref: 'DIIR RS 4, Tz. 5.1', sev: 'm' },
+        { txt: 'Positionspreise mit LV-Einheitspreisen abgeglichen', ref: 'VOB/B § 14', sev: 'm' },
+        { txt: 'Doppelerfassungen und Mehrfachabrechnung ausgeschlossen', ref: 'DIIR RS 4, Tz. 5.2', sev: 'm' },
+        { txt: 'Skonto- und Rabattregelungen korrekt angewendet', ref: 'VOB/B § 16', sev: 's' },
+        { txt: 'Freigabeprozess für Rechnungen definiert und eingehalten', ref: 'DIIR RS 4, Tz. 5.3', sev: 's' },
+      ]},
+    ]
+  },
+  {
+    id: 'diir5',
+    icon: '⏱',
+    title: 'Terminplanung & Bauzeitverzug',
+    ref: 'VOB/B § 5–6 · DIIR RS Nr. 5',
+    sections: [
+      { title: 'Terminplanung', items: [
+        { txt: 'Bauzeitenplan (Balkenterminplan) Vertragsbestandteil', ref: 'VOB/B § 5 Nr. 1', sev: 'm' },
+        { txt: 'Meilensteine und Fertigstellungstermin vertraglich fixiert', ref: 'VOB/B § 5 Nr. 1', sev: 'm' },
+        { txt: 'Terminplan regelmäßig aktualisiert (Soll/Ist-Vergleich)', ref: 'DIIR RS 5, Tz. 3.2', sev: 's' },
+        { txt: 'Kritischer Pfad identifiziert und überwacht', ref: 'DIIR RS 5, Tz. 3.3', sev: 's' },
+        { txt: 'Kapazitätsplanung und Ressourceneinsatz dokumentiert', ref: 'DIIR RS 5, Tz. 3.4', sev: 'h' },
+      ]},
+      { title: 'Verzug & Behinderung', items: [
+        { txt: 'Behinderungsanzeigen nach VOB/B schriftlich und unverzüglich erstattet', ref: 'VOB/B § 6 Nr. 1', sev: 'm' },
+        { txt: 'Ursachen des Verzugs dokumentiert und zugeordnet (AN/AG)', ref: 'VOB/B § 6 Nr. 2', sev: 'm' },
+        { txt: 'Vertragsstrafe bei Fristüberschreitung geprüft und geltend gemacht', ref: 'VOB/B § 11', sev: 's' },
+        { txt: 'Schadensersatzanspruch bei AGseitigem Verzug geprüft', ref: 'VOB/B § 6 Nr. 6', sev: 's' },
+        { txt: 'Bauzeitverlängerung schriftlich vereinbart (wenn berechtigt)', ref: 'VOB/B § 6 Nr. 2', sev: 's' },
+        { txt: 'Mehrkosten aus Bauzeitverlängerung ermittelt und dokumentiert', ref: 'VOB/B § 6 Nr. 6', sev: 's' },
+      ]},
+    ]
+  },
+  {
+    id: 'diir6',
+    icon: '🔥',
+    title: 'Brandschutz & Bauordnungsrecht',
+    ref: 'LBO · MBO · MLAR · DIN 4102 · DIN EN 13501',
+    sections: [
+      { title: 'Genehmigung & Nachweise', items: [
+        { txt: 'Brandschutznachweis nach LBO eingereicht und genehmigt', ref: 'LBO § 66', sev: 'm' },
+        { txt: 'Brandschutzkonzept von zugelassenem Sachverständigen geprüft', ref: 'LBO § 85a', sev: 'm' },
+        { txt: 'Feuerwiderstandsklassen der Bauteile dokumentiert', ref: 'DIN 4102 · DIN EN 13501', sev: 'm' },
+        { txt: 'Rettungswege und Fluchtwegbreiten eingehalten', ref: 'MBO § 33 ff.', sev: 'm' },
+        { txt: 'Feuerwehrzufahrt und -aufstellfläche gesichert', ref: 'MBO § 5', sev: 's' },
+      ]},
+      { title: 'Technischer Brandschutz', items: [
+        { txt: 'Brandmelde- und Alarmierungsanlage geprüft und abgenommen', ref: 'DIN 14675', sev: 'm' },
+        { txt: 'Sprinkleranlage (sofern gefordert) vollständig installiert', ref: 'VdS CEA 4001', sev: 'm' },
+        { txt: 'Rauchabzugsanlage (RWA) vorhanden und geprüft', ref: 'DIN 18232', sev: 's' },
+        { txt: 'Brandschutztüren und -tore mit Zulassung vorhanden', ref: 'DIN EN 16034', sev: 'm' },
+        { txt: 'Leitungsanlagen-Richtlinie (LAR) eingehalten', ref: 'MLAR', sev: 'm' },
+        { txt: 'Feuerlöschanlagen auf Funktionsfähigkeit geprüft', ref: 'DIIR RS 6, Tz. 4.2', sev: 's' },
+      ]},
+    ]
+  },
+  {
+    id: 'diir7',
+    icon: '🏛',
+    title: 'Tragwerk & Standsicherheit',
+    ref: 'LBO · BauPrüfVO · DIN EN 1990 ff. (Eurocodes)',
+    sections: [
+      { title: 'Nachweise & Prüfung', items: [
+        { txt: 'Standsicherheitsnachweis eingereicht und bauaufsichtlich geprüft', ref: 'LBO § 66 · BauPrüfVO', sev: 'm' },
+        { txt: 'Prüfingenieur bestellt und Prüfvermerk vorhanden', ref: 'BauPrüfVO § 5', sev: 'm' },
+        { txt: 'Bemessungsgrundlagen (Lasten, Normen) dokumentiert', ref: 'DIN EN 1990 · 1991', sev: 'm' },
+        { txt: 'Gründungsgutachten vorhanden und in Planung berücksichtigt', ref: 'DIN EN 1997', sev: 'm' },
+        { txt: 'Sonderkonstruktionen gesondert geprüft und genehmigt', ref: 'LBO § 67', sev: 's' },
+      ]},
+      { title: 'Ausführung', items: [
+        { txt: 'Bewehrungsplanung und -verlegung geprüft', ref: 'DIN EN 1992', sev: 'm' },
+        { txt: 'Betonierprotokoll und Gütenachweise vorhanden', ref: 'DIN EN 206', sev: 'm' },
+        { txt: 'Schweißnähte und Stahlbauanschlüsse geprüft', ref: 'DIN EN 1993', sev: 'm' },
+        { txt: 'Lücklose Bauteilüberwachung durch Bauleitung dokumentiert', ref: 'DIIR RS 7, Tz. 3.3', sev: 's' },
+        { txt: 'Verdichtungs- und Eignungsnachweise für Erdarbeiten vorhanden', ref: 'DIN 18196', sev: 's' },
+      ]},
+    ]
+  },
+  {
+    id: 'diir8',
+    icon: '⚙',
+    title: 'Technische Gebäudeausrüstung (TGA)',
+    ref: 'HOAI § 55 ff. · DIN 1946 · GEG · VDI',
+    sections: [
+      { title: 'Heizung, Lüftung, Sanitär (HLS)', items: [
+        { txt: 'HLS-Planung nach HOAI § 55 ff. vollständig und geprüft', ref: 'HOAI § 55 LP 1–8', sev: 'm' },
+        { txt: 'Wärmebedarfsberechnung nach GEG / DIN EN 12831 vorhanden', ref: 'GEG § 14 · DIN EN 12831', sev: 'm' },
+        { txt: 'Lüftungskonzept nach DIN 1946-6 erstellt', ref: 'DIN 1946-6', sev: 'm' },
+        { txt: 'Druckprüfung Trinkwasserinstallation (nach DIN EN 806) durchgeführt', ref: 'DIN EN 806', sev: 'm' },
+        { txt: 'VDI 6022-Hygieneabnahme der Lüftungsanlage erfolgt', ref: 'VDI 6022', sev: 's' },
+        { txt: 'Heizlastberechnung auf Ausführungsplanung abgestimmt', ref: 'DIN EN 12831', sev: 's' },
+      ]},
+      { title: 'Elektrotechnik (ELT)', items: [
+        { txt: 'Elektroplanung nach HOAI § 55 vollständig', ref: 'HOAI § 55', sev: 'm' },
+        { txt: 'Elektrische Anlagen VDE-konform ausgeführt und geprüft', ref: 'VDE 0100', sev: 'm' },
+        { txt: 'Blitzschutzanlage geplant, errichtet und geprüft', ref: 'DIN EN 62305', sev: 's' },
+        { txt: 'Notbeleuchtung und Sicherheitsbeleuchtung installiert', ref: 'DIN EN 1838', sev: 'm' },
+        { txt: 'Zählerkonzept und Messeinrichtungen geprüft', ref: 'DIIR RS 8, Tz. 4.1', sev: 'h' },
+      ]},
+      { title: 'GEG & Energieeffizienz', items: [
+        { txt: 'Energieausweis erstellt und übergeben', ref: 'GEG § 79 ff.', sev: 'm' },
+        { txt: 'GEG-Nachweis (ehem. EnEV) vorhanden und geprüft', ref: 'GEG § 26', sev: 'm' },
+        { txt: 'Primärenergiebedarf unter gesetzlichem Grenzwert', ref: 'GEG § 10', sev: 'm' },
+        { txt: 'Nachhaltigkeitszertifizierung (DGNB/LEED) dokumentiert (sofern vereinbart)', ref: 'DIIR RS 8, Tz. 5.1', sev: 'h' },
+      ]},
+    ]
+  },
+  {
+    id: 'diir9',
+    icon: '📋',
+    title: 'Vergabe & Ausschreibung',
+    ref: 'VOB/A · VgV · GWB · UVgO',
+    sections: [
+      { title: 'Vergabeverfahren', items: [
+        { txt: 'Vergabeart korrekt gewählt (öffentlich / beschränkt / freihändig)', ref: 'VOB/A § 3', sev: 'm' },
+        { txt: 'Schwellenwerte geprüft (EU-Verfahren ab 5,538 Mio. € / Bauwerk)', ref: 'VgV § 3 · GWB § 106', sev: 'm' },
+        { txt: 'Vergabebekanntmachung vollständig und fristgerecht veröffentlicht', ref: 'VOB/A § 12', sev: 'm' },
+        { txt: 'Bieterfrist eingehalten (mind. 4 Wochen bei öffentl. Ausschreibung)', ref: 'VOB/A § 10', sev: 'm' },
+        { txt: 'Angebotseröffnung protokolliert (Submissionsprotokoll)', ref: 'VOB/A § 14', sev: 'm' },
+      ]},
+      { title: 'Angebotsprüfung & Vergabe', items: [
+        { txt: 'Angebote auf Vollständigkeit und Plausibilität geprüft', ref: 'VOB/A § 16', sev: 'm' },
+        { txt: 'Ungewöhnlich niedrige Angebote hinterfragt (§ 60 VgV)', ref: 'VOB/A § 16d', sev: 'm' },
+        { txt: 'Zuschlagskriterien vorab bekannt gemacht und eingehalten', ref: 'VgV § 58', sev: 'm' },
+        { txt: 'Vergabevermerk vollständig geführt', ref: 'VOB/A § 20', sev: 'm' },
+        { txt: 'Informationspflicht nach § 134 GWB eingehalten', ref: 'GWB § 134', sev: 's' },
+        { txt: 'Aufhebung des Verfahrens begründet (sofern erfolgt)', ref: 'VOB/A § 17', sev: 's' },
+      ]},
+    ]
+  },
+  {
+    id: 'diir10',
+    icon: '✅',
+    title: 'Abnahme & Projektabschluss',
+    ref: 'VOB/B § 12 · BGB § 640 · DIIR RS Nr. 10',
+    sections: [
+      { title: 'Förmliche Abnahme', items: [
+        { txt: 'Abnahme auf Verlangen einer Partei schriftlich durchgeführt', ref: 'VOB/B § 12 Nr. 4', sev: 'm' },
+        { txt: 'Abnahmeprotokoll mit allen Beteiligten unterzeichnet', ref: 'VOB/B § 12 Nr. 4', sev: 'm' },
+        { txt: 'Mängel zum Abnahmezeitpunkt im Protokoll festgehalten', ref: 'VOB/B § 12 Nr. 3', sev: 'm' },
+        { txt: 'Fertigstellungstermin und Übergabedatum dokumentiert', ref: 'VOB/B § 12 Nr. 5', sev: 'm' },
+        { txt: 'Schlüsselübergabe und Dokumentationsübergabe quittiert', ref: 'DIIR RS 10, Tz. 3.1', sev: 's' },
+      ]},
+      { title: 'Projektdokumentation', items: [
+        { txt: 'Revisionspläne (As-built) vollständig und übergeben', ref: 'HOAI § 34 LP 8', sev: 'm' },
+        { txt: 'Wartungs- und Bedienungsanleitungen vorhanden', ref: 'DIIR RS 10, Tz. 4.1', sev: 'm' },
+        { txt: 'Gewährleistungsfristen tabellarisch erfasst', ref: 'VOB/B § 13 Nr. 4', sev: 'm' },
+        { txt: 'Sicherheits- und Gesundheitsschutzplan (SiGePlan) archiviert', ref: 'BaustellV § 3', sev: 's' },
+        { txt: 'Brandschutzdokumentation archiviert', ref: 'DIIR RS 10, Tz. 4.2', sev: 's' },
+        { txt: 'Restmängelliste erstellt und Nachbesserungstermine vereinbart', ref: 'VOB/B § 13', sev: 'm' },
+      ]},
+      { title: 'Lessons Learned & Bericht', items: [
+        { txt: 'Abschlussrevisionsbericht erstellt und verteilt', ref: 'DIIR RS 10, Tz. 5.1', sev: 'm' },
+        { txt: 'Wesentliche Feststellungen mit Empfehlungen dokumentiert', ref: 'DIIR RS 10, Tz. 5.2', sev: 'm' },
+        { txt: 'Maßnahmen aus Feststellungen nachverfolgt (Follow-up)', ref: 'DIIR RS 10, Tz. 5.3', sev: 'm' },
+        { txt: 'Projektakte vollständig archiviert (10 Jahre)', ref: 'HGB § 257 · AO § 147', sev: 's' },
+      ]},
+    ]
+  },
+];
 
-function lpRender(){
-  // Progress cards
-  const prow=document.getElementById('lp-progress-row');
-  if(prow) prow.innerHTML=Object.keys(LP_DATA).slice(0,4).map(lp=>{
-    const pct=lpPct(lp);
-    return '<div class="lp-pcard"><div class="lp-pcard-lp">'+lp+'</div><div class="lp-pcard-pct">'+pct+'%</div>'
-      +'<div class="lp-pcard-bar"><div class="lp-pcard-fill" style="width:'+pct+'%;"></div></div></div>';
-  }).join('');
+// ─── STATE ──────────────────────────────────────────────────────────
+let pl2Active = 'diir1';
+let pl2Checks = {};
+let pl2OpenSecs = {};
 
-  // Nav buttons
-  const nav=document.getElementById('lp-nav');
-  if(nav) nav.innerHTML=Object.keys(LP_DATA).map(lp=>'<button class="lp-btn'+(lp===lpActive?' active':'')+'" onclick="lpSetActive(\''+lp+'\')">'
-    +lp+' <span style="font-size:10px;opacity:.7;">('+lpPct(lp)+'%)</span></button>').join('');
+function pl2Key(listId, secIdx, itemIdx){ return listId+'_s'+secIdx+'_i'+itemIdx; }
 
-  // Content
-  const data=LP_DATA[lpActive];
-  const pct=lpPct(lpActive);
-  const el=document.getElementById('lp-content-title');
-  if(el) el.textContent=data.title;
-  const pe=document.getElementById('lp-content-pct');
-  if(pe){ pe.textContent=pct+'%'; pe.style.background=pct===100?'var(--grl)':'var(--acl)'; pe.style.color=pct===100?'var(--gr)':'var(--ac)'; }
-
-  const groups=document.getElementById('lp-groups');
-  if(!groups) return;
-  groups.innerHTML=data.groups.map((g,gi)=>'<div class="lp-group"><div class="lp-group-title">'+g.title+'</div>'
-    +'<div class="lp-checks">'+g.items.map((item,ii)=>{
-      const chk=lpChecks[lpActive][gi][ii];
-      return '<div class="lp-check-item'+(chk?' lp-done':'')+'" onclick="lpToggle('+gi+','+ii+')">'
-        +'<div class="lp-check-box">'+(chk?'✓':'')+'</div>'
-        +'<div class="lp-check-text">'+item+'</div>'
-        +'<span class="lp-check-tag">'+lpActive+'</span>'
-        +'</div>';
-    }).join('')+'</div></div>').join('');
+function pl2LoadFromProject(){
+  var p=AP(); if(!p||!p.pl2Checks) return;
+  pl2Checks = p.pl2Checks||{};
 }
 
-function lpSetActive(lp){ lpActive=lp; lpRender(); }
-
-function lpToggle(gi,ii){
-  lpChecks[lpActive][gi][ii]=!lpChecks[lpActive][gi][ii];
-  const p=AP(); if(!p) return;
-  if(!p.lpChecks) p.lpChecks={};
-  p.lpChecks[lpActive]=lpChecks[lpActive];
-  persist(); lpRender();
+function pl2SaveToProjectData(){
+  var p=AP(); if(!p) return;
+  p.pl2Checks = pl2Checks;
+  persist();
 }
 
-function lpResetCurrent(){
-  if(!confirm('Alle Häkchen für '+lpActive+' zurücksetzen?')) return;
-  lpChecks[lpActive]=LP_DATA[lpActive].groups.map(g=>g.items.map(()=>false));
-  const p=AP(); if(p){ if(!p.lpChecks) p.lpChecks={}; p.lpChecks[lpActive]=lpChecks[lpActive]; persist(); }
-  lpRender();
-}
-
-function lpCheckAll(){
-  lpChecks[lpActive]=LP_DATA[lpActive].groups.map(g=>g.items.map(()=>true));
-  const p=AP(); if(p){ if(!p.lpChecks) p.lpChecks={}; p.lpChecks[lpActive]=lpChecks[lpActive]; persist(); }
-  lpRender();
-}
-
-// Restore LP checks from project on load
-function lpRestoreFromProject(){
-  const p=AP(); if(!p||!p.lpChecks) return;
-  Object.keys(p.lpChecks).forEach(lp=>{ if(lpChecks[lp]) lpChecks[lp]=p.lpChecks[lp]; });
-}
-
-// Restore MK checks + answers + selOpts from project
-function mkRestoreFromProject(){
-  const p=AP(); if(!p) return;
-  if(p.mkChecks){ try{ mkChecks=MK_PHASES.map((ph,pi)=>ph.items.map((_,ii)=>!!(p.mkChecks[pi]&&p.mkChecks[pi][ii]))); }catch(e){} }
-  if(p.mkAnswers){ try{ mkAnswers=MK_PHASES.map((ph,pi)=>ph.items.map((_,ii)=>(p.mkAnswers[pi]&&p.mkAnswers[pi][ii])||'')); }catch(e){} }
-  if(p.mkSelOpts){ try{ mkSelOpts=MK_PHASES.map((ph,pi)=>ph.items.map((_,ii)=>Array.isArray(p.mkSelOpts[pi]&&p.mkSelOpts[pi][ii])?[...p.mkSelOpts[pi][ii]]:[])); }catch(e){} }
-}
-
-
-
-// KUNDENPORTAL EXPORT
-function exportKundenportal(){
-  var p=AP();
-  if(!p){alert('Kein Projekt geladen.');return;}
-  var d=D();
-  if(!d.length){alert('Keine Feststellungen vorhanden.');return;}
-  var today=new Date().toLocaleDateString('de-DE');
-  var pN=p.name||'Projekt';
-  var pAG=p.auftraggeber||'--';
-  var pPF=p.pruefer||'--';
-  var pLP=p.lp||'--';
-  var pBGF=p.bgf||'--';
-  var pDat=p.datum?new Date(p.datum).toLocaleDateString('de-DE'):today;
-  var krit=d.filter(function(f){return f.schwere==='Kritisch';}).length;
-  var erheb=d.filter(function(f){return f.schwere==='Erheblich';}).length;
-  var hinw=d.filter(function(f){return f.schwere==='Hinweis';}).length;
-  var erl=d.filter(function(f){return f.status==='Erledigt';}).length;
-  var pct=Math.round(erl/d.length*100);
-  var sorted=d.slice().sort(function(a,b){
-    var o={Kritisch:0,Erheblich:1,Hinweis:2};
-    var ao=o[a.schwere]!=null?o[a.schwere]:3;
-    var bo=o[b.schwere]!=null?o[b.schwere]:3;
-    return ao-bo;
+// ─── RENDER ─────────────────────────────────────────────────────────
+function pl2TotalFor(listId){
+  var list=PL2_DATA.find(function(l){return l.id===listId;});
+  if(!list) return {total:0,done:0};
+  var total=0,done=0;
+  list.sections.forEach(function(sec,si){
+    sec.items.forEach(function(item,ii){
+      total++;
+      if(pl2Checks[pl2Key(listId,si,ii)]) done++;
+    });
   });
-  var SWC={Kritisch:['#fef2f2','#fca5a5','#dc2626'],Erheblich:['#fff7ed','#fdba74','#ea580c'],Hinweis:['#fefce8','#fde047','#ca8a04']};
-  var lsKey='sr_'+pN.replace(/[^a-z0-9]/gi,'_');
+  return {total:total,done:done};
+}
 
-  function esc(s){
-    return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+function pl2TotalAll(){
+  var total=0,done=0;
+  PL2_DATA.forEach(function(l){
+    var r=pl2TotalFor(l.id); total+=r.total; done+=r.done;
+  });
+  return {total:total,done:done};
+}
+
+function pl2Render(){
+  pl2LoadFromProject();
+  var all=pl2TotalAll();
+  var pct=all.total?Math.round(all.done/all.total*100):0;
+  var ov=document.getElementById('pl2-overall');
+  if(ov) ov.textContent=all.done+' / '+all.total+' Prüfpunkte ('+pct+'%)';
+  var pf=document.getElementById('pl2-prog-fill');
+  if(pf) pf.style.width=pct+'%';
+
+  // Tabs
+  var tabs=document.getElementById('pl2-tabs');
+  if(tabs){
+    tabs.innerHTML=PL2_DATA.map(function(list){
+      var r=pl2TotalFor(list.id);
+      var tabPct=r.total?Math.round(r.done/r.total*100):0;
+      var isDone=r.done===r.total&&r.total>0;
+      return '<button class="pl2-tab'+(list.id===pl2Active?' active':'')+(isDone?' done':'')+'" onclick="pl2SetActive(\''+list.id+'\')">'
+        +list.icon+' '+list.title.split(' ')[0]+' '+list.title.split(' ').slice(1,3).join(' ')
+        +'<span class="pl2-tab-pct">'+tabPct+'%</span>'
+        +'</button>';
+    }).join('');
   }
 
-  // Build cards HTML using array join – avoids nested quote issues
-  var cardsArr=sorted.map(function(f){
-    var sc=SWC[f.schwere]||SWC.Hinweis;
-    var sid=f.id.replace(/[^a-z0-9]/gi,'_');
-    var done=f.status==='Erledigt';
-    var erlDate=f.erlDatum||'';
-    var parts=[];
-    parts.push('<div class="fc' + (done?' done':'') + '" id="fc_' + sid + '" data-schwere="' + esc(f.schwere) + '">');
-    parts.push('<div class="fch" style="background:' + sc[0] + ';border-color:' + sc[1] + ';">');
-    parts.push('<div class="fchl">');
-    parts.push('<span class="fid">' + esc(f.id) + '</span>');
-    parts.push('<span class="fb2" style="background:' + sc[2] + ';color:#fff;">' + esc(f.schwere) + '</span>');
-    if(f.bereich) parts.push('<span class="fb2" style="background:#f1f5f9;color:#475569;">' + esc(f.bereich) + '</span>');
-    if(f.hoai) parts.push('<span class="fb2" style="background:#eff6ff;color:#1d4ed8;">&sect; ' + esc(f.hoai) + '</span>');
-    parts.push('</div>');
-    // Checkbox label – use data-sid attribute, no inline quote issues
-    var chkd=done?' checked':'';
-    var ebBg=done?'#15803d':'#fff';
-    var ebBdr=done?'#15803d':'#cbd5e1';
-    var ebClr=done?'#fff':'transparent';
-    var etClr=done?'#15803d':'#64748b';
-    var etTxt=done?'Erledigt':'Als erledigt markieren';
-    var chkMark=done?'&#10003;':'';
-    parts.push('<label style="display:flex;align-items:center;gap:6px;cursor:pointer;" data-sid="' + sid + '" onclick="toggleErl(this.dataset.sid);return false;">');
-    parts.push('<input type="checkbox"' + chkd + ' id="chk_' + sid + '" style="display:none">');
-    parts.push('<span class="ecb" id="eb_' + sid + '" style="background:' + ebBg + ';border-color:' + ebBdr + ';color:' + ebClr + ';">' + chkMark + '</span>');
-    parts.push('<span class="ect" id="et_' + sid + '" style="color:' + etClr + ';">' + etTxt + '</span>');
-    parts.push('</label></div>');
-    parts.push('<div class="fcb">');
-    parts.push('<div class="fct">' + esc(f.titel) + '</div>');
-    if(f.beschr) parts.push('<div class="fsl">Sachverhalt</div><div class="ftx">' + esc(f.beschr) + '</div>');
-    if(f.empf) parts.push('<div class="fsl">Empfehlung</div><div class="ftx" style="color:#1e3a5f;font-weight:500;">' + esc(f.empf) + '</div>');
-    parts.push('<div class="fmr">');
-    if(f.verantw) parts.push('<span class="fme">Verantw.: ' + esc(f.verantw) + '</span>');
-    if(f.frist) parts.push('<span class="fme" id="fr_' + sid + '" style="font-weight:600;">Frist: ' + new Date(f.frist).toLocaleDateString('de-DE') + '</span>');
-    parts.push('</div>');
-    var erlDisp=done?'flex':'none';
-    parts.push('<div id="er_' + sid + '" style="display:' + erlDisp + ';align-items:center;gap:6px;margin-top:10px;padding:7px 10px;background:#f0fdf4;border:1px solid #bbf7d0;border-radius:5px;font-size:11px;color:#15803d;font-weight:500;">');
-    parts.push('&#10003; Erledigt am:');
-    parts.push('<input type="date" id="ed_' + sid + '" value="' + erlDate + '" data-sid="' + sid + '" class="edate" style="border:1px solid #bbf7d0;border-radius:4px;padding:2px 7px;font-size:11px;color:#15803d;background:#fff;cursor:pointer;">');
-    parts.push('</div></div></div>');
-    return parts.join('');
+  // Body
+  var list=PL2_DATA.find(function(l){return l.id===pl2Active;});
+  if(!list) return;
+  var body=document.getElementById('pl2-body');
+  if(!body) return;
+
+  var sevLbl={m:'Muss',s:'Soll',h:'Kann'};
+  var sevCls={m:'pl2-sev-m',s:'pl2-sev-s',h:'pl2-sev-h'};
+
+  body.innerHTML=list.sections.map(function(sec,si){
+    var secDone=0, secTotal=sec.items.length;
+    sec.items.forEach(function(_,ii){ if(pl2Checks[pl2Key(list.id,si,ii)]) secDone++; });
+    var secPct=Math.round(secDone/secTotal*100);
+    var isDone=secDone===secTotal;
+    var isOpen=pl2OpenSecs[list.id+'_'+si]!==false; // default open
+    return '<div class="pl2-section" id="pl2sec_'+list.id+'_'+si+'">'
+      +'<div class="pl2-sec-hdr'+(isOpen?' pl2-sec-open':'')+'" onclick="pl2ToggleSec(\''+list.id+'\','+si+')">'
+      +'<span class="pl2-sec-icon">'+list.icon+'</span>'
+      +'<span class="pl2-sec-title">'+sec.title+'</span>'
+      +'<span class="pl2-sec-meta">'+secDone+'/'+secTotal+'</span>'
+      +'<span class="pl2-sec-pct'+(isDone?' done':'')+'">'+secPct+'%</span>'
+      +'<span class="pl2-sec-chevron">&#8964;</span>'
+      +'</div>'
+      +(isOpen?'<div class="pl2-items">'
+        +sec.items.map(function(item,ii){
+          var key=pl2Key(list.id,si,ii);
+          var chk=!!pl2Checks[key];
+          return '<div class="pl2-item'+(chk?' pl2-checked':'')+'" onclick="pl2Toggle(\''+list.id+'\','+si+','+ii+')">'
+            +'<div class="pl2-cb">'+(chk?'&#10003;':'')+'</div>'
+            +'<div class="pl2-item-body">'
+            +'<div class="pl2-item-txt">'+item.txt+'</div>'
+            +'<div class="pl2-item-ref">'+item.ref+'</div>'
+            +'</div>'
+            +'<span class="pl2-item-sev '+sevCls[item.sev]+'">'+sevLbl[item.sev]+'</span>'
+            +'</div>';
+        }).join('')
+        +'</div>':'')
+      +'</div>';
+  }).join('');
+}
+
+function pl2SetActive(id){
+  pl2Active=id;
+  pl2Render();
+  var body=document.getElementById('pl2-body');
+  if(body) body.scrollTop=0;
+}
+
+function pl2ToggleSec(listId, si){
+  var key=listId+'_'+si;
+  pl2OpenSecs[key] = (pl2OpenSecs[key]===false)?true:false;
+  pl2Render();
+}
+
+function pl2Toggle(listId, si, ii){
+  var key=pl2Key(listId,si,ii);
+  pl2Checks[key]=!pl2Checks[key];
+  pl2SaveToProjectData();
+  pl2Render();
+}
+
+function pl2ResetActive(){
+  if(!confirm('Alle Häkchen für diese Prüfliste zurücksetzen?')) return;
+  var list=PL2_DATA.find(function(l){return l.id===pl2Active;});
+  if(!list) return;
+  list.sections.forEach(function(sec,si){
+    sec.items.forEach(function(_,ii){
+      delete pl2Checks[pl2Key(pl2Active,si,ii)];
+    });
   });
-  var cards=cardsArr.join('');
+  pl2SaveToProjectData();
+  pl2Render();
+}
 
-  // CSS
-  var css=[
-    '*{box-sizing:border-box;margin:0;padding:0;}',
-    'body{font-family:-apple-system,BlinkMacSystemFont,Arial,sans-serif;background:#f1f5f9;color:#1e293b;min-height:100vh;}',
-    '.hdr{background:linear-gradient(135deg,#0f2444,#1e3a5f);border-bottom:3px solid #b8932a;color:#fff;}',
-    '.hi{max-width:1050px;margin:0 auto;padding:20px 24px;display:flex;align-items:flex-end;justify-content:space-between;flex-wrap:wrap;gap:12px;}',
-    '.ht{font-size:22px;font-weight:700;line-height:1.1;} .hsub{font-size:12px;color:rgba(255,255,255,.6);margin-top:3px;} .hsup{font-size:9px;letter-spacing:.15em;text-transform:uppercase;color:rgba(255,255,255,.4);margin-bottom:4px;}',
-    '.hmeta{text-align:right;font-size:11px;color:rgba(255,255,255,.5);line-height:1.7;}',
-    '.mbar{background:#fff;border-bottom:1px solid #e2e8f0;} .mi{max-width:1050px;margin:0 auto;padding:8px 24px;display:flex;gap:20px;align-items:center;flex-wrap:wrap;}',
-    '.ml{font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:#94a3b8;} .mv{font-size:12px;font-weight:600;} .ms{width:1px;height:24px;background:#e2e8f0;flex-shrink:0;}',
-    '.pbtn{margin-left:auto;padding:6px 14px;background:#0f2444;color:#fff;border:none;border-radius:6px;font-size:12px;font-weight:600;cursor:pointer;}',
-    '.wrap{max-width:1050px;margin:0 auto;padding:22px 24px;}',
-    '.dash{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin-bottom:22px;}',
-    '.kpi{background:#fff;border:1px solid #e2e8f0;border-radius:8px;padding:14px 16px;position:relative;overflow:hidden;}',
-    '.kpi::before{content:"";position:absolute;left:0;top:0;bottom:0;width:3px;}',
-    '.k1::before{background:#dc2626;} .k2::before{background:#ea580c;} .k3::before{background:#ca8a04;} .k4::before{background:#15803d;} .k5::before{background:#1e3a5f;}',
-    '.kl{font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:#94a3b8;margin-bottom:4px;} .kv{font-size:26px;font-weight:700;line-height:1;} .ks{font-size:10px;color:#94a3b8;margin-top:3px;}',
-    '.k1 .kv{color:#dc2626;} .k2 .kv{color:#ea580c;} .k3 .kv{color:#ca8a04;} .k4 .kv{color:#15803d;} .k5 .kv{color:#1e3a5f;}',
-    '.pw{background:#fff;border:1px solid #e2e8f0;border-radius:8px;padding:16px 20px;margin-bottom:20px;}',
-    '.ph2{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;} .pt2{font-size:13px;font-weight:600;} .ppct{font-size:13px;font-weight:700;color:#1e3a5f;}',
-    '.ptr{height:8px;background:#e2e8f0;border-radius:4px;overflow:hidden;} .pfl{height:100%;background:linear-gradient(90deg,#1e3a5f,#2563eb);border-radius:4px;transition:width .5s;} .psb{font-size:10px;color:#94a3b8;margin-top:5px;}',
-    '.fbar{display:flex;gap:6px;margin-bottom:14px;flex-wrap:wrap;align-items:center;} .fbl{font-size:11px;font-weight:600;color:#64748b;}',
-    '.fbn{padding:4px 12px;border-radius:20px;font-size:11px;font-weight:500;cursor:pointer;border:1.5px solid #e2e8f0;background:#fff;color:#475569;transition:all .15s;}',
-    '.fbn:hover{border-color:#1e3a5f;color:#1e3a5f;} .fbn.act{background:#1e3a5f;color:#fff;border-color:#1e3a5f;}',
-    '.fcs{display:flex;flex-direction:column;gap:8px;}',
-    '.fc{background:#fff;border-radius:8px;border:1.5px solid #e2e8f0;overflow:hidden;transition:box-shadow .15s;} .fc:hover{box-shadow:0 3px 12px rgba(0,0,0,.07);} .fc.done{opacity:.75;}',
-    '.fch{padding:11px 14px;border-bottom:1px solid;display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;}',
-    '.fchl{display:flex;align-items:center;gap:6px;flex-wrap:wrap;flex:1;} .fid{font-family:monospace;font-size:10px;font-weight:700;color:#64748b;background:#f1f5f9;padding:1px 6px;border-radius:3px;border:1px solid #e2e8f0;}',
-    '.fb2{font-size:10px;font-weight:600;padding:2px 7px;border-radius:4px;}',
-    '.fcb{padding:12px 14px;} .fct{font-size:14px;font-weight:700;color:#1e293b;margin-bottom:8px;line-height:1.3;}',
-    '.fsl{font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:#94a3b8;margin-bottom:3px;margin-top:8px;} .ftx{font-size:12px;color:#475569;line-height:1.6;}',
-    '.fmr{display:flex;gap:12px;flex-wrap:wrap;margin-top:10px;padding-top:8px;border-top:1px solid #f1f5f9;} .fme{font-size:10.5px;color:#94a3b8;} .ov{color:#dc2626!important;}',
-    '.ecb{width:19px;height:19px;border-radius:5px;border:2px solid;display:flex;align-items:center;justify-content:center;font-size:11px;transition:all .2s;flex-shrink:0;}',
-    '.ect{font-size:11px;font-weight:500;white-space:nowrap;}',
-    '.ftr{background:#0f2444;color:rgba(255,255,255,.4);text-align:center;padding:16px;font-size:10px;margin-top:32px;border-top:2px solid #b8932a;}',
-    '@media print{.pbtn,.fbar{display:none!important;} body{background:#fff;} .wrap{padding:0;} .hdr,.kpi{-webkit-print-color-adjust:exact;print-color-adjust:exact;} .fc{break-inside:avoid;box-shadow:none!important;}}',
-    '@media(max-width:640px){.dash{grid-template-columns:repeat(2,1fr);} .hi,.mi,.wrap{padding-left:14px;padding-right:14px;}}'
-  ].join('');
+function pl2ResetAll(){
+  if(!confirm('ALLE Prüflisten zurücksetzen?')) return;
+  pl2Checks={};
+  pl2SaveToProjectData();
+  pl2Render();
+}
 
-  // JS – stored as data to avoid template literal conflicts
-  var jsCode=[
-    'var LK="' + lsKey + '";',
-    'var ST={};try{ST=JSON.parse(localStorage.getItem(LK)||"{}");}catch(e){}',
-    'function sv(){localStorage.setItem(LK,JSON.stringify(ST));}',
-    'function updD(){',
-    '  var all=document.querySelectorAll(".fc").length;',
-    '  var dn=document.querySelectorAll(".fc.done").length;',
-    '  var pct=all?Math.round(dn/all*100):0;',
-    '  var el=document.getElementById("de");if(el)el.textContent=dn;',
-    '  var ep=document.getElementById("dp");if(ep)ep.textContent=pct+"%";',
-    '  var pf=document.getElementById("pf");if(pf)pf.style.width=pct+"%";',
-    '  var pp=document.getElementById("pp");if(pp)pp.textContent=pct+"%";',
-    '  var ps=document.getElementById("ps");if(ps)ps.textContent=dn+" von "+all+" erledigt";',
-    '}',
-    'function applyE(sid,done){',
-    '  var c=document.getElementById("fc_"+sid);if(c)c.classList.toggle("done",done);',
-    '  var bx=document.getElementById("eb_"+sid);',
-    '  if(bx){bx.textContent=done?"\u2713":"";bx.style.background=done?"#15803d":"#fff";bx.style.borderColor=done?"#15803d":"#cbd5e1";bx.style.color=done?"#fff":"transparent";}',
-    '  var tx=document.getElementById("et_"+sid);if(tx){tx.textContent=done?"Erledigt":"Als erledigt markieren";tx.style.color=done?"#15803d":"#64748b";}',
-    '  var rw=document.getElementById("er_"+sid);if(rw)rw.style.display=done?"flex":"none";',
-    '}',
-    'function toggleErl(sid){',
-    '  var c=document.getElementById("fc_"+sid);',
-    '  var done=c&&c.classList.contains("done");',
-    '  done=!done;',
-    '  if(!ST[sid])ST[sid]={};ST[sid].done=done;',
-    '  if(done&&!ST[sid].date){ST[sid].date=new Date().toISOString().split("T")[0];var di=document.getElementById("ed_"+sid);if(di)di.value=ST[sid].date;}',
-    '  applyE(sid,done);sv();updD();',
-    '}',
-    'function flt(f,btn){',
-    '  document.querySelectorAll(".fbn").forEach(function(b){b.classList.remove("act");});',
-    '  if(btn)btn.classList.add("act");',
-    '  document.querySelectorAll(".fc").forEach(function(c){',
-    '    var sw=c.dataset.schwere;var dn=c.classList.contains("done");var sh=true;',
-    '    if(f==="Kritisch")sh=sw==="Kritisch";',
-    '    else if(f==="Erheblich")sh=sw==="Erheblich";',
-    '    else if(f==="Hinweis")sh=sw==="Hinweis";',
-    '    else if(f==="offen")sh=!dn;',
-    '    else if(f==="erl")sh=dn;',
-    '    c.style.display=sh?"":"none";',
-    '  });',
-    '}',
-    'window.onload=function(){',
-    '  Object.keys(ST).forEach(function(sid){',
-    '    if(ST[sid].done)applyE(sid,true);',
-    '    if(ST[sid].date){var di=document.getElementById("ed_"+sid);if(di)di.value=ST[sid].date;}',
-    '  });',
-    '  document.querySelectorAll(".edate").forEach(function(inp){',
-    '    inp.addEventListener("change",function(){',
-    '      var sid=this.dataset.sid;',
-    '      if(!ST[sid])ST[sid]={};ST[sid].date=this.value;sv();',
-    '    });',
-    '  });',
-    '  document.querySelectorAll("[id^=fr_]").forEach(function(el){',
-    '    var m=el.textContent.match(/(\d{1,2})\.(\d{1,2})\.(\d{4})/);',
-    '    if(m){var fd=new Date(m[3],m[2]-1,m[1]);if(fd<new Date())el.classList.add("ov");}',
-    '  });',
-    '  updD();',
-    '};'
-  ].join('\n');
-
-  // Build filter buttons separately
-  var fbtnAll='<button class="fbn act" onclick="flt(\'alle\',this)">Alle ('+d.length+')</button>';
-  var fbtnK='<button class="fbn" onclick="flt(\'Kritisch\',this)" style="color:#dc2626;">Kritisch ('+krit+')</button>';
-  var fbtnE='<button class="fbn" onclick="flt(\'Erheblich\',this)" style="color:#ea580c;">Erheblich ('+erheb+')</button>';
-  var fbtnH='<button class="fbn" onclick="flt(\'Hinweis\',this)" style="color:#ca8a04;">Hinweise ('+hinw+')</button>';
-  var fbtnO='<button class="fbn" onclick="flt(\'offen\',this)">Offen</button>';
-  var fbtnR='<button class="fbn" onclick="flt(\'erl\',this)" style="color:#15803d;">&#10003; Erledigt</button>';
-  var fbar='<div class="fbar"><span class="fbl">Anzeige:</span>'+fbtnAll+fbtnK+fbtnE+fbtnH+fbtnO+fbtnR+'</div>';
-
-  var html=[
-    '<!DOCTYPE html><html lang="de"><head>',
-    '<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">',
-    '<title>Revisionsfeststellungen – ' + pN + '</title>',
-    '<style>' + css + '</style></head><body>',
-    '<header class="hdr"><div class="hi">',
-    '<div><div class="hsup">BuiltSmart Hub · SMART Revision · Vertraulich</div>',
-    '<div class="ht">Revisionsfeststellungen</div>',
-    '<div class="hsub">' + pN + ' · ' + pLP + ' · Auftraggeber: ' + pAG + '</div></div>',
-    '<div class="hmeta">Prüfer<br><strong>' + pPF + '</strong><br>Stand: ' + today + '</div>',
-    '</div></header>',
-    '<div class="mbar"><div class="mi">',
-    '<div><div class="ml">Projekt</div><div class="mv">' + pN + '</div></div><div class="ms"></div>',
-    '<div><div class="ml">Auftraggeber</div><div class="mv">' + pAG + '</div></div><div class="ms"></div>',
-    '<div><div class="ml">Leistungsphase</div><div class="mv">' + pLP + '</div></div><div class="ms"></div>',
-    '<div><div class="ml">BGF</div><div class="mv">' + pBGF + ' m²</div></div><div class="ms"></div>',
-    '<div><div class="ml">Berichtsdatum</div><div class="mv">' + pDat + '</div></div>',
-    '<button class="pbtn" onclick="window.print()">Drucken / PDF</button>',
-    '</div></div>',
-    '<div class="wrap">',
-    '<div class="dash">',
-    '<div class="kpi k1"><div class="kl">Kritisch</div><div class="kv">' + krit + '</div><div class="ks">Sofortmaßnahmen</div></div>',
-    '<div class="kpi k2"><div class="kl">Erheblich</div><div class="kv">' + erheb + '</div><div class="ks">Wesentliche Mängel</div></div>',
-    '<div class="kpi k3"><div class="kl">Hinweise</div><div class="kv">' + hinw + '</div><div class="ks">Optimierungsbedarf</div></div>',
-    '<div class="kpi k4"><div class="kl">Erledigt</div><div class="kv" id="de">' + erl + '</div><div class="ks">von ' + d.length + ' gesamt</div></div>',
-    '<div class="kpi k5"><div class="kl">Konformität</div><div class="kv" id="dp">' + pct + '%</div><div class="ks">Abschlussquote</div></div>',
-    '</div>',
-    '<div class="pw"><div class="ph2"><div class="pt2">Gesamtfortschritt</div><div class="ppct" id="pp">' + pct + '%</div></div>',
-    '<div class="ptr"><div class="pfl" id="pf" style="width:' + pct + '%;"></div></div>',
-    '<div class="psb" id="ps">' + erl + ' von ' + d.length + ' erledigt · Stand: ' + today + '</div></div>',
-    fbar,
-    '<div class="fcs">' + cards + '</div>',
-    '</div>',
-    '<footer class="ftr"><strong>SMART Revision</strong> · BuiltSmart Hub · © Bernhard Metzger · www.built-smart-hub.com<br>' + pN + ' · ' + pAG + ' · Erstellt: ' + today + ' · <strong>Vertraulich</strong></footer>',
-    '<scr' + 'ipt>' + jsCode + '</' + 'script>',
-    '</body></html>'
-  ].join('');
-
-  var fname='Revisionsfeststellungen_'+pN.replace(/[^a-zA-Z0-9]/g,'_')+'_'+today.replace(/\./g,'-')+'.html';
-  var blob=new Blob([html],{type:'text/html;charset=utf-8'});
+function pl2ExportTxt(){
+  var p=AP();
+  var lines=['PRÜFLISTEN – SMART REVISION','nach DIIR-Revisionsstandard · HOAI · VOB/B','',
+    'Projekt: '+(p?p.name:'–'),'Auftraggeber: '+(p?p.auftraggeber||'–':'–'),
+    'Prüfer: '+(p?p.pruefer||'–':'–'),'Datum: '+new Date().toLocaleDateString('de-DE'),''];
+  PL2_DATA.forEach(function(list){
+    var r=pl2TotalFor(list.id);
+    lines.push('━━━ '+list.title+' ('+r.done+'/'+r.total+') ━━━');
+    list.sections.forEach(function(sec,si){
+      lines.push('\n  '+sec.title);
+      sec.items.forEach(function(item,ii){
+        var chk=!!pl2Checks[pl2Key(list.id,si,ii)];
+        lines.push('  '+(chk?'[✓] ':'[ ] ')+item.txt+' | '+item.ref);
+      });
+    });
+    lines.push('');
+  });
+  var blob=new Blob([lines.join('\n')],{type:'text/plain;charset=utf-8'});
   var a=document.createElement('a');
   a.href=URL.createObjectURL(blob);
-  a.download=fname;
-  document.body.appendChild(a);a.click();
-  setTimeout(function(){document.body.removeChild(a);URL.revokeObjectURL(a.href);},200);
-  var btn=document.querySelector('[onclick="exportKundenportal()"]');
-  if(btn){var o=btn.innerHTML;btn.textContent='\u2713 Heruntergeladen!';setTimeout(function(){btn.innerHTML=o;},2500);}
+  a.download='Prüflisten_DIIR_'+(p?p.name||'Projekt':'Projekt').replace(/[^a-zA-Z0-9]/g,'_')+'.txt';
+  a.click(); URL.revokeObjectURL(a.href);
+}
+
+function pl2SaveToProject(){
+  pl2SaveToProjectData();
+  var all=pl2TotalAll();
+  addAkt('Prüflisten gespeichert ('+all.done+'/'+all.total+' Punkte)', 'dg');
+  var ov=document.getElementById('pl2-overall');
+  if(ov){var o=ov.textContent;ov.textContent='✓ Gespeichert!';ov.style.color='var(--gr)';setTimeout(function(){ov.textContent=o;ov.style.color='';},1800);}
 }
 
 
-// SIDEBAR TOGGLE
-function toggleSidebar(){
-  var sb=document.querySelector('.sidebar');
-  var isCollapsed=sb.classList.toggle('collapsed');
-  localStorage.setItem('sr_sidebar_collapsed', isCollapsed?'1':'0');
-  // Update toggle icon direction
-  var btn=document.getElementById('sidebar-toggle');
-  if(btn){
-    btn.innerHTML=isCollapsed
-      ?'<svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6 4l4 4-4 4"/></svg>'
-      :'<svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 4h12M2 8h12M2 12h12"/></svg>';
-  }
-}
-// Restore sidebar state
-(function(){
-  if(localStorage.getItem('sr_sidebar_collapsed')==='1'){
-    var sb=document.querySelector('.sidebar');
-    if(sb){
-      sb.classList.add('collapsed');
-      var btn=document.getElementById('sidebar-toggle');
-      if(btn) btn.innerHTML='<svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6 4l4 4-4 4"/></svg>';
-    }
-  }
-})();
-
-// INIT
-rdPSel(); rdMeta(); rdAll();
-lpRestoreFromProject();
-mkRestoreFromProject();
-document.getElementById('sind').textContent='Autosave aktiv';
-</script>
-</body>
-</html>
