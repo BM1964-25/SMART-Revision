@@ -626,14 +626,23 @@ textarea{resize:vertical;min-height:72px;}
         <div style="display:flex;flex-direction:column;gap:12px;">
           <div class="panel">
             <div class="ph"><div class="pt">Schnellanalyse</div></div>
-            <div style="padding:12px;display:flex;flex-direction:column;gap:6px;">
-              <button class="btn bg fw" style="justify-content:flex-start;" onclick="kiA('hoai')">§ HOAI-Konformität</button>
-              <button class="btn bg fw" style="justify-content:flex-start;" onclick="kiA('risiko')">⚠ Risikoanalyse</button>
-              <button class="btn bg fw" style="justify-content:flex-start;" onclick="kiA('frist')">⏱ Fristenprüfung</button>
-              <button class="btn bg fw" style="justify-content:flex-start;" onclick="kiA('summ')">▤ Zusammenfassung</button>
+            <div style="padding:10px 12px;display:flex;flex-direction:column;gap:4px;">
+              <div style="font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--ink3);margin-bottom:2px;">Analyse</div>
+              <button class="btn bg fw" style="justify-content:flex-start;font-size:12px;" onclick="kiA('hoai')">§ HOAI § 34 ff. Konformität</button>
+              <button class="btn bg fw" style="justify-content:flex-start;font-size:12px;" onclick="kiA('vob')">📋 VOB/B Feststellungen</button>
+              <button class="btn bg fw" style="justify-content:flex-start;font-size:12px;" onclick="kiA('risiko')">⚠ Risikoanalyse</button>
+              <button class="btn bg fw" style="justify-content:flex-start;font-size:12px;" onclick="kiA('frist')">⏱ Fristenprüfung</button>
+              <button class="btn bg fw" style="justify-content:flex-start;font-size:12px;" onclick="kiA('summ')">▤ Zusammenfassung</button>
+              <div style="font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--ink3);margin:6px 0 2px;">KI-Formulierung</div>
+              <button class="btn bgo fw" style="justify-content:flex-start;font-size:12px;" onclick="kiFormulierung('sachverhalt')">✍ Sachverhalt formulieren</button>
+              <button class="btn bgo fw" style="justify-content:flex-start;font-size:12px;" onclick="kiFormulierung('empfehlung')">✍ Empfehlung formulieren</button>
+              <button class="btn bgo fw" style="justify-content:flex-start;font-size:12px;" onclick="kiFormulierung('hoai_fest')">§ HOAI-Feststellung</button>
+              <button class="btn bgo fw" style="justify-content:flex-start;font-size:12px;" onclick="kiFormulierung('vob_fest')">📋 VOB/B-Feststellung</button>
+              <button class="btn bgo fw" style="justify-content:flex-start;font-size:12px;" onclick="kiFormulierung('mängelrüge')">⚖ Mängelrüge</button>
+              <button class="btn bgo fw" style="justify-content:flex-start;font-size:12px;" onclick="kiFormulierung('beweissicherung')">🔒 Beweissicherung</button>
             </div>
           </div>
-          <div class="panel" style="flex:1;"><div class="ph"><div class="pt">Analyseergebnis</div></div><div id="kiresult" style="padding:14px;font-size:12.5px;color:var(--ink2);line-height:1.6;white-space:pre-wrap;min-height:100px;"><span style="color:var(--ink3);">Analyse auswählen...</span></div></div>
+          <div class="panel" style="flex:1;display:flex;flex-direction:column;"><div class="ph"><div class="pt">KI-Ergebnis</div><span class="badge" id="ki-status-badge" style="font-size:10px;background:var(--bg);color:var(--ink3);border:1px solid var(--b);margin-left:auto;">Bereit</span></div><div id="kiresult" style="padding:14px;font-size:12.5px;color:var(--ink2);line-height:1.8;white-space:pre-wrap;flex:1;overflow-y:auto;max-height:420px;font-family:'DM Sans',sans-serif;"><span style="color:var(--ink3);font-style:italic;">Analyse oder Formulierung auswählen…</span></div><div style="padding:8px 12px;border-top:1px solid var(--b);display:flex;gap:6px;"><button class="btn bg sm" onclick="kiCopyResult()" id="ki-copy-btn" style="display:none;">Kopieren</button><button class="btn bg sm" onclick="kiAddToFest()" id="ki-add-btn" style="display:none;">Als Feststellung übernehmen</button></div></div>
         </div>
       </div>
     </div>
@@ -1503,515 +1512,255 @@ document.querySelectorAll('.mo').forEach(el=>el.addEventListener('click',functio
 // ═══════════════════════════════════════════
 // KI
 // ═══════════════════════════════════════════
-function kiA(t){
-  const d=D(), open=d.filter(f=>f.status!=='Erledigt');
-  const krit=d.filter(f=>f.schwere==='Kritisch'&&f.status!=='Erledigt');
-  const today=new Date();
-  const overdue=open.filter(f=>f.frist&&new Date(f.frist)<today);
-  const el=document.getElementById('kiresult'); el.textContent='Analyse läuft...';
-  const R={
-    hoai:d.length===0?'Noch keine Feststellungen erfasst.':`HOAI-Konformitätsprüfung:\n\nFeststellungen gesamt: ${d.length}\nKritisch (offen): ${krit.length}\nErledigt: ${d.filter(f=>f.status==='Erledigt').length}\nKonformitätsquote: ${Math.round(d.filter(f=>f.status==='Erledigt').length/d.length*100)}%\n\nOffene kritische Feststellungen:\n${krit.map(f=>`• ${f.id}: ${f.titel} (${fs(f.frist)})`).join('\n')||'Keine'}`,
-    risiko:`Risikoanalyse (${open.length} offen):\n\n${open.filter(f=>f.schwere==='Kritisch').map(f=>`🔴 HOCH: ${f.id} – ${f.titel}`).join('\n')||'Keine kritischen Feststellungen'}\n${open.filter(f=>f.schwere==='Erheblich').map(f=>`🟠 MITTEL: ${f.id} – ${f.titel}`).join('\n')}\n${open.filter(f=>f.schwere==='Hinweis').map(f=>`🟡 NIEDRIG: ${f.id} – ${f.titel}`).join('\n')}\n\n${overdue.length>0?'⚠ '+overdue.length+' Feststellung(en) überfällig!':'Alle Fristen eingehalten.'}`,
-    frist:`Fristenprüfung per ${today.toLocaleDateString('de-DE')}:\n\n${overdue.length>0?overdue.map(f=>`⛔ ${f.id} ÜBERFÄLLIG (${fs(f.frist)})\n   ${f.titel}`).join('\n'):'Keine überfälligen Feststellungen.'}\n\nDemnächst fällig (30 Tage):\n${open.filter(f=>{const d=new Date(f.frist);return f.frist&&d>today&&d<new Date(Date.now()+30*86400000);}).map(f=>`⏱ ${f.id} – ${fs(f.frist)} – ${f.titel}`).join('\n')||'Keine'}`,
-    summ:`Zusammenfassung – ${AP().name}:\n\nPrüfer: ${AP().pruefer||'–'}\nFeststellungen: ${d.length} gesamt, ${open.length} offen\nKritisch: ${krit.length} · Überfällig: ${overdue.length}\nQuote: ${d.length>0?Math.round(d.filter(f=>f.status==='Erledigt').length/d.length*100)+'%':'–'}\n\nHauptrisiken:\n${krit.slice(0,4).map(f=>`• ${f.id}: ${f.titel}`).join('\n')||'Keine kritischen Feststellungen'}`,
-  };
-  setTimeout(()=>{ el.textContent=R[t]||'...'; }, 650);
+// ═══════════════════════════════════════════
+// KI-ASSISTENT – HOAI/VOB KONFORM
+// ═══════════════════════════════════════════
+
+function kiGetKey(){
+  return document.getElementById('api-key')&&document.getElementById('api-key').value.trim();
 }
 
-const KB={'statik':'§ 34 Abs. 3 Nr. 1 HOAI: Statische Nachweise sind Grundleistung LP 5. Kein Baufortschritt ohne Nachweis. Prüfingenieur nach § 66 BayBO beauftragen.','brandschutz':'Brandschutz: § 34 HOAI i.V.m. BayBO. Rettungswegplanung und Feuerwiderstandsklassen durch Brandschutzingenieur nachweisen und behördlich abstimmen.','honorar':'§ 7 HOAI: Bei Überschreitung des Tafelwerts ohne Vereinbarung besonderer Leistungen ist die Differenz rückforderbar.','lp':'LP = Leistungsphase. § 34 HOAI: LP 5 = Ausführungsplanung, LP 6 = Vorbereitung Vergabe, LP 7 = Mitwirkung Vergabe, LP 8 = Objektüberwachung.','nachtrag':'VOB/B § 2: Nachträge ohne Begründung und Mengenermittlung sind abzulehnen oder zu kürzen.','vergabe':'LP 6/7: Vollständige Leistungsverzeichnisse und Vergabevermerke erforderlich. Bieterauswahl dokumentieren.'};
+function kiSetStatus(txt,color){
+  const el=document.getElementById('ki-status-badge');
+  if(el){el.textContent=txt;el.style.background=color||'var(--bg)';el.style.color=color?'#fff':'var(--ink3)';}
+}
 
-function sendChat(){
-  const inp=document.getElementById('chin'); const val=inp.value.trim(); if(!val) return;
-  inp.value=''; const msgs=document.getElementById('chatmsgs');
-  msgs.innerHTML+=`<div class="cmsg u">${val}</div>`;
-  let reply='Zu dieser Frage empfehle ich die Prüfung der konkreten Revisionsunterlagen. Nutzen Sie die Schnellanalyse für eine strukturierte Auswertung.';
-  const q=val.toLowerCase();
-  for(const[k,r]of Object.entries(KB)){ if(q.includes(k)){reply=r;break;} }
-  if(q.includes('kritisch')){const k=D().filter(f=>f.schwere==='Kritisch'&&f.status!=='Erledigt');reply=k.length>0?`${k.length} kritische Feststellung(en) offen:\n${k.map(f=>`• ${f.id}: ${f.titel} (Frist: ${fs(f.frist)})`).join('\n')}`:'Keine offenen kritischen Feststellungen.';}
-  if(q.includes('projekt')){ reply=`Aktives Projekt: ${AP().name}\nFeststellungen: ${D().length}\nPrüfer: ${AP().pruefer||'–'}\nTipp: Im Seitenmenü können Sie beliebig viele Projekte anlegen, wechseln, exportieren und importieren.`; }
-  setTimeout(()=>{ msgs.innerHTML+=`<div class="cmsg a"><div class="msrc">KI-Assistent · Bau & HOAI</div>${reply}</div>`; msgs.scrollTop=msgs.scrollHeight; },600);
+function kiSetResult(txt,showBtns){
+  const el=document.getElementById('kiresult');
+  if(el){el.textContent=txt;el.style.fontStyle='normal';}
+  const cp=document.getElementById('ki-copy-btn');
+  const ab=document.getElementById('ki-add-btn');
+  if(cp) cp.style.display=showBtns?'':'none';
+  if(ab) ab.style.display=showBtns?'':'none';
+}
+
+function kiCopyResult(){
+  const el=document.getElementById('kiresult');
+  if(!el) return;
+  navigator.clipboard.writeText(el.textContent).then(()=>{
+    const btn=document.getElementById('ki-copy-btn');
+    if(btn){const o=btn.textContent;btn.textContent='✓ Kopiert';setTimeout(()=>{btn.textContent=o;},1500);}
+  });
+}
+
+function kiAddToFest(){
+  const el=document.getElementById('kiresult');
+  if(!el||!el.textContent) return;
+  openM('neue');
+  setTimeout(()=>{
+    const tb=document.getElementById('nf-beschr');
+    if(tb) tb.value=el.textContent;
+  },200);
+}
+
+async function kiCall(systemPrompt, userMsg, btnEl){
+  const key=kiGetKey();
+  if(!key){
+    kiSetResult('Bitte API-Schlüssel in den Einstellungen hinterlegen.');
+    return;
+  }
+  if(btnEl){btnEl.disabled=true; const orig=btnEl.textContent; btnEl.dataset.orig=orig; btnEl.textContent='⏳ …';}
+  kiSetStatus('Läuft…','#1e3a5f');
+  kiSetResult('KI formuliert – bitte warten…');
+  try{
+    const resp=await fetch('https://api.anthropic.com/v1/messages',{
+      method:'POST',
+      headers:{
+        'Content-Type':'application/json',
+        'x-api-key':key,
+        'anthropic-version':'2023-06-01',
+        'anthropic-dangerous-direct-browser-access':'true'
+      },
+      body:JSON.stringify({
+        model:'claude-sonnet-4-6',
+        max_tokens:1200,
+        system:systemPrompt,
+        messages:[{role:'user',content:userMsg}]
+      })
+    });
+    if(resp.ok){
+      const data=await resp.json();
+      const txt=data.content?.[0]?.text||'(Keine Antwort)';
+      kiSetResult(txt, true);
+      kiSetStatus('Fertig','#0d7a4e');
+    } else {
+      const err=await resp.json().catch(()=>({}));
+      kiSetResult('API-Fehler '+resp.status+': '+(err.error?.message||resp.statusText));
+      kiSetStatus('Fehler','#c0392b');
+    }
+  } catch(e){
+    kiSetResult('Verbindungsfehler: '+e.message);
+    kiSetStatus('Fehler','#c0392b');
+  }
+  if(btnEl){btnEl.disabled=false; btnEl.textContent=btnEl.dataset.orig||btnEl.textContent;}
+}
+
+// ─── SCHNELLANALYSEN ─────────────────────────────────────────────────
+function kiA(t){
+  const d=D(); const p=AP();
+  const open=d.filter(f=>f.status!=='Erledigt');
+  const krit=d.filter(f=>f.schwere==='Kritisch'&&f.status!=='Erledigt');
+  const erheb=d.filter(f=>f.schwere==='Erheblich'&&f.status!=='Erledigt');
+  const today=new Date();
+  const overdue=open.filter(f=>f.frist&&new Date(f.frist)<today);
+  const lp=p?p.lp||'nicht angegeben':'nicht angegeben';
+  const bgf=p?p.bgf||'k.A.':'k.A.';
+
+  const SYS_ANALYSE=`Du bist ein erfahrener Bau- und Honorarrevisor mit Spezialisierung auf HOAI § 34 ff., VOB/B und deutsches Baurecht. 
+Du formulierst präzise, rechtssichere Analysen und Feststellungen für den deutschen Baurevisionsprozess.
+Struktur deiner Antworten: klar gegliedert, mit Paragrafenangaben, ohne unnötige Füllwörter.
+Sprache: Deutsch, formal, revisionssicher.`;
+
+  const festList=d.map(f=>`${f.id}: ${f.titel} | ${f.bereich} | ${f.schwere} | ${f.status} | HOAI: ${f.hoai||'–'} | Frist: ${f.frist||'–'}`).join('\n');
+
+  if(t==='hoai'){
+    if(!d.length){kiSetResult('Noch keine Feststellungen erfasst. Bitte zuerst Feststellungen anlegen.');return;}
+    kiCall(SYS_ANALYSE,
+      `Erstelle eine strukturierte HOAI-Konformitätsprüfung für folgendes Revisionsprojekt:\n\nProjekt: ${p?p.name:'–'}\nLeistungsphase: ${lp}\nBGF: ${bgf} m²\nAuftraggeber: ${p?p.auftraggeber||'–':'–'}\n\nFeststellungen:\n${festList}\n\nBitte analysiere:\n1. HOAI § 34 ff. Konformität der Leistungserbringung\n2. Kritische Abweichungen mit Paragrafen-Bezug\n3. Honorarrechtliche Auswirkungen\n4. Empfohlene Maßnahmen`
+    );
+  } else if(t==='vob'){
+    if(!d.length){kiSetResult('Noch keine Feststellungen erfasst. Bitte zuerst Feststellungen anlegen.');return;}
+    kiCall(SYS_ANALYSE,
+      `Erstelle eine VOB/B-konforme Feststellungsübersicht für folgendes Revisionsprojekt:\n\nProjekt: ${p?p.name:'–'}\nLeistungsphase: ${lp}\n\nFeststellungen:\n${festList}\n\nBitte analysiere:\n1. Zuordnung der Feststellungen zu VOB/B-Paragrafen (§ 4, § 13, § 14, § 16 VOB/B)\n2. Mängelansprüche und Verjährungsfristen nach § 13 VOB/B\n3. Abrechnungsrelevante Feststellungen nach § 14 VOB/B\n4. Handlungsempfehlungen mit Fristangaben`
+    );
+  } else if(t==='risiko'){
+    if(!d.length){kiSetResult('Noch keine Feststellungen erfasst.');return;}
+    kiCall(SYS_ANALYSE,
+      `Erstelle eine Risikoanalyse für folgendes Revisionsprojekt:\n\nProjekt: ${p?p.name:'–'} | LP: ${lp}\nFeststellungen gesamt: ${d.length} | Kritisch: ${krit.length} | Erheblich: ${erheb.length} | Überfällig: ${overdue.length}\nErledigt: ${d.filter(f=>f.status==='Erledigt').length}\n\nFeststellungen:\n${festList}\n\nBitte analysiere:\n1. Gesamtrisikobewertung (hoch/mittel/niedrig) mit Begründung\n2. Top-3-Risiken mit Handlungspriorität\n3. Empfohlene Sofortmaßnahmen\n4. Risikominderungsmaßnahmen langfristig`
+    );
+  } else if(t==='frist'){
+    kiCall(SYS_ANALYSE,
+      `Erstelle eine Fristenanalyse für folgendes Revisionsprojekt:\n\nProjekt: ${p?p.name:'–'} | Heute: ${today.toLocaleDateString('de-DE')}\n\nFeststellungen mit Fristen:\n${open.filter(f=>f.frist).map(f=>{
+        const fd=new Date(f.frist); const diff=Math.round((fd-today)/(1000*60*60*24));
+        return `${f.id}: ${f.titel} | Frist: ${new Date(f.frist).toLocaleDateString('de-DE')} | ${diff<0?'ÜBERFÄLLIG '+Math.abs(diff)+' Tage':diff+' Tage verbleibend'} | ${f.schwere}`;
+      }).join('\n')||'Keine Feststellungen mit Fristen.'}\n\nBitte analysiere:\n1. Kritische Fristverletzungen und rechtliche Konsequenzen\n2. Verjährungsrelevante Fristen nach BGB/VOB\n3. Priorisierte Handlungsempfehlung\n4. Eskalationsempfehlung`
+    );
+  } else if(t==='summ'){
+    if(!d.length){kiSetResult('Noch keine Feststellungen erfasst.');return;}
+    kiCall(SYS_ANALYSE,
+      `Erstelle einen Executive Summary für folgenden Revisionsbericht:\n\nProjekt: ${p?p.name:'–'}\nAuftraggeber: ${p?p.auftraggeber||'–':'–'}\nLeistungsphase: ${lp} | BGF: ${bgf} m²\n\nFeststellungen:\n${festList}\n\nErstelle einen professionellen Executive Summary (max. 300 Wörter) mit:\n1. Projektsteckbrief\n2. Revisionsergebnis auf einen Blick\n3. Kritische Feststellungen\n4. Konformitätsquote und Bewertung\n5. Wesentliche Handlungsempfehlung\n\nDer Text soll direkt in einen formellen Revisionsbericht übernommen werden können.`
+    );
+  }
+}
+
+// ─── KI-FORMULIERUNGSMODI ────────────────────────────────────────────
+function kiFormulierung(modus){
+  const d=D(); const p=AP();
+  const selFest=d.find(f=>f.id===document.querySelector('.fest-row.selected')?.dataset?.id)||null;
+  const lastKrit=d.filter(f=>f.schwere==='Kritisch'&&f.status!=='Erledigt')[0]||null;
+  const ref=selFest||lastKrit;
+  const lp=p?p.lp||'LP 5':'LP 5';
+  const projName=p?p.name||'Projekt':'Projekt';
+
+  const SYS_FORMULIERUNG=`Du bist ein spezialisierter Bau- und Honorarrevisor mit umfassendem Fachwissen in:
+- HOAI (Honorarordnung für Architekten und Ingenieure) § 34 ff., insbesondere LP 1–8
+- VOB/B (Vergabe- und Vertragsordnung für Bauleistungen) §§ 4, 13, 14, 16, 17
+- BGB Werkvertragsrecht §§ 633–650
+- Deutsches Baurecht und Revisionspraxis
+
+Formulierungsregeln:
+- Präzise, sachliche Sprache – keine Konjunktive bei Tatsachen
+- Paragrafenangaben immer mit vollständigem Bezug (z.B. "§ 13 Abs. 5 VOB/B")
+- Sachverhalt: beschreibend, nicht wertend
+- Empfehlung: handlungsorientiert, mit Fristangabe
+- Format: strukturiert mit Überschriften
+- Länge: 150–300 Wörter pro Abschnitt`;
+
+  const ctx=ref?`Aktuelle Feststellung:\nID: ${ref.id}\nTitel: ${ref.titel}\nBereich: ${ref.bereich}\nSchwere: ${ref.schwere}\nHOAI: ${ref.hoai||'–'}\nBeschreibung: ${ref.beschr||'nicht hinterlegt'}\n\n`:`Allgemeines Revisionsprojekt: ${projName} | ${lp}\n\n`;
+  const chatVal=document.getElementById('chin')?.value?.trim()||'';
+  const userCtx=chatVal?`Konkrete Angabe des Nutzers: ${chatVal}\n\n`:'';
+
+  const prompts={
+    sachverhalt:`${ctx}${userCtx}Formuliere einen revisionssicheren Sachverhalt für diese Feststellung im Sinne einer professionellen Baurevision. Der Sachverhalt soll:\n- Den Ist-Zustand objektiv beschreiben\n- Den relevanten HOAI/VOB-Paragrafenbezug herstellen\n- Die Abweichung vom Soll-Zustand benennen\n- Als Grundlage für rechtliche Auseinandersetzungen geeignet sein`,
+
+    empfehlung:`${ctx}${userCtx}Formuliere eine professionelle Revisionsempfehlung für diese Feststellung. Die Empfehlung soll:\n- Konkrete Maßnahmen mit Verantwortlichkeiten benennen\n- Fristen nach VOB/B § 13 bzw. BGB § 637 vorschlagen\n- Den rechtlichen Rahmen (HOAI/VOB) referenzieren\n- Eskalationsschritte bei Nichterfüllung aufzeigen`,
+
+    hoai_fest:`${ctx}${userCtx}Formuliere eine vollständige HOAI-konforme Revisionsfeststellung nach § 34 ff. HOAI mit:\n1. SACHVERHALT: Was wurde geprüft, was wurde festgestellt?\n2. RECHTLICHE EINORDNUNG: Welche HOAI-Paragrafen sind betroffen?\n3. SCHWERE DER ABWEICHUNG: Kritisch / Erheblich / Hinweis mit Begründung\n4. EMPFEHLUNG: Konkrete Maßnahme mit Frist\n5. HONORARAUSWIRKUNG: Ggf. Auswirkung auf Honoraranspruch nach HOAI`,
+
+    vob_fest:`${ctx}${userCtx}Formuliere eine vollständige VOB/B-konforme Revisionsfeststellung mit:\n1. SACHVERHALT: Baubeschreibung der festgestellten Abweichung\n2. VOB/B-PARAGRAFEN: Zuordnung zu §§ 4, 13, 14, 16 VOB/B\n3. MANGELBEWERTUNG: Art des Mangels (Ausführungsmangel, Abrechnungsfehler, Vertragsverletzung)\n4. FRISTSETZUNG: Mängelbeseitigungsfrist nach § 13 Abs. 5 VOB/B\n5. RECHTSMITTEL: Empfohlene Maßnahmen bei Nichterfüllung (§ 13 Abs. 5 Nr. 2, Selbstvornahme, Schadensersatz)`,
+
+    mängelrüge:`${ctx}${userCtx}Formuliere eine formgerechte Mängelrüge nach § 13 VOB/B / § 634 BGB mit:\n1. Präziser Mängelbeschreibung (Ort, Art, Ausmaß)\n2. Rechtsgrundlage der Mängelrüge\n3. Forderung zur Mängelbeseitigung mit angemessener Frist\n4. Ankündigung der Rechtsfolgen bei Fristablauf\n5. Formeller Abschluss\n\nDer Text soll direkt als schriftliche Mängelrüge verwendet werden können.`,
+
+    beweissicherung:`${ctx}${userCtx}Erstelle ein strukturiertes Beweissicherungsprotokoll mit:\n1. FESTSTELLUNGSDATUM und Beteiligte\n2. OBJEKTBESCHREIBUNG: Ort, Bereich, Gewerk\n3. DOKUMENTIERTE MÄNGEL: Sachliche Beschreibung\n4. BEWEISMITTEL: Fotos (Nummern), Pläne, Protokolle\n5. RECHTLICHE BEDEUTUNG: Verjährungshemmung, Beweissicherung nach § 485 ZPO\n6. UNTERSCHRIFTEN: Vorlage für Bestätigung durch alle Beteiligten`
+  };
+
+  const userMsg=prompts[modus]||`Formuliere eine professionelle Revisionsfeststellung zu: ${chatVal||'aktuellem Projekt'}`;
+  kiCall(SYS_FORMULIERUNG, userMsg);
+}
+
+// ─── CHAT ────────────────────────────────────────────────────────────
+async function sendChat(){
+  const inp=document.getElementById('chin');
+  const val=inp.value.trim();
+  if(!val) return;
+  inp.value='';
+  const msgs=document.getElementById('chatmsgs');
+  msgs.innerHTML+=`<div class="cmsg u">${val.replace(/</g,'&lt;')}</div>`;
+  msgs.scrollTop=msgs.scrollHeight;
+
+  const key=kiGetKey();
+  if(!key){
+    msgs.innerHTML+=`<div class="cmsg a"><div class="msrc">System</div>Bitte API-Schlüssel hinterlegen um den KI-Chat zu nutzen.</div>`;
+    return;
+  }
+
+  const d=D(); const p=AP();
+  const festCtx=d.length?`\n\nAktuelle Feststellungen im Projekt (${d.length} gesamt):\n${d.slice(0,8).map(f=>`${f.id}: ${f.titel} | ${f.schwere} | ${f.status} | HOAI: ${f.hoai||'–'}`).join('\n')}${d.length>8?'\n…und weitere':''}`:'\n\nNoch keine Feststellungen erfasst.';
+  const projCtx=p?`\nProjekt: ${p.name||'–'} | ${p.lp||'–'} | ${p.auftraggeber||'–'}`:'';
+
+  const SYS_CHAT=`Du bist KI-Revisionsassistent für SMART Revision, ein professionelles Bau- und HOAI-Revisionssystem.
+Dein Fachwissen umfasst:
+- HOAI § 34 ff. (Grundleistungen LP 1–8, Besondere Leistungen, Honorarermittlung)
+- VOB/B (§§ 4, 13, 14, 16, 17 – Mängelrecht, Abrechnung, Vergabe)
+- BGB Werkvertragsrecht §§ 633–650
+- DIN-Normen im Bauwesen
+- Revisionspraxis und Berichtswesen${projCtx}${festCtx}
+
+Antworte präzise, fachlich korrekt und praxisorientiert. Bei Formulierungsanfragen: direkt formulieren, revisionssicher.
+Wenn du Paragrafenangaben machst, immer vollständig mit Absatz und Nummer.`;
+
+  const thinkingEl=document.createElement('div');
+  thinkingEl.className='cmsg a';
+  thinkingEl.innerHTML='<div class="msrc">KI-Assistent</div><em style="color:var(--ink3);">formuliert…</em>';
+  msgs.appendChild(thinkingEl);
+  msgs.scrollTop=msgs.scrollHeight;
+
+  try{
+    const resp=await fetch('https://api.anthropic.com/v1/messages',{
+      method:'POST',
+      headers:{
+        'Content-Type':'application/json',
+        'x-api-key':key,
+        'anthropic-version':'2023-06-01',
+        'anthropic-dangerous-direct-browser-access':'true'
+      },
+      body:JSON.stringify({
+        model:'claude-sonnet-4-6',
+        max_tokens:800,
+        system:SYS_CHAT,
+        messages:[{role:'user',content:val}]
+      })
+    });
+    if(resp.ok){
+      const data=await resp.json();
+      thinkingEl.innerHTML='<div class="msrc">KI-Assistent · HOAI/VOB</div>'+(data.content?.[0]?.text||'(Keine Antwort)').replace(/</g,'&lt;');
+    } else {
+      thinkingEl.innerHTML='<div class="msrc">Fehler</div>API-Fehler: '+resp.status;
+    }
+  } catch(e){
+    thinkingEl.innerHTML='<div class="msrc">Fehler</div>'+e.message;
+  }
   msgs.scrollTop=msgs.scrollHeight;
 }
 
-const KF=['Feststellung: Im Rahmen der Revision wurde festgestellt, dass die geforderten Nachweise nicht vorliegen. Die Ausführungsunterlagen weichen von den genehmigten Planunterlagen in sicherheitsrelevanter Weise ab.\n\nEmpfehlung: Vorlage geprüfter Nachweise durch zugelassenen Fachplaner bis [Datum]. Baustopp in betroffenen Bereichen bis Nachweis erbracht.','Feststellung: Die Prüfung ergab, dass die abgerechneten Leistungen die vereinbarten Grundleistungen gemäß HOAI übersteigen, ohne dass eine Vereinbarung über besondere Leistungen vorliegt.\n\nEmpfehlung: Anpassung der Honorarrechnung entsprechend HOAI-Tafelwert. Fehlende Unterlagen innerhalb von 14 Werktagen nachzureichen.'];
-function kiForm(){ const el=document.getElementById('ai-resp'); if(!document.getElementById('ai-inp').value.trim()) return; el.textContent='Formulierung wird erstellt...'; setTimeout(()=>{ el.textContent=KF[Math.floor(Math.random()*KF.length)]; },900); }
-
-// ═══════════════════════════════════════════
-// API CONNECTION
-// ═══════════════════════════════════════════
-const API_STORE_KEY = 'bau_rev_apikey';
-let API_CONNECTED = false;
-let API_KEY_VAL = '';
-let API_KEY_VISIBLE = false;
-
-// Restore saved key on load
-(function(){
-  try {
-    const saved = localStorage.getItem(API_STORE_KEY);
-    if (saved) {
-      API_KEY_VAL = saved;
-      const inp = document.getElementById('api-key');
-      inp.value = saved;
-      inp.classList.add('has-key');
-      document.getElementById('api-check-btn').disabled = false;
-      setApiStatus('saved', 'Schlüssel gespeichert');
-    }
-  } catch(e) {}
-})();
-
-function onApiKeyInput() {
-  const val = document.getElementById('api-key').value.trim();
-  API_KEY_VAL = val;
-  const checkBtn = document.getElementById('api-check-btn');
-  checkBtn.disabled = val.length < 10;
-  if (val.length > 0) document.getElementById('api-key').classList.add('has-key');
-  else document.getElementById('api-key').classList.remove('has-key');
-  if (API_CONNECTED) {
-    API_CONNECTED = false;
-    setApiStatus('disconnected', 'Nicht verbunden');
-    document.getElementById('api-disc-btn').disabled = true;
-    document.getElementById('api-model').textContent = '';
+// INIT Chat welcome
+document.addEventListener('DOMContentLoaded',()=>{
+  const msgs=document.getElementById('chatmsgs');
+  if(msgs&&msgs.children.length===0){
+    msgs.innerHTML='<div class="cmsg a"><div class="msrc">KI-Assistent · HOAI/VOB § 34 ff.</div>Guten Tag! Ich bin Ihr spezialisierter KI-Revisionsassistent für SMART Revision.\n\nIch formuliere für Sie:\n• HOAI § 34 ff. konforme Revisionsfeststellungen\n• VOB/B Feststellungen (§§ 4, 13, 14, 16)\n• Mängelrügen nach § 13 VOB/B\n• Beweissicherungsprotokolle\n• Risikoanalysen und Zusammenfassungen\n\nNutzen Sie die Schnellanalyse oder beschreiben Sie einen Mangel im Chat.</div>';
   }
-}
+});
 
-function toggleApiVis() {
-  API_KEY_VISIBLE = !API_KEY_VISIBLE;
-  const inp = document.getElementById('api-key');
-  inp.type = API_KEY_VISIBLE ? 'text' : 'password';
-  document.getElementById('api-eye').textContent = API_KEY_VISIBLE ? '○' : '●';
-}
-
-function setApiStatus(state, text) {
-  const dot = document.getElementById('api-dot');
-  const stxt = document.getElementById('api-stxt');
-  dot.className = 'api-dot';
-  stxt.className = 'api-status-text';
-  if (state === 'connected') { dot.classList.add('connected'); stxt.classList.add('connected'); }
-  else if (state === 'error') { dot.classList.add('error'); stxt.classList.add('error'); }
-  else if (state === 'checking') { dot.classList.add('checking'); stxt.classList.add('checking'); }
-  else if (state === 'saved') { dot.classList.add('checking'); }
-  else { dot.classList.add('disconnected'); }
-  stxt.textContent = text;
-}
-
-async function checkApiConnection() {
-  const key = document.getElementById('api-key').value.trim();
-  if (!key || key.length < 10) return;
-  const checkBtn = document.getElementById('api-check-btn');
-  const discBtn = document.getElementById('api-disc-btn');
-  checkBtn.disabled = true;
-  checkBtn.textContent = 'Prüfe...';
-  setApiStatus('checking', 'Verbindung wird geprüft...');
-  document.getElementById('api-model').textContent = '';
-  try {
-    const resp = await fetch('https://api.anthropic.com/v1/messages', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'x-api-key': key,
-        'anthropic-version': '2023-06-01',
-        'anthropic-dangerous-direct-browser-access': 'true'
-      },
-      body: JSON.stringify({
-        model: 'claude-haiku-4-5-20251001',
-        max_tokens: 20,
-        messages: [{ role: 'user', content: 'Antworte nur: OK' }]
-      })
-    });
-    if (resp.ok) {
-      const data = await resp.json();
-      const model = data.model || 'claude-haiku-4-5-20251001';
-      API_CONNECTED = true;
-      API_KEY_VAL = key;
-      try { localStorage.setItem(API_STORE_KEY, key); } catch(e) {}
-      setApiStatus('connected', 'Verbindung OK');
-      document.getElementById('api-model').textContent = model;
-      discBtn.disabled = false;
-      checkBtn.textContent = 'Verbindung prüfen';
-      checkBtn.disabled = false;
-      // Enable live AI in chat
-      enableLiveAI(true);
-    } else {
-      const err = await resp.json().catch(() => ({}));
-      const msg = err?.error?.message || ('HTTP ' + resp.status);
-      API_CONNECTED = false;
-      setApiStatus('error', 'Fehler: ' + (resp.status === 401 ? 'Ungültiger API-Key' : resp.status === 429 ? 'Rate Limit' : msg.substring(0,30)));
-      checkBtn.disabled = false;
-      checkBtn.textContent = 'Verbindung prüfen';
-    }
-  } catch(e) {
-    API_CONNECTED = false;
-    setApiStatus('error', 'Netzwerkfehler');
-    checkBtn.disabled = false;
-    checkBtn.textContent = 'Verbindung prüfen';
-  }
-}
-
-function disconnectApi() {
-  API_CONNECTED = false;
-  API_KEY_VAL = '';
-  document.getElementById('api-key').value = '';
-  document.getElementById('api-key').classList.remove('has-key');
-  document.getElementById('api-check-btn').disabled = true;
-  document.getElementById('api-disc-btn').disabled = true;
-  document.getElementById('api-model').textContent = '';
-  setApiStatus('disconnected', 'Nicht verbunden');
-  try { localStorage.removeItem(API_STORE_KEY); } catch(e) {}
-  enableLiveAI(false);
-}
-
-function enableLiveAI(on) {
-  // Update KI chat placeholder to reflect live status
-  const inp = document.getElementById('chin');
-  if (inp) inp.placeholder = on ? 'Live-Frage an Claude stellen...' : 'Frage zur Revision...';
-  // Update KI panel header badge
-  const badge = document.querySelector('.cmsg.a .msrc');
-  if (badge) badge.textContent = on ? 'Claude API · Live' : 'KI-Assistent · Bau & HOAI';
-}
-
-// Override sendChat for live API when connected
-const _sendChat_orig = sendChat;
-window.sendChat = async function() {
-  if (!API_CONNECTED) { _sendChat_orig(); return; }
-  const inp = document.getElementById('chin');
-  const val = inp.value.trim(); if (!val) return;
-  inp.value = '';
-  const msgs = document.getElementById('chatmsgs');
-  msgs.innerHTML += `<div class="cmsg u">${val}</div>`;
-  const thinking = document.createElement('div');
-  thinking.className = 'cmsg a';
-  thinking.innerHTML = '<div class="msrc">Claude API · Live</div><span style="color:var(--ink3);">&#9646;&#9646;&#9646;</span>';
-  msgs.appendChild(thinking);
-  msgs.scrollTop = msgs.scrollHeight;
-
-  // Build context from current project
-  const p = AP(); const d = D();
-  const ctx = `Du bist ein Experte für Bau- und HOAI-Revision. Aktuelles Projekt: "${p.name}". Auftraggeber: ${p.auftraggeber||'–'}. Prüfer: ${p.pruefer||'–'}. Feststellungen: ${d.length} gesamt, ${d.filter(f=>f.status!=='Erledigt').length} offen, davon ${d.filter(f=>f.schwere==='Kritisch'&&f.status!=='Erledigt').length} kritisch. Beantworte Fragen präzise und professionell auf Deutsch.`;
-
-  try {
-    const resp = await fetch('https://api.anthropic.com/v1/messages', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'x-api-key': document.getElementById('api-key').value.trim(),
-        'anthropic-version': '2023-06-01',
-        'anthropic-dangerous-direct-browser-access': 'true'
-      },
-      body: JSON.stringify({
-        model: 'claude-haiku-4-5-20251001',
-        max_tokens: 500,
-        system: ctx,
-        messages: [{ role: 'user', content: val }]
-      })
-    });
-    if (resp.ok) {
-      const data = await resp.json();
-      const reply = data.content?.[0]?.text || '(Keine Antwort)';
-      thinking.innerHTML = `<div class="msrc">Claude API · Live · ${data.model||''}</div>${reply}`;
-    } else {
-      const err = await resp.json().catch(()=>({}));
-      if (resp.status === 401) { API_CONNECTED = false; setApiStatus('error','API-Key ungültig'); enableLiveAI(false); }
-      thinking.innerHTML = `<div class="msrc">Fehler</div>${err?.error?.message||'API-Fehler '+resp.status}`;
-    }
-  } catch(e) {
-    thinking.innerHTML = `<div class="msrc">Fehler</div>Netzwerkfehler: ${e.message}`;
-  }
-  msgs.scrollTop = msgs.scrollHeight;
-};
-
-// Also wire live AI into the KI Formulierungshilfe
-const _kiForm_orig = kiForm;
-window.kiForm = async function() {
-  if (!API_CONNECTED) { _kiForm_orig(); return; }
-  const inp = document.getElementById('ai-inp').value.trim();
-  if (!inp) return;
-  const el = document.getElementById('ai-resp');
-  el.textContent = 'Claude formuliert...';
-  try {
-    const resp = await fetch('https://api.anthropic.com/v1/messages', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'x-api-key': document.getElementById('api-key').value.trim(),
-        'anthropic-version': '2023-06-01',
-        'anthropic-dangerous-direct-browser-access': 'true'
-      },
-      body: JSON.stringify({
-        model: 'claude-haiku-4-5-20251001',
-        max_tokens: 400,
-        system: 'Du bist Revisionsexperte (HOAI/Bau). Formuliere den geschilderten Mangel als professionelle Revisionsfeststellung mit Sachverhalt und Empfehlung. Deutsch, präzise, revisionssicher.',
-        messages: [{ role: 'user', content: inp }]
-      })
-    });
-    if (resp.ok) {
-      const data = await resp.json();
-      el.textContent = data.content?.[0]?.text || '(Keine Antwort)';
-    } else {
-      el.textContent = 'API-Fehler: ' + resp.status;
-    }
-  } catch(e) { el.textContent = 'Netzwerkfehler: ' + e.message; }
-};
-
-// ═══════════════════════════════════════════
-// RECENT PROJECTS WIDGET
-// ═══════════════════════════════════════════
-function rdRecentProjects() {
-  const el = document.getElementById('rp-widget');
-  if (!el) return;
-  // Sort by modified date, take last 3
-  const sorted = [...S.projs]
-    .sort((a,b) => new Date(b.modified||0) - new Date(a.modified||0))
-    .slice(0, 3);
-  el.innerHTML = sorted.map(p => {
-    const isActive = p.id === S.aid;
-    const d = p.feststellungen || [];
-    const open = d.filter(f => f.status !== 'Erledigt').length;
-    const krit = d.filter(f => f.schwere === 'Kritisch' && f.status !== 'Erledigt').length;
-    const erl = d.filter(f => f.status === 'Erledigt').length;
-    const dt = p.modified ? new Date(p.modified).toLocaleDateString('de-DE') : '–';
-    const ag = p.auftraggeber ? p.auftraggeber : '–';
-    return `<div class="rp-card${isActive?' active-proj':''}" onclick="switchProj('${p.id}')">
-      <div class="rp-card-label">${isActive ? 'Aktives Projekt' : 'Zuletzt bearbeitet'}</div>
-      <div class="rp-card-name" title="${p.name}">${p.name}</div>
-      <div class="rp-card-meta">${ag}<br>${dt}</div>
-      <div class="rp-card-stats">
-        ${krit>0?`<span class="rp-stat bre"><span class="sdot dr" style="width:5px;height:5px;"></span>${krit} krit.</span>`:''}
-        <span class="rp-stat bgy">${open} offen</span>
-        ${erl>0?`<span class="rp-stat bgr2">&#10003; ${erl}</span>`:''}
-      </div>
-    </div>`;
-  }).join('');
-}
-
-// ═══════════════════════════════════════════
-// INLINE PROJECT NAME EDIT
-// ═══════════════════════════════════════════
-function rdProjNameInp() {
-  const p = AP(); if (!p) return;
-  const inp = document.getElementById('proj-name-inp');
-  const hint = document.getElementById('proj-name-hint');
-  if (inp) inp.value = p.name || '';
-  if (hint) hint.textContent = p.auftraggeber ? 'AG: ' + p.auftraggeber : 'Projektname bearbeiten & ✓ drücken';
-}
-
-function onProjNameInput() {
-  const hint = document.getElementById('proj-name-hint');
-  if (hint) hint.textContent = 'Enter oder ✓ zum Speichern';
-}
-
-function saveProjNameInline() {
-  const inp = document.getElementById('proj-name-inp');
-  const val = inp ? inp.value.trim() : '';
-  if (!val) return;
-  const p = AP(); if (!p) return;
-  p.name = val;
-  persist();
-  rdPSel();
-  rdMeta();
-  rdRecentProjects();
-  rdRpt();
-  const hint = document.getElementById('proj-name-hint');
-  if (hint) { hint.textContent = 'Gespeichert ✓'; hint.style.color = 'rgba(100,220,140,.7)'; setTimeout(() => { hint.textContent = p.auftraggeber ? 'AG: ' + p.auftraggeber : ''; hint.style.color = ''; }, 1500); }
-}
-
-// Patch switchProj to also update name input + restore MK state
-const _switchProj_orig = switchProj;
-window.switchProj = function(id) {
-  _switchProj_orig(id);
-  rdProjNameInp();
-  rdRecentProjects();
-  mkChecks=MK_PHASES.map(p=>p.items.map(()=>false));
-  mkAnswers=MK_PHASES.map(p=>p.items.map(()=>''));
-  mkSelOpts=MK_PHASES.map(p=>p.items.map(()=>[]));
-  mkCurrent=0; mkOpenItem=null;
-  mkRestoreFromProject();
-};
-
-// Patch rdAll to include recent projects
-const _rdAll_orig = rdAll;
-window.rdAll = function() {
-  _rdAll_orig();
-  rdRecentProjects();
-  rdProjNameInp();
-};
-
-
-// ═══════════════════════════════════════════
-// PDF EXPORT (jsPDF)
-// ═══════════════════════════════════════════
-async function exportPDF(){
-  const p=AP(); const d=D();
-  // Load jsPDF dynamically
-  if(!window.jspdf){
-    await new Promise((res,rej)=>{
-      const s=document.createElement('script');
-      s.src='https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js';
-      s.onload=res; s.onerror=rej;
-      document.head.appendChild(s);
-    });
-  }
-  const {jsPDF}=window.jspdf;
-  const pdf=new jsPDF({orientation:'portrait',unit:'mm',format:'a4'});
-  const W=210, M=20, CW=W-2*M;
-  let y=M;
-  const dt=p.datum?new Date(p.datum).toLocaleDateString('de-DE',{day:'2-digit',month:'long',year:'numeric'}):'–';
-
-  function newPage(){ pdf.addPage(); y=M; }
-  function checkY(needed=20){ if(y+needed>280) newPage(); }
-  function h1(txt){ checkY(12); pdf.setFont('helvetica','bold'); pdf.setFontSize(16); pdf.setTextColor(30,58,95); pdf.text(txt,M,y); y+=8; }
-  function h2(txt){ checkY(10); pdf.setFont('helvetica','bold'); pdf.setFontSize(12); pdf.setTextColor(30,58,95); pdf.text(txt,M,y); y+=7; }
-  function h3(txt){ checkY(8); pdf.setFont('helvetica','bold'); pdf.setFontSize(10); pdf.setTextColor(80,80,80); pdf.text(txt,M,y); y+=6; }
-  function body(txt,indent=0){ checkY(6); pdf.setFont('helvetica','normal'); pdf.setFontSize(10); pdf.setTextColor(40,40,40); const lines=pdf.splitTextToSize(txt,CW-indent); lines.forEach(l=>{ checkY(5); pdf.text(l,M+indent,y); y+=5; }); }
-  function sep(){ checkY(4); pdf.setDrawColor(220,220,220); pdf.line(M,y,W-M,y); y+=5; }
-  function kpiRow(items){ checkY(18); const bw=CW/items.length; items.forEach((it,i)=>{ const x=M+i*bw; pdf.setFillColor(232,237,245); pdf.roundedRect(x,y,bw-3,16,2,2,'F'); pdf.setFont('helvetica','bold'); pdf.setFontSize(18); pdf.setTextColor(30,58,95); pdf.text(String(it.val),x+bw/2-1.5,y+10,{align:'center'}); pdf.setFont('helvetica','normal'); pdf.setFontSize(8); pdf.setTextColor(100,100,100); pdf.text(it.lbl,x+bw/2-1.5,y+15,{align:'center'}); }); y+=22; }
-
-  // COVER
-  pdf.setFillColor(30,58,95); pdf.rect(0,0,W,50,'F');
-  pdf.setFillColor(184,147,42); pdf.rect(0,50,W,2,'F');
-  pdf.setFont('helvetica','bold'); pdf.setFontSize(9); pdf.setTextColor(255,255,255); pdf.setAlpha(0.5);
-  pdf.text('REVISIONSBERICHT  ·  BAU & HOAI § 34 ff.  ·  VERTRAULICH',M,14);
-  pdf.setAlpha(1);
-  pdf.setFont('helvetica','bold'); pdf.setFontSize(22); pdf.setTextColor(255,255,255);
-  pdf.text('Revisionsbericht',M,26);
-  pdf.setFont('helvetica','normal'); pdf.setFontSize(14); pdf.setTextColor(184,147,42);
-  pdf.text(p.name||'Projekt',M,35);
-  pdf.setFontSize(10); pdf.setTextColor(200,210,225);
-  pdf.text('Bau- und HOAI-Revision · '+(p.lp||''),M,44);
-  // Meta
-  pdf.setFontSize(9); pdf.setTextColor(80,90,110);
-  y=60;
-  [{l:'Auftraggeber',v:p.auftraggeber||'–'},{l:'Prüfstelle',v:p.pruefer||'–'},{l:'Berichtsdatum',v:dt}].forEach((m,i)=>{
-    const x=M+i*62;
-    pdf.setFont('helvetica','bold'); pdf.text(m.l.toUpperCase(),x,y);
-    pdf.setFont('helvetica','normal'); pdf.text(m.v,x,y+5);
-  });
-  y=78; sep();
-
-  // SECTION 00 – MANDATSGRUNDLAGE
-  const hasMkPdf=mkAnswers.some(ph=>ph&&ph.some(a=>a&&a.trim()))||mkChecks.some(ph=>ph&&ph.some(Boolean));
-  if(hasMkPdf){
-    h1('00  Mandatsgrundlage & Auftragsklärung');
-    body('Die folgenden Angaben wurden im Rahmen der Mandatsklärung mit dem Auftraggeber erhoben. Stand: '+(p.mandatsklaerungDatum||dt)+'.');
-    y+=4;
-    MK_PHASES.forEach((ph,pi)=>{
-      const phAnswers=mkAnswers[pi]||[];
-      const hasPhase=ph.items.some((_,ii)=>mkChecks[pi][ii]||phAnswers[ii]);
-      if(!hasPhase) return;
-      checkY(8); h3((pi+1)+'. '+ph.title);
-      ph.items.forEach((item,ii)=>{
-        const chk=mkChecks[pi][ii]; const ans=phAnswers[ii]||'';
-        if(!chk&&!ans) return;
-        checkY(12);
-        pdf.setFont('helvetica','bold'); pdf.setFontSize(8.5); pdf.setTextColor(30,58,95);
-        const qLines=pdf.splitTextToSize((chk?'✓ ':'◦ ')+item.q, CW-8);
-        qLines.forEach(l=>{ checkY(5); pdf.text(l,M+4,y); y+=5; });
-        if(ans){
-          pdf.setFont('helvetica','normal'); pdf.setFontSize(8); pdf.setTextColor(60,60,60);
-          const aLines=pdf.splitTextToSize('→ '+ans, CW-12);
-          aLines.forEach(l=>{ checkY(4.5); pdf.text(l,M+8,y); y+=4.5; });
-        }
-        y+=2;
-      });
-    });
-    sep();
-  }
-
-  // SECTION 1 – SUMMARY
-  h1('01  Executive Summary');
-  const erl=d.filter(f=>f.status==='Erledigt').length;
-  const krit=d.filter(f=>f.schwere==='Kritisch'&&f.status!=='Erledigt').length;
-  const erheb=d.filter(f=>f.schwere==='Erheblich'&&f.status!=='Erledigt').length;
-  const hinw=d.filter(f=>f.schwere==='Hinweis'&&f.status!=='Erledigt').length;
-  const pct=d.length>0?Math.round(erl/d.length*100):0;
-  body(`Die Revision "${p.name}" umfasst ${d.length} Feststellungen. ${krit} kritische und ${erheb} erhebliche Mängel sind offen. Abschlussquote: ${pct}%.`);
-  y+=4;
-  kpiRow([{val:krit,lbl:'Kritisch'},{val:erheb,lbl:'Erheblich'},{val:hinw,lbl:'Hinweise'},{val:erl,lbl:'Erledigt'}]);
-  sep();
-
-  // SECTION 2 – RISK MATRIX
-  h1('02  Risikomatrix');
-  const cols=['ID','Feststellung','Bereich','Schwere','Status','Frist'];
-  const cw=[20,75,28,22,28,20];
-  checkY(10);
-  pdf.setFillColor(30,58,95); pdf.rect(M,y,CW,8,'F');
-  pdf.setFont('helvetica','bold'); pdf.setFontSize(8.5); pdf.setTextColor(255,255,255);
-  let cx=M; cols.forEach((c,i)=>{ pdf.text(c,cx+2,y+5.5); cx+=cw[i]; }); y+=10;
-  d.forEach((f,ri)=>{
-    checkY(8);
-    const bg=ri%2===0?[255,255,255]:[248,247,245];
-    pdf.setFillColor(...bg); pdf.rect(M,y,CW,8,'F');
-    pdf.setFont('helvetica','normal'); pdf.setFontSize(8); pdf.setTextColor(40,40,40);
-    const row=[f.id,f.titel.substring(0,38),f.bereich,f.schwere,f.status,f.frist?new Date(f.frist).toLocaleDateString('de-DE'):'–'];
-    cx=M; row.forEach((v,i)=>{ pdf.text(String(v),cx+2,y+5.5); cx+=cw[i]; }); y+=8;
-  });
-  y+=4; sep();
-
-  // SECTION 3 – DETAIL
-  h1('03  Feststellungen – Detailbericht');
-  d.forEach(f=>{
-    checkY(35);
-    const scColors={Kritisch:[184,50,50],Erheblich:[196,96,26],Hinweis:[184,147,42]};
-    const sc=scColors[f.schwere]||[100,100,100];
-    pdf.setFillColor(sc[0],sc[1],sc[2]); pdf.rect(M,y,3,18,'F');
-    pdf.setFont('helvetica','bold'); pdf.setFontSize(10); pdf.setTextColor(30,58,95);
-    pdf.text(f.id+'  '+f.titel.substring(0,60),M+5,y+6);
-    pdf.setFont('helvetica','normal'); pdf.setFontSize(8.5); pdf.setTextColor(90,90,90);
-    pdf.text(`${f.hoai||''} · ${f.bereich} · ${f.schwere} · ${f.status} · Frist: ${f.frist?new Date(f.frist).toLocaleDateString('de-DE'):'–'}`,M+5,y+11);
-    pdf.text(`Verantwortlich: ${f.verantw||'–'}`,M+5,y+16); y+=22;
-    h3('Sachverhalt:'); body(f.beschr||'–',4);
-    h3('Empfehlung:'); body(f.empf||'–',4);
-    y+=4;
-  });
-  sep();
-
-  // SECTION 4 – MASSNAHMEN
-  h1('04  Maßnahmenplan');
-  const mcols=['ID','Empfehlung','Verantw.','Frist','Priorität'];
-  const mcw=[20,90,30,25,25];
-  checkY(10);
-  pdf.setFillColor(30,58,95); pdf.rect(M,y,CW,8,'F');
-  pdf.setFont('helvetica','bold'); pdf.setFontSize(8.5); pdf.setTextColor(255,255,255);
-  cx=M; mcols.forEach((c,i)=>{ pdf.text(c,cx+2,y+5.5); cx+=mcw[i]; }); y+=10;
-  d.forEach((f,ri)=>{
-    checkY(8);
-    const bg=ri%2===0?[255,255,255]:[248,247,245];
-    pdf.setFillColor(...bg); pdf.rect(M,y,CW,8,'F');
-    pdf.setFont('helvetica','normal'); pdf.setFontSize(8); pdf.setTextColor(40,40,40);
-    const prio=f.schwere==='Kritisch'?'Sofort':f.schwere==='Erheblich'?'Dringend':'Normal';
-    const row=[f.id,(f.empf||'–').substring(0,52),f.verantw||'–',f.frist?new Date(f.frist).toLocaleDateString('de-DE'):'–',prio];
-    cx=M; row.forEach((v,i)=>{ pdf.text(String(v),cx+2,y+5.5); cx+=mcw[i]; }); y+=8;
-  });
-  sep();
-
-  // SIGNATURES
-  checkY(60);
-  h1('05  Schlussbestätigung und Unterschriften');
-  body('Mit Unterzeichnung bestätigt die Geschäftsführung die Kenntnisnahme der Feststellungen.');
-  y+=25;
-  pdf.setDrawColor(30,58,95); pdf.setLineWidth(0.7);
-  pdf.line(M,y,M+80,y);
-  pdf.line(W-M-80,y,W-M,y);
-  pdf.setFont('helvetica','normal'); pdf.setFontSize(9); pdf.setTextColor(80,80,80);
-  pdf.text(p.pruefer||'Revisionsstelle',M,y+5);
-  pdf.text('Ort, Datum',M,y+9);
-  pdf.text('Geschäftsführung',W-M-80,y+5);
-  pdf.text(p.auftraggeber||'–',W-M-80,y+9);
-  y+=20;
-
-  // FOOTER on all pages
-  const totalPages=pdf.internal.getNumberOfPages();
-  for(let i=1;i<=totalPages;i++){
-    pdf.setPage(i);
-    pdf.setFillColor(240,239,236); pdf.rect(0,287,W,10,'F');
-    pdf.setDrawColor(220,215,208); pdf.line(0,287,W,287);
-    pdf.setFont('helvetica','normal'); pdf.setFontSize(7.5); pdf.setTextColor(100,95,85);
-    pdf.text(`${p.name} · ${p.lp||''} · ${dt}`,M,293);
-    pdf.text(`${i} / ${totalPages}`,W/2,293,{align:'center'});
-    pdf.text('© Bernhard Metzger · BuiltSmart Hub · www.built-smart-hub.com',W-M,293,{align:'right'});
-  }
-
-  pdf.save(`Revisionsbericht_${(p.name||'Projekt').replace(/[^a-zA-Z0-9]/g,'_')}_${new Date().toISOString().split('T')[0]}.pdf`);
-}
 
 // ═══════════════════════════════════════════
 // MANDATSKLÄRUNG
