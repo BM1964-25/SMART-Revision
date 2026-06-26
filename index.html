@@ -789,8 +789,9 @@ textarea{resize:vertical;min-height:72px;}
           <div class="pt">Mandatsklärung</div>
           <div class="pc" id="mk-prog-badge">0 / 0 beantwortet</div>
           <div class="mla fl g8">
-            <button class="btn bg sm" onclick="mkExport()">Mandatsblatt exportieren</button>
-            <button class="btn bp sm" onclick="mkSaveToProject()">In Projekt übernehmen</button>
+            <button class="btn bg sm" onclick="mkPrintBlank()">&#128438; Papiervorlage drucken</button>
+            <button class="btn bg sm" onclick="mkExport()">&#8595; Textexport</button>
+            <button class="btn bp sm" onclick="mkSaveToProject()">In Bericht &#8594;</button>
           </div>
         </div>
         <div class="mk-progress-bar" style="height:6px;border-radius:0;margin:0;background:var(--b);">
@@ -2055,6 +2056,16 @@ const MK_PHASES = [
     {q:'Gibt es Wettbewerber / Vergleichsangebote?',hint:'Kenntnis von Wettbewerbern hilft bei Positionierung und Argumentationsvorbereitung.',tag:'o',opts:['Nein – exklusives Gespräch','Ja – 1 Vergleichsangebot','Ja – mehrere Angebote','Öffentliche Ausschreibung','Nicht bekannt']},
     {q:'Besteht Interesse an einem Folgeauftrag (Begleitung, Beratung)?',hint:'Folgeauftrag kann in Angebot als Option vorgesehen werden.',tag:'o',opts:['Ja – laufende Baubegleitung','Ja – Fristentracking & Nachverfolgung','Ja – weitere Revisionsrunden','Ja – Gerichts- / Schiedsbegleitung','Nein – nur Einzelmandat','Noch offen']},
   ]},
+  {icon:'📋',title:'Prüf- & Revisionsbericht',sub:'Format, Gliederung und Anforderungen an den Bericht klären',items:[
+    {q:'Wie soll der Bericht benannt / bezeichnet werden?',hint:'Die Bezeichnung bestimmt die rechtliche Einordnung und Außenwirkung des Dokuments.',tag:'p',opts:['Revisionsbericht (Bau & HOAI)','Technischer Prüfbericht','Sachverständigengutachten','Baumängelprotokoll / Mängelbericht','Stellungnahme / Technisches Memo','Prüfvermerk (intern)','Kurzgutachten']},
+    {q:'Welche Hauptkapitel soll der Bericht enthalten?',hint:'Klare Gliederungsvorgabe sichert Vollständigkeit und erleichtert spätere Aktualisierungen.',tag:'p',opts:['Executive Summary / Zusammenfassung','Mandatsgrundlage & Auftragsklärung','Risikomatrix & Gesamtübersicht','Feststellungen – Detailbericht','HOAI-Honorarprüfung','Maßnahmenplan mit Fristen','Fotodokumentation','Gesamtbewertung & Empfehlung','Schlussbestätigung & Unterschriften']},
+    {q:'Welcher Detaillierungsgrad ist für die Feststellungen gewünscht?',hint:'Detaillierungsgrad bestimmt Bearbeitungsaufwand und Überzeugungskraft vor Dritten.',tag:'p',opts:['Sehr detailliert – mit Fundstellen, Fotos, Paragrafenbezug','Standard – Sachverhalt, Schwere, Empfehlung','Kurzform – ID, Titel, Status, Frist','Unterschiedlich je Schweregrad (Kritisch = ausführlich)']},
+    {q:'In welchem Format soll der Bericht geliefert werden?',hint:'Format und Übergabeweg vorab klären – vermeidet Nacharbeiten und Formatierungsprobleme.',tag:'p',opts:['PDF (digital, passwortgeschützt)','Word (.docx) zur weiteren Bearbeitung','Ausdruck / Papierform (gebunden)','Beides – PDF + Word','Online-Zugang / Weblink','Per E-Mail','Übergabe in Besprechung']},
+    {q:'Sollen Fotos / Bildnachweise in den Bericht integriert werden?',hint:'Fotodokumentation stärkt Beweiskraft erheblich – Aufwand für Aufnahme und Einbindung einplanen.',tag:'k',opts:['Ja – direkt im Berichtsdokument eingebettet','Ja – als separater Anhang','Nur bei kritischen Feststellungen','Nein – rein textbasierter Bericht','Fotos werden durch Mandanten geliefert']},
+    {q:'Welche Gestaltungsanforderungen gelten für den Bericht?',hint:'Corporate Identity und Vertraulichkeitsstufe vorab klären – spart Nachbearbeitung.',tag:'k',opts:['Briefkopf des Mandanten verwenden','Briefkopf des Revisionsbüros','Vertraulich-Stempel auf jeder Seite','Paginierung und Inhaltsverzeichnis','Nur interner Verteiler, kein Außenstehender','Freie Gestaltung durch Revisionsstelle']},
+    {q:'Soll eine Freigabe / Unterschrift durch Auftraggeber vorgesehen werden?',hint:'Unterzeichneter Bericht stärkt Rechtssicherheit und dokumentiert Kenntnisnahme.',tag:'o',opts:['Ja – Unterschrift Geschäftsführung','Ja – Unterschrift Bauleitung','Ja – Gegenzeichnung beider Parteien','Digitale Signatur (qualifiziert)','Keine Unterschrift erforderlich','Nur Revisionsstellenunterschrift']},
+    {q:'Soll eine Papiervorlage / Blankoformular als Backup erstellt werden?',hint:'Ausdruckbare Papiervorlage ermöglicht manuelle Erfassung vor Ort ohne Software.',tag:'o',opts:['Ja – vollständige Papiervorlage zum Ausdrucken','Ja – Kurzfassung (1–2 Seiten)','Nur Mängelliste als Formular','Nur Maßnahmenplan als Formular','Nein – nur digital']},
+  ]},
 ];
 
 let mkCurrent=0;
@@ -2308,6 +2319,188 @@ function mkExport(){
   a.href=URL.createObjectURL(blob);
   a.download='Mandatsklaerung_'+(AP().name||'Projekt').replace(/[^a-zA-Z0-9]/g,'_')+'.txt';
   a.click(); URL.revokeObjectURL(a.href);
+}
+
+// ═══════════════════════════════════════════
+// PAPIERVORLAGE – DRUCKBARES PDF-FORMULAR
+// ═══════════════════════════════════════════
+function mkPrintBlank(){
+  const p=AP();
+  const projName=p?p.name:'';
+  const projAG=p?p.auftraggeber||'':'';
+  const projPF=p?p.pruefer||'':'';
+  const today=new Date().toLocaleDateString('de-DE');
+
+  const tagLabel={p:'Pflicht',k:'Schlüsselfrage',o:'Optional'};
+  const tagColor={p:'#b83232',k:'#b8932a',o:'#1e3a5f'};
+  const tagBg={p:'#fbe8e8',k:'#fdf6e8',o:'#e8edf5'};
+
+  let phasesHtml='';
+  MK_PHASES.forEach((ph,pi)=>{
+    let itemsHtml='';
+    ph.items.forEach((item,ii)=>{
+      const tl=tagLabel[item.tag]||'';
+      const tc=tagColor[item.tag]||'#666';
+      const tb=tagBg[item.tag]||'#f5f5f5';
+      // Option checkboxes (2 per row)
+      let optsHtml='';
+      if(item.opts&&item.opts.length){
+        optsHtml='<div style="margin:6px 0 4px;"><span style="font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:#888;">Vorschläge (ankreuzen):</span></div>';
+        optsHtml+='<div style="display:grid;grid-template-columns:1fr 1fr;gap:3px 16px;margin-bottom:4px;">';
+        item.opts.forEach(opt=>{
+          optsHtml+='<label style="display:flex;align-items:center;gap:5px;font-size:10.5px;color:#333;cursor:default;">'
+            +'<span style="display:inline-block;width:11px;height:11px;border:1.5px solid #aaa;border-radius:2px;flex-shrink:0;"></span>'
+            +opt+'</label>';
+        });
+        optsHtml+='</div>';
+      }
+      itemsHtml+=`<div style="border:1px solid #ddd;border-radius:6px;padding:11px 14px;margin-bottom:10px;break-inside:avoid;background:#fff;">
+        <div style="display:flex;align-items:flex-start;gap:8px;margin-bottom:6px;">
+          <div style="width:16px;height:16px;border:1.5px solid #aaa;border-radius:3px;flex-shrink:0;margin-top:1px;"></div>
+          <div style="flex:1;">
+            <div style="font-size:12px;font-weight:700;color:#1a1814;line-height:1.35;">${(ii+1)}. ${item.q}</div>
+            <div style="font-size:9.5px;color:#888;font-style:italic;margin-top:2px;line-height:1.4;">${item.hint}</div>
+          </div>
+          <span style="font-size:9px;font-weight:700;padding:2px 7px;border-radius:3px;background:${tb};color:${tc};white-space:nowrap;flex-shrink:0;">${tl}</span>
+        </div>
+        ${optsHtml}
+        <div style="margin-top:8px;">
+          <div style="font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:#888;margin-bottom:4px;">Antwort / Gesprächsnotiz:</div>
+          <div style="border:1px solid #ddd;border-radius:3px;background:#fafafa;height:44px;"></div>
+        </div>
+      </div>`;
+    });
+
+    phasesHtml+=`<div style="break-inside:avoid;margin-bottom:20px;">
+      <div style="background:#1e3a5f;color:#fff;border-radius:6px 6px 0 0;padding:9px 16px;display:flex;align-items:center;gap:10px;">
+        <span style="font-size:18px;">${ph.icon}</span>
+        <div>
+          <div style="font-size:13px;font-weight:700;letter-spacing:.01em;">${pi+1}. ${ph.title}</div>
+          <div style="font-size:10px;opacity:.65;margin-top:1px;">${ph.sub}</div>
+        </div>
+        <div style="margin-left:auto;font-size:10px;opacity:.5;">${ph.items.length} Fragen</div>
+      </div>
+      <div style="border:1px solid #ddd;border-top:none;border-radius:0 0 6px 6px;padding:12px 14px;background:#f9f8f6;">
+        ${itemsHtml}
+      </div>
+    </div>`;
+  });
+
+  const html=`<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<title>SMART Revision – Mandatsklärung Papiervorlage</title>
+<style>
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{font-family:Arial,Helvetica,sans-serif;font-size:11px;color:#1a1814;background:#fff;padding:0;}
+  @page{size:A4;margin:18mm 16mm 20mm;}
+  @media print{
+    body{padding:0;}
+    .no-print{display:none!important;}
+    .page-break{page-break-before:always;}
+  }
+  .btn-print{display:inline-flex;align-items:center;gap:6px;padding:10px 22px;background:#1e3a5f;color:#fff;border:none;border-radius:6px;font-size:13px;font-weight:600;cursor:pointer;margin:16px 8px 16px 0;}
+  .btn-close{display:inline-flex;align-items:center;gap:6px;padding:10px 18px;background:#eee;color:#333;border:none;border-radius:6px;font-size:13px;font-weight:600;cursor:pointer;}
+</style>
+</head>
+<body>
+<div class="no-print" style="padding:16px 20px;background:#1e3a5f;color:#fff;display:flex;align-items:center;gap:12px;">
+  <span style="font-size:15px;font-weight:700;">SMART Revision – Papiervorlage</span>
+  <span style="font-size:12px;opacity:.6;margin-left:8px;">Mandatsklärungsbogen zum Ausdrucken (A4)</span>
+  <div style="margin-left:auto;display:flex;gap:8px;">
+    <button class="btn-print" onclick="window.print()">🖨 Drucken / PDF</button>
+    <button class="btn-close" onclick="window.close()">✕ Schließen</button>
+  </div>
+</div>
+
+<!-- COVER PAGE -->
+<div style="padding:32px 0 24px;">
+  <!-- Header bar -->
+  <div style="background:#1e3a5f;border-radius:8px;padding:22px 28px;margin-bottom:22px;display:flex;align-items:flex-end;justify-content:space-between;">
+    <div>
+      <div style="font-size:9px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.45);margin-bottom:6px;">BuiltSmart Hub · © Bernhard Metzger</div>
+      <div style="font-size:28px;font-weight:700;color:#fff;letter-spacing:-.01em;line-height:1;">SMART Revision</div>
+      <div style="font-size:12px;color:rgba(255,255,255,.65);margin-top:5px;">Mandatsklärungsbogen – Bau- und HOAI-Revision</div>
+    </div>
+    <div style="text-align:right;">
+      <div style="font-size:9px;color:rgba(255,255,255,.4);text-transform:uppercase;letter-spacing:.1em;">Stand</div>
+      <div style="font-size:14px;font-weight:700;color:#e8c96d;">${today}</div>
+    </div>
+  </div>
+
+  <!-- Gold separator -->
+  <div style="height:3px;background:linear-gradient(90deg,#b8932a,#e8c96d,#b8932a);border-radius:2px;margin-bottom:22px;"></div>
+
+  <!-- Project meta form -->
+  <div style="background:#f5f3ef;border:1px solid #e0dbd4;border-radius:8px;padding:18px 22px;margin-bottom:24px;">
+    <div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:#8a857e;margin-bottom:14px;">Projektinformationen</div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;">
+      <div>
+        <div style="font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:#8a857e;margin-bottom:5px;">Projektbezeichnung</div>
+        <div style="border-bottom:2px solid #aaa;padding-bottom:4px;font-size:12px;min-height:20px;color:#1e3a5f;font-weight:${projName?'600':'400'};">${projName||'&nbsp;'}</div>
+      </div>
+      <div>
+        <div style="font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:#8a857e;margin-bottom:5px;">Auftraggeber</div>
+        <div style="border-bottom:2px solid #aaa;padding-bottom:4px;font-size:12px;min-height:20px;color:#1e3a5f;font-weight:${projAG?'600':'400'};">${projAG||'&nbsp;'}</div>
+      </div>
+      <div>
+        <div style="font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:#8a857e;margin-bottom:5px;">Prüfer / Revisionsstelle</div>
+        <div style="border-bottom:2px solid #aaa;padding-bottom:4px;font-size:12px;min-height:20px;color:#1e3a5f;font-weight:${projPF?'600':'400'};">${projPF||'&nbsp;'}</div>
+      </div>
+      <div>
+        <div style="font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:#8a857e;margin-bottom:5px;">Gesprächsdatum</div>
+        <div style="border-bottom:2px solid #aaa;padding-bottom:4px;font-size:12px;min-height:20px;">&nbsp;</div>
+      </div>
+      <div>
+        <div style="font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:#8a857e;margin-bottom:5px;">Gesprächsort</div>
+        <div style="border-bottom:2px solid #aaa;padding-bottom:4px;font-size:12px;min-height:20px;">&nbsp;</div>
+      </div>
+      <div>
+        <div style="font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:#8a857e;margin-bottom:5px;">Gesprächsteilnehmer</div>
+        <div style="border-bottom:2px solid #aaa;padding-bottom:4px;font-size:12px;min-height:20px;">&nbsp;</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Legend -->
+  <div style="display:flex;gap:14px;align-items:center;margin-bottom:20px;padding:9px 14px;background:#fff;border:1px solid #e0dbd4;border-radius:6px;">
+    <span style="font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:#8a857e;">Legende:</span>
+    <span style="display:flex;align-items:center;gap:5px;font-size:10px;"><span style="display:inline-block;width:10px;height:10px;background:#fbe8e8;border:1px solid #b83232;border-radius:2px;"></span><span style="color:#b83232;font-weight:700;">Pflicht</span> – muss im Gespräch geklärt werden</span>
+    <span style="display:flex;align-items:center;gap:5px;font-size:10px;"><span style="display:inline-block;width:10px;height:10px;background:#fdf6e8;border:1px solid #b8932a;border-radius:2px;"></span><span style="color:#b8932a;font-weight:700;">Schlüsselfrage</span> – strategisch wichtig</span>
+    <span style="display:flex;align-items:center;gap:5px;font-size:10px;"><span style="display:inline-block;width:10px;height:10px;background:#e8edf5;border:1px solid #1e3a5f;border-radius:2px;"></span><span style="color:#1e3a5f;font-weight:700;">Optional</span> – nach Bedarf</span>
+  </div>
+
+  <!-- Phases -->
+  ${phasesHtml}
+
+  <!-- Signature block -->
+  <div class="page-break" style="padding-top:28px;border-top:2px solid #1e3a5f;margin-top:32px;">
+    <div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:#8a857e;margin-bottom:16px;">Gesprächsabschluss & Bestätigung</div>
+    <div style="display:grid;grid-template-columns:1fr 40px 1fr;gap:0;margin-bottom:40px;">
+      <div>
+        <div style="height:60px;border-bottom:2px solid #333;margin-bottom:6px;"></div>
+        <div style="font-size:10px;font-weight:600;color:#333;">${projPF||'Revisionsstelle'}</div>
+        <div style="font-size:9px;color:#888;">Unterschrift Revisionsstelle · Datum</div>
+      </div>
+      <div></div>
+      <div>
+        <div style="height:60px;border-bottom:2px solid #333;margin-bottom:6px;"></div>
+        <div style="font-size:10px;font-weight:600;color:#333;">${projAG||'Auftraggeber'}</div>
+        <div style="font-size:9px;color:#888;">Unterschrift Auftraggeber · Datum</div>
+      </div>
+    </div>
+    <div style="font-size:8.5px;color:#aaa;border-top:1px solid #e0dbd4;padding-top:8px;text-align:center;line-height:1.6;">
+      SMART Revision · Mandatsklärungsbogen · Bau- und HOAI-Revision § 34 ff. · Erstellt mit SMART Revision, powered by BuiltSmart Hub · © Bernhard Metzger · www.built-smart-hub.com · Stand ${today} · Vertraulich – nur für interne Projektbeteiligte
+    </div>
+  </div>
+</div>
+</body>
+</html>`;
+
+  const w=window.open('','_blank','width=900,height=800,scrollbars=yes');
+  w.document.write(html);
+  w.document.close();
 }
 
 // ═══════════════════════════════════════════
