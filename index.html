@@ -529,6 +529,7 @@ textarea{resize:vertical;min-height:72px;}
       <div class="tb-sub" id="tbsub">KI-gestützte Bau- &amp; HOAI-Revision · BuiltSmart Hub</div>
     </div>
     <div class="tb-acts">
+      <button class="btn bg sm" onclick="gv('mk')" style="border-color:var(--go);color:var(--go);">Mandatsklärung</button>
       <button class="btn bg sm" onclick="gv('ki')">KI fragen</button>
       <button class="btn bg sm" onclick="openM('neue')">+ Feststellung</button>
       <button class="btn bgo sm" onclick="gv('rpt')">Bericht generieren</button>
@@ -540,35 +541,8 @@ textarea{resize:vertical;min-height:72px;}
     <!-- DASHBOARD -->
     <div class="view active" id="view-dashboard">
 
-      <!-- SMART REVISION HERO BANNER -->
-      <div style="background:linear-gradient(135deg,#0f2444 0%,#1e3a5f 60%,#1a3258 100%);border-radius:10px;padding:22px 28px;display:flex;align-items:center;gap:24px;margin-bottom:4px;position:relative;overflow:hidden;">
-        <div style="position:absolute;right:-20px;top:-20px;width:160px;height:160px;border-radius:50%;background:rgba(255,255,255,.03);pointer-events:none;"></div>
-        <div style="position:absolute;right:60px;bottom:-40px;width:100px;height:100px;border-radius:50%;background:rgba(184,147,42,.07);pointer-events:none;"></div>
-        <div style="flex:1;min-width:0;">
-          <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px;">
-            <span style="font-family:'Fraunces',serif;font-size:22px;font-weight:600;color:#fff;letter-spacing:-.01em;">SMART Revision</span>
-            <span style="font-size:10px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;background:rgba(184,147,42,.2);color:#e8c96d;border:1px solid rgba(184,147,42,.35);border-radius:4px;padding:2px 8px;">Beta</span>
-          </div>
-          <div style="font-size:13px;color:rgba(255,255,255,.7);line-height:1.6;max-width:640px;">
-            KI-gestützte Bau- und HOAI-Revision für die Bau- und Immobilienwirtschaft. Erfassen Sie Feststellungen strukturiert nach HOAI § 34 ff., verfolgen Sie Fristen und Maßnahmen nach, und generieren Sie in Minuten einen professionellen Revisionsbericht – ergänzt durch KI-Formulierungshilfe und Mandatsklärung.
-          </div>
-          <div style="display:flex;gap:16px;margin-top:12px;flex-wrap:wrap;">
-            <span style="display:flex;align-items:center;gap:5px;font-size:11px;color:rgba(255,255,255,.5);"><span style="width:6px;height:6px;border-radius:50%;background:#4ade80;display:inline-block;"></span>HOAI § 34 ff. konform</span>
-            <span style="display:flex;align-items:center;gap:5px;font-size:11px;color:rgba(255,255,255,.5);"><span style="width:6px;height:6px;border-radius:50%;background:#4ade80;display:inline-block;"></span>VOB/B Feststellungen</span>
-            <span style="display:flex;align-items:center;gap:5px;font-size:11px;color:rgba(255,255,255,.5);"><span style="width:6px;height:6px;border-radius:50%;background:#4ade80;display:inline-block;"></span>KI-Revisionsassistent</span>
-            <span style="display:flex;align-items:center;gap:5px;font-size:11px;color:rgba(255,255,255,.5);"><span style="width:6px;height:6px;border-radius:50%;background:#4ade80;display:inline-block;"></span>PDF-Revisionsbericht</span>
-            <span style="display:flex;align-items:center;gap:5px;font-size:11px;color:rgba(255,255,255,.5);"><span style="width:6px;height:6px;border-radius:50%;background:#4ade80;display:inline-block;"></span>Fristenkalender</span>
-          </div>
-        </div>
-        <div style="flex-shrink:0;text-align:right;">
-          <div style="font-size:9px;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.35);margin-bottom:4px;">Powered by</div>
-          <div style="font-family:'Fraunces',serif;font-size:13px;font-weight:600;color:rgba(255,255,255,.65);">BuiltSmart Hub</div>
-          <div style="font-size:10px;color:rgba(255,255,255,.3);margin-top:2px;">© Bernhard Metzger</div>
-          <button onclick="gv('mk')" style="margin-top:14px;padding:8px 16px;background:var(--go);color:#1a1814;border:none;border-radius:6px;font-family:'DM Sans',sans-serif;font-size:12px;font-weight:600;cursor:pointer;letter-spacing:.02em;transition:opacity .15s;" onmouseover="this.style.opacity=.85" onmouseout="this.style.opacity=1">Mandatsklärung starten →</button>
-        </div>
-      </div>
 
-      <!-- RECENT PROJECTS WIDGET -->
+            <!-- RECENT PROJECTS WIDGET -->
       <div class="rp-widget" id="rp-widget"></div>
 
       <div class="krow">
