@@ -2090,7 +2090,7 @@ function mkRender(){
     const pdone=mkPhaseDone(i)===p.items.length;
     const hasAnswers=mkAnswers[i]&&mkAnswers[i].some(a=>a&&a.trim());
     return '<button class="mk-tab'+(i===mkCurrent?' active':'')+(pdone?' done':'')+(hasAnswers&&!pdone?' answered-partial':'')+'" onclick="mkGoPhase('+i+')">'
-      +'<span class="mk-tab-dot"></span>'+(i+1)+'. '+p.title.split('&')[0].trim()+'</button>';
+      +'<span class="mk-tab-dot"></span>'+(i+1)+'. '+p.title+'</button>';
   }).join('');
 
   const p2=ph[mkCurrent];
