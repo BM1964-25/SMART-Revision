@@ -3260,7 +3260,111 @@ const PL2_DATA = [
       {txt:'Zahlungsfreigabe nur nach vollständiger Rechnungsprüfung',ref:'Good Practice IKS Bauwesen · VOB/B § 16',sev:'m'},
       {txt:'Doppelzahlungen und Mehrfachabrechnung systemseitig oder manuell ausgeschlossen',ref:'Good Practice IKS · Fraud-Prävention Bau',sev:'m'},
     ]},
+  ]},,
+
+  // ═══ FREIGABEPROZESS PLANUNTERLAGEN ════════════════════════════════════════
+{id:'fp-plan',icon:'📝',title:'Freigabeprozess Planunterlagen',ref:'HOAI 2021 · VOB/B 2019 · Good Practice PM · M-REA Standard',sections:[
+  {title:'Planeingang & Eingangskontrolle',items:[
+    {txt:'Planeingang dokumentiert (Datum, Absender, Plannummer, Version, Format)',ref:'Good Practice Planungsmanagement',sev:'m'},
+    {txt:'Vollständigkeitsprüfung bei Planeingang: alle geforderten Unterlagen vorhanden',ref:'HOAI 2021 Anlage 10 LP 5 · Good Practice',sev:'m'},
+    {txt:'Planeingangskontrolle durch definierte Person durchgeführt – nicht durch Absender selbst',ref:'Good Practice IKS · Funktionstrennung',sev:'m'},
+    {txt:'Unverzügliche Rückmeldung an Absender bei unvollständigen Unterlagen',ref:'Good Practice PM',sev:'s'},
+    {txt:'Planindex aktuell geführt (Plannummer, Titel, Version, Status, Datum)',ref:'Good Practice Planungsmanagement',sev:'m'},
   ]},
+  {title:'Fachliche Prüfung',items:[
+    {txt:'Fachliche Prüfung durch qualifizierten Empfänger (Bauleiter, Fachplaner) dokumentiert',ref:'HOAI 2021 Anlage 10 LP 5/8 · Good Practice',sev:'m'},
+    {txt:'Prüfung auf Konformität mit genehmigter Planung und Baugenehmigung',ref:'HOAI 2021 Anlage 10 LP 5 · LBO',sev:'m'},
+    {txt:'Kollisionsprüfung mit anderen Gewerken durchgeführt',ref:'Good Practice Planungsmanagement',sev:'m'},
+    {txt:'Prüffrist eingehalten und nicht überschritten (vertraglich vereinbart)',ref:'HOAI 2021 · Good Practice PM',sev:'s'},
+    {txt:'Prüfergebnis schriftlich dokumentiert (Freigabe, Freigabe mit Auflagen, Ablehnung)',ref:'Good Practice Planungsmanagement',sev:'m'},
+    {txt:'Auflagen bei bedingter Freigabe schriftlich formuliert und übermittelt',ref:'Good Practice PM',sev:'m'},
+  ]},
+  {title:'Freigabe & Verteilung',items:[
+    {txt:'Freigabe nur durch zeichnungsberechtigte Person erteilt',ref:'Good Practice IKS · Vier-Augen-Prinzip',sev:'m'},
+    {txt:'Freigabe-Stempel oder digitale Freigabe mit Datum, Name und Version dokumentiert',ref:'Good Practice Planungsmanagement',sev:'m'},
+    {txt:'Freigegebene Pläne an alle definierten Empfänger verteilt (Verteilliste)',ref:'Good Practice PM',sev:'m'},
+    {txt:'Alte Planversionen als „überholt" gekennzeichnet und aus Umlauf genommen',ref:'Good Practice Planungsmanagement',sev:'m'},
+    {txt:'Empfangsbestätigung der Planeingänger dokumentiert',ref:'Good Practice PM · VOB/B § 4',sev:'s'},
+    {txt:'Keine Ausführung auf Basis nicht freigegebener Pläne',ref:'VOB/B § 4 Nr. 1 · Good Practice IKS',sev:'m'},
+  ]},
+  {title:'Änderungsmanagement Pläne',items:[
+    {txt:'Planänderungen durch separaten Änderungsindex kenntlich gemacht',ref:'Good Practice Planungsmanagement',sev:'m'},
+    {txt:'Änderungen gegenüber Vorgängerversion markiert (Cloud, Delta-Symbol)',ref:'Good Practice Planungsmanagement',sev:'s'},
+    {txt:'Revisionsursache (Planänderung, Auflagenerfüllung, Korrektur) dokumentiert',ref:'Good Practice PM',sev:'s'},
+    {txt:'Kostenwirkung von Planänderungen bewertet und dokumentiert',ref:'IIR Bd. 33 (2002), Kap. 6.4 · VOB/B',sev:'m'},
+    {txt:'Planänderungen nach Baubeginn durch Nachtrag abgebildet (soweit kostenrelevant)',ref:'HOAI 2021 § 10 · BGB § 650b',sev:'m'},
+  ]},
+]},
+
+// ═══ FREIGABEPROZESS RECHNUNGEN ════════════════════════════════════════════
+{id:'fp-rech',icon:'🧾',title:'Freigabeprozess Rechnungen',ref:'VOB/B 2019 § 14 ff. · HOAI 2021 · Good Practice IKS · M-REA Standard',sections:[
+  {title:'Rechnungseingang & formale Prüfung',items:[
+    {txt:'Zentraler Rechnungseingang definiert – keine Rechnungen direkt an Fachbereiche',ref:'Good Practice IKS Bauwesen',sev:'m'},
+    {txt:'Rechnungseingang dokumentiert (Datum, Rechnungssteller, Betrag, Bestellbezug)',ref:'Good Practice IKS · HGB § 238',sev:'m'},
+    {txt:'Formale Prüfung: Pflichtangaben nach UStG § 14 vollständig',ref:'UStG § 14 Abs. 4',sev:'m'},
+    {txt:'Rechnungsbetrag und -positionen mit Auftragsunterlagen (LV, Vertrag) abgeglichen',ref:'VOB/B § 14 · HOAI 2021',sev:'m'},
+    {txt:'Prüfung auf Doppeleinreichung (gleiche Rechnungsnummer, gleiches Datum, gleicher Betrag)',ref:'Good Practice IKS · Fraud-Prävention Bau',sev:'m'},
+  ]},
+  {title:'Sachliche Prüfung (Leistungsnachweis)',items:[
+    {txt:'Sachliche Prüfung durch Bauleiter oder zuständigen Fachverantwortlichen',ref:'VOB/B § 14 · Good Practice IKS',sev:'m'},
+    {txt:'Nachweis der tatsächlichen Leistungserbringung vor sachlicher Freigabe',ref:'VOB/B § 14 Nr. 1 · Good Practice',sev:'m'},
+    {txt:'Aufmaßblätter als Nachweis für Bauleistungen vorhanden und gegengezeichnet',ref:'VOB/B § 14 Nr. 2',sev:'m'},
+    {txt:'Lieferscheine für Materiallieferungen vollständig und geprüft',ref:'Good Practice Rechnungsprüfung Bau',sev:'m'},
+    {txt:'Nachtragsleistungen nur abgerechnet wenn schriftlich beauftragt',ref:'VOB/B § 2 Nr. 8 · Good Practice IKS',sev:'m'},
+    {txt:'Sachliche Prüfung nicht durch dieselbe Person die die Leistung beauftragt hat',ref:'Good Practice IKS · Funktionstrennung',sev:'m'},
+  ]},
+  {title:'Rechnerische Prüfung',items:[
+    {txt:'Rechnerische Prüfung durch von der sachlichen Prüfung getrennte Person',ref:'VOB/B § 14 · Good Practice IKS · Funktionstrennung',sev:'m'},
+    {txt:'Einheitspreise mit Vertragspreisen (LV, Vertrag, Nachtragsvereinbarung) abgeglichen',ref:'VOB/B § 14 · § 2',sev:'m'},
+    {txt:'Mengen mit Aufmaß abgeglichen und rechnerisch nachgeprüft',ref:'VOB/B § 14 Nr. 1',sev:'m'},
+    {txt:'Abzüge (Nachlässe, Skonti, Einbehalte) korrekt berechnet',ref:'VOB/B § 16 · Good Practice',sev:'m'},
+    {txt:'Kumulierung bei Abschlagsrechnungen geprüft (keine Doppelabrechnung)',ref:'VOB/B § 16 Nr. 1 · Good Practice',sev:'m'},
+    {txt:'Rechnerische Prüfung mit Prüfvermerk, Datum und Unterschrift dokumentiert',ref:'Good Practice IKS Bauwesen',sev:'m'},
+  ]},
+  {title:'Freigabe & Zahlung',items:[
+    {txt:'Zahlungsfreigabe nur nach vollständiger sachlicher UND rechnerischer Prüfung',ref:'Good Practice IKS Bauwesen · VOB/B § 16',sev:'m'},
+    {txt:'Zahlungsfreigabe durch zeichnungsberechtigte Person innerhalb Vollmachtsgrenzen',ref:'Good Practice IKS · Vier-Augen-Prinzip',sev:'m'},
+    {txt:'Zahlungsfreigaben über Vollmachtsgrenze erfordern Zweitunterschrift',ref:'Good Practice IKS · Vier-Augen-Prinzip',sev:'m'},
+    {txt:'Zahlungsfristen eingehalten (VOB/B: 21 Tage Abschlag, 30 Tage Schlussrechnung)',ref:'VOB/B § 16 Nr. 1 Abs. 3 · Nr. 3 Abs. 1',sev:'s'},
+    {txt:'Zahlungsempfänger identisch mit Vertragspartner – keine Drittkonten',ref:'Good Practice IKS · Fraud-Prävention Bau',sev:'m'},
+    {txt:'Barzahlungen auf der Baustelle ausgeschlossen oder dokumentiert begrenzt',ref:'Good Practice IKS · GwG',sev:'m'},
+  ]},
+]},
+
+// ═══ NACHTRAGSMANAGEMENT-PROZESS ═══════════════════════════════════════════
+{id:'nm-prozess',icon:'📊',title:'Nachtragsmanagement-Prozess',ref:'VOB/B 2019 § 2 · BGB § 650b ff. · M-REA Standard',sections:[
+  {title:'Nachtragsankündigung & Prüfberechtigung',items:[
+    {txt:'Nachtragsankündigung durch AN schriftlich und vor Ausführung der Mehrleistung',ref:'VOB/B § 2 Nr. 8 Abs. 3 · BGB § 650b Abs. 1',sev:'m'},
+    {txt:'Nachtragsankündigung mit Begründung (Rechtsgrundlage, Vertragsänderung oder neue Leistung)',ref:'VOB/B § 2 Nr. 5–6 · BGB § 650b',sev:'m'},
+    {txt:'Prüfung: Ist die Mehrleistung tatsächlich nicht im Originalauftrag enthalten?',ref:'VOB/B § 2 Nr. 1 · Good Practice Baurevision',sev:'m'},
+    {txt:'Prüfung: Beruht der Nachtrag auf einer Anordnung des AG oder auf einem Planungsfehler?',ref:'VOB/B § 2 Nr. 5 · § 13 Nr. 3 · HOAI 2021',sev:'m'},
+    {txt:'Häufung gleichartiger Nachträge als Indiz für unseriöse LV-Erstellung geprüft',ref:'Good Practice Baurevision · Fraud-Prävention',sev:'s'},
+  ]},
+  {title:'Nachtragspreisermittlung',items:[
+    {txt:'Nachtragspreise auf Basis der Urkalkulation (Einheitspreise des Hauptvertrags) ermittelt',ref:'VOB/B § 2 Nr. 5 Satz 2',sev:'m'},
+    {txt:'Bei neuen Leistungen: Preisermittlung auf Basis ortsüblicher Preise oder Angebote',ref:'VOB/B § 2 Nr. 6 · Good Practice',sev:'m'},
+    {txt:'Nachtragspreise mit Marktpreisen und eigenen Erfahrungswerten plausibilisiert',ref:'Good Practice Baurevision',sev:'m'},
+    {txt:'Stundenverrechnungssätze im Vertrag vereinbart oder nachverhandelt',ref:'VOB/B § 2 Nr. 10',sev:'s'},
+    {txt:'Regiearbeiten nur auf Basis vereinbarter Stundenlohnzettel abgerechnet',ref:'VOB/B § 15',sev:'m'},
+    {txt:'Stundenlohnzettel täglich vom Bauleiter gegengezeichnet',ref:'VOB/B § 15 Nr. 3',sev:'m'},
+  ]},
+  {title:'Nachtragsverhandlung & Beauftragung',items:[
+    {txt:'Nachtragsverhandlung dokumentiert (Protokoll mit Teilnehmern, Ergebnis, Datum)',ref:'Good Practice PM · VOB/B',sev:'m'},
+    {txt:'Einigung über Nachtragspreis schriftlich festgehalten vor Ausführungsbeginn',ref:'BGB § 650b Abs. 2 · VOB/B § 2',sev:'m'},
+    {txt:'Nachtragsbeauftragung nur durch zeichnungsberechtigte Person',ref:'Good Practice IKS · Vollmachtenregelung',sev:'m'},
+    {txt:'Mündliche Aufträge auf der Baustelle durch schriftliche Bestätigung nachgeführt',ref:'VOB/B § 2 Nr. 8 · Good Practice',sev:'m'},
+    {txt:'Nicht einigungsfähige Nachträge an Auftraggeber/Rechtsabteilung eskaliert',ref:'BGB § 650d · VOB/B · Good Practice',sev:'s'},
+  ]},
+  {title:'Nachtragsverfolgung & Abschluss',items:[
+    {txt:'Nachtragsregister vollständig und aktuell (Nummer, Titel, Betrag, Status, Beauftragungsdatum)',ref:'Good Practice PM · Good Practice Baurevision',sev:'m'},
+    {txt:'Nicht erteilte Nachträge als ausstehend im Register geführt und verfolgt',ref:'Good Practice PM',sev:'s'},
+    {txt:'Nachtragsvolumen regelmäßig an Auftraggeber berichtet',ref:'IIR Bd. 33 (2002), Kap. 6.3 · Good Practice',sev:'m'},
+    {txt:'Nachtragsvolumen im Verhältnis zur Beauftragungssumme plausibel (Richtwert: max. 10–15%)',ref:'Good Practice Baurevision',sev:'s'},
+    {txt:'Abgerechnete Nachtragsleistungen mit beauftragten abgeglichen – keine Mehrmengen',ref:'VOB/B § 14 · Good Practice',sev:'m'},
+    {txt:'Nachtragsabschluss in Kostenfeststellung DIN 276 berücksichtigt',ref:'DIN 276:2018 · HOAI 2021',sev:'m'},
+  ]},
+]},
+
 ];
 
 
