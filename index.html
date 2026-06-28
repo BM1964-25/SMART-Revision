@@ -2111,6 +2111,64 @@ function kiAddToFest(){
   },200);
 }
 
+async function kiForm(){
+  var inp=document.getElementById('ai-inp');
+  var resp=document.getElementById('ai-resp');
+  var val=inp?inp.value.trim():'';
+  if(!resp) return;
+  var key=kiGetKey();
+  if(!key){ resp.textContent='Bitte API-Schlüssel hinterlegen.'; resp.style.color='var(--re)'; return; }
+  var titel=document.getElementById('nf-titel')?.value||'';
+  var sachv=document.getElementById('nf-beschr')?.value||'';
+  var schwere=document.getElementById('nf-sw')?.value||document.getElementById('nf-schwere')?.value||'Kritisch';
+  var hoai=document.getElementById('nf-hoai')?.value||'';
+  var bereich=document.getElementById('nf-br')?.value||document.getElementById('nf-bereich')?.value||'';
+  resp.textContent='KI formuliert \u2013 bitte warten\u2026';
+  resp.style.color='var(--ink3)';
+  resp.style.cursor='default';
+  resp.onclick=null;
+  var sys='Du bist ein spezialisierter Bau- und Honorarrevisor. Formuliere eine professionelle Revisionsfeststellung auf Deutsch. Regeln: pr\u00e4zise und sachlich, Paragrafenangaben vollst\u00e4ndig (z.B. \u00a7 13 Abs. 5 VOB/B), Sachverhalt beschreibend, Empfehlung handlungsorientiert mit Fristangabe.';
+  var parts=[
+    titel?'Titel: '+titel:'',
+    sachv?'Sachverhalt bisher: '+sachv:'',
+    schwere?'Schwere: '+schwere:'',
+    hoai?'HOAI-Bezug: '+hoai:'',
+    bereich?'Bereich: '+bereich:'',
+    val?'Hinweis: '+val:''
+  ].filter(function(x){return x;}).join('\n');
+  var prompt=parts+'\n\nFormuliere:\n1. SACHVERHALT (2\u20134 S\u00e4tze, objektiv)\n2. EMPFEHLUNG (konkrete Ma\u00dfnahme mit Frist)\n\nFasse dich pr\u00e4zise.';
+  try{
+    var r=await fetch('https://api.anthropic.com/v1/messages',{
+      method:'POST',
+      headers:{'Content-Type':'application/json','x-api-key':key,'anthropic-version':'2023-06-01','anthropic-dangerous-direct-browser-access':'true'},
+      body:JSON.stringify({model:'claude-sonnet-4-6',max_tokens:600,system:sys,messages:[{role:'user',content:prompt}]})
+    });
+    if(r.ok){
+      var data=await r.json();
+      var text=data.content?.[0]?.text||'(Keine Antwort)';
+      resp.textContent=text;
+      resp.style.color='var(--ink)';
+      resp.style.cursor='pointer';
+      resp.title='Klicken um in Formular zu \u00fcbernehmen';
+      resp.onclick=function(){
+        var ps=text.split(/EMPFEHLUNG[:\s]*/i);
+        var sf=document.getElementById('nf-beschr');
+        var ef=document.getElementById('nf-emp');
+        if(sf&&ps[0]) sf.value=ps[0].replace(/^\s*SACHVERHALT[:\s]*/i,'').trim();
+        if(ef&&ps[1]) ef.value=ps[1].trim();
+        resp.style.outline='2px solid var(--gr)';
+        setTimeout(function(){resp.style.outline='';},1500);
+      };
+    } else {
+      resp.textContent='API-Fehler '+r.status;
+      resp.style.color='var(--re)';
+    }
+  } catch(e){
+    resp.textContent='Fehler: '+e.message;
+    resp.style.color='var(--re)';
+  }
+}
+
 async function kiCall(systemPrompt, userMsg, btnEl){
   const key=kiGetKey();
   if(!key){
