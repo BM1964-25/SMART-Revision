@@ -621,8 +621,9 @@ textarea{resize:vertical;min-height:72px;}
 .stoggle-lbl{white-space:nowrap;}
 .sidebar.collapsed .stoggle-btn{justify-content:center;padding:10px 0;}
 .pl2-tab-locked{cursor:pointer;opacity:.65;}.pl2-tab-locked:hover{opacity:.85;}
-.pl2-mrea-badge{display:inline-flex;font-size:9px;font-weight:700;text-transform:uppercase;background:linear-gradient(135deg,#b8932a,#d4aa4a);color:#fff;padding:2px 7px;border-radius:3px;margin-left:5px;}
-.pl2-mrea-sep{width:1px;background:var(--b);margin:6px 4px;align-self:stretch;}
+.pl2-mrea-badge{display:inline-flex;font-size:9px;font-weight:700;text-transform:uppercase;background:linear-gradient(135deg,#b8932a,#d4aa4a);color:#fff;padding:2px 7px;border-radius:3px;margin-left:5px;flex-shrink:0;}
+.pl2-mrea-sep{width:1px;background:var(--b);margin:4px 3px;align-self:stretch;flex-shrink:0;}
+.pl2-tab-group-lbl{font-size:9px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--ink3);padding:0 6px;align-self:center;white-space:nowrap;flex-shrink:0;}
 .pl2-locked-overlay{display:flex;flex-direction:column;align-items:center;justify-content:center;padding:48px 24px;text-align:center;gap:14px;}
 .pl2-lock-big{font-size:48px;opacity:.25;}
 .pl2-locked-title{font-family:'Fraunces',serif;font-size:18px;font-weight:600;color:var(--ink);}
@@ -641,6 +642,7 @@ textarea{resize:vertical;min-height:72px;}
 .stoggle-btn:hover{background:rgba(255,255,255,.07);color:rgba(255,255,255,.8);}
 .stoggle-lbl{white-space:nowrap;}
 .sidebar.collapsed .stoggle-btn{justify-content:center;padding:10px 0;}
+
 </style>
 </head>
 <body>
@@ -2919,233 +2921,348 @@ function fkRender(){
 // ═══════════════════════════════════════════════════════════════
 
 const PL2_DATA = [
-  {id:'pl1',icon:'🏗',title:'Projektrevision – Grundlagen & Planung',ref:'HOAI 2021 · VOB/B 2019 · BGB',sections:[
-    {title:'Auftragsklärung & Revisionsziel',items:[
-      {txt:'Revisionsauftrag schriftlich erteilt und Ziele definiert',ref:'Good Practice Interne Revision',sev:'m'},
-      {txt:'Revisionszeitraum und Prüfungsumfang dokumentiert',ref:'Good Practice Interne Revision',sev:'m'},
-      {txt:'Auftraggeber und Ansprechpartner identifiziert',ref:'Good Practice Interne Revision',sev:'m'},
-      {txt:'Interessenkonflikte des Revisors geprüft und ausgeschlossen',ref:'Berufsgrundsätze Interne Revision',sev:'m'},
-      {txt:'Revisionsmethodik festgelegt (dokumentenbasiert / Begehung / Befragung)',ref:'Good Practice Interne Revision',sev:'s'},
+  // ═══ PF1 PROJEKTMANAGEMENT ════════════════════════════════════════════════
+  {id:'pf1',icon:'🏗',title:'PF1 Projektmanagement',ref:'IIR Schriftenreihe Bd. 33 (2002) · M-REA Standard',sections:[
+    {title:'Organisation & Prozesse',items:[
+      {txt:'Projektorganisation schriftlich definiert (Aufbau- und Ablauforganisation)',ref:'IIR Bd. 33 (2002), Kap. 3.1 · Good Practice PM',sev:'m'},
+      {txt:'Aufgaben, Rechte und Pflichten aller Projektbeteiligten klar dokumentiert',ref:'IIR Bd. 33 (2002), Kap. 3.2',sev:'m'},
+      {txt:'Projektleiter mit ausreichender Entscheidungskompetenz und Vollmacht ausgestattet',ref:'IIR Bd. 33 (2002), Kap. 3.2 · Good Practice PM',sev:'m'},
+      {txt:'Organisationsform des Projekts gewählt und begründet (Linien-, Matrix- oder reine Projektorganisation)',ref:'IIR Bd. 33 (2002), Kap. 3.1',sev:'s'},
+      {txt:'Schnittstellen zu externen Beteiligten (Planer, GU, Projektsteuerer) klar definiert und dokumentiert',ref:'IIR Bd. 33 (2002), Kap. 3.2 · Good Practice PM',sev:'m'},
+      {txt:'Vertretungsregelungen für Schlüsselpositionen im Projekt festgelegt',ref:'IIR Bd. 33 (2002), Kap. 3.2',sev:'s'},
+      {txt:'Interessenkonflikte der Projektbeteiligten geprüft und ausgeschlossen',ref:'IIR Bd. 33 (2002), Kap. 3.2 · Good Practice PM',sev:'m'},
+      {txt:'Vier-Augen-Prinzip für wesentliche Entscheidungen und Freigaben implementiert',ref:'Good Practice IKS im Bauwesen · COSO I',sev:'m'},
     ]},
-    {title:'Planungsunterlagen & Vollständigkeit',items:[
-      {txt:'Baugenehmigung mit allen Auflagen vorhanden und geprüft',ref:'MBO § 72 ff. · LBO (jeweiliges Bundesland)',sev:'m'},
-      {txt:'Ausführungspläne 1:50 vollständig und aktuell',ref:'HOAI 2021 Anlage 10 LP 5',sev:'m'},
-      {txt:'Statische Berechnungen vorhanden und durch Prüfingenieur bestätigt',ref:'LBO · BauPrüfVO (jeweiliges Bundesland)',sev:'m'},
-      {txt:'Werkplanung mit Freigabevermerk des Planers vorhanden',ref:'HOAI 2021 Anlage 10 LP 5',sev:'s'},
-      {txt:'Schnittstellenplanung zwischen Gewerken koordiniert',ref:'Allgemeine Planungspflicht',sev:'s'},
-      {txt:'Änderungen gegenüber Baugenehmigung dokumentiert und genehmigt',ref:'MBO § 73 · LBO (jeweiliges Bundesland)',sev:'m'},
-    ]},
-    {title:'Vertragsgrundlagen',items:[
-      {txt:'Bauvertrag vorhanden und vollständig (BGB oder VOB/B)',ref:'BGB § 631 ff. · VOB/B § 1',sev:'m'},
-      {txt:'Leistungsverzeichnis mit Mengen und Einheitspreisen geprüft',ref:'VOB/B § 2',sev:'m'},
-      {txt:'Baubeschreibung Bestandteil des Vertrages',ref:'BGB § 633',sev:'m'},
-      {txt:'Nachtragsregelung im Vertrag vereinbart',ref:'VOB/B § 2 Nr. 5–6',sev:'s'},
-      {txt:'Sicherheitsleistungen vereinbart (Vertragserfüllung / Gewährleistung)',ref:'VOB/B § 17',sev:'s'},
-      {txt:'Bauzeit und Verzugsregelung vertraglich fixiert',ref:'VOB/B § 5 · § 6',sev:'s'},
-    ]},
-  ]},
-  {id:'pl2',icon:'📐',title:'HOAI-Honorarprüfung',ref:'HOAI 2021 · BGB § 650p ff.',sections:[
-    {title:'Honorargrundlagen',items:[
-      {txt:'Schriftliche Honorarvereinbarung bei Vertragsschluss vorhanden',ref:'HOAI 2021 § 7 Abs. 1',sev:'m'},
-      {txt:'Anrechenbare Kosten korrekt nach DIN 276 ermittelt',ref:'HOAI 2021 § 4 · DIN 276:2018',sev:'m'},
-      {txt:'Honorarzone korrekt bestimmt und begründet',ref:'HOAI 2021 § 35',sev:'m'},
-      {txt:'Leistungsphasen und Grundleistungen klar definiert',ref:'HOAI 2021 § 34 Anlage 10',sev:'m'},
-      {txt:'Besondere Leistungen gesondert vereinbart und beauftragt',ref:'HOAI 2021 § 3 Abs. 3',sev:'s'},
-      {txt:'Umbauzuschlag geprüft und korrekt angesetzt (sofern Bestand)',ref:'HOAI 2021 § 6 Abs. 2',sev:'s'},
-    ]},
-    {title:'Leistungserbringung LP 1–4',items:[
-      {txt:'LP 1: Grundlagenermittlung – Ergebnisprotokoll vorhanden',ref:'HOAI 2021 Anlage 10 LP 1',sev:'m'},
-      {txt:'LP 2: Vorplanung mit Variantenvergleich dokumentiert',ref:'HOAI 2021 Anlage 10 LP 2',sev:'m'},
-      {txt:'LP 3: Entwurf mit Kostenberechnung DIN 276 vorgelegt',ref:'HOAI 2021 Anlage 10 LP 3 · DIN 276:2018',sev:'m'},
-      {txt:'LP 4: Bauantrag vollständig eingereicht und bestätigt',ref:'HOAI 2021 Anlage 10 LP 4',sev:'m'},
-      {txt:'Abnahme der Leistungsphase durch Auftraggeber dokumentiert',ref:'BGB § 640 · HOAI 2021',sev:'s'},
-    ]},
-    {title:'Leistungserbringung LP 5–8',items:[
-      {txt:'LP 5: Ausführungspläne vollständig und freigegeben',ref:'HOAI 2021 Anlage 10 LP 5',sev:'m'},
-      {txt:'LP 6: LV vollständig, Mengen und Positionen plausibel',ref:'HOAI 2021 Anlage 10 LP 6',sev:'m'},
-      {txt:'LP 7: Vergabeverfahren dokumentiert und nachvollziehbar',ref:'HOAI 2021 Anlage 10 LP 7',sev:'m'},
-      {txt:'LP 8: Bauüberwachung durch befugten Fachmann durchgeführt',ref:'HOAI 2021 Anlage 10 LP 8',sev:'m'},
-      {txt:'Mängelprotokoll aus Abnahme vorhanden und nachverfolgt',ref:'HOAI 2021 Anlage 10 LP 8 · VOB/B § 12',sev:'m'},
-      {txt:'As-built-Dokumentation übergeben und quittiert',ref:'HOAI 2021 Anlage 10 LP 8',sev:'s'},
-    ]},
-    {title:'Schlussrechnung & Abrechnung',items:[
-      {txt:'Schlussrechnung prüfbar aufgestellt und fristgerecht eingereicht',ref:'VOB/B § 14 · BGB § 650g',sev:'m'},
-      {txt:'Abzüge (Abschlagszahlungen, Skonto) korrekt berücksichtigt',ref:'VOB/B § 16',sev:'m'},
-      {txt:'Honorar-Endabrechnung mit Kostenfeststellung verglichen',ref:'HOAI 2021 § 4 Abs. 3',sev:'m'},
-      {txt:'Mehrfachbeauftragung geprüft und ausgeschlossen',ref:'Prüfungsgrundsatz',sev:'s'},
-    ]},
-  ]},
-  {id:'pl3',icon:'🔨',title:'VOB/B – Ausführung & Mängelrecht',ref:'VOB/B 2019 · BGB § 633 ff.',sections:[
-    {title:'Ausführungsqualität',items:[
-      {txt:'Ausführung entspricht dem vereinbarten Leistungsverzeichnis',ref:'VOB/B § 4 Nr. 1',sev:'m'},
-      {txt:'Bedenkenanmeldungen des AN schriftlich dokumentiert',ref:'VOB/B § 4 Nr. 3',sev:'m'},
-      {txt:'Materialverwendung geprüft (Lieferscheine, CE-Zertifikate)',ref:'VOB/B § 4 Nr. 1 · BauPVO EU Nr. 305/2011',sev:'m'},
-      {txt:'Baustellenordnung und Verkehrssicherungspflicht eingehalten',ref:'VOB/B § 4 Nr. 6 · BGB § 823',sev:'s'},
-      {txt:'Schutzmaßnahmen für angrenzende Bauteile getroffen',ref:'VOB/B § 4 Nr. 5',sev:'s'},
-      {txt:'Nachunternehmer vom AG genehmigt',ref:'VOB/B § 4 Nr. 8',sev:'s'},
-    ]},
-    {title:'Abnahme',items:[
-      {txt:'Förmliche Abnahme mit Protokoll durchgeführt',ref:'VOB/B § 12 Nr. 4',sev:'m'},
-      {txt:'Abnahmeverweigerung schriftlich begründet (soweit erfolgt)',ref:'VOB/B § 12 Nr. 3',sev:'m'},
-      {txt:'Wesentliche Mängel bei Abnahme festgehalten und gerügt',ref:'VOB/B § 12 Nr. 3',sev:'m'},
-      {txt:'Abnahmedatum (Beginn Gewährleistung) dokumentiert',ref:'VOB/B § 12 Nr. 5',sev:'m'},
-      {txt:'Teilabnahmen für verdeckte Leistungen durchgeführt',ref:'VOB/B § 12 Nr. 2',sev:'s'},
-    ]},
-    {title:'Mängelrecht',items:[
-      {txt:'Mängelrügen schriftlich und fristgerecht erteilt',ref:'VOB/B § 13 Nr. 5',sev:'m'},
-      {txt:'Mängelbeseitigungsfrist angemessen gesetzt',ref:'VOB/B § 13 Nr. 5 Abs. 1',sev:'m'},
-      {txt:'Mängelbeseitigung überprüft und abgenommen',ref:'VOB/B § 13 Nr. 5',sev:'m'},
-      {txt:'Verjährungsfristen überwacht (4 J. VOB/B / 5 J. BGB)',ref:'VOB/B § 13 Nr. 4 · BGB § 634a Abs. 1 Nr. 2',sev:'m'},
-      {txt:'Kostenvorschuss oder Selbstvornahme geprüft (bei Verweigerung)',ref:'VOB/B § 13 Nr. 5 Abs. 2 · BGB § 637',sev:'s'},
-      {txt:'Schadensersatzansprüche wegen Mängeln geprüft',ref:'VOB/B § 13 Nr. 7 · BGB § 634 Nr. 4',sev:'s'},
-    ]},
-    {title:'Abrechnung',items:[
-      {txt:'Massenberechnungen nachvollziehbar und prüfbar aufgestellt',ref:'VOB/B § 14 Nr. 1',sev:'m'},
-      {txt:'Aufmaß vor Ort erstellt und dokumentiert',ref:'VOB/B § 14 Nr. 2',sev:'m'},
-      {txt:'Abschlagszahlungen fristgerecht geleistet (innerhalb 21 Tagen)',ref:'VOB/B § 16 Nr. 1 Abs. 3',sev:'s'},
-      {txt:'Einbehalt (Sicherheitsleistung) korrekt berechnet',ref:'VOB/B § 16 Nr. 1 Abs. 4',sev:'s'},
-      {txt:'Prüfungsfrist für Schlussrechnung eingehalten (60 Tage)',ref:'VOB/B § 16 Nr. 3 Abs. 1',sev:'s'},
-    ]},
-  ]},
-  {id:'pl4',icon:'💶',title:'Kostenkontrolle & Nachträge',ref:'DIN 276:2018 · VOB/B § 2 · HOAI 2021',sections:[
-    {title:'Kostenplanung & Steuerung',items:[
-      {txt:'Kostenrahmen (DIN 276 KG 200–700) bei Projektstart dokumentiert',ref:'DIN 276:2018 · HOAI 2021 Anlage 10 LP 1',sev:'m'},
-      {txt:'Kostenschätzung LP 2 und Kostenberechnung LP 3 vorhanden',ref:'HOAI 2021 Anlage 10 LP 2–3 · DIN 276:2018',sev:'m'},
-      {txt:'Kostenanschlag nach Vergabe mit beauftragten Summen abgeglichen',ref:'HOAI 2021 Anlage 10 LP 6–7 · DIN 276:2018',sev:'m'},
-      {txt:'Kostenfeststellung nach Abschluss erstellt',ref:'HOAI 2021 Anlage 10 LP 8 · DIN 276:2018',sev:'m'},
-      {txt:'Kostenabweichungen über 10% schriftlich begründet',ref:'Prüfungsgrundsatz · DIN 276:2018',sev:'s'},
-      {txt:'Regelmäßige Kostenberichterstattung an Auftraggeber erfolgt',ref:'HOAI 2021 Anlage 10 LP 8',sev:'s'},
-    ]},
-    {title:'Nachtragsmanagement',items:[
-      {txt:'Alle Nachträge schriftlich beauftragt und begründet',ref:'VOB/B § 2 Nr. 5–6',sev:'m'},
-      {txt:'Nachtragsberechnung nachvollziehbar (Urkalkulation / Einheitspreise)',ref:'VOB/B § 2 Nr. 5 · § 2 Nr. 8',sev:'m'},
-      {txt:'Bedenken gegen unberechtigte Nachträge schriftlich erhoben',ref:'VOB/B § 2 Nr. 8 Abs. 3',sev:'m'},
-      {txt:'Nachtragsvolumen im Verhältnis zum Hauptauftrag plausibel',ref:'Prüfungsgrundsatz',sev:'s'},
-      {txt:'Nachtragsregister geführt und aktuell',ref:'Good Practice Projektkontrolle',sev:'s'},
-      {txt:'Massenänderungen nach VOB/B § 2 Nr. 3 geprüft',ref:'VOB/B § 2 Nr. 3',sev:'s'},
-    ]},
-    {title:'Rechnungsprüfung',items:[
-      {txt:'Rechnungen sachlich und rechnerisch geprüft',ref:'VOB/B § 14 · Good Practice',sev:'m'},
-      {txt:'Positionspreise mit LV-Einheitspreisen abgeglichen',ref:'VOB/B § 14 · § 2',sev:'m'},
-      {txt:'Doppelerfassungen und Mehrfachabrechnung ausgeschlossen',ref:'Prüfungsgrundsatz Rechnungsprüfung',sev:'m'},
-      {txt:'Skonto- und Rabattregelungen korrekt angewendet',ref:'VOB/B § 16',sev:'s'},
-      {txt:'Freigabeprozess für Rechnungen definiert und eingehalten',ref:'Good Practice Projektkontrolle',sev:'s'},
-    ]},
-  ]},
-  {id:'pl5',icon:'⏱',title:'Terminplanung & Bauzeitverzug',ref:'VOB/B § 5–6 · BGB § 286 ff.',sections:[
-    {title:'Terminplanung',items:[
-      {txt:'Bauzeitenplan (Balkenterminplan) Vertragsbestandteil',ref:'VOB/B § 5 Nr. 1',sev:'m'},
-      {txt:'Meilensteine und Fertigstellungstermin vertraglich fixiert',ref:'VOB/B § 5 Nr. 1 · BGB § 271',sev:'m'},
-      {txt:'Terminplan regelmäßig aktualisiert (Soll/Ist-Vergleich)',ref:'Good Practice Terminsteuerung',sev:'s'},
-      {txt:'Kritischer Pfad identifiziert und überwacht',ref:'Good Practice Terminsteuerung',sev:'s'},
-      {txt:'Kapazitätsplanung und Ressourceneinsatz dokumentiert',ref:'Good Practice Terminsteuerung',sev:'h'},
-    ]},
-    {title:'Verzug & Behinderung',items:[
-      {txt:'Behinderungsanzeigen schriftlich und unverzüglich erstattet',ref:'VOB/B § 6 Nr. 1',sev:'m'},
-      {txt:'Ursachen des Verzugs dokumentiert und zugeordnet (AN/AG)',ref:'VOB/B § 6 Nr. 2',sev:'m'},
-      {txt:'Vertragsstrafe bei Fristüberschreitung geprüft und geltend gemacht',ref:'VOB/B § 11 · BGB § 339 ff.',sev:'s'},
-      {txt:'Schadensersatzanspruch bei AG-seitigem Verzug geprüft',ref:'VOB/B § 6 Nr. 6 · BGB § 286',sev:'s'},
-      {txt:'Bauzeitverlängerung schriftlich vereinbart (wenn berechtigt)',ref:'VOB/B § 6 Nr. 2',sev:'s'},
-      {txt:'Mehrkosten aus Bauzeitverlängerung ermittelt und dokumentiert',ref:'VOB/B § 6 Nr. 6',sev:'s'},
-    ]},
-  ]},
-  {id:'pl6',icon:'🔥',title:'Brandschutz & Bauordnungsrecht',ref:'MBO · LBO · DIN 4102 · DIN EN 13501',sections:[
-    {title:'Genehmigung & Nachweise',items:[
-      {txt:'Brandschutznachweis nach LBO eingereicht und genehmigt',ref:'MBO § 66 · LBO (jeweiliges Bundesland)',sev:'m'},
-      {txt:'Brandschutzkonzept von zugelassenem Sachverständigen geprüft',ref:'LBO § 85a (jeweiliges Bundesland)',sev:'m'},
-      {txt:'Feuerwiderstandsklassen der Bauteile dokumentiert',ref:'DIN 4102 · DIN EN 13501-2',sev:'m'},
-      {txt:'Rettungswege und Fluchtwegbreiten eingehalten',ref:'MBO § 33 ff. · ASR A2.3',sev:'m'},
-      {txt:'Feuerwehrzufahrt und -aufstellfläche gesichert',ref:'MBO § 5',sev:'s'},
-    ]},
-    {title:'Technischer Brandschutz',items:[
-      {txt:'Brandmeldeanlage geprüft und abgenommen',ref:'DIN 14675-1',sev:'m'},
-      {txt:'Sprinkleranlage (sofern gefordert) vollständig installiert',ref:'VdS CEA 4001',sev:'m'},
-      {txt:'Rauchabzugsanlage (RWA) vorhanden und geprüft',ref:'DIN 18232-2',sev:'s'},
-      {txt:'Brandschutztüren und -tore mit bauaufsichtlicher Zulassung',ref:'DIN EN 16034 · MBO § 17',sev:'m'},
-      {txt:'Leitungsanlagen-Richtlinie (LAR) eingehalten',ref:'MLAR 2005 (Muster-LAR)',sev:'m'},
-      {txt:'Feuerlöschanlagen auf Funktionsfähigkeit geprüft',ref:'DIN EN 12845',sev:'s'},
-    ]},
-  ]},
-  {id:'pl7',icon:'🏛',title:'Tragwerk & Standsicherheit',ref:'LBO · BauPrüfVO · DIN EN 1990 ff.',sections:[
-    {title:'Nachweise & Prüfung',items:[
-      {txt:'Standsicherheitsnachweis eingereicht und bauaufsichtlich geprüft',ref:'MBO § 66 · BauPrüfVO (jeweiliges Bundesland)',sev:'m'},
-      {txt:'Prüfingenieur bestellt und Prüfvermerk vorhanden',ref:'BauPrüfVO (jeweiliges Bundesland)',sev:'m'},
-      {txt:'Bemessungsgrundlagen (Lasten, Normen) dokumentiert',ref:'DIN EN 1990 · DIN EN 1991',sev:'m'},
-      {txt:'Gründungsgutachten vorhanden und in Planung berücksichtigt',ref:'DIN EN 1997-1 · DIN 4020',sev:'m'},
-      {txt:'Sonderkonstruktionen gesondert geprüft und genehmigt',ref:'MBO § 67 · LBO (jeweiliges Bundesland)',sev:'s'},
-    ]},
-    {title:'Ausführung',items:[
-      {txt:'Bewehrungsplanung und -verlegung geprüft',ref:'DIN EN 1992-1-1 · DIN 1045-3',sev:'m'},
-      {txt:'Betonierprotokoll und Gütenachweise vorhanden',ref:'DIN EN 206 · DIN 1045-3',sev:'m'},
-      {txt:'Schweißnähte und Stahlbauanschlüsse geprüft',ref:'DIN EN 1993-1-8 · DIN EN ISO 3834',sev:'m'},
-      {txt:'Lücklose Bauteilüberwachung durch Bauleitung dokumentiert',ref:'HOAI 2021 Anlage 10 LP 8',sev:'s'},
-      {txt:'Verdichtungs- und Eignungsnachweise für Erdarbeiten vorhanden',ref:'DIN 18196 · DIN 18127',sev:'s'},
-    ]},
-  ]},
-  {id:'pl8',icon:'⚙',title:'Technische Gebäudeausrüstung (TGA)',ref:'HOAI 2021 § 55 ff. · GEG 2023 · VDI · DIN',sections:[
-    {title:'Heizung, Lüftung, Sanitär (HLS)',items:[
-      {txt:'HLS-Planung nach HOAI § 55 ff. vollständig und geprüft',ref:'HOAI 2021 Anlage 15 LP 1–8',sev:'m'},
-      {txt:'Wärmebedarfsberechnung nach GEG / DIN EN 12831 vorhanden',ref:'GEG 2023 § 14 · DIN EN 12831-1',sev:'m'},
-      {txt:'Lüftungskonzept nach DIN 1946-6 erstellt',ref:'DIN 1946-6:2019',sev:'m'},
-      {txt:'Druckprüfung Trinkwasserinstallation durchgeführt',ref:'DIN EN 806-4 · DVGW W 400-2',sev:'m'},
-      {txt:'VDI 6022-Hygieneabnahme der Lüftungsanlage erfolgt',ref:'VDI 6022 Bl. 1:2018',sev:'s'},
-      {txt:'Heizlastberechnung auf Ausführungsplanung abgestimmt',ref:'DIN EN 12831-1',sev:'s'},
-    ]},
-    {title:'Elektrotechnik (ELT)',items:[
-      {txt:'Elektroplanung nach HOAI vollständig',ref:'HOAI 2021 Anlage 15',sev:'m'},
-      {txt:'Elektrische Anlagen VDE-konform ausgeführt und geprüft',ref:'DIN VDE 0100-600',sev:'m'},
-      {txt:'Blitzschutzanlage geplant, errichtet und geprüft',ref:'DIN EN 62305-3',sev:'s'},
-      {txt:'Notbeleuchtung und Sicherheitsbeleuchtung installiert',ref:'DIN EN 1838 · ASR A3.4/3',sev:'m'},
-      {txt:'Zählerkonzept und Messeinrichtungen geprüft',ref:'MessEG · Netzbetreibervorgaben',sev:'h'},
-    ]},
-    {title:'GEG & Energieeffizienz',items:[
-      {txt:'Energieausweis erstellt und übergeben',ref:'GEG 2023 § 79 ff.',sev:'m'},
-      {txt:'GEG-Nachweis vorhanden und geprüft',ref:'GEG 2023 § 26',sev:'m'},
-      {txt:'Primärenergiebedarf unter gesetzlichem Grenzwert',ref:'GEG 2023 § 10',sev:'m'},
-      {txt:'Nachhaltigkeitszertifizierung dokumentiert (sofern vereinbart)',ref:'Vertraglich vereinbart · DGNB / BNB',sev:'h'},
-    ]},
-  ]},
-  {id:'pl9',icon:'📋',title:'Vergabe & Ausschreibung',ref:'VOB/A 2019 · VgV · GWB · UVgO',sections:[
-    {title:'Vergabeverfahren',items:[
-      {txt:'Vergabeart korrekt gewählt (öffentlich / beschränkt / freihändig)',ref:'VOB/A § 3 · UVgO § 12',sev:'m'},
-      {txt:'EU-Schwellenwert geprüft (Bauleistungen ab 5.538.000 € netto)',ref:'VgV § 3 · GWB § 106 · EU-VO 2023/2496',sev:'m'},
-      {txt:'Vergabebekanntmachung vollständig und fristgerecht veröffentlicht',ref:'VOB/A § 12 · VgV § 37',sev:'m'},
-      {txt:'Angebotsfrist eingehalten (mind. 4 Wochen bei öffentlicher Ausschreibung)',ref:'VOB/A § 10 Abs. 1',sev:'m'},
-      {txt:'Submissionsprotokoll ordnungsgemäß erstellt',ref:'VOB/A § 14',sev:'m'},
-    ]},
-    {title:'Angebotsprüfung & Vergabe',items:[
-      {txt:'Angebote auf Vollständigkeit und Plausibilität geprüft',ref:'VOB/A § 16',sev:'m'},
-      {txt:'Ungewöhnlich niedrige Angebote aufgeklärt',ref:'VOB/A § 16d · VgV § 60',sev:'m'},
-      {txt:'Zuschlagskriterien vorab bekannt gemacht und eingehalten',ref:'VgV § 58 · GWB § 127',sev:'m'},
-      {txt:'Vergabevermerk vollständig geführt',ref:'VOB/A § 20 · VgV § 8',sev:'m'},
-      {txt:'Informationspflicht gegenüber unterlegenen Bietern eingehalten',ref:'GWB § 134',sev:'s'},
-      {txt:'Aufhebung des Verfahrens begründet (sofern erfolgt)',ref:'VOB/A § 17',sev:'s'},
-    ]},
-  ]},
-  {id:'pl10',icon:'✅',title:'Abnahme & Projektabschluss',ref:'VOB/B § 12 · BGB § 640 · HOAI 2021 Anlage 10 LP 8',sections:[
-    {title:'Förmliche Abnahme',items:[
-      {txt:'Abnahme auf Verlangen einer Partei schriftlich durchgeführt',ref:'VOB/B § 12 Nr. 4',sev:'m'},
-      {txt:'Abnahmeprotokoll mit allen Beteiligten unterzeichnet',ref:'VOB/B § 12 Nr. 4',sev:'m'},
-      {txt:'Mängel zum Abnahmezeitpunkt im Protokoll festgehalten',ref:'VOB/B § 12 Nr. 3',sev:'m'},
-      {txt:'Fertigstellungstermin und Übergabedatum dokumentiert',ref:'VOB/B § 12 Nr. 5',sev:'m'},
-      {txt:'Schlüsselübergabe und Dokumentationsübergabe quittiert',ref:'HOAI 2021 Anlage 10 LP 8',sev:'s'},
+    {title:'Information & Kommunikation',items:[
+      {txt:'Regelkommunikation (Jour fixe, Projektbesprechungen) mit festen Terminen und Teilnehmern etabliert',ref:'IIR Bd. 33 (2002), Kap. 3.3 · Good Practice PM',sev:'m'},
+      {txt:'Besprechungen protokolliert, Protokolle zeitnah verteilt und von Beteiligten gegengezeichnet',ref:'IIR Bd. 33 (2002), Kap. 3.3',sev:'m'},
+      {txt:'Berichtspflichten (Projektstatusbericht) an Auftraggeber/Gremien definiert und eingehalten',ref:'IIR Bd. 33 (2002), Kap. 3.3 · Good Practice PM',sev:'m'},
+      {txt:'Eskalationswege für kritische Projektentscheidungen dokumentiert',ref:'IIR Bd. 33 (2002), Kap. 3.3',sev:'s'},
+      {txt:'Informationsfluss zwischen Auftraggeber, Planer und ausführenden Firmen sichergestellt',ref:'IIR Bd. 33 (2002), Kap. 3.3',sev:'m'},
+      {txt:'Entscheidungen schriftlich dokumentiert und nachvollziehbar begründet',ref:'IIR Bd. 33 (2002), Kap. 3.3 · Good Practice PM',sev:'m'},
     ]},
     {title:'Projektdokumentation',items:[
-      {txt:'Revisionspläne (As-built) vollständig und übergeben',ref:'HOAI 2021 Anlage 10 LP 8',sev:'m'},
-      {txt:'Wartungs- und Bedienungsanleitungen vorhanden',ref:'HOAI 2021 Anlage 10 LP 8',sev:'m'},
-      {txt:'Gewährleistungsfristen tabellarisch erfasst',ref:'VOB/B § 13 Nr. 4 · BGB § 634a',sev:'m'},
-      {txt:'Sicherheits- und Gesundheitsschutzplan (SiGePlan) archiviert',ref:'BaustellV § 3 · RAB 31',sev:'s'},
-      {txt:'Brandschutzdokumentation archiviert',ref:'LBO (jeweiliges Bundesland)',sev:'s'},
-      {txt:'Restmängelliste erstellt und Nachbesserungstermine vereinbart',ref:'VOB/B § 13',sev:'m'},
+      {txt:'Dokumentenmanagement-System für das Projekt definiert und eingeführt',ref:'IIR Bd. 33 (2002), Kap. 7.2 · Good Practice PM',sev:'m'},
+      {txt:'Alle projektrelevanten Dokumente vollständig, aktuell und versioniert abgelegt',ref:'IIR Bd. 33 (2002), Kap. 7.2',sev:'m'},
+      {txt:'Zugriffsrechte auf Projektdokumentation geregelt (Mindestinformationsprinzip)',ref:'Good Practice IKS · COSO I',sev:'s'},
+      {txt:'Aufbewahrungsfristen für Projektunterlagen definiert und eingehalten (mind. 10 Jahre)',ref:'HGB § 257 · AO § 147 · Good Practice',sev:'m'},
+      {txt:'Bautagesberichte vollständig, lückenlos und zeitnah erstellt',ref:'HOAI 2021 Anlage 10 LP 8 · VOB/B § 14',sev:'m'},
+      {txt:'Planänderungen dokumentiert, versioniert und an alle Beteiligten verteilt',ref:'IIR Bd. 33 (2002), Kap. 7.2 · Good Practice PM',sev:'m'},
+      {txt:'Fotodokumentation der Bauausführung geführt (insbesondere verdeckte Leistungen)',ref:'Good Practice Baurevision',sev:'s'},
     ]},
-    {title:'Abschlussdokumentation & Bericht',items:[
-      {txt:'Abschlussrevisionsbericht erstellt und verteilt',ref:'Good Practice Interne Revision',sev:'m'},
-      {txt:'Wesentliche Feststellungen mit Empfehlungen dokumentiert',ref:'Good Practice Interne Revision',sev:'m'},
-      {txt:'Maßnahmen aus Feststellungen nachverfolgt (Follow-up)',ref:'Good Practice Interne Revision',sev:'m'},
-      {txt:'Projektakte vollständig archiviert (10 Jahre)',ref:'HGB § 257 · AO § 147',sev:'s'},
+    {title:'Steuerung Kosten, Termine & Qualität',items:[
+      {txt:'Projektziele (Kosten, Termine, Qualität) schriftlich definiert und genehmigt',ref:'IIR Bd. 33 (2002), Kap. 4.1 · DIN 276:2018',sev:'m'},
+      {txt:'Kostenrahmen vom Auftraggeber genehmigt und als Steuerungsgröße genutzt',ref:'IIR Bd. 33 (2002), Kap. 5.3 · DIN 276:2018',sev:'m'},
+      {txt:'Kostenkontrolle und Kostenfortschreibung lückenlos geführt',ref:'IIR Bd. 33 (2002), Kap. 6.3 · DIN 276:2018',sev:'m'},
+      {txt:'Soll-Ist-Vergleich für Kosten regelmäßig erstellt und dem Auftraggeber kommuniziert',ref:'IIR Bd. 33 (2002), Kap. 6.3',sev:'m'},
+      {txt:'Terminplan (Balkenterminplan) als Vertragsbestandteil vereinbart',ref:'IIR Bd. 33 (2002), Kap. 5.2 · VOB/B § 5',sev:'m'},
+      {txt:'Terminverfolgung und Soll-Ist-Vergleich regelmäßig durchgeführt',ref:'IIR Bd. 33 (2002), Kap. 6.3',sev:'m'},
+      {txt:'Kritischer Pfad identifiziert und aktiv überwacht',ref:'IIR Bd. 33 (2002), Kap. 5.2',sev:'s'},
+      {txt:'Qualitätsvorgaben dokumentiert und Prüfung der Einhaltung nachgewiesen',ref:'IIR Bd. 33 (2002), Kap. 5.4',sev:'m'},
+    ]},
+    {title:'Prüf- & Kontrollaufgaben',items:[
+      {txt:'Interne Kontrollaufgaben im Projekt definiert (wer prüft was, wann und wie)',ref:'IIR Bd. 33 (2002), Kap. 6.3 · Good Practice IKS',sev:'m'},
+      {txt:'Freigabeprozesse für Zahlungen, Pläne und Nachträge schriftlich geregelt',ref:'IIR Bd. 33 (2002), Kap. 6.3 · Good Practice IKS',sev:'m'},
+      {txt:'Sachliche und rechnerische Prüfung von Rechnungen dokumentiert nachgewiesen',ref:'VOB/B § 14 · Good Practice',sev:'m'},
+      {txt:'Kontrolle der Leistungserbringung vor Freigabe der Zahlung sichergestellt',ref:'Good Practice IKS im Bauwesen',sev:'m'},
+      {txt:'Bauleitung vor Ort mit ausreichender Qualifikation und Präsenz nachgewiesen',ref:'HOAI 2021 Anlage 10 LP 8',sev:'m'},
+      {txt:'Stichprobenprüfungen zur Qualitätssicherung dokumentiert',ref:'IIR Bd. 33 (2002), Kap. 6.3 · Good Practice',sev:'s'},
+    ]},
+    {title:'Risikomanagement',items:[
+      {txt:'Risikoanalyse für das Projekt erstellt und dokumentiert',ref:'IIR Bd. 33 (2002), Kap. 5.4 · Good Practice PM',sev:'m'},
+      {txt:'Risiken nach Eintrittswahrscheinlichkeit und Auswirkung bewertet (Risikomatrix)',ref:'IIR Bd. 33 (2002), Kap. 5.4',sev:'s'},
+      {txt:'Maßnahmen zur Risikoreduzierung definiert und verfolgt',ref:'IIR Bd. 33 (2002), Kap. 5.4',sev:'m'},
+      {txt:'Risikoregister regelmäßig aktualisiert',ref:'IIR Bd. 33 (2002), Kap. 5.4 · Good Practice PM',sev:'s'},
+      {txt:'Versicherungen für Projektrisiken geprüft und abgeschlossen',ref:'Good Practice Bauversicherung',sev:'m'},
+      {txt:'Risiken aus Vertragsgestaltung geprüft und adressiert',ref:'IIR Bd. 33 (2002), Kap. 5.4 · BGB · VOB/B',sev:'m'},
+    ]},
+    {title:'Wirtschaftlichkeitsuntersuchungen',items:[
+      {txt:'Wirtschaftlichkeitsuntersuchung vor Projektbeginn erstellt und genehmigt',ref:'IIR Bd. 33 (2002), Kap. 2 · Good Practice PM',sev:'m'},
+      {txt:'Variantenvergleich für wesentliche Planungsentscheidungen dokumentiert',ref:'IIR Bd. 33 (2002), Kap. 2',sev:'s'},
+      {txt:'Nutzungskosten (Betriebskosten) in der Wirtschaftlichkeitsbetrachtung berücksichtigt',ref:'IIR Bd. 33 (2002), Kap. 2 · Good Practice',sev:'s'},
+      {txt:'Investitionsentscheidung durch zuständiges Gremium genehmigt und dokumentiert',ref:'IIR Bd. 33 (2002), Kap. 2',sev:'m'},
+    ]},
+  ]},
+
+  // ═══ PF2 VERGABE ARCHITEKTEN & INGENIEURE ═══════════════════════════════
+  {id:'pf2',icon:'📐',title:'PF2 Vergabe Architekten & Ingenieure',ref:'HOAI 2021 · VOB/A 2019 · VgV · GWB · M-REA Standard',sections:[
+    {title:'Bedarfsermittlung & Leistungsbestimmung',items:[
+      {txt:'Planungs- und Ingenieurleistungen vollständig definiert und abgegrenzt',ref:'HOAI 2021 § 3 · Anlage 10',sev:'m'},
+      {txt:'Beauftragungsumfang (Leistungsphasen, Grundleistungen, besondere Leistungen) schriftlich festgelegt',ref:'HOAI 2021 § 34 · Anlage 10',sev:'m'},
+      {txt:'Prüfung, ob Eigenleistung oder Fremdbezug wirtschaftlicher ist',ref:'IIR Bd. 33 (2002), Kap. 2 · Good Practice',sev:'s'},
+      {txt:'EU-Schwellenwert geprüft (Planungsleistungen: ab 221.000 € netto EU-weit)',ref:'VgV § 3 · GWB § 106 · EU-VO 2023/2496',sev:'m'},
+    ]},
+    {title:'Ausschreibung & Vergabeverfahren',items:[
+      {txt:'Vergabeverfahren korrekt gewählt (VOF/VgV, freihändig, beschränkt)',ref:'VgV § 17 ff. · GWB § 97 ff.',sev:'m'},
+      {txt:'Anforderungsprofil für Architekten/Ingenieure vollständig und diskriminierungsfrei formuliert',ref:'VgV § 42 ff. · GWB § 97 Abs. 2',sev:'m'},
+      {txt:'Auswahlkriterien vorab festgelegt und dokumentiert',ref:'VgV § 58 · GWB § 127',sev:'m'},
+      {txt:'Mindestanzahl von Bewerbern eingehalten (mind. 3 bei beschränktem Verfahren)',ref:'VgV § 51',sev:'s'},
+      {txt:'Interessenkonflikte der Vergabeentscheider geprüft und ausgeschlossen',ref:'VgV § 6 · GWB § 124',sev:'m'},
+    ]},
+    {title:'Angebotsprüfung & Zuschlag',items:[
+      {txt:'Angebote vollständig und fristgerecht eingegangen',ref:'VgV § 53 · Good Practice',sev:'m'},
+      {txt:'Angebotsprüfung nach vorab definierten Kriterien durchgeführt und dokumentiert',ref:'VgV § 58',sev:'m'},
+      {txt:'Referenzen und Qualifikationsnachweise der Bieter geprüft',ref:'VgV § 45 ff.',sev:'m'},
+      {txt:'Vergabeentscheidung schriftlich begründet und nachvollziehbar dokumentiert',ref:'VgV § 8 · GWB § 127',sev:'m'},
+      {txt:'Unterlegene Bieter informiert (Informations- und Wartepflicht)',ref:'GWB § 134',sev:'s'},
+    ]},
+    {title:'Vertragsgestaltung AI-Leistungen',items:[
+      {txt:'Honorarvereinbarung schriftlich vor Leistungsbeginn abgeschlossen',ref:'HOAI 2021 § 7 Abs. 1 · BGB § 650p',sev:'m'},
+      {txt:'Honorarzone und anrechenbare Kosten korrekt bestimmt',ref:'HOAI 2021 § 35 · § 4',sev:'m'},
+      {txt:'Haftung und Versicherungspflicht des Planers vertraglich geregelt',ref:'BGB § 634a · HOAI 2021',sev:'m'},
+      {txt:'Urheberrechte und Nutzungsrechte an Planunterlagen geregelt',ref:'UrhG § 2 · BGB · HOAI 2021',sev:'s'},
+      {txt:'Kündigungsrechte und Folgen bei Schlechtleistung vertraglich fixiert',ref:'BGB § 648 · § 649 · HOAI 2021',sev:'s'},
+    ]},
+  ]},
+
+  // ═══ PF3 PLANUNGSLEISTUNGEN ══════════════════════════════════════════════
+  {id:'pf3',icon:'📋',title:'PF3 Planungsleistungen',ref:'HOAI 2021 · M-REA Standard',sections:[
+    {title:'Leistungserbringung LP 1–4',items:[
+      {txt:'LP 1: Grundlagenermittlung dokumentiert, Ergebnisse protokolliert',ref:'HOAI 2021 Anlage 10 LP 1',sev:'m'},
+      {txt:'LP 2: Vorplanung mit Variantenvergleich und Kostenschätzung DIN 276',ref:'HOAI 2021 Anlage 10 LP 2 · DIN 276:2018',sev:'m'},
+      {txt:'LP 3: Entwurfsplanung mit vollständiger Kostenberechnung DIN 276',ref:'HOAI 2021 Anlage 10 LP 3 · DIN 276:2018',sev:'m'},
+      {txt:'LP 4: Bauantrag vollständig und fristgerecht eingereicht',ref:'HOAI 2021 Anlage 10 LP 4 · LBO',sev:'m'},
+      {txt:'Baugenehmigung mit Auflagen vorhanden und Auflagen in Planung umgesetzt',ref:'HOAI 2021 Anlage 10 LP 4 · MBO § 72',sev:'m'},
+      {txt:'Freigabe jeder Leistungsphase durch Auftraggeber schriftlich dokumentiert',ref:'HOAI 2021 · Good Practice PM',sev:'s'},
+    ]},
+    {title:'Leistungserbringung LP 5–8',items:[
+      {txt:'LP 5: Ausführungspläne 1:50 vollständig und widerspruchsfrei',ref:'HOAI 2021 Anlage 10 LP 5',sev:'m'},
+      {txt:'LP 6: Leistungsverzeichnisse vollständig mit Mengen und Einheitspreisen',ref:'HOAI 2021 Anlage 10 LP 6 · VOB/A § 7',sev:'m'},
+      {txt:'LP 7: Vergabeverfahren durch Planer korrekt begleitet',ref:'HOAI 2021 Anlage 10 LP 7',sev:'m'},
+      {txt:'LP 8: Bauüberwachung durch qualifizierten Fachmann nachgewiesen',ref:'HOAI 2021 Anlage 10 LP 8',sev:'m'},
+      {txt:'Werkstattpläne der Auftragnehmer geprüft und freigegeben',ref:'HOAI 2021 Anlage 10 LP 5',sev:'m'},
+      {txt:'Planlieferplan vereinbart und eingehalten – Verzögerungen dokumentiert',ref:'HOAI 2021 Anlage 10 LP 5 · VOB/B § 6',sev:'m'},
+    ]},
+    {title:'Koordination der Fachplaner',items:[
+      {txt:'Koordination zwischen Architekt und allen Fachplanern nachgewiesen',ref:'HOAI 2021 Anlage 10 LP 3/5 · Good Practice',sev:'m'},
+      {txt:'Kollisionsprüfung zwischen Architektur- und TGA-Planung durchgeführt',ref:'HOAI 2021 Anlage 10 LP 5 · Good Practice',sev:'m'},
+      {txt:'Schnittstellen zwischen Gewerken in der Planung geklärt und dokumentiert',ref:'HOAI 2021 Anlage 10 LP 5',sev:'m'},
+      {txt:'TGA-Koordinationsplan erstellt und freigegeben',ref:'HOAI 2021 Anlage 15 · Good Practice',sev:'s'},
+    ]},
+    {title:'Planungsdokumentation',items:[
+      {txt:'Planindex vollständig und aktuell geführt',ref:'Good Practice Planungsmanagement',sev:'m'},
+      {txt:'Planänderungen dokumentiert und an alle Beteiligten verteilt',ref:'Good Practice Planungsmanagement',sev:'m'},
+      {txt:'As-built-Pläne vollständig erstellt und an Auftraggeber übergeben',ref:'HOAI 2021 Anlage 10 LP 8',sev:'m'},
+      {txt:'Revisionsunterlagen vollständig archiviert',ref:'HOAI 2021 Anlage 10 LP 8 · HGB § 257',sev:'s'},
+    ]},
+  ]},
+
+  // ═══ PF4 VERGABE BAULEISTUNGEN ══════════════════════════════════════════
+  {id:'pf4',icon:'🔨',title:'PF4 Vergabe Bauleistungen',ref:'VOB/A 2019 · VgV · GWB · UVgO · M-REA Standard',sections:[
+    {title:'Vorbereitung der Ausschreibung',items:[
+      {txt:'Leistungsverzeichnis vollständig, eindeutig und erschöpfend beschreibend',ref:'VOB/A § 7 Abs. 1',sev:'m'},
+      {txt:'Mengen plausibel ermittelt und durch Aufmaßunterlagen belegt',ref:'VOB/A § 7 · VOB/B § 14',sev:'m'},
+      {txt:'Vergabeunterlagen vollständig (BVB, ZVB, LV, Pläne, Baubeschreibung)',ref:'VOB/A § 8',sev:'m'},
+      {txt:'EU-Schwellenwert geprüft (Bauleistungen: ab 5.538.000 € netto EU-weit)',ref:'VgV § 3 · GWB § 106 · EU-VO 2023/2496',sev:'m'},
+      {txt:'Kostenanschlag als Vergleichsgrundlage erstellt',ref:'DIN 276:2018 · Good Practice',sev:'s'},
+    ]},
+    {title:'Vergabeverfahren',items:[
+      {txt:'Vergabeart korrekt gewählt und begründet (öffentlich, beschränkt, freihändig)',ref:'VOB/A § 3',sev:'m'},
+      {txt:'Bekanntmachung vollständig und fristgerecht veröffentlicht',ref:'VOB/A § 12 · VgV § 37',sev:'m'},
+      {txt:'Angebotsfrist eingehalten (mind. 4 Wochen bei öffentlicher Ausschreibung)',ref:'VOB/A § 10 Abs. 1',sev:'m'},
+      {txt:'Submissionsprotokoll ordnungsgemäß erstellt und unterzeichnet',ref:'VOB/A § 14',sev:'m'},
+      {txt:'Vertraulichkeit der Angebote bis zur Submissionseröffnung sichergestellt',ref:'VOB/A § 14 · Good Practice IKS',sev:'m'},
+    ]},
+    {title:'Angebotsprüfung & Zuschlag',items:[
+      {txt:'Angebote vollständig auf formale Anforderungen geprüft',ref:'VOB/A § 16',sev:'m'},
+      {txt:'Ungewöhnlich niedrige Angebote aufgeklärt und dokumentiert',ref:'VOB/A § 16d · VgV § 60',sev:'m'},
+      {txt:'Angebotsspiegel erstellt und alle Angebote vollständig erfasst',ref:'VOB/A § 16',sev:'m'},
+      {txt:'Zuschlagskriterien vorab festgelegt, bekannt gemacht und konsequent angewendet',ref:'VOB/A § 16d · GWB § 127',sev:'m'},
+      {txt:'Vergabeentscheidung schriftlich begründet und nachvollziehbar',ref:'VOB/A § 20',sev:'m'},
+      {txt:'Vergabevermerk vollständig geführt',ref:'VOB/A § 20 · VgV § 8',sev:'m'},
+      {txt:'Interessenkonflikte der Vergabeentscheider ausgeschlossen',ref:'VOB/A § 6 · GWB § 124',sev:'m'},
+      {txt:'Bieter über Vergabeentscheidung informiert (Wartefrist eingehalten)',ref:'GWB § 134',sev:'s'},
+    ]},
+    {title:'Vertragsgestaltung Bauleistungen',items:[
+      {txt:'Bauvertrag schriftlich abgeschlossen und vollständig (BGB oder VOB/B)',ref:'BGB § 631 ff. · VOB/B § 1',sev:'m'},
+      {txt:'Bauzeit, Meilensteine und Verzugsstrafe vertraglich geregelt',ref:'VOB/B § 5 · § 11',sev:'m'},
+      {txt:'Sicherheitsleistungen vereinbart (Vertragserfüllung und Gewährleistung)',ref:'VOB/B § 17',sev:'m'},
+      {txt:'Nachtragsregelung im Vertrag eindeutig definiert',ref:'VOB/B § 2 Nr. 5–6',sev:'m'},
+      {txt:'Subunternehmer-Klausel und Genehmigungsvorbehalt vereinbart',ref:'VOB/B § 4 Nr. 8',sev:'s'},
+    ]},
+  ]},
+
+  // ═══ PF5 BAUAUSFÜHRUNG ══════════════════════════════════════════════════
+  {id:'pf5',icon:'🏛',title:'PF5 Bauausführung',ref:'VOB/B 2019 · DIN-Normen · HOAI 2021 LP 8 · M-REA Standard',sections:[
+    {title:'Baustellenorganisation',items:[
+      {txt:'Bauleiter mit ausreichender Qualifikation und Präsenz auf der Baustelle nachgewiesen',ref:'HOAI 2021 Anlage 10 LP 8 · LBO',sev:'m'},
+      {txt:'Baustellenordnung erstellt und den Beteiligten bekannt gemacht',ref:'VOB/B § 4 Nr. 1 · BaustellV',sev:'s'},
+      {txt:'Sicherheits- und Gesundheitsschutzplan (SiGePlan) erstellt und eingehalten',ref:'BaustellV § 3 · RAB 31',sev:'m'},
+      {txt:'Subunternehmer vom Auftraggeber genehmigt',ref:'VOB/B § 4 Nr. 8',sev:'m'},
+    ]},
+    {title:'Qualitätskontrolle',items:[
+      {txt:'Ausführung entspricht dem vereinbarten Leistungsverzeichnis',ref:'VOB/B § 4 Nr. 1',sev:'m'},
+      {txt:'Materialverwendung geprüft (Lieferscheine, CE-Zertifikate, Gütenachweise)',ref:'VOB/B § 4 Nr. 1 · BauPVO EU Nr. 305/2011',sev:'m'},
+      {txt:'Verdeckte Leistungen vor Überbauung dokumentiert und abgenommen',ref:'VOB/B § 12 Nr. 2 · Good Practice',sev:'m'},
+      {txt:'Prüfprotokolle (Druckprüfungen, Messungen, E-Prüfungen) vollständig vorhanden',ref:'DIN EN 806-4 · DIN VDE 0100-600 · TRGI',sev:'m'},
+      {txt:'Bedenken des Auftragnehmers schriftlich angemeldet und dokumentiert',ref:'VOB/B § 4 Nr. 3',sev:'s'},
+    ]},
+    {title:'Terminüberwachung',items:[
+      {txt:'Terminplan auf der Baustelle vorhanden und aktuell',ref:'VOB/B § 5 Nr. 1 · Good Practice PM',sev:'m'},
+      {txt:'Abweichungen vom Terminplan erkannt, dokumentiert und Gegenmaßnahmen eingeleitet',ref:'VOB/B § 5 · IIR Bd. 33 (2002), Kap. 6.3',sev:'m'},
+      {txt:'Behinderungsanzeigen schriftlich und unverzüglich erstattet',ref:'VOB/B § 6 Nr. 1',sev:'m'},
+      {txt:'Bauzeitverlängerung dokumentiert und Ursachen zugeordnet (AG/AN)',ref:'VOB/B § 6 Nr. 2',sev:'m'},
+    ]},
+    {title:'Mängelmanagement',items:[
+      {txt:'Mängel schriftlich und fristgebunden gerügt',ref:'VOB/B § 13 Nr. 5',sev:'m'},
+      {txt:'Mängelbeseitigung geprüft und dokumentiert',ref:'VOB/B § 13 Nr. 5',sev:'m'},
+      {txt:'Gewährleistungsfristen je Gewerk erfasst und überwacht',ref:'VOB/B § 13 Nr. 4 · BGB § 634a',sev:'m'},
+      {txt:'Einbehalt für Mängel korrekt berechnet und einbehalten',ref:'VOB/B § 17 · Good Practice',sev:'s'},
+    ]},
+  ]},
+
+  // ═══ PF6 ÄNDERUNGSMANAGEMENT ════════════════════════════════════════════
+  {id:'pf6',icon:'🔄',title:'PF6 Änderungsmanagement & Nachträge',ref:'VOB/B 2019 § 2 · BGB § 650b ff. · M-REA Standard',sections:[
+    {title:'Nachtragsmanagement',items:[
+      {txt:'Nachtragsregister vollständig geführt und aktuell',ref:'Good Practice PM · VOB/B § 2',sev:'m'},
+      {txt:'Alle Nachträge schriftlich beauftragt – keine mündlichen Aufträge',ref:'VOB/B § 2 Nr. 5–6 · BGB § 650b',sev:'m'},
+      {txt:'Nachtragsankündigung des AN vor Ausführung geprüft und dokumentiert',ref:'VOB/B § 2 Nr. 8 Abs. 3 · BGB § 650b',sev:'m'},
+      {txt:'Nachtragsberechnung sachlich und rechnerisch geprüft',ref:'VOB/B § 2 Nr. 5 · § 2 Nr. 8',sev:'m'},
+      {txt:'Unberechtigte Nachträge schriftlich zurückgewiesen',ref:'VOB/B § 2 Nr. 8 Abs. 3',sev:'m'},
+      {txt:'Nachtragsvolumen im Verhältnis zum Hauptauftrag plausibel und begründet',ref:'Good Practice Baurevision',sev:'s'},
+      {txt:'Häufung von Nachträgen als Risikoindikator für Fraud geprüft',ref:'Good Practice Fraud-Prävention Bau',sev:'s'},
+    ]},
+    {title:'Planungsänderungen',items:[
+      {txt:'Änderungen gegenüber genehmigter Planung dokumentiert und genehmigt',ref:'MBO § 73 · LBO · Good Practice PM',sev:'m'},
+      {txt:'Auswirkungen von Planungsänderungen auf Kosten und Termine bewertet',ref:'IIR Bd. 33 (2002), Kap. 6.4 · VOB/B',sev:'m'},
+      {txt:'Geänderte Pläne versioniert und an alle Beteiligten verteilt',ref:'Good Practice Planungsmanagement',sev:'m'},
+      {txt:'Planungsänderungen nach Baubeginn als Nachtrag honoriert (soweit berechtigt)',ref:'HOAI 2021 § 10 · BGB § 650b',sev:'s'},
+    ]},
+    {title:'Behinderungen & Bauzeitverlängerung',items:[
+      {txt:'Behinderungsanzeigen unverzüglich und schriftlich erstattet',ref:'VOB/B § 6 Nr. 1',sev:'m'},
+      {txt:'Ursachen der Behinderung dokumentiert und Verantwortung zugeordnet',ref:'VOB/B § 6 Nr. 2',sev:'m'},
+      {txt:'Bauzeitverlängerung schriftlich vereinbart (wenn berechtigt)',ref:'VOB/B § 6 Nr. 2',sev:'s'},
+      {txt:'Mehrkosten aus Bauzeitverlängerung ermittelt und geltend gemacht',ref:'VOB/B § 6 Nr. 6',sev:'s'},
+      {txt:'Vertragsstrafe bei unberechtigtem Verzug geprüft und geltend gemacht',ref:'VOB/B § 11 · BGB § 339 ff.',sev:'s'},
+    ]},
+  ]},
+
+  // ═══ PF7 ABRECHNUNG ═════════════════════════════════════════════════════
+  {id:'pf7',icon:'💶',title:'PF7 Abrechnung Planungs- & Bauleistungen',ref:'VOB/B 2019 § 14 ff. · HOAI 2021 · DIN 276:2018 · M-REA Standard',sections:[
+    {title:'Aufmaß & Mengenermittlung',items:[
+      {txt:'Aufmaß vor Ort erstellt und von Bauleitung und AN unterzeichnet',ref:'VOB/B § 14 Nr. 2',sev:'m'},
+      {txt:'Massenberechnungen nachvollziehbar, prüfbar und vollständig',ref:'VOB/B § 14 Nr. 1',sev:'m'},
+      {txt:'Aufmaß mit Ausführungsplänen und LV-Positionen abgeglichen',ref:'VOB/B § 14 · Good Practice',sev:'m'},
+      {txt:'Verdeckte Leistungen vor Überbauung aufgemessen und dokumentiert',ref:'VOB/B § 14 Nr. 2 · Good Practice',sev:'m'},
+    ]},
+    {title:'Rechnungsprüfung Bauleistungen',items:[
+      {txt:'Abschlagsrechnungen sachlich und rechnerisch geprüft',ref:'VOB/B § 16 Nr. 1',sev:'m'},
+      {txt:'Positionspreise mit LV-Einheitspreisen abgeglichen – keine abweichenden Einheitspreise',ref:'VOB/B § 14 · § 2',sev:'m'},
+      {txt:'Doppelerfassungen und Mehrfachabrechnung geprüft und ausgeschlossen',ref:'Good Practice Rechnungsprüfung',sev:'m'},
+      {txt:'Prüfungsfrist für Schlussrechnung eingehalten (60 Tage nach VOB/B)',ref:'VOB/B § 16 Nr. 3 Abs. 1',sev:'s'},
+      {txt:'Einbehalte (Gewährleistung, Vertragsstrafe) korrekt berechnet',ref:'VOB/B § 16 Nr. 1 Abs. 4 · § 17',sev:'m'},
+      {txt:'Abschlagszahlungen fristgerecht geleistet (innerhalb 21 Tagen)',ref:'VOB/B § 16 Nr. 1 Abs. 3',sev:'s'},
+    ]},
+    {title:'Honorarabrechnung Planerleistungen',items:[
+      {txt:'Honorarschlussrechnung enthält alle LP mit korrekten Prozentsätzen',ref:'HOAI 2021 § 35 · Anlage 10',sev:'m'},
+      {txt:'Anrechenbare Kosten auf Basis Kostenfeststellung DIN 276 ermittelt',ref:'HOAI 2021 § 4 Abs. 3 · DIN 276:2018',sev:'m'},
+      {txt:'Abschlagszahlungen vollständig und korrekt verrechnet',ref:'HOAI 2021 § 15 Abs. 2',sev:'m'},
+      {txt:'Besondere Leistungen und Nebenkosten ordnungsgemäß belegt',ref:'HOAI 2021 § 3 Abs. 3 · § 14',sev:'m'},
+      {txt:'Mindest- und Höchstsätze HOAI 2021 eingehalten',ref:'HOAI 2021 § 7 Abs. 3',sev:'m'},
+    ]},
+    {title:'Kostenfeststellung & Abschluss',items:[
+      {txt:'Kostenfeststellung nach DIN 276 vollständig erstellt',ref:'HOAI 2021 Anlage 10 LP 8 · DIN 276:2018',sev:'m'},
+      {txt:'Kostenfeststellung mit Kostenberechnung und Kostenanschlag verglichen',ref:'DIN 276:2018 · Good Practice',sev:'m'},
+      {txt:'Abweichungen über 10% schriftlich begründet',ref:'Good Practice Kostencontrolling',sev:'s'},
+    ]},
+  ]},
+
+  // ═══ PF8 ABNAHME ════════════════════════════════════════════════════════
+  {id:'pf8',icon:'✅',title:'PF8 Abnahme Planungs- & Bauleistungen',ref:'VOB/B 2019 § 12 · BGB § 640 · HOAI 2021 LP 8 · M-REA Standard',sections:[
+    {title:'Vorbereitung der Abnahme',items:[
+      {txt:'Vorabnahme (interne Begehung) mit Mängelliste vor förmlicher Abnahme durchgeführt',ref:'Good Practice Abnahme',sev:'m'},
+      {txt:'Abnahmebegehung mit Bauleitung, AN und AG terminiert und vorbereitet',ref:'VOB/B § 12 Nr. 4 · Good Practice',sev:'m'},
+      {txt:'Unterlagen für die Abnahme vollständig zusammengestellt (Prüfprotokolle, Nachweise)',ref:'HOAI 2021 Anlage 10 LP 8 · Good Practice',sev:'m'},
+    ]},
+    {title:'Förmliche Abnahme',items:[
+      {txt:'Förmliche Abnahme mit Protokoll und Unterschrift aller Beteiligten durchgeführt',ref:'VOB/B § 12 Nr. 4',sev:'m'},
+      {txt:'Mängel zum Abnahmezeitpunkt vollständig im Protokoll festgehalten',ref:'VOB/B § 12 Nr. 3',sev:'m'},
+      {txt:'Abnahmedatum (Beginn Gewährleistungsfrist) dokumentiert',ref:'VOB/B § 12 Nr. 5',sev:'m'},
+      {txt:'Abnahmeverweigerung bei wesentlichen Mängeln schriftlich begründet',ref:'VOB/B § 12 Nr. 3',sev:'m'},
+      {txt:'Teilabnahmen für verdeckte Leistungen durchgeführt und protokolliert',ref:'VOB/B § 12 Nr. 2',sev:'s'},
+    ]},
+    {title:'Übergabe & Dokumentation',items:[
+      {txt:'Schlüsselübergabeprotokoll unterzeichnet',ref:'Good Practice Übergabe',sev:'m'},
+      {txt:'Bedienungsanleitungen und Wartungsunterlagen aller Gewerke übergeben',ref:'HOAI 2021 Anlage 10 LP 8',sev:'m'},
+      {txt:'As-built-Unterlagen vollständig übergeben und quittiert',ref:'HOAI 2021 Anlage 10 LP 8',sev:'m'},
+      {txt:'Energieausweis erstellt und übergeben',ref:'GEG 2023 § 79 ff.',sev:'m'},
+      {txt:'Gewährleistungsfristen je Gewerk tabellarisch erfasst und Wiedervorlage implementiert',ref:'VOB/B § 13 Nr. 4 · Good Practice',sev:'m'},
+      {txt:'SiGePlan-Dokumentation archiviert',ref:'BaustellV § 3 · RAB 31',sev:'s'},
+    ]},
+  ]},
+
+  // ═══ IKS BAUPROZESSE ════════════════════════════════════════════════════
+  {id:'iks',icon:'🔒',title:'IKS Bauprozesse',ref:'COSO I · Good Practice IKS Bauwesen · M-REA Standard',sections:[
+    {title:'IKS-Grundprinzipien',items:[
+      {txt:'Vier-Augen-Prinzip: Alle wesentlichen Entscheidungen und Zahlungsfreigaben durch mind. 2 Personen',ref:'Good Practice IKS · COSO I',sev:'m'},
+      {txt:'Funktionstrennung: Operative Verantwortung und Kontrollfunktion personell getrennt',ref:'Good Practice IKS · COSO I',sev:'m'},
+      {txt:'Transparenzprinzip: Dokumentierte Sollkonzepte für alle Bauprozesse vorhanden',ref:'Good Practice IKS · COSO I',sev:'m'},
+      {txt:'Mindestinformationsprinzip: Zugriffsrechte auf Projektdaten auf Notwendigkeit beschränkt',ref:'Good Practice IKS · COSO I · DSGVO',sev:'m'},
+      {txt:'Vollmachtenregelung schriftlich definiert und aktuell (Zeichnungsberechtigungen)',ref:'Good Practice IKS Bauwesen',sev:'m'},
+      {txt:'Keine Einzelperson allein verantwortlich für Vergabe und Zahlung im gleichen Prozess',ref:'Good Practice IKS · COSO I',sev:'m'},
+    ]},
+    {title:'IKS-Prozesskontrollen Bau',items:[
+      {txt:'Sachliche und rechnerische Rechnungsprüfung nachweislich getrennt durchgeführt',ref:'Good Practice IKS Bauwesen · VOB/B § 14',sev:'m'},
+      {txt:'Zahlungsfreigabeprozess dokumentiert und mehrstufig (Prüfung → Freigabe → Zahlung)',ref:'Good Practice IKS Bauwesen',sev:'m'},
+      {txt:'Vertragsschlüsse nur durch Berechtigte und innerhalb definierter Vollmachtsgrenzen',ref:'Good Practice IKS Bauwesen',sev:'m'},
+      {txt:'Nachtragsbeauftragung nur durch definierte Zeichnungsberechtigte',ref:'Good Practice IKS Bauwesen · VOB/B § 2',sev:'m'},
+      {txt:'Vergabeentscheider und Rechnungsfreigebende personell getrennt',ref:'Good Practice IKS Bauwesen',sev:'m'},
+      {txt:'Stichprobenartige Kontrollen der Bauleistungen vor Ort dokumentiert',ref:'Good Practice IKS Bauwesen · HOAI 2021 LP 8',sev:'s'},
+    ]},
+    {title:'Compliance & Fraud-Prävention',items:[
+      {txt:'Antikorruptionsrichtlinie vorhanden und den Projektbeteiligten bekannt',ref:'Good Practice Compliance Bau · StGB § 299',sev:'m'},
+      {txt:'Interessenkonflikte aller Projektbeteiligten vor Auftragsvergabe geprüft',ref:'GWB § 124 · Good Practice',sev:'m'},
+      {txt:'Verdachtsmomente auf dolose Handlungen dokumentiert und eskaliert',ref:'Good Practice Fraud-Prävention Bau',sev:'m'},
+      {txt:'Hinweisgebersystem (Whistleblower) für Bauprojekte etabliert',ref:'HinSchG 2023 · Good Practice',sev:'s'},
+      {txt:'Submissionsabsprachen und Preisabsprachen aktiv geprüft (Preisvergleich, Bieterstruktur)',ref:'GWB § 1 · § 298 StGB',sev:'m'},
+      {txt:'Manipulation von Leistungsverzeichnissen als Fraud-Schema geprüft',ref:'Good Practice Fraud-Prävention Bau · StGB § 263',sev:'m'},
+      {txt:'Unangemessene Zahlungsströme (unübliche Konten, Barzahlungen) geprüft',ref:'Good Practice Fraud-Prävention Bau · GwG',sev:'m'},
+    ]},
+    {title:'IKS-Wirksamkeitsprüfung',items:[
+      {txt:'IKS-Prüfung für Bauprozesse mindestens projektbegleitend durchgeführt',ref:'Good Practice IKS Bauwesen · COSO I',sev:'m'},
+      {txt:'Schwachstellen im IKS identifiziert und Maßnahmen definiert',ref:'COSO I · Good Practice',sev:'m'},
+      {txt:'IKS-Maßnahmen auf Wirksamkeit geprüft (Follow-up)',ref:'COSO I · IIR RS Nr. 3 (2002), Kap. 1.7',sev:'s'},
+      {txt:'IKS-Bericht an Geschäftsleitung periodisch erstattet',ref:'COSO I · Good Practice',sev:'s'},
+    ]},
+  ]},
+
+  // ═══ AVA-PROZESS ════════════════════════════════════════════════════════
+  {id:'ava',icon:'⚙',title:'AVA-Prozess',ref:'VOB/A 2019 · HOAI 2021 · VgV · M-REA Standard',sections:[
+    {title:'Bedarfsermittlung & Leistungsbeschreibung',items:[
+      {txt:'Bedarf vor Leistungsbeschreibung vollständig und schriftlich ermittelt',ref:'IIR Bd. 33 (2002), Kap. 4.1 · Good Practice AVA',sev:'m'},
+      {txt:'Leistungsbeschreibung eindeutig, vollständig und erschöpfend',ref:'VOB/A § 7 Abs. 1',sev:'m'},
+      {txt:'Leistungsbeschreibung neutral – keine produktspezifischen Anforderungen ohne Begründung',ref:'VOB/A § 7 Abs. 1 · GWB § 97 Abs. 4',sev:'m'},
+      {txt:'Mengenermittlung auf Basis genehmigter Pläne und Baubeschreibung',ref:'VOB/A § 7 · DIN 276:2018',sev:'m'},
+      {txt:'Positionen eindeutig und trennscharf – keine Überschneidungen zwischen Gewerken',ref:'VOB/A § 7 · Good Practice AVA',sev:'s'},
+    ]},
+    {title:'Ausschreibungsprozess',items:[
+      {txt:'Ausschreibungsunterlagen vollständig (LV, BVB, ZVB, Pläne, Baubeschreibung)',ref:'VOB/A § 8',sev:'m'},
+      {txt:'Angebotsfristen regelkonform und angemessen',ref:'VOB/A § 10',sev:'m'},
+      {txt:'Bieterliste dokumentiert und Auswahl nachvollziehbar begründet',ref:'VOB/A § 6 · Good Practice',sev:'m'},
+      {txt:'Nachfragen der Bieter allen Bietern gleichzeitig mitgeteilt',ref:'VOB/A § 15 · Good Practice',sev:'m'},
+      {txt:'Angebotsöffnung protokolliert und nicht manipulierbar gestaltet',ref:'VOB/A § 14',sev:'m'},
+    ]},
+    {title:'Vergabeprozess',items:[
+      {txt:'Angebotsprüfung formal und inhaltlich vollständig dokumentiert',ref:'VOB/A § 16',sev:'m'},
+      {txt:'Preisprüfung bei ungewöhnlich niedrigen Angeboten durchgeführt',ref:'VOB/A § 16d',sev:'m'},
+      {txt:'Zuschlagsentscheidung nachvollziehbar, schriftlich und fristgerecht',ref:'VOB/A § 16 · § 20',sev:'m'},
+      {txt:'Vergabevermerk vollständig und lückenlos geführt',ref:'VOB/A § 20',sev:'m'},
+      {txt:'Vergabe innerhalb der Zuschlagsfrist erfolgt',ref:'VOB/A § 10a',sev:'s'},
+      {txt:'Keine Aufteilung von Aufträgen zur Umgehung von Schwellenwerten',ref:'GWB § 97 Abs. 4 · VgV § 3',sev:'m'},
+    ]},
+    {title:'Abrechnungsprozess',items:[
+      {txt:'Aufmaßblätter vollständig und von beiden Parteien unterzeichnet',ref:'VOB/B § 14 Nr. 2',sev:'m'},
+      {txt:'Rechnungsprüfung sachlich und rechnerisch getrennt durchgeführt',ref:'VOB/B § 14 · Good Practice IKS',sev:'m'},
+      {txt:'Freigabeprozess für Rechnungen mehrstufig und dokumentiert',ref:'Good Practice IKS Bauwesen',sev:'m'},
+      {txt:'Abschlagsrechnungen mit erbrachten Leistungen abgeglichen',ref:'VOB/B § 16 Nr. 1',sev:'m'},
+      {txt:'Schlussrechnung prüfbar und fristgerecht eingereicht',ref:'VOB/B § 14 Nr. 1 · BGB § 650g',sev:'m'},
+      {txt:'Abzüge (Sicherheitseinbehalte, Mängel, Vertragsstrafe) korrekt berechnet',ref:'VOB/B § 16 · § 17',sev:'m'},
+      {txt:'Zahlungsfreigabe nur nach vollständiger Rechnungsprüfung',ref:'Good Practice IKS Bauwesen · VOB/B § 16',sev:'m'},
+      {txt:'Doppelzahlungen und Mehrfachabrechnung systemseitig oder manuell ausgeschlossen',ref:'Good Practice IKS · Fraud-Prävention Bau',sev:'m'},
     ]},
   ]},
 ];
+
 
 
 // ═══ M-REA PRUEFLISTEN-PAKETE ════════════════════════════════════════════════
@@ -3444,7 +3561,7 @@ function pl2Render(){
       body.innerHTML='<div class="pl2-locked-overlay">'
         +'<div class="pl2-lock-big">&#128274;</div>'
         +'<div class="pl2-locked-title">'+mreaPkg.icon+' '+mreaPkg.title+'</div>'
-        +'<div class="pl2-locked-sub">M-REA Prüflisten-Paket &middot; '+nPts+' Prüfpunkte. Lizenzschlüssel eingeben zum Freischalten.</div>'
+        +'<div class="pl2-locked-sub">M-REA Prüflisten-Paket &middot; '+nPts+' Prüfpunkte.<br>Lizenzschlüssel eingeben zum Freischalten.</div>'
         +'<div class="pl2-unlock-row"><input class="pl2-unlock-inp" id="mrea-key-inp" placeholder="MREA-XXXX-XXXX" type="text">'
         +'<button class="pl2-unlock-btn" data-pkg="'+mreaPkg.id+'" onclick="mreaActivate(this.dataset.pkg)">Freischalten</button></div>'
         +'<div id="mrea-key-msg"></div></div>';
@@ -3688,7 +3805,7 @@ function pl2ToFest(listId,si,ii,ev){
   var sec=src.sections[si];var item=sec?sec.items[ii]:null;if(!item)return;
   var sevMap={m:'Kritisch',s:'Erheblich',h:'Hinweis'};
   var hoai='';var hm=item.ref.match(/HOAI[^·]*/);if(hm)hoai=hm[0].trim();
-  var bereich=src.title.replace(/[⚖✔⛏✅️]/g,'').trim();
+  var bereich=src.title.replace(/[^\w\säöüÄÖÜß&]/g,'').trim();
   openM('neue');
   setTimeout(function(){
     var tf=document.getElementById('nf-titel');var sb2=document.getElementById('nf-beschr');
