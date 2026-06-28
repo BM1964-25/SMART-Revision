@@ -619,7 +619,29 @@ textarea{resize:vertical;min-height:72px;}
 .stoggle-btn{width:100%;display:flex;align-items:center;gap:10px;padding:9px 14px;background:none;border:none;border-left:3px solid transparent;cursor:pointer;color:rgba(255,255,255,.42);font-family:inherit;font-size:12.5px;font-weight:500;transition:all .18s;margin-bottom:2px;}
 .stoggle-btn:hover{background:rgba(255,255,255,.07);color:rgba(255,255,255,.8);}
 .stoggle-lbl{white-space:nowrap;}
-.sidebar.collapsed .stoggle-btn{justify-content:center;padding:10px 0;}</style>
+.sidebar.collapsed .stoggle-btn{justify-content:center;padding:10px 0;}
+.pl2-tab-locked{cursor:pointer;opacity:.65;}.pl2-tab-locked:hover{opacity:.85;}
+.pl2-mrea-badge{display:inline-flex;font-size:9px;font-weight:700;text-transform:uppercase;background:linear-gradient(135deg,#b8932a,#d4aa4a);color:#fff;padding:2px 7px;border-radius:3px;margin-left:5px;}
+.pl2-mrea-sep{width:1px;background:var(--b);margin:6px 4px;align-self:stretch;}
+.pl2-locked-overlay{display:flex;flex-direction:column;align-items:center;justify-content:center;padding:48px 24px;text-align:center;gap:14px;}
+.pl2-lock-big{font-size:48px;opacity:.25;}
+.pl2-locked-title{font-family:'Fraunces',serif;font-size:18px;font-weight:600;color:var(--ink);}
+.pl2-locked-sub{font-size:13px;color:var(--ink3);line-height:1.6;max-width:420px;}
+.pl2-unlock-btn{padding:9px 22px;background:linear-gradient(135deg,#b8932a,#d4aa4a);color:#fff;border:none;border-radius:var(--rm);font-family:inherit;font-size:13px;font-weight:600;cursor:pointer;}
+.pl2-unlock-inp{width:260px;padding:9px 14px;border:1.5px solid var(--b);border-radius:var(--r);font-family:'IBM Plex Mono',monospace;font-size:13px;text-align:center;outline:none;letter-spacing:.08em;}
+.pl2-unlock-inp:focus{border-color:#b8932a;}
+.pl2-unlock-row{display:flex;gap:8px;align-items:center;flex-wrap:wrap;justify-content:center;}
+.pl2-unlock-err{font-size:12px;color:var(--re);}
+.pl2-unlock-ok{font-size:12px;color:var(--gr);font-weight:600;}
+.pl2-tab.mrea.active{border-bottom-color:#b8932a;color:#b8932a;}
+.pl2-item{display:flex;align-items:flex-start;gap:9px;padding:9px 11px;border-radius:var(--r);cursor:default;transition:background .12s;border:1px solid transparent;}
+.pl2-fest-btn{flex-shrink:0;width:22px;height:22px;border-radius:4px;border:1.5px solid var(--b);background:var(--bgc);color:var(--ink3);font-size:14px;font-weight:700;cursor:pointer;display:flex;align-items:center;justify-content:center;line-height:1;transition:all .15s;margin-top:2px;padding:0;}
+.pl2-fest-btn:hover{background:var(--ac);border-color:var(--ac);color:#fff;}
+.stoggle-btn{width:100%;display:flex;align-items:center;gap:10px;padding:9px 14px;background:none;border:none;border-left:3px solid transparent;cursor:pointer;color:rgba(255,255,255,.42);font-family:inherit;font-size:12.5px;font-weight:500;transition:all .18s;margin-bottom:2px;}
+.stoggle-btn:hover{background:rgba(255,255,255,.07);color:rgba(255,255,255,.8);}
+.stoggle-lbl{white-space:nowrap;}
+.sidebar.collapsed .stoggle-btn{justify-content:center;padding:10px 0;}
+</style>
 </head>
 <body>
 <div class="shell">
@@ -3125,6 +3147,231 @@ const PL2_DATA = [
   ]},
 ];
 
+
+// ═══ M-REA PRUEFLISTEN-PAKETE ════════════════════════════════════════════════
+const MREA_PACKAGES = {
+  'mrea-hoai': {
+    id:'mrea-hoai',icon:'\u2696\ufe0f',title:'M-REA HOAI Honorarrevision',
+    ref:'HOAI 2021 \u00b7 BGB \u00a7 650p ff. \u00b7 M-REA Standard',badge:'Paket 1',licenseKey:'MREA-HOAI-2024',
+    sections:[
+      {title:'LP 1 \u2013 Grundlagenermittlung',items:[
+        {txt:'Planungsauftrag schriftlich und vollst\u00e4ndig vor Leistungsbeginn erteilt',ref:'HOAI 2021 \u00a7 7 Abs. 1 \u00b7 BGB \u00a7 650p',sev:'m'},
+        {txt:'Bedarfsermittlung mit Raumprogramm dokumentiert',ref:'HOAI 2021 Anlage 10 LP 1',sev:'m'},
+        {txt:'Grundst\u00fccks- und Bestandsunterlagen beschafft',ref:'HOAI 2021 Anlage 10 LP 1',sev:'m'},
+        {txt:'Beh\u00f6rdliche Vorgaben und Bebauungsplan recherchiert',ref:'HOAI 2021 Anlage 10 LP 1',sev:'m'},
+        {txt:'Kostenrahmen schriftlich mit AG abgestimmt',ref:'HOAI 2021 Anlage 10 LP 1 \u00b7 DIN 276:2018',sev:'m'},
+        {txt:'Anrechenbare Kosten LP 1 mit sp\u00e4teren Kostenstufen abgeglichen',ref:'HOAI 2021 \u00a7 4 \u00b7 DIN 276:2018',sev:'s'},
+        {txt:'Sonderleistungen LP 1 gesondert vereinbart und verg\u00fctet',ref:'HOAI 2021 \u00a7 3 Abs. 3',sev:'s'},
+      ]},
+      {title:'LP 2 \u2013 Vorplanung',items:[
+        {txt:'Vorentwurfsvariante mit Fl\u00e4chennachweis vorgelegt und abgestimmt',ref:'HOAI 2021 Anlage 10 LP 2',sev:'m'},
+        {txt:'Kostensch\u00e4tzung DIN 276 vollst\u00e4ndig (KG 100\u2013700)',ref:'HOAI 2021 Anlage 10 LP 2 \u00b7 DIN 276:2018',sev:'m'},
+        {txt:'Kostensch\u00e4tzung vom AG schriftlich best\u00e4tigt',ref:'HOAI 2021 Anlage 10 LP 2',sev:'m'},
+        {txt:'TGA-Vorplanung (HLS, ELT) koordiniert',ref:'HOAI 2021 Anlage 10 LP 2 \u00b7 \u00a7 55',sev:'m'},
+        {txt:'Tragwerkskonzept abgestimmt und dokumentiert',ref:'HOAI 2021 Anlage 10 LP 2 \u00b7 \u00a7 51',sev:'s'},
+        {txt:'Honoraransatz LP 2 (23%) auf Plausibilit\u00e4t gepr\u00fcft',ref:'HOAI 2021 \u00a7 35 \u00b7 Anlage 10',sev:'m'},
+      ]},
+      {title:'LP 3 \u2013 Entwurfsplanung',items:[
+        {txt:'Entwurfszeichnungen 1:100 vollst\u00e4ndig',ref:'HOAI 2021 Anlage 10 LP 3',sev:'m'},
+        {txt:'Kostenberechnung DIN 276 mit Kostensch\u00e4tzung abgeglichen',ref:'HOAI 2021 Anlage 10 LP 3 \u00b7 DIN 276:2018',sev:'m'},
+        {txt:'Abweichungen zwischen Kostensch\u00e4tzung und Kostenberechnung begr\u00fcndet',ref:'HOAI 2021 Anlage 10 LP 3',sev:'m'},
+        {txt:'Koordination Architekt / Fachplaner nachgewiesen',ref:'HOAI 2021 Anlage 10 LP 3',sev:'m'},
+        {txt:'Energiekonzept und GEG-Nachweis-Vorstufe vorhanden',ref:'HOAI 2021 Anlage 10 LP 3 \u00b7 GEG 2023',sev:'m'},
+        {txt:'Freigabe des Entwurfs durch AG schriftlich vorhanden',ref:'HOAI 2021 Anlage 10 LP 3',sev:'s'},
+        {txt:'Honoraransatz LP 3 (11%) korrekt ermittelt',ref:'HOAI 2021 \u00a7 35 \u00b7 Anlage 10',sev:'m'},
+      ]},
+      {title:'LP 4 \u2013 Genehmigungsplanung',items:[
+        {txt:'Bauantrag vollst\u00e4ndig und fristgerecht eingereicht',ref:'HOAI 2021 Anlage 10 LP 4 \u00b7 LBO',sev:'m'},
+        {txt:'Alle Fachgutachten dem Bauantrag beigef\u00fcgt',ref:'HOAI 2021 Anlage 10 LP 4',sev:'m'},
+        {txt:'Baugenehmigung vorhanden und Auflagen in Planung ber\u00fccksichtigt',ref:'HOAI 2021 Anlage 10 LP 4',sev:'m'},
+        {txt:'Plan\u00e4nderungen durch Auflage als Nachtrag dokumentiert',ref:'HOAI 2021 \u00a7 10 \u00b7 BGB \u00a7 650c',sev:'s'},
+        {txt:'Honoraransatz LP 4 (6%) gepr\u00fcft',ref:'HOAI 2021 \u00a7 35 \u00b7 Anlage 10',sev:'m'},
+      ]},
+      {title:'LP 5 \u2013 Ausf\u00fchrungsplanung',items:[
+        {txt:'Ausf\u00fchrungszeichnungen 1:50 vollst\u00e4ndig und widerspruchsfrei',ref:'HOAI 2021 Anlage 10 LP 5',sev:'m'},
+        {txt:'Detailzeichnungen f\u00fcr kritische Konstruktionspunkte vorhanden',ref:'HOAI 2021 Anlage 10 LP 5',sev:'m'},
+        {txt:'Werkstattpläne gepr\u00fcft, freigegeben und dokumentiert',ref:'HOAI 2021 Anlage 10 LP 5',sev:'m'},
+        {txt:'Koordination Architektur / Fachplanung nachgewiesen',ref:'HOAI 2021 Anlage 10 LP 5',sev:'m'},
+        {txt:'Planlieferplan eingehalten, Verz\u00f6gerungen dokumentiert',ref:'HOAI 2021 Anlage 10 LP 5 \u00b7 VOB/B \u00a7 6',sev:'m'},
+        {txt:'Honoraransatz LP 5 (25%) auf Vollst\u00e4ndigkeit gepr\u00fcft',ref:'HOAI 2021 \u00a7 35 \u00b7 Anlage 10',sev:'m'},
+        {txt:'Planungs\u00e4nderungen nach Baubeginn als Nachtrag dokumentiert und honoriert',ref:'HOAI 2021 \u00a7 10 \u00b7 BGB \u00a7 650b',sev:'m'},
+      ]},
+      {title:'LP 6 \u2013 Vorbereitung Vergabe',items:[
+        {txt:'LV vollst\u00e4ndig, eindeutig und mit Mengen hinterlegt',ref:'HOAI 2021 Anlage 10 LP 6 \u00b7 VOB/A \u00a7 7',sev:'m'},
+        {txt:'LV-Positionen mit Ausf\u00fchrungspl\u00e4nen abgeglichen',ref:'HOAI 2021 Anlage 10 LP 6 \u00b7 VOB/B \u00a7 2',sev:'m'},
+        {txt:'Kostenanschlag auf LV-Basis erstellt und abgeglichen',ref:'HOAI 2021 Anlage 10 LP 6 \u00b7 DIN 276:2018',sev:'m'},
+        {txt:'Honorar LP 6 (10%) vollst\u00e4ndig abgerechnet',ref:'HOAI 2021 \u00a7 35 \u00b7 Anlage 10',sev:'m'},
+      ]},
+      {title:'LP 7 \u2013 Mitwirkung Vergabe',items:[
+        {txt:'Angebotsspiegel ordnungsgem\u00e4\u00df erstellt',ref:'HOAI 2021 Anlage 10 LP 7 \u00b7 VOB/A \u00a7 16',sev:'m'},
+        {txt:'G\u00fcnstige Angebote aufgekl\u00e4rt, Vergabeempfehlung dokumentiert',ref:'HOAI 2021 Anlage 10 LP 7 \u00b7 VOB/A \u00a7 16d',sev:'m'},
+        {txt:'Honorar LP 7 (4%) auf Basis Vergabesummen abgerechnet',ref:'HOAI 2021 \u00a7 35 \u00b7 Anlage 10',sev:'m'},
+        {txt:'\u00c4nderungen anrechenbarer Kosten durch Vergabeergebnis ber\u00fccksichtigt',ref:'HOAI 2021 \u00a7 4 Abs. 3',sev:'m'},
+      ]},
+      {title:'LP 8 \u2013 Objekt\u00fcberwachung',items:[
+        {txt:'Bautagesberichte l\u00fcckenlos mit Unterschrift der Bauleitung',ref:'HOAI 2021 Anlage 10 LP 8',sev:'m'},
+        {txt:'Baubesprechungen regelm\u00e4\u00dfig protokolliert',ref:'HOAI 2021 Anlage 10 LP 8',sev:'m'},
+        {txt:'Nachtr\u00e4ge schriftlich beauftragt, gepr\u00fcft und freigegeben',ref:'HOAI 2021 Anlage 10 LP 8 \u00b7 VOB/B \u00a7 2',sev:'m'},
+        {txt:'M\u00e4ngelr\u00fcgen schriftlich und fristgebunden erteilt',ref:'HOAI 2021 Anlage 10 LP 8 \u00b7 VOB/B \u00a7 13',sev:'m'},
+        {txt:'F\u00f6rmliche Abnahme mit Protokoll durchgef\u00fchrt',ref:'HOAI 2021 Anlage 10 LP 8 \u00b7 VOB/B \u00a7 12',sev:'m'},
+        {txt:'Schlussrechnungen gepr\u00fcft und freigegeben',ref:'HOAI 2021 Anlage 10 LP 8 \u00b7 VOB/B \u00a7 14',sev:'m'},
+        {txt:'Gew\u00e4hrleistungsfristen je Gewerk erfasst und \u00fcberwacht',ref:'HOAI 2021 Anlage 10 LP 8 \u00b7 VOB/B \u00a7 13 Nr. 4',sev:'m'},
+        {txt:'Honorar LP 8 (31%) vollst\u00e4ndig abgerechnet',ref:'HOAI 2021 \u00a7 35 \u00b7 Anlage 10',sev:'m'},
+        {txt:'Mehrleistungen LP 8 als Nachtrag dokumentiert und honoriert',ref:'HOAI 2021 \u00a7 10 \u00b7 BGB \u00a7 650b',sev:'m'},
+      ]},
+      {title:'Honorarschlussrechnung',items:[
+        {txt:'Schlussrechnung enth\u00e4lt alle LP 1\u20138 mit korrekten Prozents\u00e4tzen',ref:'HOAI 2021 \u00a7 35 \u00b7 Anlage 10',sev:'m'},
+        {txt:'Anrechenbare Kosten auf Basis Kostenfeststellung DIN 276 belegt',ref:'HOAI 2021 \u00a7 4 Abs. 3 \u00b7 DIN 276:2018',sev:'m'},
+        {txt:'Abschlagszahlungen vollst\u00e4ndig verrechnet',ref:'HOAI 2021 \u00a7 15 Abs. 2',sev:'m'},
+        {txt:'Besondere Leistungen und Nebenkosten ordnungsgem\u00e4\u00df abgerechnet',ref:'HOAI 2021 \u00a7 3 Abs. 3 \u00b7 \u00a7 14',sev:'m'},
+        {txt:'Mindest- und H\u00f6chsts\u00e4tze HOAI 2021 eingehalten',ref:'HOAI 2021 \u00a7 7 Abs. 3',sev:'m'},
+      ]},
+    ]
+  },
+  'mrea-neubau': {
+    id:'mrea-neubau',icon:'\u26cf\ufe0f',title:'M-REA Neubau Revision',
+    ref:'HOAI 2021 \u00b7 VOB/B 2019 \u00b7 BGB \u00b7 DIN-Normen \u00b7 M-REA Standard',badge:'Paket 2',licenseKey:'MREA-NEUBAU-2024',
+    sections:[
+      {title:'Planungs- & Genehmigungsphase',items:[
+        {txt:'Baugrundgutachten vor Planungsbeginn vorliegend',ref:'DIN EN 1997-1 \u00b7 DIN 4020',sev:'m'},
+        {txt:'Altlastenuntersuchung durchgef\u00fchrt',ref:'BBodSchG \u00a7 4 \u00b7 DIN 4020',sev:'m'},
+        {txt:'Leitungsbestandspl\u00e4ne beim Netzbetreiber eingeholt',ref:'DVGW W 400 \u00b7 DIN VDE 0100',sev:'m'},
+        {txt:'Baugenehmigung mit Auflagen vorhanden und Auflagen erf\u00fcllt',ref:'LBO (jeweiliges Bundesland) \u00b7 MBO \u00a7 72',sev:'m'},
+        {txt:'Erschlie\u00dfungsvertrag abgeschlossen',ref:'BauGB \u00a7 123 ff.',sev:'m'},
+        {txt:'Bauversicherungen abgeschlossen',ref:'Good Practice Bauversicherung',sev:'m'},
+      ]},
+      {title:'Gr\u00fcndung & Untergeschoss',items:[
+        {txt:'Baugrubensicherung ausgef\u00fchrt und von Statiker freigegeben',ref:'DIN 4124 \u00b7 DIN EN 1997-1',sev:'m'},
+        {txt:'Kellerabdichtung nach Planung ausgef\u00fchrt',ref:'DIN 18195 \u00b7 DIN 4095',sev:'m'},
+        {txt:'Betonierprotokoll f\u00fcr Fundamentplatten vorhanden',ref:'DIN EN 206 \u00b7 DIN 1045-3',sev:'m'},
+        {txt:'Bewehrungsabnahme durch Pr\u00fcfingenieur dokumentiert',ref:'BauPr\u00fcfVO \u00b7 DIN EN 1992',sev:'m'},
+        {txt:'Verdichtungsnachweise f\u00fcr Auff\u00fcllmaterialien vorhanden',ref:'DIN 18196 \u00b7 DIN 18127',sev:'m'},
+      ]},
+      {title:'Rohbau Oberbau',items:[
+        {txt:'Bautagesberichte l\u00fcckenlos gef\u00fchrt',ref:'HOAI 2021 Anlage 10 LP 8 \u00b7 DIN EN 206',sev:'m'},
+        {txt:'Ma\u00dfhaltigkeit des Rohbaus gepr\u00fcft (Achsma\u00dfe, H\u00f6hen)',ref:'DIN 18202',sev:'m'},
+        {txt:'Fertigteile mit Liefernachweis und G\u00fctezeugnis eingebaut',ref:'DIN EN 13369 \u00b7 BauPVO',sev:'m'},
+        {txt:'Pr\u00fcfvermerk des Pr\u00fcfingenieurs vorhanden',ref:'BauPr\u00fcfVO (jeweiliges Bundesland)',sev:'m'},
+        {txt:'Rohbauabnahme mit M\u00e4ngelprotokoll durchgef\u00fchrt',ref:'VOB/B \u00a7 12 \u00b7 \u00a7 13',sev:'m'},
+      ]},
+      {title:'Au\u00dfenH\u00fclle',items:[
+        {txt:'Dachabdichtung ausgef\u00fchrt und abgenommen',ref:'DIN 18531-1 \u00b7 ZVDH-Regelwerk',sev:'m'},
+        {txt:'W\u00e4rmed\u00e4mmung Dach GEG-konform und Einbaunachweis vorhanden',ref:'GEG 2023 \u00b7 DIN 4108',sev:'m'},
+        {txt:'Fenster mit GEG-konformem Uw-Wert eingebaut',ref:'GEG 2023 \u00b7 DIN EN ISO 10077',sev:'m'},
+        {txt:'BlowerDoor-Test durchgef\u00fchrt',ref:'GEG 2023 \u00a7 26 \u00b7 DIN EN ISO 9972',sev:'m'},
+        {txt:'Brandschutzanforderungen der Fassade eingehalten',ref:'MBO \u00a7 28 \u00b7 DIN 4102',sev:'m'},
+      ]},
+      {title:'TGA Neubau',items:[
+        {txt:'Druckpr\u00fcfung Heizungsanlage protokolliert',ref:'DIN EN 12828 \u00b7 TRGI',sev:'m'},
+        {txt:'Druckpr\u00fcfung Trinkwasser mit Protokoll vorhanden',ref:'DIN EN 806-4 \u00b7 DVGW W 400',sev:'m'},
+        {txt:'L\u00fcftungsanlage nach DIN 1946-6 abgenommen',ref:'DIN 1946-6:2019',sev:'m'},
+        {txt:'E-Pr\u00fcfung nach VDE 0100-600 mit Messprotokoll',ref:'DIN VDE 0100-600',sev:'m'},
+        {txt:'Aufzugsanlage abgenommen und T\u00dcV-Erstzulassung erteilt',ref:'BetrSichV \u00b7 TRBS 3121',sev:'m'},
+        {txt:'Brandmeldeanlage abgenommen und protokolliert',ref:'DIN 14675-1',sev:'m'},
+      ]},
+      {title:'Innenausbau',items:[
+        {txt:'Estrich-Lieferscheine vorhanden, Schichtdicken der Planung entsprechend',ref:'DIN 18353 \u00b7 DIN EN 13813',sev:'m'},
+        {txt:'Estrichfeuchte-Messung vor Bodenbelagsverlegung dokumentiert',ref:'DIN 18356 \u00b7 Good Practice',sev:'m'},
+        {txt:'Trockenbauarbeiten mit korrektem Feuerwiderstand ausgef\u00fchrt',ref:'DIN 18183 \u00b7 DIN 4102',sev:'m'},
+        {txt:'Fliesenarbeiten in Nassr\u00e4umen mit Abdichtung ausgef\u00fchrt',ref:'DIN 18534 \u00b7 ZDB-Merkblatt',sev:'m'},
+      ]},
+      {title:'Abnahme & \u00dcbergabe',items:[
+        {txt:'Vorabnahme mit M\u00e4ngelliste vor f\u00f6rmlicher Abnahme durchgef\u00fchrt',ref:'Good Practice \u00b7 VOB/B \u00a7 12',sev:'m'},
+        {txt:'F\u00f6rmliche Abnahme je Gewerk mit M\u00e4ngelprotokoll',ref:'VOB/B \u00a7 12 Nr. 4',sev:'m'},
+        {txt:'Abnahmedaten tabellarisch erfasst (Gew\u00e4hrleistungsfrist)',ref:'VOB/B \u00a7 12 Nr. 5 \u00b7 \u00a7 13 Nr. 4',sev:'m'},
+        {txt:'Energieausweis vorhanden',ref:'GEG 2023 \u00a7 79 ff.',sev:'m'},
+        {txt:'Bedienungsanleitungen aller Gewerke \u00fcbergeben',ref:'HOAI 2021 Anlage 10 LP 8',sev:'m'},
+        {txt:'Kostenfeststellung nach DIN 276 erstellt',ref:'HOAI 2021 LP 8 \u00b7 DIN 276:2018',sev:'m'},
+        {txt:'Bauakte vollst\u00e4ndig zusammengestellt',ref:'LBO \u00b7 Good Practice',sev:'m'},
+      ]},
+    ]
+  },
+  'mrea-revmethodik': {
+    id:'mrea-revmethodik',icon:'\u2714\ufe0f',title:'M-REA Revisionsmethodik & QM',
+    ref:'IIR Revisionsstandard Nr. 3 (2002) \u00b7 IIA Standards \u00b7 M-REA Standard',badge:'Paket 3',licenseKey:'MREA-METHODIK-2024',
+    sections:[
+      {title:'Revisionsauftrag & Auftragsklarheit',items:[
+        {txt:'Revisionsauftrag schriftlich erteilt, Ziele und Pr\u00fcfungsumfang dokumentiert',ref:'IIR RS Nr. 3 (2002), Kap. 3.5.1',sev:'m'},
+        {txt:'Unabh\u00e4ngigkeit und Objektivit\u00e4t des Revisors gepr\u00fcft und sichergestellt',ref:'IIR RS Nr. 3 (2002), Kap. 3.3.1 \u00b7 IIA Code of Ethics',sev:'m'},
+        {txt:'Interessenkonflikte des Revisors ausgeschlossen',ref:'IIR RS Nr. 3 (2002), Kap. 3.3.1',sev:'m'},
+        {txt:'Pr\u00fcfungsziel eindeutig und messbar definiert',ref:'IIR RS Nr. 3 (2002), Kap. 3.5.2.2',sev:'m'},
+        {txt:'Revisionsumfang klar abgegrenzt (Gewerke, Zeitraum, Unterlagen)',ref:'IIR RS Nr. 3 (2002), Kap. 3.5.1',sev:'m'},
+        {txt:'Informationsrechte der Revision gegen\u00fcber gepr\u00fcfter Einheit gesichert',ref:'IIR RS Nr. 3 (2002), Kap. 3.3.1',sev:'m'},
+      ]},
+      {title:'Vorbereitung der Pr\u00fcfung',items:[
+        {txt:'Pr\u00fcfungsobjekt analysiert und Informationen vollst\u00e4ndig beschafft',ref:'IIR RS Nr. 3 (2002), Kap. 3.5.2.1',sev:'m'},
+        {txt:'Pr\u00fcfungsmethodik festgelegt (Dokumentenanalyse, Begehung, Befragung)',ref:'IIR RS Nr. 3 (2002), Kap. 3.5.2.2',sev:'m'},
+        {txt:'Risikoanalyse der Pr\u00fcfungsobjekte durchgef\u00fchrt',ref:'IIR RS Nr. 3 (2002), Kap. 3.5.1 \u00b7 Anlage 1 Kap. 3',sev:'m'},
+        {txt:'Zeitlicher Rahmen und Meilensteine festgelegt',ref:'IIR RS Nr. 3 (2002), Anlage 1 Kap. 4.1',sev:'m'},
+        {txt:'Pr\u00fcfung beim gepr\u00fcften Bereich angek\u00fcndigt',ref:'IIR RS Nr. 3 (2002), Anlage 1 Kap. 4.1',sev:'s'},
+        {txt:'Pr\u00fcfungsprogramm von Revisionsleitung freigegeben',ref:'IIR RS Nr. 3 (2002), Anlage 1 Kap. 4.1',sev:'m'},
+      ]},
+      {title:'Durchf\u00fchrung der Revision',items:[
+        {txt:'Pr\u00fcfung entsprechend Pr\u00fcfungsprogramm vor Ort durchgef\u00fchrt',ref:'IIR RS Nr. 3 (2002), Anlage 1 Kap. 4.2',sev:'m'},
+        {txt:'Gesetzliche Anforderungen und vertragliche Regelungen ber\u00fccksichtigt',ref:'IIR RS Nr. 3 (2002), Anlage 1 Kap. 4.2',sev:'m'},
+        {txt:'Wirtschaftlichkeit und Zweckm\u00e4\u00dfigkeit gepr\u00fcft',ref:'IIR RS Nr. 3 (2002), Anlage 1 Kap. 4.2',sev:'s'},
+        {txt:'Verbesserungspotenziale offengelegt und dokumentiert',ref:'IIR RS Nr. 3 (2002), Anlage 1 Kap. 4.2',sev:'s'},
+        {txt:'Pr\u00fcfungsergebnisse laufend mit gepr\u00fcftem Bereich abgestimmt',ref:'IIR RS Nr. 3 (2002), Anlage 1 Kap. 4.2',sev:'m'},
+        {txt:'Pr\u00fcfungshandlungen einheitlich und sachgerecht dokumentiert (Arbeitspapiere)',ref:'IIR RS Nr. 3 (2002), Kap. 3.5.2.2 \u00b7 Anlage 1 Kap. 4.2',sev:'m'},
+        {txt:'Schlussbesprechung mit Leitung der gepr\u00fcften Einheit durchgef\u00fchrt',ref:'IIR RS Nr. 3 (2002), Anlage 1 Kap. 4.2',sev:'m'},
+        {txt:'Ma\u00dfnahmen mit Terminen und Verantwortlichen vereinbart',ref:'IIR RS Nr. 3 (2002), Anlage 1 Kap. 4.2',sev:'m'},
+      ]},
+      {title:'Berichterstattung',items:[
+        {txt:'Revisionsbericht erf\u00fcllt Vollst\u00e4ndigkeit, Wahrheit, Klarheit und Objektivit\u00e4t',ref:'IIR RS Nr. 3 (2002), Kap. 3.5.2.3',sev:'m'},
+        {txt:'Bericht enth\u00e4lt: Pr\u00fcfungsziel, -umfang, Durchf\u00fchrung, Ergebnis, Ma\u00dfnahmen',ref:'IIR RS Nr. 3 (2002), Kap. 3.5.2.3',sev:'m'},
+        {txt:'Ma\u00dfnahmen enthalten Realisierungstermine, Verantwortliche und Priorisierung',ref:'IIR RS Nr. 3 (2002), Kap. 3.5.2.3',sev:'m'},
+        {txt:'Berichtsform standardisiert und einheitlich',ref:'IIR RS Nr. 3 (2002), Anlage 1 Kap. 4.3',sev:'s'},
+        {txt:'Berichtsentwurf rechtzeitig vor Schlussbesprechung vorgelegt',ref:'IIR RS Nr. 3 (2002), Anlage 1 Kap. 4.3',sev:'s'},
+        {txt:'Berichterstattung zeitnah nach Pr\u00fcfungsabschluss',ref:'IIR RS Nr. 3 (2002), Kap. 3.5.2.3',sev:'m'},
+        {txt:'Berichtsverteiler entsprechend Festlegung angewandt',ref:'IIR RS Nr. 3 (2002), Anlage 1 Kap. 4.3',sev:'s'},
+      ]},
+      {title:'Pr\u00fcfungsnacharbeit & Follow-up',items:[
+        {txt:'Soll-/Ist-Vergleich der Ressourcen und des Zeitaufwands durchgef\u00fchrt',ref:'IIR RS Nr. 3 (2002), Anlage 1 Kap. 4.4',sev:'s'},
+        {txt:'Aufbewahrungsfristen f\u00fcr Revisionsunterlagen definiert und eingehalten',ref:'IIR RS Nr. 3 (2002), Anlage 1 Kap. 4.4 \u00b7 HGB \u00a7 257',sev:'m'},
+        {txt:'Durchf\u00fchrung der Ma\u00dfnahmen termingerecht \u00fcberwacht (Follow-up)',ref:'IIR RS Nr. 3 (2002), Kap. 3.5.2.4 \u00b7 Anlage 1 Kap. 4.5',sev:'m'},
+        {txt:'Fristverlängerungen f\u00fcr Ma\u00dfnahmen dokumentiert und begr\u00fcndet',ref:'IIR RS Nr. 3 (2002), Anlage 1 Kap. 4.5',sev:'s'},
+        {txt:'Nicht ausgef\u00fchrte Ma\u00dfnahmen mindestens j\u00e4hrlich an Gesch\u00e4ftsleitung gemeldet',ref:'IIR RS Nr. 3 (2002), Anlage 1 Kap. 4.5',sev:'m'},
+        {txt:'Nachschaupr\u00fcfung im Bedarfsfall durchgef\u00fchrt',ref:'IIR RS Nr. 3 (2002), Kap. 3.5.2.4',sev:'s'},
+      ]},
+      {title:'Qualit\u00e4tssicherung der Revisionsarbeit',items:[
+        {txt:'Qualit\u00e4tskontrolle der Revisionsarbeit mindestens j\u00e4hrlich durchgef\u00fchrt',ref:'IIR RS Nr. 3 (2002), Anlage 1 Kap. 6',sev:'m'},
+        {txt:'Pr\u00fcfungsergebnisse durch Revisionsleitung inhaltlich \u00fcberwacht (Supervision)',ref:'IIR RS Nr. 3 (2002), Kap. 1.6.1.1',sev:'m'},
+        {txt:'Qualit\u00e4tsl\u00fccken und Verbesserungspotenzial systematisch identifiziert',ref:'IIR RS Nr. 3 (2002), Kap. 1.6.1.2.2',sev:'s'},
+        {txt:'Feedback-Gespr\u00e4ch nach Pr\u00fcfungsabschluss durchgef\u00fchrt',ref:'IIR RS Nr. 3 (2002), Anlage 1 Kap. 4.4',sev:'s'},
+        {txt:'Kundenbefragung nach Revisionsprojekten durchgef\u00fchrt',ref:'IIR RS Nr. 3 (2002), Kap. 1.6.1.2.3 \u00b7 Anlage 2',sev:'h'},
+        {txt:'Ma\u00dfnahmen konstruktiv und umsetzbar formuliert',ref:'IIR RS Nr. 3 (2002), Anlage 2',sev:'m'},
+      ]},
+      {title:'Mandatsdokumentation & Archivierung',items:[
+        {txt:'Vollst\u00e4ndige Mandatsakte angelegt (Auftrag, Unterlagen, Arbeitspapiere, Bericht, Follow-up)',ref:'IIR RS Nr. 3 (2002), Kap. 3.5.2.2 \u00b7 Good Practice',sev:'m'},
+        {txt:'Arbeitspapiere ordnungsgem\u00e4\u00df gef\u00fchrt und nachvollziehbar strukturiert',ref:'IIR RS Nr. 3 (2002), Anlage 1 Kap. 4.2',sev:'m'},
+        {txt:'Revisionsunterlagen sicher und vertraulich archiviert',ref:'IIR RS Nr. 3 (2002), Kap. 3.3.2 \u00b7 HGB \u00a7 257',sev:'m'},
+        {txt:'Geheimhaltungs- und Vertraulichkeitspflichten schriftlich gesichert',ref:'IIR RS Nr. 3 (2002), Kap. 3.3.2',sev:'m'},
+        {txt:'Elektronische Revisionsdokumentation vor unberechtigtem Zugriff gesch\u00fctzt',ref:'IIR RS Nr. 3 (2002), Kap. 3.3.2 \u00b7 DSGVO Art. 32',sev:'m'},
+      ]},
+    ]
+  }
+};
+
+function mreaIsUnlocked(pkgId){return localStorage.getItem('mrea_lic_'+pkgId)==='1';}
+function mreaUnlock(pkgId,key){
+  var pkg=MREA_PACKAGES[pkgId];
+  if(!pkg)return false;
+  if(key.trim().toUpperCase()===pkg.licenseKey){localStorage.setItem('mrea_lic_'+pkgId,'1');return true;}
+  return false;
+}
+function mreaActivate(pkgId){
+  var inp=document.getElementById('mrea-key-inp');
+  var msg=document.getElementById('mrea-key-msg');
+  if(!inp||!msg)return;
+  if(mreaUnlock(pkgId,inp.value)){
+    msg.className='pl2-unlock-ok';msg.textContent='\u2713 Paket freigeschaltet!';
+    setTimeout(function(){pl2Render();},800);
+  } else {
+    msg.className='pl2-unlock-err';msg.textContent='Ung\u00fcltiger Lizenzschl\u00fcssel.';
+    inp.style.borderColor='var(--re)';setTimeout(function(){inp.style.borderColor='';},2000);
+  }
+}
+
 // ─── STATE ──────────────────────────────────────────────────────────
 let pl2Active = 'diir1';
 let pl2Checks = {};
@@ -3189,6 +3436,46 @@ function pl2Render(){
   }
 
   // Body
+  var mreaPkg=MREA_PACKAGES[pl2Active];
+  if(mreaPkg){
+    var body=document.getElementById('pl2-body');if(!body)return;
+    var nPts=mreaPkg.sections.reduce(function(s,sec){return s+sec.items.length;},0);
+    if(!mreaIsUnlocked(mreaPkg.id)){
+      body.innerHTML='<div class="pl2-locked-overlay">'
+        +'<div class="pl2-lock-big">&#128274;</div>'
+        +'<div class="pl2-locked-title">'+mreaPkg.icon+' '+mreaPkg.title+'</div>'
+        +'<div class="pl2-locked-sub">M-REA Prüflisten-Paket &middot; '+nPts+' Prüfpunkte. Lizenzschlüssel eingeben zum Freischalten.</div>'
+        +'<div class="pl2-unlock-row"><input class="pl2-unlock-inp" id="mrea-key-inp" placeholder="MREA-XXXX-XXXX" type="text">'
+        +'<button class="pl2-unlock-btn" data-pkg="'+mreaPkg.id+'" onclick="mreaActivate(this.dataset.pkg)">Freischalten</button></div>'
+        +'<div id="mrea-key-msg"></div></div>';
+      var _ki=document.getElementById('mrea-key-inp');
+      if(_ki)_ki.addEventListener('keydown',function(e){if(e.key==='Enter')mreaActivate(mreaPkg.id);});
+    } else {
+      var sevLbl2={m:'Muss',s:'Soll',h:'Kann'};var sevCls2={m:'pl2-sev-m',s:'pl2-sev-s',h:'pl2-sev-h'};
+      body.innerHTML=mreaPkg.sections.map(function(sec,si){
+        var secDone=0;sec.items.forEach(function(_,ii){if(pl2Checks[pl2Key(mreaPkg.id,si,ii)])secDone++;});
+        var secPct=Math.round(secDone/sec.items.length*100);var isOpen=pl2OpenSecs[mreaPkg.id+'_'+si]!==false;
+        return '<div class="pl2-section">'
+          +'<div class="pl2-sec-hdr'+(isOpen?' pl2-sec-open':'')+'" data-lid="'+mreaPkg.id+'" data-si="'+si+'" onclick="pl2ToggleSec(this.dataset.lid,+this.dataset.si)">'
+          +'<span class="pl2-sec-icon">'+mreaPkg.icon+'</span><span class="pl2-sec-title">'+sec.title+'</span>'
+          +'<span class="pl2-sec-meta">'+secDone+'/'+sec.items.length+'</span>'
+          +'<span class="pl2-sec-pct'+(secDone===sec.items.length?' done':'')+'">'+secPct+'%</span>'
+          +'<span class="pl2-sec-chevron">&#8964;</span></div>'
+          +(isOpen?'<div class="pl2-items">'+sec.items.map(function(item,ii){
+            var key=pl2Key(mreaPkg.id,si,ii);var chk=!!pl2Checks[key];
+            return '<div class="pl2-item'+(chk?' pl2-checked':'')+'">'
+              +'<div class="pl2-cb" data-lid="'+mreaPkg.id+'" data-si="'+si+'" data-ii="'+ii+'" onclick="pl2Toggle(this.dataset.lid,+this.dataset.si,+this.dataset.ii)">'+(chk?'&#10003;':'')+'</div>'
+              +'<div class="pl2-item-body" data-lid="'+mreaPkg.id+'" data-si="'+si+'" data-ii="'+ii+'" onclick="pl2Toggle(this.dataset.lid,+this.dataset.si,+this.dataset.ii)" style="cursor:pointer;">'
+              +'<div class="pl2-item-txt">'+item.txt+'</div><div class="pl2-item-ref">'+item.ref+'</div></div>'
+              +'<span class="pl2-item-sev '+sevCls2[item.sev]+'">'+sevLbl2[item.sev]+'</span>'
+              +'<button class="pl2-fest-btn" data-lid="'+mreaPkg.id+'" data-si="'+si+'" data-ii="'+ii+'" onclick="pl2ToFest(this.dataset.lid,+this.dataset.si,+this.dataset.ii,event)" title="Als Feststellung erfassen">&#43;</button>'
+              +'</div>';
+          }).join('')+'</div>':'')+'</div>';
+      }).join('');
+    }
+    return;
+  }
+
   var list=PL2_DATA.find(function(l){return l.id===pl2Active;});
   if(!list) return;
   var body=document.getElementById('pl2-body');
@@ -3390,6 +3677,30 @@ function pl2ToFest(listId,si,ii,ev){
   if(btn){var o=btn.innerHTML;btn.innerHTML='&#10003;';btn.style.background='var(--gr)';btn.style.color='#fff';setTimeout(function(){btn.innerHTML=o;btn.style.background='';btn.style.color='';},1200);}
 }
 
+
+function toggleSidebar(){var sb=document.querySelector('.sidebar');var col=sb.classList.toggle('collapsed');localStorage.setItem('sr_sidebar_collapsed',col?'1':'0');_upd(col);}
+function _upd(col){var b=document.getElementById('sidebar-toggle');if(!b)return;var a=b.querySelector('.st-arrow');if(a)a.setAttribute('d',col?'M7.5 6l2 2-2 2':'M8.5 6l-2 2 2 2');var l=b.querySelector('.stoggle-lbl');if(l)l.textContent=col?'Ausklappen':'Einklappen';b.title=col?'Sidebar ausklappen':'Sidebar einklappen';}
+(function(){var col=localStorage.getItem('sr_sidebar_collapsed')==='1';if(col){var sb=document.querySelector('.sidebar');if(sb)sb.classList.add('collapsed');}if(typeof _upd==='function')_upd(col);})();
+
+function pl2ToFest(listId,si,ii,ev){
+  var src=PL2_DATA.find(function(l){return l.id===listId;})||MREA_PACKAGES[listId];
+  if(!src)return;
+  var sec=src.sections[si];var item=sec?sec.items[ii]:null;if(!item)return;
+  var sevMap={m:'Kritisch',s:'Erheblich',h:'Hinweis'};
+  var hoai='';var hm=item.ref.match(/HOAI[^·]*/);if(hm)hoai=hm[0].trim();
+  var bereich=src.title.replace(/[⚖✔⛏✅️]/g,'').trim();
+  openM('neue');
+  setTimeout(function(){
+    var tf=document.getElementById('nf-titel');var sb2=document.getElementById('nf-beschr');
+    var sw=document.getElementById('nf-schwere');var br=document.getElementById('nf-bereich');var ho=document.getElementById('nf-hoai');
+    if(tf)tf.value='[Prüfpunkt] '+item.txt;
+    if(sw)sw.value=sevMap[item.sev]||'Erheblich';
+    if(br)br.value=bereich;if(ho)ho.value=hoai;
+    if(sb2){sb2.value='Prüfpunkt: '+item.txt+'\n\nReferenz: '+item.ref+'\n\nFeststellung:';sb2.focus();sb2.setSelectionRange(sb2.value.length,sb2.value.length);}
+  },120);
+  var btn=ev&&ev.target;
+  if(btn){var o=btn.innerHTML;btn.innerHTML='&#10003;';btn.style.background='var(--gr)';btn.style.color='#fff';setTimeout(function(){btn.innerHTML=o;btn.style.background='';btn.style.color='';},1200);}
+}
 
 // INIT
 rdPSel(); rdMeta(); rdAll();
