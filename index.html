@@ -635,6 +635,7 @@ textarea{resize:vertical;min-height:72px;}
 .pl2-unlock-err{font-size:12px;color:var(--re);}
 .pl2-unlock-ok{font-size:12px;color:var(--gr);font-weight:600;}
 .pl2-tab.mrea.active{border-bottom-color:#b8932a;color:#b8932a;}
+.pl2-tab-abw{display:inline-block;background:#dc2626;color:#fff;border-radius:10px;font-size:9px;font-weight:700;padding:1px 5px;margin-right:3px;}
 .pl2-item{display:flex;align-items:flex-start;gap:9px;padding:9px 11px;border-radius:var(--r);cursor:default;transition:background .12s;border:1px solid transparent;}
 .pl2-fest-btn{flex-shrink:0;width:22px;height:22px;border-radius:4px;border:1.5px solid var(--b);background:var(--bgc);color:var(--ink3);font-size:14px;font-weight:700;cursor:pointer;display:flex;align-items:center;justify-content:center;line-height:1;transition:all .15s;margin-top:2px;padding:0;}
 .pl2-fest-btn:hover{background:var(--ac);border-color:var(--ac);color:#fff;}
@@ -642,6 +643,74 @@ textarea{resize:vertical;min-height:72px;}
 .stoggle-btn:hover{background:rgba(255,255,255,.07);color:rgba(255,255,255,.8);}
 .stoggle-lbl{white-space:nowrap;}
 .sidebar.collapsed .stoggle-btn{justify-content:center;padding:10px 0;}
+
+
+/* ═══ NEUES PRÜFLISTEN-SYSTEM: SOLL/IST ═══════════════════════════════ */
+.pl2-item2{border:1px solid var(--b);border-radius:6px;margin-bottom:10px;overflow:hidden;transition:border-color .15s;}
+.pl2-item2-hdr{display:flex;align-items:center;gap:8px;padding:7px 12px;background:var(--bgc);border-bottom:1px solid var(--b);}
+.pl2-item2-ref{font-size:10px;color:var(--ink3);font-family:'IBM Plex Mono',monospace;flex:1;}
+.pl2-item2-status{font-size:10px;font-weight:700;padding:2px 8px;border-radius:3px;}
+.pl2-item2-body{display:grid;grid-template-columns:1fr 1fr;gap:0;}
+.pl2-soll-col{padding:12px 14px;border-right:1px solid var(--b);background:#fafafa;}
+.pl2-ist-col{padding:12px 14px;display:flex;flex-direction:column;gap:8px;}
+.pl2-col-lbl{font-size:9px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--ink3);margin-bottom:4px;}
+.pl2-soll-txt{font-size:13px;color:var(--ink);line-height:1.55;}
+
+/* Status-Farben */
+.pl2-st-offen{border-color:var(--b);}
+.pl2-st-konform{border-color:#16a34a;}
+.pl2-st-konform .pl2-item2-hdr{background:#f0fdf4;}
+.pl2-st-abweichung{border-color:#dc2626;}
+.pl2-st-abweichung .pl2-item2-hdr{background:#fef2f2;}
+.pl2-st-na{border-color:#9ca3af;opacity:.7;}
+.pl2-st-na .pl2-item2-hdr{background:#f3f4f6;}
+
+.pl2-item2-status.pl2-st-offen{background:#f3f4f6;color:#6b7280;}
+.pl2-item2-status.pl2-st-konform{background:#dcfce7;color:#16a34a;}
+.pl2-item2-status.pl2-st-abweichung{background:#fee2e2;color:#dc2626;}
+.pl2-item2-status.pl2-st-na{background:#f3f4f6;color:#9ca3af;}
+
+/* Status-Buttons */
+.pl2-status-row{display:flex;gap:4px;}
+.pl2-st-btn{flex:1;padding:5px 4px;border:1.5px solid var(--b);border-radius:4px;background:var(--card);font-size:11px;font-weight:600;cursor:pointer;transition:all .12s;color:var(--ink3);}
+.pl2-st-btn:hover{border-color:var(--ac);color:var(--ac);}
+.pl2-st-btn-active-konform{background:#dcfce7!important;border-color:#16a34a!important;color:#16a34a!important;}
+.pl2-st-btn-active-abw{background:#fee2e2!important;border-color:#dc2626!important;color:#dc2626!important;}
+.pl2-st-btn-active-na{background:#f3f4f6!important;border-color:#9ca3af!important;color:#9ca3af!important;}
+
+/* Ist-Feld */
+.pl2-ist-field{width:100%;border:1px solid var(--b);border-radius:4px;padding:8px 10px;font-family:'Inter',sans-serif;font-size:12.5px;color:var(--ink);resize:vertical;min-height:60px;outline:none;transition:border-color .15s;background:var(--card);}
+.pl2-ist-field:focus{border-color:var(--ac);}
+
+/* Aktionszeile */
+.pl2-item2-actions{display:flex;gap:6px;}
+.pl2-ki-btn{padding:5px 10px;background:linear-gradient(135deg,#1e3a5f,#0f2444);color:#fff;border:none;border-radius:4px;font-size:11px;font-weight:600;cursor:pointer;letter-spacing:.02em;}
+.pl2-eintrag-btn{padding:5px 10px;background:var(--bgc);border:1.5px solid var(--b);border-radius:4px;font-size:11px;font-weight:600;cursor:pointer;color:var(--ink);transition:all .12s;}
+.pl2-eintrag-btn:hover{border-color:var(--ac);color:var(--ac);}
+
+/* KI-Panel */
+.pl2-ki-panel{border:1px solid #c7d2fe;border-radius:5px;padding:10px 12px;background:#f5f3ff;display:flex;flex-direction:column;gap:8px;margin-top:2px;}
+.pl2-ki-panel-hdr{font-size:11px;font-weight:700;color:#4338ca;letter-spacing:.04em;}
+.pl2-ki-modes{display:flex;gap:4px;}
+.pl2-ki-mode-btn{flex:1;padding:5px 4px;border:1px solid #c7d2fe;border-radius:4px;background:#fff;font-size:11px;font-weight:600;cursor:pointer;color:#4338ca;transition:all .12s;}
+.pl2-ki-mode-btn:hover{background:#4338ca;color:#fff;}
+.pl2-ki-inp-field{width:100%;padding:6px 10px;border:1px solid #c7d2fe;border-radius:4px;font-size:12px;outline:none;background:#fff;}
+.pl2-ki-out{font-size:12px;color:var(--ink3);line-height:1.55;min-height:36px;padding:6px 8px;background:#fff;border:1px solid #e0e7ff;border-radius:4px;white-space:pre-wrap;}
+.pl2-ki-take-row{display:flex;gap:6px;}
+.pl2-ki-take-btn{flex:1;padding:5px 8px;border:1px solid #c7d2fe;border-radius:4px;font-size:11px;font-weight:600;cursor:pointer;background:#4338ca;color:#fff;transition:opacity .12s;}
+.pl2-ki-take-btn:disabled{opacity:.4;cursor:default;}
+.pl2-ki-take-btn:not(:disabled):hover{opacity:.85;}
+
+/* Fortschritt-Leiste Farben */
+.pl2-sec-stats{display:flex;gap:8px;margin-left:auto;font-size:10px;}
+.pl2-sec-stat-k{color:#16a34a;font-weight:600;}
+.pl2-sec-stat-a{color:#dc2626;font-weight:600;}
+.pl2-sec-stat-n{color:#9ca3af;}
+
+@media(max-width:800px){
+  .pl2-item2-body{grid-template-columns:1fr;}
+  .pl2-soll-col{border-right:none;border-bottom:1px solid var(--b);}
+}
 
 </style>
 </head>
@@ -3868,26 +3937,285 @@ let pl2OpenSecs = {};
 
 function pl2Key(listId, secIdx, itemIdx){ return listId+'_s'+secIdx+'_i'+itemIdx; }
 
+// ═══════════════════════════════════════════════════════════════════════
+// NEUES PRÜFLISTEN-SYSTEM: SOLL/IST/STATUS + KI
+// ═══════════════════════════════════════════════════════════════════════
+
+// Erweiterter State: status und ist-Zustand pro Prüfpunkt
+// pl2Checks bleibt für Rückwärtskompatibilität
+// Neu: pl2Status = { key: 'konform'|'abweichung'|'na'|'offen' }
+//      pl2Ist    = { key: 'Freitext des Ist-Zustands' }
+
+var pl2Status = {};
+var pl2Ist    = {};
+var pl2KiOpen = {}; // welche KI-Panels offen sind
+
+function pl2KeyStatus(listId,si,ii){ return listId+'_s'+si+'_i'+ii+'_st'; }
+function pl2KeyIst(listId,si,ii){    return listId+'_s'+si+'_i'+ii+'_ist'; }
+
 function pl2LoadFromProject(){
-  var p=AP(); if(!p||!p.pl2Checks) return;
+  var p=AP(); if(!p) return;
   pl2Checks = p.pl2Checks||{};
+  pl2Status = p.pl2Status||{};
+  pl2Ist    = p.pl2Ist||{};
 }
 
 function pl2SaveToProjectData(){
   var p=AP(); if(!p) return;
   p.pl2Checks = pl2Checks;
+  p.pl2Status = pl2Status;
+  p.pl2Ist    = pl2Ist;
   persist();
 }
 
+// Status setzen
+function pl2SetStatus(listId,si,ii,status){
+  var key  = pl2Key(listId,si,ii);
+  var ks   = pl2KeyStatus(listId,si,ii);
+  pl2Status[ks] = status;
+  // Rückwärtskompatibilität: konform = checked
+  pl2Checks[key] = (status==='konform'||status==='na');
+  pl2SaveToProjectData();
+  // Bei Abweichung: KI-Panel öffnen
+  if(status==='abweichung'){
+    var kiKey = listId+'_'+si+'_'+ii;
+    pl2KiOpen[kiKey] = true;
+  }
+  pl2Render();
+}
+
+// Ist-Zustand speichern (debounced)
+var pl2IstTimer = {};
+function pl2SaveIst(listId,si,ii,val){
+  var ki = pl2KeyIst(listId,si,ii);
+  pl2Ist[ki] = val;
+  var tk = listId+'_'+si+'_'+ii;
+  clearTimeout(pl2IstTimer[tk]);
+  pl2IstTimer[tk] = setTimeout(function(){ pl2SaveToProjectData(); }, 600);
+}
+
+// KI-Formular aufrufen für Prüfpunkt
+async function pl2KiFormulieren(listId,si,ii,modus){
+  var src = PL2_DATA.find(function(l){return l.id===listId;})||MREA_PACKAGES[listId];
+  if(!src) return;
+  var sec  = src.sections[si];
+  var item = sec ? sec.items[ii] : null;
+  if(!item) return;
+
+  var key   = pl2KeyIst(listId,si,ii);
+  var istVal = pl2Ist[key]||'';
+  var kiKey  = listId+'_'+si+'_'+ii;
+  var outId  = 'pl2ki_out_'+kiKey;
+  var outEl  = document.getElementById(outId);
+  if(!outEl) return;
+
+  var apiKey = kiGetKey();
+  if(!apiKey){
+    outEl.textContent = 'Bitte API-Schl\u00fcssel in den Einstellungen hinterlegen.';
+    outEl.style.color = 'var(--re)';
+    return;
+  }
+
+  outEl.textContent = 'KI formuliert \u2013 bitte warten\u2026';
+  outEl.style.color = 'var(--ink3)';
+
+  var soll = item.txt;
+  var ref  = item.ref;
+  var sev  = {m:'Muss',s:'Soll',h:'Kann'}[item.sev]||'Muss';
+
+  var promptMap = {
+    ist: 'Formuliere einen sachlichen, juristisch pr\u00e4zisen IST-ZUSTAND (2\u20133 S\u00e4tze). Beschreibe was der Pr\u00fcfer vorgefunden hat. Keine Wertung, nur Befund.',
+    fest: 'Formuliere eine vollst\u00e4ndige Revisionsfeststellung mit: 1. SACHVERHALT (Befund, 2\u20133 S\u00e4tze) 2. RECHTSGRUNDLAGE (' + ref + ') 3. BEWERTUNG (Schwere: ' + sev + ') 4. EMPFEHLUNG (konkrete Ma\u00dfnahme mit Frist).',
+    empf: 'Formuliere eine konkrete, handlungsorientierte EMPFEHLUNG mit Fristangabe (1\u20132 S\u00e4tze). Pr\u00e4zise und umsetzbar.'
+  };
+
+  var sys = 'Du bist ein spezialisierter Bau- und Honorarrevisor. Formuliere auf Deutsch, pr\u00e4zise und sachlich. Rechtsgrundlagen vollst\u00e4ndig angeben.';
+  var inp = document.getElementById('pl2ki_inp_'+kiKey);
+  var hint = inp ? inp.value.trim() : '';
+
+  var userMsg = 'SOLLZUSTAND: ' + soll + '\nRECHTSGRUNDLAGE: ' + ref
+    + (istVal ? '\nBISHERIGER IST-ZUSTAND: ' + istVal : '')
+    + (hint ? '\nHINWEIS DES PR\u00dcFERS: ' + hint : '')
+    + '\n\n' + (promptMap[modus]||promptMap.ist);
+
+  try {
+    var resp = await fetch('https://api.anthropic.com/v1/messages',{
+      method:'POST',
+      headers:{'Content-Type':'application/json','x-api-key':apiKey,'anthropic-version':'2023-06-01','anthropic-dangerous-direct-browser-access':'true'},
+      body:JSON.stringify({model:'claude-sonnet-4-6',max_tokens:500,system:sys,messages:[{role:'user',content:userMsg}]})
+    });
+    if(resp.ok){
+      var data = await resp.json();
+      var text = data.content?.[0]?.text||'(Keine Antwort)';
+      outEl.textContent = text;
+      outEl.style.color = 'var(--ink)';
+      // Übernahme-Button aktivieren
+      var btnId = 'pl2ki_take_'+kiKey+'_'+modus;
+      var takeBtn = document.getElementById(btnId);
+      if(takeBtn){ takeBtn.disabled=false; takeBtn.dataset.text=text; }
+    } else {
+      outEl.textContent = 'API-Fehler ' + resp.status;
+      outEl.style.color = 'var(--re)';
+    }
+  } catch(e){
+    outEl.textContent = 'Fehler: ' + e.message;
+    outEl.style.color = 'var(--re)';
+  }
+}
+
+// KI-Vorschlag übernehmen
+function pl2KiUebernehmen(listId,si,ii,modus,text){
+  if(!text) return;
+  var kiKey = listId+'_'+si+'_'+ii;
+  if(modus==='ist'){
+    var istEl = document.getElementById('pl2ist_'+kiKey);
+    if(istEl){ istEl.value=text; pl2SaveIst(listId,si,ii,text); }
+  } else if(modus==='fest'||modus==='empf'){
+    // Direkt Feststellung öffnen mit vorausgefülltem Text
+    pl2ToFest(listId,si,ii,null,text,modus);
+  }
+  // Feedback
+  var outEl = document.getElementById('pl2ki_out_'+kiKey);
+  if(outEl){ outEl.style.outline='2px solid var(--gr)'; setTimeout(function(){outEl.style.outline='';},1200); }
+}
+
+// Toggle KI-Panel
+function pl2KiToggle(listId,si,ii){
+  var kiKey = listId+'_'+si+'_'+ii;
+  pl2KiOpen[kiKey] = !pl2KiOpen[kiKey];
+  pl2Render();
+}
+
+// Eintrag erstellen (für alle Status)
+function pl2CreateEintrag(listId,si,ii,status){
+  var src = PL2_DATA.find(function(l){return l.id===listId;})||MREA_PACKAGES[listId];
+  if(!src) return;
+  var sec  = src.sections[si];
+  var item = sec ? sec.items[ii] : null;
+  if(!item) return;
+  var kiKey = listId+'_'+si+'_'+ii;
+  var istVal = pl2Ist[pl2KeyIst(listId,si,ii)]||'';
+  var sevMap = {m:'Kritisch',s:'Erheblich',h:'Hinweis'};
+  // Bei konform → Information, bei abweichung → nach Schwere
+  var schwere = (status==='konform') ? 'Information' : (sevMap[item.sev]||'Erheblich');
+  openM('neue');
+  setTimeout(function(){
+    var tf=document.getElementById('nf-titel');
+    var sb=document.getElementById('nf-beschr');
+    var sw=document.getElementById('nf-sw');
+    var ho=document.getElementById('nf-hoai');
+    if(tf) tf.value=(status==='konform'?'[Konform] ':status==='na'?'[N/A] ':'[Abweichung] ')+item.txt;
+    if(sw) sw.value=schwere;
+    if(ho) ho.value=item.ref;
+    if(sb) {
+      var txt = 'SOLLZUSTAND: '+item.txt+'\nRECHTSGRUNDLAGE: '+item.ref;
+      if(istVal) txt += '\n\nIST-ZUSTAND: '+istVal;
+      txt += '\n\nFeststellung (bitte erg\u00e4nzen):';
+      sb.value=txt;
+      sb.focus();
+      sb.setSelectionRange(sb.value.length,sb.value.length);
+    }
+  },120);
+}
+
+// Erweiterte Soll/Ist Render-Funktion
+function pl2RenderItem(listId, item, si, ii){
+  var key    = pl2Key(listId,si,ii);
+  var ks     = pl2KeyStatus(listId,si,ii);
+  var ki_key = pl2KeyIst(listId,si,ii);
+  var kiKey  = listId+'_'+si+'_'+ii;
+  var status = pl2Status[ks]||'offen';
+  var istVal = pl2Ist[ki_key]||'';
+  var kiOpen = pl2KiOpen[kiKey]||false;
+  // Bei Abweichung KI-Panel auto-öffnen
+  if(status==='abweichung' && istVal==='' && !pl2KiOpen[kiKey]) kiOpen=true;
+
+  var sevLbl={m:'Muss',s:'Soll',h:'Kann'};
+  var sevCls={m:'pl2-sev-m',s:'pl2-sev-s',h:'pl2-sev-h'};
+
+  var statusCls = {
+    offen:      'pl2-st-offen',
+    konform:    'pl2-st-konform',
+    abweichung: 'pl2-st-abweichung',
+    na:         'pl2-st-na'
+  }[status]||'pl2-st-offen';
+
+  var statusLbl = {
+    offen:'Offen', konform:'Konform', abweichung:'Abweichung', na:'N/A'
+  }[status]||'Offen';
+
+  return '<div class="pl2-item2 '+statusCls+'" id="pl2item_'+kiKey+'">'
+    // ── Kopfzeile ──────────────────────────────────────────────────────
+    +'<div class="pl2-item2-hdr">'
+    +'<span class="pl2-item2-ref">'+item.ref+'</span>'
+    +'<span class="pl2-item-sev '+sevCls[item.sev]+'">'+sevLbl[item.sev]+'</span>'
+    +'<span class="pl2-item2-status '+statusCls+'">'+statusLbl+'</span>'
+    +'</div>'
+    // ── Zweispaltiger Körper ────────────────────────────────────────────
+    +'<div class="pl2-item2-body">'
+    // Linke Spalte: Soll
+    +'<div class="pl2-soll-col">'
+    +'<div class="pl2-col-lbl">SOLLZUSTAND</div>'
+    +'<div class="pl2-soll-txt">'+item.txt+'</div>'
+    +'</div>'
+    // Rechte Spalte: Ist
+    +'<div class="pl2-ist-col">'
+    +'<div class="pl2-col-lbl">IST-ZUSTAND</div>'
+    // Status-Buttons
+    +'<div class="pl2-status-row">'
+    +'<button class="pl2-st-btn'+(status==='konform'?' pl2-st-btn-active-konform':'')+'" data-lid="'+listId+'" data-si="'+si+'" data-ii="'+ii+'" data-st="konform" onclick="pl2SetStatus(this.dataset.lid,+this.dataset.si,+this.dataset.ii,this.dataset.st)">\u2713 Konform</button>'
+    +'<button class="pl2-st-btn'+(status==='abweichung'?' pl2-st-btn-active-abw':'')+'" data-lid="'+listId+'" data-si="'+si+'" data-ii="'+ii+'" data-st="abweichung" onclick="pl2SetStatus(this.dataset.lid,+this.dataset.si,+this.dataset.ii,this.dataset.st)">\u26a0 Abweichung</button>'
+    +'<button class="pl2-st-btn'+(status==='na'?' pl2-st-btn-active-na':'')+'" data-lid="'+listId+'" data-si="'+si+'" data-ii="'+ii+'" data-st="na" onclick="pl2SetStatus(this.dataset.lid,+this.dataset.si,+this.dataset.ii,this.dataset.st)">N/A</button>'
+    +'</div>'
+    // Ist-Textfeld
+    +'<textarea class="pl2-ist-field" id="pl2ist_'+kiKey+'" placeholder="Ist-Zustand erfassen \u2026" rows="3"'
+    +' data-lid="'+listId+'" data-si="'+si+'" data-ii="'+ii+'"'
+    +' onchange="pl2SaveIst(this.dataset.lid,+this.dataset.si,+this.dataset.ii,this.value)"'
+    +' oninput="pl2SaveIst(this.dataset.lid,+this.dataset.si,+this.dataset.ii,this.value)">'+istVal+'</textarea>'
+    // KI + Aktionen
+    +'<div class="pl2-item2-actions">'
+    +'<button class="pl2-ki-btn" data-lid="'+listId+'" data-si="'+si+'" data-ii="'+ii+'" onclick="pl2KiToggle(this.dataset.lid,+this.dataset.si,+this.dataset.ii)">\u2736 KI</button>'
+    +'<button class="pl2-eintrag-btn" data-lid="'+listId+'" data-si="'+si+'" data-ii="'+ii+'" data-st="'+status+'" onclick="pl2CreateEintrag(this.dataset.lid,+this.dataset.si,+this.dataset.ii,this.dataset.st)">\u2192 Eintrag</button>'
+    +'</div>'
+    // KI-Panel
+    +(kiOpen
+      ? '<div class="pl2-ki-panel">'
+        +'<div class="pl2-ki-panel-hdr">\u2736 KI-Formulierungshilfe</div>'
+        +'<div class="pl2-ki-modes">'
+        +'<button class="pl2-ki-mode-btn" data-lid="'+listId+'" data-si="'+si+'" data-ii="'+ii+'" data-m="ist" onclick="pl2KiFormulieren(this.dataset.lid,+this.dataset.si,+this.dataset.ii,this.dataset.m)">\u270d Ist-Zustand</button>'
+        +'<button class="pl2-ki-mode-btn" data-lid="'+listId+'" data-si="'+si+'" data-ii="'+ii+'" data-m="fest" onclick="pl2KiFormulieren(this.dataset.lid,+this.dataset.si,+this.dataset.ii,this.dataset.m)">\u21d2 Feststellung</button>'
+        +'<button class="pl2-ki-mode-btn" data-lid="'+listId+'" data-si="'+si+'" data-ii="'+ii+'" data-m="empf" onclick="pl2KiFormulieren(this.dataset.lid,+this.dataset.si,+this.dataset.ii,this.dataset.m)">\u2605 Empfehlung</button>'
+        +'</div>'
+        +'<div class="pl2-ki-inp-row">'
+        +'<input class="pl2-ki-inp-field" id="pl2ki_inp_'+kiKey+'" placeholder="Stichworte / Kontext (optional) \u2026" type="text">'
+        +'</div>'
+        +'<div class="pl2-ki-out" id="pl2ki_out_'+kiKey+'">KI-Vorschlag erscheint hier\u2026</div>'
+        +'<div class="pl2-ki-take-row">'
+        +'<button class="pl2-ki-take-btn" id="pl2ki_take_'+kiKey+'_ist" disabled data-lid="'+listId+'" data-si="'+si+'" data-ii="'+ii+'" data-m="ist" onclick="pl2KiUebernehmen(this.dataset.lid,+this.dataset.si,+this.dataset.ii,this.dataset.m,this.dataset.text)">\u2713 In Ist-Zustand \u00fcbernehmen</button>'
+        +'<button class="pl2-ki-take-btn" id="pl2ki_take_'+kiKey+'_fest" disabled data-lid="'+listId+'" data-si="'+si+'" data-ii="'+ii+'" data-m="fest" onclick="pl2KiUebernehmen(this.dataset.lid,+this.dataset.si,+this.dataset.ii,this.dataset.m,this.dataset.text)">\u21d2 Als Feststellung</button>'
+        +'</div>'
+        +'</div>'
+      : '')
+    +'</div>' // pl2-ist-col
+    +'</div>' // pl2-item2-body
+    +'</div>'; // pl2-item2
+}
+
+
+
 // ─── RENDER ─────────────────────────────────────────────────────────
 function pl2TotalFor(listId){
-  var list=PL2_DATA.find(function(l){return l.id===listId;});
-  if(!list) return {total:0,done:0};
-  var total=0,done=0;
+  var list=PL2_DATA.find(function(l){return l.id===listId;})||MREA_PACKAGES[listId];
+  if(!list) return {total:0,done:0,konform:0,abweichung:0,na:0};
+  var total=0,done=0,konform=0,abweichung=0,na=0;
   list.sections.forEach(function(sec,si){
     sec.items.forEach(function(item,ii){
       total++;
-      if(pl2Checks[pl2Key(listId,si,ii)]) done++;
+      var st=pl2Status[pl2KeyStatus(listId,si,ii)]||'offen';
+      if(st==='konform'){done++;konform++;}
+      else if(st==='abweichung'){abweichung++;}
+      else if(st==='na'){done++;na++;}
+      if(pl2Checks[pl2Key(listId,si,ii)]) {} // compat
     });
   });
   return {total:total,done:done};
@@ -3952,13 +4280,7 @@ function pl2Render(){
           +'<span class="pl2-sec-chevron">&#8964;</span></div>'
           +(isOpen?'<div class="pl2-items">'+sec.items.map(function(item,ii){
             var key=pl2Key(mreaPkg.id,si,ii);var chk=!!pl2Checks[key];
-            return '<div class="pl2-item'+(chk?' pl2-checked':'')+'">'
-              +'<div class="pl2-cb" data-lid="'+mreaPkg.id+'" data-si="'+si+'" data-ii="'+ii+'" onclick="pl2Toggle(this.dataset.lid,+this.dataset.si,+this.dataset.ii)">'+(chk?'&#10003;':'')+'</div>'
-              +'<div class="pl2-item-body" data-lid="'+mreaPkg.id+'" data-si="'+si+'" data-ii="'+ii+'" onclick="pl2Toggle(this.dataset.lid,+this.dataset.si,+this.dataset.ii)" style="cursor:pointer;">'
-              +'<div class="pl2-item-txt">'+item.txt+'</div><div class="pl2-item-ref">'+item.ref+'</div></div>'
-              +'<span class="pl2-item-sev '+sevCls2[item.sev]+'">'+sevLbl2[item.sev]+'</span>'
-              +'<button class="pl2-fest-btn" data-lid="'+mreaPkg.id+'" data-si="'+si+'" data-ii="'+ii+'" onclick="pl2ToFest(this.dataset.lid,+this.dataset.si,+this.dataset.ii,event)" title="Als Feststellung erfassen">&#43;</button>'
-              +'</div>';
+            return pl2RenderItem(mreaPkg.id,item,si,ii);
           }).join('')+'</div>':'')+'</div>';
       }).join('');
     }
@@ -3989,9 +4311,7 @@ function pl2Render(){
       +'</div>'
       +(isOpen?'<div class="pl2-items">'
         +sec.items.map(function(item,ii){
-          var key=pl2Key(list.id,si,ii);
-          var chk=!!pl2Checks[key];
-          return '<div class="pl2-item'+(chk?' pl2-checked':'')+'">'+'<div class="pl2-cb" onclick="pl2Toggle(\''+list.id+'\','+si+','+ii+')">'+(chk?'&#10003;':'')+'</div>'+'<div class="pl2-item-body" onclick="pl2Toggle(\''+list.id+'\','+si+','+ii+')" style="cursor:pointer;">'+'<div class="pl2-item-txt">'+item.txt+'</div>'+'<div class="pl2-item-ref">'+item.ref+'</div>'+'</div>'+'<span class="pl2-item-sev '+sevCls[item.sev]+'">'+sevLbl[item.sev]+'</span>'+'<button class="pl2-fest-btn" onclick="pl2ToFest(\''+list.id+'\','+si+','+ii+',event)" title="Als Feststellung erfassen">&#43;</button>'+'</div>';
+          return pl2RenderItem(list.id,item,si,ii);
         }).join('')
         +'</div>':'')
       +'</div>';
@@ -4013,7 +4333,12 @@ function pl2ToggleSec(listId, si){
 
 function pl2Toggle(listId, si, ii){
   var key=pl2Key(listId,si,ii);
-  pl2Checks[key]=!pl2Checks[key];
+  var ks=pl2KeyStatus(listId,si,ii);
+  var cur=pl2Status[ks]||'offen';
+  // Cycle: offen → konform → offen
+  var nxt=cur==='konform'?'offen':'konform';
+  pl2Status[ks]=nxt;
+  pl2Checks[key]=(nxt==='konform');
   pl2SaveToProjectData();
   pl2Render();
 }
