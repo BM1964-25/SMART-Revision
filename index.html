@@ -712,24 +712,6 @@ textarea{resize:vertical;min-height:72px;}
   .pl2-soll-col{border-right:none;border-bottom:1px solid var(--b);}
 }
 
-
-/* ═══ REVISIONSMODUS-PANEL ══════════════════════════════════════════════ */
-.rvm-panel{background:#fff;border:1px solid var(--b);border-radius:8px;padding:16px 20px;margin-bottom:16px;display:flex;flex-wrap:wrap;gap:16px;align-items:flex-end;}
-.rvm-group{display:flex;flex-direction:column;gap:6px;min-width:160px;}
-.rvm-label{font-size:9px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--ink3);}
-.rvm-chips{display:flex;flex-wrap:wrap;gap:4px;}
-.rvm-chip{padding:4px 10px;border:1.5px solid var(--b);border-radius:20px;font-size:11px;font-weight:600;cursor:pointer;background:#fff;color:var(--ink3);transition:all .12s;white-space:nowrap;}
-.rvm-chip:hover{border-color:var(--ac);color:var(--ac);}
-.rvm-chip.active{background:var(--ac);border-color:var(--ac);color:#fff;}
-.rvm-chip.active-phase{background:#0f2444;border-color:#0f2444;color:#fff;}
-.rvm-chip.active-ansatz{background:#0d7a4e;border-color:#0d7a4e;color:#fff;}
-.rvm-summary{display:flex;align-items:center;gap:8px;padding:8px 12px;background:var(--bgc);border-radius:6px;font-size:11.5px;color:var(--ink);border:1px solid var(--b);margin-bottom:12px;flex-wrap:wrap;}
-.rvm-summary strong{color:var(--ac);font-weight:700;}
-.rvm-filter-badge{display:inline-flex;align-items:center;gap:3px;padding:2px 8px;border-radius:10px;font-size:10px;font-weight:600;background:#e0e7ff;color:#3730a3;}
-.rvm-reset{margin-left:auto;padding:4px 10px;border:1px solid var(--b);border-radius:4px;background:#fff;font-size:11px;cursor:pointer;color:var(--ink3);}
-.rvm-reset:hover{border-color:var(--re);color:var(--re);}
-.pl2-tab-hidden{display:none!important;}
-
 </style>
 </head>
 <body>
@@ -1130,47 +1112,6 @@ textarea{resize:vertical;min-height:72px;}
             <button class="btn bg sm" onclick="pl2ExportTxt()">&#8595; Export</button>
             <button class="btn bp sm" onclick="pl2SaveToProject()">In Bericht übernehmen</button>
           </div>
-        </div>
-        <!-- REVISIONSMODUS-PANEL -->
-        <div class="rvm-panel" id="rvm-panel">
-          <div class="rvm-group">
-            <div class="rvm-label">Auftragstyp</div>
-            <div class="rvm-chips" id="rvm-typ">
-              <button class="rvm-chip active" data-val="alle" onclick="rvmSet('typ',this)">Alle</button>
-              <button class="rvm-chip" data-val="vollrevision" onclick="rvmSet('typ',this)">Vollrevision</button>
-              <button class="rvm-chip" data-val="honorar" onclick="rvmSet('typ',this)">Honorarprüfung</button>
-              <button class="rvm-chip" data-val="rechnung" onclick="rvmSet('typ',this)">Rechnungsprüfung</button>
-              <button class="rvm-chip" data-val="nachtrag" onclick="rvmSet('typ',this)">Nachtragsanalyse</button>
-              <button class="rvm-chip" data-val="abnahme" onclick="rvmSet('typ',this)">Abnahmeprüfung</button>
-              <button class="rvm-chip" data-val="due" onclick="rvmSet('typ',this)">Due Diligence</button>
-              <button class="rvm-chip" data-val="fraud" onclick="rvmSet('typ',this)">Fraud-Verdacht</button>
-            </div>
-          </div>
-          <div class="rvm-group">
-            <div class="rvm-label">Prüfungsansatz</div>
-            <div class="rvm-chips" id="rvm-ansatz">
-              <button class="rvm-chip active" data-val="alle" onclick="rvmSet('ansatz',this)">Alle</button>
-              <button class="rvm-chip" data-val="exante" onclick="rvmSet('ansatz',this)">Ex-ante (begleitend)</button>
-              <button class="rvm-chip" data-val="expost" onclick="rvmSet('ansatz',this)">Ex-post (abgeschlossen)</button>
-              <button class="rvm-chip" data-val="adhoc" onclick="rvmSet('ansatz',this)">Ad-hoc (Anlassfall)</button>
-            </div>
-          </div>
-          <div class="rvm-group">
-            <div class="rvm-label">Bauphase</div>
-            <div class="rvm-chips" id="rvm-phase">
-              <button class="rvm-chip active" data-val="alle" onclick="rvmSet('phase',this)">Alle</button>
-              <button class="rvm-chip" data-val="planung" onclick="rvmSet('phase',this)">Planung</button>
-              <button class="rvm-chip" data-val="vergabe" onclick="rvmSet('phase',this)">Vergabe</button>
-              <button class="rvm-chip" data-val="ausfuehrung" onclick="rvmSet('phase',this)">Ausführung</button>
-              <button class="rvm-chip" data-val="abnahme" onclick="rvmSet('phase',this)">Abnahme</button>
-              <button class="rvm-chip" data-val="abrechnung" onclick="rvmSet('phase',this)">Abrechnung</button>
-              <button class="rvm-chip" data-val="gewaehrleistung" onclick="rvmSet('phase',this)">Gewährleistung</button>
-            </div>
-          </div>
-        </div>
-        <div class="rvm-summary" id="rvm-summary" style="display:none;">
-          <span id="rvm-summary-text"></span>
-          <button class="rvm-reset" onclick="rvmReset()">✕ Filter zurücksetzen</button>
         </div>
         <div class="pl2-tabs" id="pl2-tabs"></div>
         <div class="pl2-progress">
@@ -4547,15 +4488,30 @@ function pl2Render(){
   // Tabs
   var tabs=document.getElementById('pl2-tabs');
   if(tabs){
-    tabs.innerHTML=PL2_DATA.map(function(list){
-      var r=pl2TotalFor(list.id);
-      var tabPct=r.total?Math.round(r.done/r.total*100):0;
-      var isDone=r.done===r.total&&r.total>0;
-      return '<button class="pl2-tab'+(list.id===pl2Active?' active':'')+(isDone?' done':'')+'" onclick="pl2SetActive(\''+list.id+'\')">'
-        +list.icon+' '+list.title.split(' ')[0]+' '+list.title.split(' ').slice(1,3).join(' ')
-        +'<span class="pl2-tab-pct">'+tabPct+'%</span>'
-        +'</button>';
+    var _pf=PL2_DATA.filter(function(l){return l.id.startsWith('pf');});
+    var _oth=PL2_DATA.filter(function(l){return !l.id.startsWith('pf');});
+    var _th='<span class="pl2-tab-group-lbl">Prüffelder</span>';
+    _th+=_pf.map(function(list){
+      var r=pl2TotalFor(list.id);var tabPct=r.total?Math.round(r.done/r.total*100):0;var isDone=r.done===r.total&&r.total>0;
+      return '<button class="pl2-tab'+(list.id===pl2Active?' active':'')+(isDone?' done':'')+(r.abweichung>0?' pl2-tab-has-abw':'')+'" data-id="'+list.id+'" onclick="pl2SetActive(this.dataset.id)">'
+        +list.icon+' '+list.title.split(' ')[0]+' '+list.title.split(' ').slice(1,2).join(' ')
+        +(r.abweichung>0?'<span class="pl2-tab-abw">'+r.abweichung+'</span>':'')
+        +'<span class="pl2-tab-pct">'+tabPct+'%</span>'+'</button>';
     }).join('');
+    _th+='<div class="pl2-mrea-sep"></div><span class="pl2-tab-group-lbl">IKS &amp; Prozesse</span>';
+    _th+=_oth.map(function(list){
+      var r=pl2TotalFor(list.id);var tabPct=r.total?Math.round(r.done/r.total*100):0;var isDone=r.done===r.total&&r.total>0;
+      return '<button class="pl2-tab'+(list.id===pl2Active?' active':'')+(isDone?' done':'')+'" data-id="'+list.id+'" onclick="pl2SetActive(this.dataset.id)">'
+        +list.icon+' '+list.title+'<span class="pl2-tab-pct">'+tabPct+'%</span>'+'</button>';
+    }).join('');
+    _th+='<div class="pl2-mrea-sep"></div><span class="pl2-tab-group-lbl">M-REA</span>';
+    Object.values(MREA_PACKAGES).forEach(function(pkg){
+      var unlocked=mreaIsUnlocked(pkg.id);var isActive=pl2Active===pkg.id;
+      _th+='<button class="pl2-tab mrea'+(isActive?' active':'')+(unlocked?'':' pl2-tab-locked')+'" data-id="'+pkg.id+'" onclick="pl2SetActive(this.dataset.id)">'
+        +pkg.icon+' '+pkg.badge+'<span class="pl2-mrea-badge">M-REA</span>'+(unlocked?'':' &#128274;')+'</button>';
+    });
+    tabs.innerHTML=_th;
+    if(typeof rvmApply==='function') setTimeout(rvmApply,0);
   }
 
   // Body
@@ -4821,123 +4777,6 @@ function pl2ToFest(listId,si,ii,ev){
   var btn=ev&&ev.target;
   if(btn){var o=btn.innerHTML;btn.innerHTML='&#10003;';btn.style.background='var(--gr)';btn.style.color='#fff';setTimeout(function(){btn.innerHTML=o;btn.style.background='';btn.style.color='';},1200);}
 }
-
-
-// ═══ REVISIONSMODUS & FILTER ═════════════════════════════════════════════
-var rvmState = { typ: 'alle', ansatz: 'alle', phase: 'alle' };
-
-// Filter-Mapping: Auftragstyp → welche Listen werden angezeigt
-var RVM_FILTER = {
-  // Format: typ: { listen: [...ids], mrea: [...ids] }
-  alle:        { listen: null, mrea: null }, // null = alle
-  vollrevision:{ listen: ['pf1','pf2','pf3','pf4','pf5','pf6','pf7','pf8','iks','ava','fp-plan','fp-rech','nm-prozess'], mrea: ['mrea-hoai','mrea-neubau','mrea-vobb','mrea-hoai-full'] },
-  honorar:     { listen: ['pf2','pf3','pf7','iks'], mrea: ['mrea-hoai','mrea-hoai-full'] },
-  rechnung:    { listen: ['pf7','ava','fp-rech','iks'], mrea: ['mrea-vobb'] },
-  nachtrag:    { listen: ['pf6','nm-prozess','iks'], mrea: ['mrea-vobb'] },
-  abnahme:     { listen: ['pf5','pf8','iks'], mrea: ['mrea-vobb','mrea-neubau'] },
-  due:         { listen: ['pf1','pf2','pf3','pf4','pf5','pf6','pf7','pf8','iks'], mrea: ['mrea-hoai-full','mrea-vobb'] },
-  fraud:       { listen: ['iks','fp-rech','fp-plan','nm-prozess','ava'], mrea: ['mrea-vobb'] }
-};
-
-// Phase → welche Prüffelder passen
-var RVM_PHASE = {
-  alle:           null,
-  planung:        ['pf1','pf2','pf3','iks','fp-plan'],
-  vergabe:        ['pf1','pf2','pf4','iks','ava','fp-plan'],
-  ausfuehrung:    ['pf1','pf5','pf6','iks','ava','fp-rech','nm-prozess'],
-  abnahme:        ['pf5','pf8','iks'],
-  abrechnung:     ['pf7','ava','fp-rech','nm-prozess','iks'],
-  gewaehrleistung:['pf8','iks']
-};
-
-function rvmSet(group, btn) {
-  var val = btn.dataset.val;
-  rvmState[group] = val;
-  // Update chips UI
-  var container = document.getElementById('rvm-' + group);
-  if (container) {
-    container.querySelectorAll('.rvm-chip').forEach(function(b) {
-      b.classList.remove('active','active-phase','active-ansatz');
-    });
-    var cls = group === 'phase' ? 'active-phase' : group === 'ansatz' ? 'active-ansatz' : 'active';
-    btn.classList.add(cls);
-  }
-  rvmApply();
-}
-
-function rvmApply() {
-  var typ    = rvmState.typ;
-  var phase  = rvmState.phase;
-  var isFiltered = typ !== 'alle' || phase !== 'alle';
-
-  // Build active list IDs
-  var typFilter   = RVM_FILTER[typ]  || RVM_FILTER.alle;
-  var phaseFilter = RVM_PHASE[phase] || null;
-
-  var activeListen = typFilter.listen;
-  var activeMrea   = typFilter.mrea;
-
-  // Intersect with phase filter if set
-  if (phaseFilter && activeListen) {
-    activeListen = activeListen.filter(function(id){ return phaseFilter.indexOf(id) >= 0; });
-  } else if (phaseFilter && !activeListen) {
-    activeListen = phaseFilter;
-  }
-
-  // Show/hide tabs
-  var tabs = document.querySelectorAll('#pl2-tabs .pl2-tab');
-  tabs.forEach(function(tab) {
-    var id = tab.dataset.id || '';
-    var isMrea = id.startsWith('mrea-');
-    var hidden = false;
-    if (isMrea && activeMrea !== null) {
-      hidden = activeMrea.indexOf(id) < 0;
-    } else if (!isMrea && activeListen !== null) {
-      hidden = activeListen.indexOf(id) < 0;
-    }
-    tab.classList.toggle('pl2-tab-hidden', hidden);
-  });
-
-  // If active tab is now hidden, switch to first visible
-  var activeTab = document.querySelector('#pl2-tabs .pl2-tab.active:not(.pl2-tab-hidden)');
-  if (!activeTab) {
-    var firstVisible = document.querySelector('#pl2-tabs .pl2-tab:not(.pl2-tab-hidden)');
-    if (firstVisible && firstVisible.dataset.id) {
-      pl2SetActive(firstVisible.dataset.id);
-    }
-  }
-
-  // Update summary
-  var summary = document.getElementById('rvm-summary');
-  var summaryText = document.getElementById('rvm-summary-text');
-  if (summary && summaryText) {
-    if (isFiltered) {
-      var parts = [];
-      if (typ !== 'alle') parts.push('<strong>' + typ.charAt(0).toUpperCase() + typ.slice(1) + '</strong>');
-      if (phase !== 'alle') parts.push('<span class="rvm-filter-badge">' + phase + '</span>');
-      if (rvmState.ansatz !== 'alle') parts.push('<span class="rvm-filter-badge">' + rvmState.ansatz + '</span>');
-      var visCount = document.querySelectorAll('#pl2-tabs .pl2-tab:not(.pl2-tab-hidden)').length;
-      summaryText.innerHTML = '🔍 Aktiver Filter: ' + parts.join(' · ') + ' &nbsp;·&nbsp; ' + visCount + ' Prüfmodule eingeblendet';
-      summary.style.display = 'flex';
-    } else {
-      summary.style.display = 'none';
-    }
-  }
-}
-
-function rvmReset() {
-  rvmState = { typ: 'alle', ansatz: 'alle', phase: 'alle' };
-  ['rvm-typ','rvm-ansatz','rvm-phase'].forEach(function(gid) {
-    var g = document.getElementById(gid);
-    if (!g) return;
-    g.querySelectorAll('.rvm-chip').forEach(function(b) {
-      b.classList.remove('active','active-phase','active-ansatz');
-    });
-    g.querySelector('[data-val="alle"]').classList.add('active');
-  });
-  rvmApply();
-}
-
 
 // INIT
 rdPSel(); rdMeta(); rdAll();
