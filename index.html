@@ -863,6 +863,10 @@ textarea{resize:vertical;min-height:72px;}
           <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="8" cy="5" r="3"/><path d="M2 14c0-3.3 2.7-6 6-6s6 2.7 6 6"/></svg>
           Kundenportal exportieren
         </button>
+        <button class="rpt-gen-btn" onclick="exportMassnahmenplan()" style="background:#b8882a;color:#fff;border-color:#b8882a;">
+          <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 3h12M2 6h9M2 9h12M2 12h7"/><path d="M13 9l2 2-4 4"/></svg>
+          Maßnahmenplan exportieren
+        </button>
         <button class="rpt-gen-btn outline" onclick="window.print()">
           <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="6" width="10" height="7" rx="1"/><path d="M5 6V3h6v3M5 11h6"/></svg>
           Drucken
@@ -1967,6 +1971,219 @@ Antworte mit JSON: {"summary": "3-4 Sätze Executive Summary", "gesamtbewertung"
 }
 
 // ── DOCX EXPORT ──
+
+// ═══════════════════════════════════════════════════════════════
+// MASSNAHMENPLAN-EXPORT
+// Professionelles Dokument für Auftraggeber-Nachverfolgung
+// ═══════════════════════════════════════════════════════════════
+function exportMassnahmenplan() {
+  const p = AP();
+  const d = D();
+  if (!p || !d.length) {
+    alert('Keine Feststellungen vorhanden. Bitte erst Feststellungen erfassen.');
+    return;
+  }
+
+  const heute = new Date().toLocaleDateString('de-DE', { day:'2-digit', month:'2-digit', year:'numeric' });
+  const projName = p.name || 'Revisionsprojekt';
+  const projLP   = p.lp   || '–';
+  const projAG   = p.auftraggeber || '–';
+
+  // Sort: Kritisch → Erheblich → Hinweis, then by ID
+  const sev = { 'Kritisch': 0, 'Erheblich': 1, 'Hinweis': 2 };
+  const sorted = [...d].sort((a,b) => (sev[a.schwere]||9)-(sev[b.schwere]||9) || a.id.localeCompare(b.id));
+
+  const offen    = sorted.filter(f => f.status !== 'Erledigt');
+  const erledigt = sorted.filter(f => f.status === 'Erledigt');
+
+  function sevColor(s) {
+    if (s === 'Kritisch')  return { bg: '#fef2f2', border: '#dc2626', badge: '#dc2626', text: '#7f1d1d' };
+    if (s === 'Erheblich') return { bg: '#fffbeb', border: '#d97706', badge: '#d97706', text: '#78350f' };
+    return                        { bg: '#f0fdf4', border: '#16a34a', badge: '#16a34a', text: '#14532d' };
+  }
+
+  function fmtDate(ds) {
+    if (!ds) return '–';
+    try { return new Date(ds).toLocaleDateString('de-DE', { day:'2-digit', month:'2-digit', year:'numeric' }); }
+    catch(e) { return ds; }
+  }
+
+  function istUeberfaellig(ds) {
+    if (!ds) return false;
+    return new Date(ds) < new Date() && true;
+  }
+
+  function rowHtml(f, idx) {
+    const c = sevColor(f.schwere);
+    const ueberfaellig = istUeberfaellig(f.frist) && f.status !== 'Erledigt';
+    return `
+      <tr style="page-break-inside:avoid;">
+        <td style="padding:12px 10px;border-bottom:1px solid #e5e7eb;vertical-align:top;font-family:'IBM Plex Mono',monospace;font-size:11px;color:#6b7280;white-space:nowrap;">${f.id}</td>
+        <td style="padding:12px 10px;border-bottom:1px solid #e5e7eb;vertical-align:top;">
+          <div style="font-weight:600;font-size:13px;color:#111827;margin-bottom:4px;">${f.titel||'–'}</div>
+          ${f.beschr ? `<div style="font-size:11.5px;color:#374151;line-height:1.5;margin-bottom:4px;">${f.beschr.replace(/\n/g,'<br>')}</div>` : ''}
+          ${f.hoai ? `<div style="font-size:10px;color:#6b7280;margin-top:2px;">⚖ ${f.hoai}</div>` : ''}
+        </td>
+        <td style="padding:12px 10px;border-bottom:1px solid #e5e7eb;vertical-align:top;text-align:center;">
+          <span style="display:inline-block;padding:2px 8px;border-radius:4px;font-size:11px;font-weight:700;background:${c.bg};color:${c.badge};border:1px solid ${c.border};">${f.schwere||'–'}</span>
+        </td>
+        <td style="padding:12px 10px;border-bottom:1px solid #e5e7eb;vertical-align:top;font-size:12px;color:${ueberfaellig?'#dc2626':'#374151'};white-space:nowrap;font-weight:${ueberfaellig?'700':'400'};">
+          ${fmtDate(f.frist)}${ueberfaellig ? '<br><span style="font-size:10px;color:#dc2626;">⚠ überfällig</span>' : ''}
+        </td>
+        <td style="padding:12px 10px;border-bottom:1px solid #e5e7eb;vertical-align:top;font-size:12px;color:#374151;">${f.verantw||'–'}</td>
+        <td style="padding:12px 10px;border-bottom:1px solid #e5e7eb;vertical-align:top;font-size:12.5px;color:#374151;line-height:1.5;">${(f.empf||'').replace(/\n/g,'<br>') || '–'}</td>
+        <td style="padding:12px 10px;border-bottom:1px solid #e5e7eb;vertical-align:top;">
+          <span style="display:inline-block;padding:2px 8px;border-radius:4px;font-size:11px;font-weight:600;background:${f.status==='Erledigt'?'#f0fdf4':f.status==='In Bearbeitung'?'#eff6ff':'#f9fafb'};color:${f.status==='Erledigt'?'#16a34a':f.status==='In Bearbeitung'?'#2563eb':'#6b7280'};border:1px solid ${f.status==='Erledigt'?'#86efac':f.status==='In Bearbeitung'?'#93c5fd':'#d1d5db'};">${f.status||'Offen'}</span>
+        </td>
+        <td style="padding:12px 10px;border-bottom:1px solid #e5e7eb;vertical-align:top;min-width:140px;">
+          <div style="border:1px dashed #d1d5db;border-radius:4px;padding:6px;min-height:48px;font-size:11px;color:#9ca3af;">Rückmeldung / Datum</div>
+        </td>
+      </tr>`;
+  }
+
+  const kritCount   = offen.filter(f=>f.schwere==='Kritisch').length;
+  const erhebCount  = offen.filter(f=>f.schwere==='Erheblich').length;
+  const hinwCount   = offen.filter(f=>f.schwere==='Hinweis').length;
+  const erlCount    = erledigt.length;
+  const ueberCount  = offen.filter(f=>istUeberfaellig(f.frist)).length;
+
+  const html = `<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Maßnahmenplan – ${projName}</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600&family=Inter:wght@400;500;600;700&family=Fraunces:ital,wght@0,600;1,600&display=swap');
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{font-family:'Inter',sans-serif;font-size:13px;color:#111827;background:#fff;padding:0;}
+  @media print {
+    body{padding:0;}
+    .no-print{display:none!important;}
+    .page-break{page-break-before:always;}
+    tr{page-break-inside:avoid;}
+  }
+  .page{max-width:1100px;margin:0 auto;padding:32px 40px;}
+  table{width:100%;border-collapse:collapse;}
+  th{background:#0f2444;color:#fff;padding:10px 10px;text-align:left;font-size:11px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;}
+  tr:hover{background:#f9fafb;}
+  .kpi-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:12px;margin:20px 0;}
+  .kpi{background:#f9fafb;border:1px solid #e5e7eb;border-radius:6px;padding:14px 16px;text-align:center;}
+  .kpi-val{font-size:28px;font-weight:700;font-family:'Fraunces',serif;line-height:1;}
+  .kpi-lbl{font-size:10px;text-transform:uppercase;letter-spacing:.08em;color:#6b7280;margin-top:4px;}
+  .section-hdr{background:#f3f4f6;border-left:4px solid #0f2444;padding:10px 16px;margin:24px 0 0;font-weight:700;font-size:13px;letter-spacing:.03em;text-transform:uppercase;color:#0f2444;}
+  .signature-row{display:grid;grid-template-columns:1fr 1fr;gap:40px;margin-top:40px;padding-top:24px;border-top:2px solid #e5e7eb;}
+  .sig-box{border-top:1px solid #374151;padding-top:8px;font-size:11px;color:#6b7280;}
+</style>
+</head>
+<body>
+<div class="page">
+
+  <!-- HEADER -->
+  <div style="display:flex;justify-content:space-between;align-items:flex-start;border-bottom:3px solid #0f2444;padding-bottom:20px;margin-bottom:20px;">
+    <div>
+      <div style="font-family:'Fraunces',serif;font-size:26px;font-weight:600;color:#0f2444;line-height:1.1;">Maßnahmenplan</div>
+      <div style="font-size:13px;color:#6b7280;margin-top:4px;">Revisionsfeststellungen · Nachverfolgung & Terminierung</div>
+    </div>
+    <div style="text-align:right;">
+      <div style="font-size:11px;color:#6b7280;text-transform:uppercase;letter-spacing:.08em;">BuiltSmart Hub</div>
+      <div style="font-size:11px;color:#6b7280;">© Bernhard Metzger</div>
+      <div style="font-size:11px;color:#6b7280;margin-top:4px;">Erstellt: ${heute}</div>
+    </div>
+  </div>
+
+  <!-- PROJEKTINFO -->
+  <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:16px;background:#f9fafb;border:1px solid #e5e7eb;border-radius:6px;padding:16px 20px;margin-bottom:16px;">
+    <div><div style="font-size:10px;text-transform:uppercase;letter-spacing:.08em;color:#6b7280;margin-bottom:3px;">Projekt</div><div style="font-weight:600;">${projName}</div></div>
+    <div><div style="font-size:10px;text-transform:uppercase;letter-spacing:.08em;color:#6b7280;margin-bottom:3px;">Auftraggeber</div><div style="font-weight:600;">${projAG}</div></div>
+    <div><div style="font-size:10px;text-transform:uppercase;letter-spacing:.08em;color:#6b7280;margin-bottom:3px;">Leistungsphase</div><div style="font-weight:600;">${projLP}</div></div>
+  </div>
+
+  <!-- KPI ÜBERSICHT -->
+  <div class="kpi-grid">
+    <div class="kpi"><div class="kpi-val" style="color:#0f2444;">${d.length}</div><div class="kpi-lbl">Gesamt</div></div>
+    <div class="kpi"><div class="kpi-val" style="color:#dc2626;">${kritCount}</div><div class="kpi-lbl">Kritisch</div></div>
+    <div class="kpi"><div class="kpi-val" style="color:#d97706;">${erhebCount}</div><div class="kpi-lbl">Erheblich</div></div>
+    <div class="kpi"><div class="kpi-val" style="color:#16a34a;">${hinwCount}</div><div class="kpi-lbl">Hinweis</div></div>
+    <div class="kpi"><div class="kpi-val" style="color:${ueberCount>0?'#dc2626':'#16a34a'};">${ueberCount}</div><div class="kpi-lbl">Überfällig</div></div>
+  </div>
+
+  <!-- HINWEIS FÜR AUFTRAGGEBER -->
+  <div style="background:#fffbeb;border:1px solid #fde68a;border-radius:6px;padding:12px 16px;margin-bottom:20px;font-size:12px;color:#78350f;">
+    <strong>Hinweis:</strong> Bitte bestätigen Sie die Maßnahmen durch Eintrag in der Spalte „Rückmeldung AG". 
+    Bei Terminfragen oder Rückfragen wenden Sie sich direkt an Ihren Revisor. 
+    Kritische Feststellungen sind unverzüglich zu adressieren.
+  </div>
+
+  <!-- OFFENE FESTSTELLUNGEN -->
+  ${offen.length > 0 ? `
+  <div class="section-hdr">Offene Feststellungen (${offen.length})</div>
+  <table style="margin-top:8px;">
+    <thead><tr>
+      <th style="width:60px;">ID</th>
+      <th>Feststellung</th>
+      <th style="width:90px;text-align:center;">Schwere</th>
+      <th style="width:90px;">Frist</th>
+      <th style="width:110px;">Verantwortlich</th>
+      <th>Empfehlung / Maßnahme</th>
+      <th style="width:90px;">Status</th>
+      <th style="width:150px;">Rückmeldung AG</th>
+    </tr></thead>
+    <tbody>${offen.map(rowHtml).join('')}</tbody>
+  </table>` : '<div style="padding:20px;color:#6b7280;text-align:center;">Keine offenen Feststellungen.</div>'}
+
+  <!-- ERLEDIGTE FESTSTELLUNGEN -->
+  ${erledigt.length > 0 ? `
+  <div class="section-hdr page-break" style="margin-top:32px;">Erledigte Feststellungen (${erledigt.length})</div>
+  <table style="margin-top:8px;opacity:.75;">
+    <thead><tr>
+      <th style="width:60px;">ID</th>
+      <th>Feststellung</th>
+      <th style="width:90px;text-align:center;">Schwere</th>
+      <th style="width:90px;">Frist</th>
+      <th style="width:110px;">Verantwortlich</th>
+      <th>Empfehlung / Maßnahme</th>
+      <th style="width:90px;">Status</th>
+      <th style="width:150px;">Erledigt am</th>
+    </tr></thead>
+    <tbody>${erledigt.map(rowHtml).join('')}</tbody>
+  </table>` : ''}
+
+  <!-- UNTERSCHRIFTEN -->
+  <div class="signature-row no-print" style="margin-top:48px;">
+    <div>
+      <div style="margin-bottom:32px;"></div>
+      <div class="sig-box">Ort, Datum &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Auftraggeber</div>
+    </div>
+    <div>
+      <div style="margin-bottom:32px;"></div>
+      <div class="sig-box">Ort, Datum &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Revisionsbeauftragter / Bernhard Metzger</div>
+    </div>
+  </div>
+
+  <!-- PRINT BUTTON -->
+  <div class="no-print" style="margin-top:32px;padding-top:20px;border-top:1px solid #e5e7eb;display:flex;gap:12px;">
+    <button onclick="window.print()" style="padding:10px 24px;background:#0f2444;color:#fff;border:none;border-radius:6px;font-family:'Inter',sans-serif;font-size:13px;font-weight:600;cursor:pointer;">🖨 Drucken / PDF speichern</button>
+    <button onclick="window.close()" style="padding:10px 20px;background:#f3f4f6;color:#374151;border:1px solid #d1d5db;border-radius:6px;font-family:'Inter',sans-serif;font-size:13px;cursor:pointer;">Schließen</button>
+  </div>
+
+  <!-- FOOTER -->
+  <div style="margin-top:32px;padding-top:16px;border-top:1px solid #e5e7eb;display:flex;justify-content:space-between;font-size:10px;color:#9ca3af;">
+    <span>Maßnahmenplan · ${projName} · Erstellt: ${heute}</span>
+    <span>© Bernhard Metzger · BuiltSmart Hub · www.built-smart-hub.com</span>
+  </div>
+
+</div>
+</body>
+</html>`;
+
+  const w = window.open('', '_blank', 'width=1200,height=900,scrollbars=yes');
+  if (!w) { alert('Popup blockiert. Bitte Popup-Blocker deaktivieren.'); return; }
+  w.document.write(html);
+  w.document.close();
+  w.focus();
+}
+
 function exportDocx(){
   // Generate report data and trigger server-side or provide instructions
   const p=AP(); const d=D();
