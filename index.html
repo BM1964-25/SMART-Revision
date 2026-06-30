@@ -712,6 +712,19 @@ textarea{resize:vertical;min-height:72px;}
   .pl2-soll-col{border-right:none;border-bottom:1px solid var(--b);}
 }
 
+
+/* ═══ REVISIONSMODUS FILTER ═══════════════════════════════════════════ */
+.rvm-panel{background:var(--bgc);border:1px solid var(--b);border-radius:6px;padding:10px 14px;margin-bottom:10px;display:flex;flex-direction:column;gap:8px;}
+.rvm-row{display:flex;align-items:center;gap:8px;flex-wrap:wrap;}
+.rvm-row-lbl{font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--ink3);min-width:90px;}
+.rvm-chip{padding:4px 10px;border:1.5px solid var(--b);border-radius:14px;background:var(--card);font-size:11.5px;font-weight:600;color:var(--ink3);cursor:pointer;transition:all .12s;white-space:nowrap;}
+.rvm-chip:hover{border-color:var(--ac);color:var(--ac);}
+.rvm-chip.active{background:var(--navy,#0f2444);border-color:var(--navy,#0f2444);color:#fff;}
+.rvm-summary{font-size:11px;color:var(--ink3);font-style:italic;}
+.rvm-reset-btn{padding:3px 10px;border:1px solid var(--b);border-radius:4px;background:var(--card);font-size:10.5px;cursor:pointer;color:var(--ink3);margin-left:auto;}
+.rvm-reset-btn:hover{border-color:var(--ac);color:var(--ac);}
+.pl2-tab-hidden{display:none!important;}
+
 </style>
 </head>
 <body>
@@ -1111,6 +1124,38 @@ textarea{resize:vertical;min-height:72px;}
             <button class="btn bg sm" onclick="pl2ResetActive()">Zurücksetzen</button>
             <button class="btn bg sm" onclick="pl2ExportTxt()">&#8595; Export</button>
             <button class="btn bp sm" onclick="pl2SaveToProject()">In Bericht übernehmen</button>
+          </div>
+        </div>
+        <div class="rvm-panel">
+          <div class="rvm-row">
+            <span class="rvm-row-lbl">Auftragstyp</span>
+            <button class="rvm-chip active" data-group="typ" data-val="alle" onclick="rvmSet('typ',this)">Alle</button>
+            <button class="rvm-chip" data-group="typ" data-val="vollrevision" onclick="rvmSet('typ',this)">Vollrevision</button>
+            <button class="rvm-chip" data-group="typ" data-val="honorar" onclick="rvmSet('typ',this)">Honorarprüfung</button>
+            <button class="rvm-chip" data-group="typ" data-val="rechnung" onclick="rvmSet('typ',this)">Rechnungsprüfung</button>
+            <button class="rvm-chip" data-group="typ" data-val="nachtrag" onclick="rvmSet('typ',this)">Nachtragsanalyse</button>
+            <button class="rvm-chip" data-group="typ" data-val="abnahme" onclick="rvmSet('typ',this)">Abnahmeprüfung</button>
+            <button class="rvm-chip" data-group="typ" data-val="duediligence" onclick="rvmSet('typ',this)">Due Diligence</button>
+            <button class="rvm-chip" data-group="typ" data-val="fraud" onclick="rvmSet('typ',this)">Fraud-Verdacht</button>
+          </div>
+          <div class="rvm-row">
+            <span class="rvm-row-lbl">Prüfungsansatz</span>
+            <button class="rvm-chip active" data-group="ansatz" data-val="alle" onclick="rvmSet('ansatz',this)">Alle</button>
+            <button class="rvm-chip" data-group="ansatz" data-val="ex-ante" onclick="rvmSet('ansatz',this)">Ex-ante</button>
+            <button class="rvm-chip" data-group="ansatz" data-val="ex-post" onclick="rvmSet('ansatz',this)">Ex-post</button>
+            <button class="rvm-chip" data-group="ansatz" data-val="ad-hoc" onclick="rvmSet('ansatz',this)">Ad-hoc</button>
+          </div>
+          <div class="rvm-row">
+            <span class="rvm-row-lbl">Bauphase</span>
+            <button class="rvm-chip active" data-group="phase" data-val="alle" onclick="rvmSet('phase',this)">Alle</button>
+            <button class="rvm-chip" data-group="phase" data-val="planung" onclick="rvmSet('phase',this)">Planung</button>
+            <button class="rvm-chip" data-group="phase" data-val="vergabe" onclick="rvmSet('phase',this)">Vergabe</button>
+            <button class="rvm-chip" data-group="phase" data-val="ausfuehrung" onclick="rvmSet('phase',this)">Ausführung</button>
+            <button class="rvm-chip" data-group="phase" data-val="abnahme" onclick="rvmSet('phase',this)">Abnahme</button>
+            <button class="rvm-chip" data-group="phase" data-val="abrechnung" onclick="rvmSet('phase',this)">Abrechnung</button>
+            <button class="rvm-chip" data-group="phase" data-val="gewaehrleist" onclick="rvmSet('phase',this)">Gewährleistung</button>
+            <span class="rvm-summary" id="rvm-summary"></span>
+            <button class="rvm-reset-btn" onclick="rvmReset()">Filter zurücksetzen</button>
           </div>
         </div>
         <div class="pl2-tabs" id="pl2-tabs"></div>
@@ -4579,6 +4624,89 @@ function pl2Render(){
       +'</div>';
   }).join('');
 }
+
+
+// ═══════════════════════════════════════════════════════════════════════
+// REVISIONSMODUS: Auftragstyp + Ansatz + Bauphase → Filter der Prüfmodule
+// ═══════════════════════════════════════════════════════════════════════
+var rvmState = { typ:'alle', ansatz:'alle', phase:'alle' };
+
+// Zuordnung: welche Listen/Pakete gehören zu welchem Auftragstyp
+var RVM_FILTER = {
+  'alle':            null, // zeigt alles
+  'vollrevision':    ['pf1','pf2','pf3','pf4','pf5','pf6','pf7','pf8','iks','ava','mrea-vobb','mrea-hoai-full'],
+  'honorar':         ['pf2','pf3','iks','mrea-hoai-full','mrea-hoai'],
+  'rechnung':        ['pf7','ava','fp-rech','iks','mrea-vobb'],
+  'nachtrag':        ['pf6','nm-prozess','mrea-vobb'],
+  'abnahme':         ['pf5','pf8','mrea-vobb'],
+  'duediligence':    ['pf1','pf2','pf3','pf4','pf5','pf6','pf7','pf8','iks','ava','fp-plan','fp-rech','nm-prozess','mrea-vobb','mrea-hoai-full','mrea-neubau','mrea-revmethodik'],
+  'fraud':           ['iks','fp-plan','fp-rech','nm-prozess','pf2','pf4']
+};
+
+// Zuordnung: welche Listen gehören zu welcher Bauphase
+var RVM_PHASE = {
+  'alle':         null,
+  'planung':      ['pf1','pf2','pf3','mrea-hoai-full'],
+  'vergabe':      ['pf2','pf4','ava','mrea-vobb'],
+  'ausfuehrung':  ['pf5','pf6','iks','mrea-vobb'],
+  'abnahme':      ['pf8','mrea-vobb'],
+  'abrechnung':   ['pf7','ava','fp-rech','mrea-vobb','mrea-hoai-full'],
+  'gewaehrleist': ['pf8','mrea-vobb']
+};
+
+function rvmSet(group, btn){
+  rvmState[group] = btn.dataset.val;
+  document.querySelectorAll('.rvm-chip[data-group="'+group+'"]').forEach(function(b){
+    b.classList.toggle('active', b===btn);
+  });
+  rvmApply();
+}
+
+function rvmReset(){
+  rvmState = { typ:'alle', ansatz:'alle', phase:'alle' };
+  document.querySelectorAll('.rvm-chip').forEach(function(b){
+    b.classList.toggle('active', b.dataset.val==='alle');
+  });
+  rvmApply();
+}
+
+function rvmGetAllowedIds(){
+  var byTyp   = RVM_FILTER[rvmState.typ];
+  var byPhase = RVM_PHASE[rvmState.phase];
+  if(!byTyp && !byPhase) return null; // alles erlaubt
+  if(byTyp && !byPhase) return byTyp;
+  if(!byTyp && byPhase) return byPhase;
+  // Schnittmenge
+  return byTyp.filter(function(id){ return byPhase.indexOf(id)>-1; });
+}
+
+function rvmApply(){
+  var allowed = rvmGetAllowedIds();
+  // Tabs ein-/ausblenden
+  document.querySelectorAll('.pl2-tab').forEach(function(tab){
+    var id = tab.dataset.id;
+    var show = !allowed || allowed.indexOf(id)>-1;
+    tab.classList.toggle('pl2-tab-hidden', !show);
+  });
+  // Wenn aktiver Tab ausgeblendet wird, auf ersten sichtbaren wechseln
+  if(allowed && allowed.indexOf(pl2Active)===-1){
+    var firstVisible = document.querySelector('.pl2-tab:not(.pl2-tab-hidden)');
+    if(firstVisible && firstVisible.dataset.id){
+      pl2SetActive(firstVisible.dataset.id);
+    }
+  }
+  // Summary-Zeile aktualisieren
+  var sumEl = document.getElementById('rvm-summary');
+  if(sumEl){
+    if(!allowed){
+      sumEl.textContent = '';
+    } else {
+      var visibleCount = allowed.length;
+      sumEl.textContent = visibleCount + ' von ' + (PL2_DATA.length + Object.keys(MREA_PACKAGES).length) + ' Pr\u00fcfmodulen relevant';
+    }
+  }
+}
+
 
 function pl2SetActive(id){
   pl2Active=id;
