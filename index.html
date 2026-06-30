@@ -735,6 +735,22 @@ textarea{resize:vertical;min-height:72px;}
 .pl2-vorlage-del{width:24px;height:24px;border:1px solid var(--b);border-radius:4px;background:var(--card);color:var(--ink3);cursor:pointer;font-size:11px;}
 .pl2-vorlage-del:hover{border-color:#dc2626;color:#dc2626;}
 
+
+/* ═══ SOLLZUSTAND EDITIERBAR ═══════════════════════════════════════════ */
+.pl2-soll-edit-btn{display:inline-flex;align-items:center;gap:3px;font-size:10px;color:var(--ink3);background:none;border:none;cursor:pointer;padding:2px 5px;border-radius:3px;margin-top:6px;}
+.pl2-soll-edit-btn:hover{background:var(--bgc);color:var(--ac);}
+.pl2-soll-edited-badge{display:inline-block;font-size:9px;font-weight:700;color:#b8882a;background:#fdf4e3;padding:1px 6px;border-radius:3px;margin-left:6px;letter-spacing:.03em;}
+.pl2-soll-edit-box{margin-top:8px;display:flex;flex-direction:column;gap:6px;}
+.pl2-soll-edit-textarea{width:100%;padding:7px 9px;border:1.5px solid var(--ac);border-radius:4px;font-size:12.5px;font-family:inherit;outline:none;resize:vertical;min-height:60px;}
+.pl2-soll-edit-acts{display:flex;gap:6px;}
+.pl2-soll-save-btn{padding:4px 12px;background:var(--navy,#0f2444);color:#fff;border:none;border-radius:4px;font-size:11px;font-weight:600;cursor:pointer;}
+.pl2-soll-reset-btn{padding:4px 10px;background:var(--bgc);border:1px solid var(--b);border-radius:4px;font-size:11px;cursor:pointer;color:var(--ink3);}
+.pl2-soll-locked-note{font-size:10px;color:var(--ink3);font-style:italic;margin-top:4px;}
+.pl2-hint-box{margin-top:8px;padding:8px 10px;background:#fffbeb;border:1px solid #fde68a;border-radius:4px;}
+.pl2-hint-lbl{font-size:9px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:#92400e;margin-bottom:4px;}
+.pl2-hint-textarea{width:100%;padding:6px 8px;border:1px solid #fde68a;border-radius:4px;font-size:12px;font-family:inherit;outline:none;resize:vertical;min-height:40px;background:#fff;}
+.pl2-hint-display{font-size:12px;color:#78350f;line-height:1.5;}
+
 </style>
 </head>
 <body>
@@ -4239,6 +4255,8 @@ function pl2LoadFromProject(){
   pl2Checks = p.pl2Checks||{};
   pl2Status = p.pl2Status||{};
   pl2Ist    = p.pl2Ist||{};
+  pl2SollEdit = p.pl2SollEdit||{};
+  pl2SollHint = p.pl2SollHint||{};
 }
 
 function pl2SaveToProjectData(){
@@ -4414,6 +4432,51 @@ function pl2CreateEintrag(listId,si,ii,status){
 }
 
 // Erweiterte Soll/Ist Render-Funktion
+
+// ═══════════════════════════════════════════════════════════════════════
+// SOLLZUSTAND ANPASSEN: editierbar bei eigenen Listen, Hinweis bei Gesetz
+// ═══════════════════════════════════════════════════════════════════════
+var pl2SollEdit = {}; // projekt-spezifische Überschreibung des Sollzustands
+var pl2SollHint = {}; // Zusatzhinweis bei Gesetzeslisten (VOB/B, HOAI)
+var pl2EditOpen = {}; // welche Edit-Felder gerade offen sind
+
+var PL2_LOCKED_LISTS = ['mrea-vobb','mrea-hoai-full','mrea-hoai','mrea-neubau','mrea-revmethodik'];
+
+function pl2KeySoll(listId,si,ii){ return listId+'_s'+si+'_i'+ii+'_soll'; }
+function pl2KeyHint(listId,si,ii){ return listId+'_s'+si+'_i'+ii+'_hint'; }
+
+function pl2ToggleEdit(listId,si,ii){
+  var ek = listId+'_'+si+'_'+ii;
+  pl2EditOpen[ek] = !pl2EditOpen[ek];
+  pl2Render();
+}
+
+function pl2SaveSollEdit(listId,si,ii,val){
+  var k = pl2KeySoll(listId,si,ii);
+  if(val && val.trim()){ pl2SollEdit[k] = val.trim(); }
+  else { delete pl2SollEdit[k]; }
+  pl2SaveSollToProject();
+}
+function pl2ResetSollEdit(listId,si,ii){
+  var k = pl2KeySoll(listId,si,ii);
+  delete pl2SollEdit[k];
+  pl2SaveSollToProject();
+  pl2Render();
+}
+function pl2SaveHint(listId,si,ii,val){
+  var k = pl2KeyHint(listId,si,ii);
+  if(val && val.trim()){ pl2SollHint[k] = val.trim(); }
+  else { delete pl2SollHint[k]; }
+  pl2SaveSollToProject();
+}
+function pl2SaveSollToProject(){
+  var p=AP(); if(!p) return;
+  p.pl2SollEdit = pl2SollEdit;
+  p.pl2SollHint = pl2SollHint;
+  persist();
+}
+
+
 function pl2RenderItem(listId, item, si, ii){
   var key    = pl2Key(listId,si,ii);
   var ks     = pl2KeyStatus(listId,si,ii);
@@ -4450,8 +4513,29 @@ function pl2RenderItem(listId, item, si, ii){
     +'<div class="pl2-item2-body">'
     // Linke Spalte: Soll
     +'<div class="pl2-soll-col">'
-    +'<div class="pl2-col-lbl">SOLLZUSTAND</div>'
-    +'<div class="pl2-soll-txt">'+item.txt+'</div>'
+    +'<div class="pl2-col-lbl">SOLLZUSTAND'+(pl2SollEdit[pl2KeySoll(listId,si,ii)]?'<span class="pl2-soll-edited-badge">Angepasst</span>':'')+'</div>'
+    +'<div class="pl2-soll-txt">'+(pl2SollEdit[pl2KeySoll(listId,si,ii)]||item.txt)+'</div>'
+    +(PL2_LOCKED_LISTS.indexOf(listId)>-1
+      // Gesetzesliste: nur Hinweis-Ergänzung, kein Überschreiben
+      ? ('<div class="pl2-hint-box">'
+        +'<div class="pl2-hint-lbl">\u270e Zusatzhinweis (projektspezifisch)</div>'
+        +(pl2EditOpen[listId+'_'+si+'_'+ii]
+          ? '<textarea class="pl2-hint-textarea" data-lid="'+listId+'" data-si="'+si+'" data-ii="'+ii+'" placeholder="Erg\u00e4nzender Hinweis f\u00fcr dieses Projekt \u2026" onchange="pl2SaveHint(this.dataset.lid,+this.dataset.si,+this.dataset.ii,this.value)">'+(pl2SollHint[pl2KeyHint(listId,si,ii)]||'')+'</textarea>'
+          : (pl2SollHint[pl2KeyHint(listId,si,ii)]
+            ? '<div class="pl2-hint-display">'+pl2SollHint[pl2KeyHint(listId,si,ii)]+'</div>'
+            : ''))
+        +'</div>'
+        +'<button class="pl2-soll-edit-btn" data-lid="'+listId+'" data-si="'+si+'" data-ii="'+ii+'" onclick="pl2ToggleEdit(this.dataset.lid,+this.dataset.si,+this.dataset.ii)">\u270e '+(pl2EditOpen[listId+'_'+si+'_'+ii]?'Hinweis schlie\u00dfen':'Hinweis hinzuf\u00fcgen')+'</button>'
+        +'<div class="pl2-soll-locked-note">Gesetzestext gesch\u00fctzt \u2013 nur Erg\u00e4nzung m\u00f6glich</div>')
+      // Eigene Liste: vollständig editierbar
+      : ((pl2EditOpen[listId+'_'+si+'_'+ii]
+        ? ('<div class="pl2-soll-edit-box">'
+          +'<textarea class="pl2-soll-edit-textarea" data-lid="'+listId+'" data-si="'+si+'" data-ii="'+ii+'" onchange="pl2SaveSollEdit(this.dataset.lid,+this.dataset.si,+this.dataset.ii,this.value)">'+(pl2SollEdit[pl2KeySoll(listId,si,ii)]||item.txt)+'</textarea>'
+          +'<div class="pl2-soll-edit-acts">'
+          +'<button class="pl2-soll-save-btn" data-lid="'+listId+'" data-si="'+si+'" data-ii="'+ii+'" onclick="pl2ToggleEdit(this.dataset.lid,+this.dataset.si,+this.dataset.ii)">\u2713 \u00dcbernehmen</button>'
+          +(pl2SollEdit[pl2KeySoll(listId,si,ii)]?'<button class="pl2-soll-reset-btn" data-lid="'+listId+'" data-si="'+si+'" data-ii="'+ii+'" onclick="pl2ResetSollEdit(this.dataset.lid,+this.dataset.si,+this.dataset.ii)">Original wiederherstellen</button>':'')
+          +'</div></div>')
+        : '<button class="pl2-soll-edit-btn" data-lid="'+listId+'" data-si="'+si+'" data-ii="'+ii+'" onclick="pl2ToggleEdit(this.dataset.lid,+this.dataset.si,+this.dataset.ii)">\u270e Sollzustand anpassen</button>')))
     +'</div>'
     // Rechte Spalte: Ist
     +'<div class="pl2-ist-col">'
