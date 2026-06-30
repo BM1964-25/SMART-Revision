@@ -4612,7 +4612,7 @@ function pl2Render(){
       var sevLbl2={m:'Muss',s:'Soll',h:'Kann'};var sevCls2={m:'pl2-sev-m',s:'pl2-sev-s',h:'pl2-sev-h'};
       body.innerHTML=mreaPkg.sections.map(function(sec,si){
         var secDone=0;sec.items.forEach(function(_,ii){if(pl2Checks[pl2Key(mreaPkg.id,si,ii)])secDone++;});
-        var secPct=Math.round(secDone/sec.items.length*100);var isOpen=pl2OpenSecs[mreaPkg.id+'_'+si]!==false;
+        var secPct=Math.round(secDone/sec.items.length*100);var isOpen=pl2OpenSecs[mreaPkg.id+'_'+si]===true;
         return '<div class="pl2-section">'
           +'<div class="pl2-sec-hdr'+(isOpen?' pl2-sec-open':'')+'" data-lid="'+mreaPkg.id+'" data-si="'+si+'" onclick="pl2ToggleSec(this.dataset.lid,+this.dataset.si)">'
           +'<span class="pl2-sec-icon">'+mreaPkg.icon+'</span><span class="pl2-sec-title">'+sec.title+'</span>'
@@ -4641,7 +4641,7 @@ function pl2Render(){
     sec.items.forEach(function(_,ii){ if(pl2Checks[pl2Key(list.id,si,ii)]) secDone++; });
     var secPct=Math.round(secDone/secTotal*100);
     var isDone=secDone===secTotal;
-    var isOpen=pl2OpenSecs[list.id+'_'+si]!==false; // default open
+    var isOpen=pl2OpenSecs[list.id+'_'+si]===true; // default closed
     return '<div class="pl2-section" id="pl2sec_'+list.id+'_'+si+'">'
       +'<div class="pl2-sec-hdr'+(isOpen?' pl2-sec-open':'')+'" onclick="pl2ToggleSec(\''+list.id+'\','+si+')">'
       +'<span class="pl2-sec-icon">'+list.icon+'</span>'
