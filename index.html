@@ -713,17 +713,27 @@ textarea{resize:vertical;min-height:72px;}
 }
 
 
-/* ═══ REVISIONSMODUS FILTER ═══════════════════════════════════════════ */
-.rvm-panel{background:var(--bgc);border:1px solid var(--b);border-radius:6px;padding:10px 14px;margin-bottom:10px;display:flex;flex-direction:column;gap:8px;}
-.rvm-row{display:flex;align-items:center;gap:8px;flex-wrap:wrap;}
-.rvm-row-lbl{font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--ink3);min-width:90px;}
-.rvm-chip{padding:4px 10px;border:1.5px solid var(--b);border-radius:14px;background:var(--card);font-size:11.5px;font-weight:600;color:var(--ink3);cursor:pointer;transition:all .12s;white-space:nowrap;}
-.rvm-chip:hover{border-color:var(--ac);color:var(--ac);}
-.rvm-chip.active{background:var(--navy,#0f2444);border-color:var(--navy,#0f2444);color:#fff;}
-.rvm-summary{font-size:11px;color:var(--ink3);font-style:italic;}
-.rvm-reset-btn{padding:3px 10px;border:1px solid var(--b);border-radius:4px;background:var(--card);font-size:10.5px;cursor:pointer;color:var(--ink3);margin-left:auto;}
-.rvm-reset-btn:hover{border-color:var(--ac);color:var(--ac);}
-.pl2-tab-hidden{display:none!important;}
+/* ═══ INDIVIDUELLE PRÜFLISTE ═══════════════════════════════════════════ */
+.pl2-ind-form{background:#fafafa;border:1px solid var(--b);border-radius:6px;padding:14px 16px;margin-bottom:14px;display:flex;flex-direction:column;gap:8px;}
+.pl2-ind-form-hdr{font-size:12px;font-weight:700;color:var(--ink);letter-spacing:.02em;}
+.pl2-ind-row{display:grid;grid-template-columns:2fr 1fr 1fr;gap:8px;}
+.pl2-ind-field{padding:7px 10px;border:1px solid var(--b);border-radius:4px;font-size:12.5px;font-family:inherit;outline:none;}
+.pl2-ind-field:focus{border-color:var(--ac);}
+.pl2-ind-textarea{width:100%;padding:8px 10px;border:1px solid var(--b);border-radius:4px;font-size:12.5px;font-family:inherit;outline:none;resize:vertical;min-height:54px;}
+.pl2-ind-actions{display:flex;align-items:center;gap:10px;justify-content:space-between;}
+.pl2-ind-tpl-check{display:flex;align-items:center;gap:5px;font-size:11.5px;color:var(--ink3);}
+.pl2-ind-add-btn{padding:7px 16px;background:var(--navy,#0f2444);color:#fff;border:none;border-radius:4px;font-size:12.5px;font-weight:600;cursor:pointer;}
+.pl2-ind-tpl-btn{padding:7px 14px;background:var(--bgc);border:1px solid var(--b);border-radius:4px;font-size:12px;cursor:pointer;color:var(--ink3);}
+.pl2-ind-tpl-btn:hover{border-color:var(--ac);color:var(--ac);}
+.pl2-ind-del{position:absolute;top:8px;right:8px;width:20px;height:20px;border:none;background:none;color:var(--ink3);cursor:pointer;font-size:13px;border-radius:3px;}
+.pl2-ind-del:hover{background:#fee2e2;color:#dc2626;}
+.pl2-ind-empty{text-align:center;padding:30px;color:var(--ink3);font-size:13px;font-style:italic;}
+
+.pl2-vorlage-row{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:10px 12px;border-bottom:1px solid var(--b);}
+.pl2-vorlage-info{flex:1;font-size:12.5px;}
+.pl2-vorlage-acts{display:flex;gap:6px;align-items:center;}
+.pl2-vorlage-del{width:24px;height:24px;border:1px solid var(--b);border-radius:4px;background:var(--card);color:var(--ink3);cursor:pointer;font-size:11px;}
+.pl2-vorlage-del:hover{border-color:#dc2626;color:#dc2626;}
 
 </style>
 </head>
@@ -1126,38 +1136,6 @@ textarea{resize:vertical;min-height:72px;}
             <button class="btn bp sm" onclick="pl2SaveToProject()">In Bericht übernehmen</button>
           </div>
         </div>
-        <div class="rvm-panel">
-          <div class="rvm-row">
-            <span class="rvm-row-lbl">Auftragstyp</span>
-            <button class="rvm-chip active" data-group="typ" data-val="alle" onclick="rvmSet('typ',this)">Alle</button>
-            <button class="rvm-chip" data-group="typ" data-val="vollrevision" onclick="rvmSet('typ',this)">Vollrevision</button>
-            <button class="rvm-chip" data-group="typ" data-val="honorar" onclick="rvmSet('typ',this)">Honorarprüfung</button>
-            <button class="rvm-chip" data-group="typ" data-val="rechnung" onclick="rvmSet('typ',this)">Rechnungsprüfung</button>
-            <button class="rvm-chip" data-group="typ" data-val="nachtrag" onclick="rvmSet('typ',this)">Nachtragsanalyse</button>
-            <button class="rvm-chip" data-group="typ" data-val="abnahme" onclick="rvmSet('typ',this)">Abnahmeprüfung</button>
-            <button class="rvm-chip" data-group="typ" data-val="duediligence" onclick="rvmSet('typ',this)">Due Diligence</button>
-            <button class="rvm-chip" data-group="typ" data-val="fraud" onclick="rvmSet('typ',this)">Fraud-Verdacht</button>
-          </div>
-          <div class="rvm-row">
-            <span class="rvm-row-lbl">Prüfungsansatz</span>
-            <button class="rvm-chip active" data-group="ansatz" data-val="alle" onclick="rvmSet('ansatz',this)">Alle</button>
-            <button class="rvm-chip" data-group="ansatz" data-val="ex-ante" onclick="rvmSet('ansatz',this)">Ex-ante</button>
-            <button class="rvm-chip" data-group="ansatz" data-val="ex-post" onclick="rvmSet('ansatz',this)">Ex-post</button>
-            <button class="rvm-chip" data-group="ansatz" data-val="ad-hoc" onclick="rvmSet('ansatz',this)">Ad-hoc</button>
-          </div>
-          <div class="rvm-row">
-            <span class="rvm-row-lbl">Bauphase</span>
-            <button class="rvm-chip active" data-group="phase" data-val="alle" onclick="rvmSet('phase',this)">Alle</button>
-            <button class="rvm-chip" data-group="phase" data-val="planung" onclick="rvmSet('phase',this)">Planung</button>
-            <button class="rvm-chip" data-group="phase" data-val="vergabe" onclick="rvmSet('phase',this)">Vergabe</button>
-            <button class="rvm-chip" data-group="phase" data-val="ausfuehrung" onclick="rvmSet('phase',this)">Ausführung</button>
-            <button class="rvm-chip" data-group="phase" data-val="abnahme" onclick="rvmSet('phase',this)">Abnahme</button>
-            <button class="rvm-chip" data-group="phase" data-val="abrechnung" onclick="rvmSet('phase',this)">Abrechnung</button>
-            <button class="rvm-chip" data-group="phase" data-val="gewaehrleist" onclick="rvmSet('phase',this)">Gewährleistung</button>
-            <span class="rvm-summary" id="rvm-summary"></span>
-            <button class="rvm-reset-btn" onclick="rvmReset()">Filter zurücksetzen</button>
-          </div>
-        </div>
         <div class="pl2-tabs" id="pl2-tabs"></div>
         <div class="pl2-progress">
           <div class="pl2-prog-fill" id="pl2-prog-fill" style="width:0%"></div>
@@ -1166,6 +1144,17 @@ textarea{resize:vertical;min-height:72px;}
       </div>
     </div>
 
+
+<!-- VORLAGEN-PICKER MODAL -->
+<div class="modal-overlay" id="pl2-vorlagen-modal" style="display:none;" onclick="if(event.target===this)pl2CloseVorlagenPicker()">
+  <div class="modal-box" style="max-width:460px;">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;">
+      <h4 style="margin:0;">☆ Vorlagen-Bibliothek</h4>
+      <button onclick="pl2CloseVorlagenPicker()" style="background:none;border:none;font-size:18px;cursor:pointer;color:var(--ink3);">✕</button>
+    </div>
+    <div id="pl2-vorlagen-list" style="max-height:400px;overflow-y:auto;"></div>
+  </div>
+</div>
 
 <!-- HILFE-OVERLAY -->
 <div class="hilfe-overlay" id="hilfe-overlay" onclick="closeHilfe()"></div>
@@ -4288,11 +4277,18 @@ function pl2SaveIst(listId,si,ii,val){
 
 // KI-Formular aufrufen für Prüfpunkt
 async function pl2KiFormulieren(listId,si,ii,modus){
-  var src = PL2_DATA.find(function(l){return l.id===listId;})||MREA_PACKAGES[listId];
-  if(!src) return;
-  var sec  = src.sections[si];
-  var item = sec ? sec.items[ii] : null;
-  if(!item) return;
+  var item;
+  if(listId==='individuell'){
+    var ind=pl2GetIndividuell(); var it0=ind[ii];
+    if(!it0) return;
+    item={txt:it0.titel+': '+it0.txt, ref:it0.ref, sev:it0.sev};
+  } else {
+    var src = PL2_DATA.find(function(l){return l.id===listId;})||MREA_PACKAGES[listId];
+    if(!src) return;
+    var sec  = src.sections[si];
+    item = sec ? sec.items[ii] : null;
+    if(!item) return;
+  }
 
   var key   = pl2KeyIst(listId,si,ii);
   var istVal = pl2Ist[key]||'';
@@ -4380,11 +4376,18 @@ function pl2KiToggle(listId,si,ii){
 
 // Eintrag erstellen (für alle Status)
 function pl2CreateEintrag(listId,si,ii,status){
-  var src = PL2_DATA.find(function(l){return l.id===listId;})||MREA_PACKAGES[listId];
-  if(!src) return;
-  var sec  = src.sections[si];
-  var item = sec ? sec.items[ii] : null;
-  if(!item) return;
+  var item;
+  if(listId==='individuell'){
+    var ind=pl2GetIndividuell(); var it0=ind[ii];
+    if(!it0) return;
+    item={txt:it0.titel+': '+it0.txt, ref:it0.ref, sev:it0.sev};
+  } else {
+    var src = PL2_DATA.find(function(l){return l.id===listId;})||MREA_PACKAGES[listId];
+    if(!src) return;
+    var sec  = src.sections[si];
+    item = sec ? sec.items[ii] : null;
+    if(!item) return;
+  }
   var kiKey = listId+'_'+si+'_'+ii;
   var istVal = pl2Ist[pl2KeyIst(listId,si,ii)]||'';
   var sevMap = {m:'Kritisch',s:'Erheblich',h:'Hinweis'};
@@ -4549,6 +4552,7 @@ function pl2Render(){
       return '<button class="pl2-tab'+(list.id===pl2Active?' active':'')+(isDone?' done':'')+'" data-id="'+list.id+'" onclick="pl2SetActive(this.dataset.id)">'
         +list.icon+' '+list.title+'<span class="pl2-tab-pct">'+tabPct+'%</span>'+'</button>';
     }).join('');
+    _th+='<button class="pl2-tab'+(pl2Active==="individuell"?" active":"")+'" data-id="individuell" onclick="pl2SetActive(this.dataset.id)">\u270e Individuell</button>';
     _th+='<div class="pl2-mrea-sep"></div><span class="pl2-tab-group-lbl">M-REA</span>';
     Object.values(MREA_PACKAGES).forEach(function(pkg){
       var unlocked=mreaIsUnlocked(pkg.id);var isActive=pl2Active===pkg.id;
@@ -4560,6 +4564,36 @@ function pl2Render(){
   }
 
   // Body
+  if(pl2Active==='individuell'){
+    var body0=document.getElementById('pl2-body');if(!body0)return;
+    var items0=pl2GetIndividuell();
+    var sevLbl0={m:'Muss',s:'Soll',h:'Kann'};var sevCls0={m:'pl2-sev-m',s:'pl2-sev-s',h:'pl2-sev-h'};
+    var formHtml='<div class="pl2-ind-form">'
+      +'<div class="pl2-ind-form-hdr">+ Individuellen Pr\u00fcfpunkt erstellen</div>'
+      +'<input class="pl2-ind-field" id="pl2ind-titel" placeholder="Titel (z.B. Pr\u00fcfung Sonderwunsch Bauherr)">'
+      +'<div class="pl2-ind-row">'
+      +'<input class="pl2-ind-field" id="pl2ind-ref" placeholder="Rechtsgrundlage / Quelle (optional)">'
+      +'<select class="pl2-ind-field" id="pl2ind-sev"><option value="m">Muss</option><option value="s">Soll</option><option value="h">Kann</option></select>'
+      +'<span></span></div>'
+      +'<textarea class="pl2-ind-textarea" id="pl2ind-soll" placeholder="Sollzustand formulieren \u2026"></textarea>'
+      +'<div class="pl2-ind-actions">'
+      +'<label class="pl2-ind-tpl-check"><input type="checkbox" id="pl2ind-save-tpl"> Als Vorlage f\u00fcr zuk\u00fcnftige Projekte speichern</label>'
+      +'<div style="display:flex;gap:8px;">'
+      +'<button class="pl2-ind-tpl-btn" onclick="pl2OpenVorlagenPicker()">\u2606 Aus Vorlagen w\u00e4hlen</button>'
+      +'<button class="pl2-ind-add-btn" onclick="pl2AddIndividuellerPunkt()">+ Hinzuf\u00fcgen</button>'
+      +'</div></div></div>';
+    var itemsHtml = items0.length===0
+      ? '<div class="pl2-ind-empty">Noch keine individuellen Pr\u00fcfpunkte f\u00fcr dieses Projekt erstellt.</div>'
+      : items0.map(function(it,idx0){
+          var rendered = pl2RenderItem('individuell',{txt:it.titel+': '+it.txt,ref:it.ref,sev:it.sev},0,idx0);
+          var withDel = rendered.replace('<div class="pl2-item2"', '<div class="pl2-item2" style="position:relative;"');
+          withDel = withDel.replace('<div class="pl2-item2-hdr">', '<button class="pl2-ind-del" data-id="'+it.id+'" onclick="pl2RemoveIndividuellerPunkt(this.dataset.id)">\u2715</button><div class="pl2-item2-hdr">');
+          return withDel;
+        }).join('');
+    body0.innerHTML = formHtml + itemsHtml;
+    var ov0=document.getElementById('pl2-overall'); if(ov0) ov0.textContent=items0.length+' individuelle Pr\u00fcfpunkte';
+    return;
+  }
   var mreaPkg=MREA_PACKAGES[pl2Active];
   if(mreaPkg){
     var body=document.getElementById('pl2-body');if(!body)return;
@@ -4627,84 +4661,105 @@ function pl2Render(){
 
 
 // ═══════════════════════════════════════════════════════════════════════
-// REVISIONSMODUS: Auftragstyp + Ansatz + Bauphase → Filter der Prüfmodule
+// INDIVIDUELLE PRÜFLISTE: Eigene Prüfpunkte erstellen + als Vorlage speichern
 // ═══════════════════════════════════════════════════════════════════════
-var rvmState = { typ:'alle', ansatz:'alle', phase:'alle' };
 
-// Zuordnung: welche Listen/Pakete gehören zu welchem Auftragstyp
-var RVM_FILTER = {
-  'alle':            null, // zeigt alles
-  'vollrevision':    ['pf1','pf2','pf3','pf4','pf5','pf6','pf7','pf8','iks','ava','mrea-vobb','mrea-hoai-full'],
-  'honorar':         ['pf2','pf3','iks','mrea-hoai-full','mrea-hoai'],
-  'rechnung':        ['pf7','ava','fp-rech','iks','mrea-vobb'],
-  'nachtrag':        ['pf6','nm-prozess','mrea-vobb'],
-  'abnahme':         ['pf5','pf8','mrea-vobb'],
-  'duediligence':    ['pf1','pf2','pf3','pf4','pf5','pf6','pf7','pf8','iks','ava','fp-plan','fp-rech','nm-prozess','mrea-vobb','mrea-hoai-full','mrea-neubau','mrea-revmethodik'],
-  'fraud':           ['iks','fp-plan','fp-rech','nm-prozess','pf2','pf4']
-};
-
-// Zuordnung: welche Listen gehören zu welcher Bauphase
-var RVM_PHASE = {
-  'alle':         null,
-  'planung':      ['pf1','pf2','pf3','mrea-hoai-full'],
-  'vergabe':      ['pf2','pf4','ava','mrea-vobb'],
-  'ausfuehrung':  ['pf5','pf6','iks','mrea-vobb'],
-  'abnahme':      ['pf8','mrea-vobb'],
-  'abrechnung':   ['pf7','ava','fp-rech','mrea-vobb','mrea-hoai-full'],
-  'gewaehrleist': ['pf8','mrea-vobb']
-};
-
-function rvmSet(group, btn){
-  rvmState[group] = btn.dataset.val;
-  document.querySelectorAll('.rvm-chip[data-group="'+group+'"]').forEach(function(b){
-    b.classList.toggle('active', b===btn);
-  });
-  rvmApply();
+// Vorlagen-Bibliothek liegt in localStorage (geräteweit, über Projekte hinweg)
+function pl2GetVorlagen(){
+  try { return JSON.parse(localStorage.getItem('sr_pl2_vorlagen')||'[]'); }
+  catch(e){ return []; }
+}
+function pl2SaveVorlagen(arr){
+  try { localStorage.setItem('sr_pl2_vorlagen', JSON.stringify(arr)); } catch(e){}
 }
 
-function rvmReset(){
-  rvmState = { typ:'alle', ansatz:'alle', phase:'alle' };
-  document.querySelectorAll('.rvm-chip').forEach(function(b){
-    b.classList.toggle('active', b.dataset.val==='alle');
-  });
-  rvmApply();
+// Projektbezogene individuelle Liste (wird im Projekt gespeichert)
+function pl2GetIndividuell(){
+  var p=AP(); if(!p) return [];
+  if(!p.pl2Individuell) p.pl2Individuell=[];
+  return p.pl2Individuell;
+}
+function pl2SaveIndividuell(items){
+  var p=AP(); if(!p) return;
+  p.pl2Individuell = items;
+  persist();
 }
 
-function rvmGetAllowedIds(){
-  var byTyp   = RVM_FILTER[rvmState.typ];
-  var byPhase = RVM_PHASE[rvmState.phase];
-  if(!byTyp && !byPhase) return null; // alles erlaubt
-  if(byTyp && !byPhase) return byTyp;
-  if(!byTyp && byPhase) return byPhase;
-  // Schnittmenge
-  return byTyp.filter(function(id){ return byPhase.indexOf(id)>-1; });
-}
+function pl2AddIndividuellerPunkt(){
+  var titel = document.getElementById('pl2ind-titel')?.value.trim();
+  var ref   = document.getElementById('pl2ind-ref')?.value.trim();
+  var sev   = document.getElementById('pl2ind-sev')?.value || 'm';
+  var soll  = document.getElementById('pl2ind-soll')?.value.trim();
+  if(!titel || !soll){ alert('Bitte Titel und Sollzustand ausf\u00fcllen.'); return; }
 
-function rvmApply(){
-  var allowed = rvmGetAllowedIds();
-  // Tabs ein-/ausblenden
-  document.querySelectorAll('.pl2-tab').forEach(function(tab){
-    var id = tab.dataset.id;
-    var show = !allowed || allowed.indexOf(id)>-1;
-    tab.classList.toggle('pl2-tab-hidden', !show);
+  var items = pl2GetIndividuell();
+  items.push({
+    id: 'ind_'+Date.now(),
+    txt: soll,
+    ref: ref || 'Individuelle Pr\u00fcfung',
+    sev: sev,
+    titel: titel
   });
-  // Wenn aktiver Tab ausgeblendet wird, auf ersten sichtbaren wechseln
-  if(allowed && allowed.indexOf(pl2Active)===-1){
-    var firstVisible = document.querySelector('.pl2-tab:not(.pl2-tab-hidden)');
-    if(firstVisible && firstVisible.dataset.id){
-      pl2SetActive(firstVisible.dataset.id);
-    }
+  pl2SaveIndividuell(items);
+
+  // Felder leeren
+  ['pl2ind-titel','pl2ind-ref','pl2ind-soll'].forEach(function(id){
+    var el=document.getElementById(id); if(el) el.value='';
+  });
+
+  // Als Vorlage anbieten?
+  var saveTpl = document.getElementById('pl2ind-save-tpl')?.checked;
+  if(saveTpl){
+    var vorlagen = pl2GetVorlagen();
+    vorlagen.push({ id:'tpl_'+Date.now(), titel:titel, ref:ref, sev:sev, soll:soll });
+    pl2SaveVorlagen(vorlagen);
   }
-  // Summary-Zeile aktualisieren
-  var sumEl = document.getElementById('rvm-summary');
-  if(sumEl){
-    if(!allowed){
-      sumEl.textContent = '';
-    } else {
-      var visibleCount = allowed.length;
-      sumEl.textContent = visibleCount + ' von ' + (PL2_DATA.length + Object.keys(MREA_PACKAGES).length) + ' Pr\u00fcfmodulen relevant';
-    }
+
+  pl2Render();
+}
+
+function pl2RemoveIndividuellerPunkt(itemId){
+  var items = pl2GetIndividuell().filter(function(it){ return it.id!==itemId; });
+  pl2SaveIndividuell(items);
+  pl2Render();
+}
+
+function pl2OpenVorlagenPicker(){
+  var vorlagen = pl2GetVorlagen();
+  var modal = document.getElementById('pl2-vorlagen-modal');
+  var list  = document.getElementById('pl2-vorlagen-list');
+  if(!modal || !list) return;
+  if(vorlagen.length===0){
+    list.innerHTML = '<div style="padding:20px;text-align:center;color:var(--ink3);font-size:13px;">Noch keine Vorlagen gespeichert. Erstellen Sie einen individuellen Pr\u00fcfpunkt und aktivieren Sie "Als Vorlage speichern".</div>';
+  } else {
+    list.innerHTML = vorlagen.map(function(v){
+      return '<div class="pl2-vorlage-row">'
+        +'<div class="pl2-vorlage-info"><strong>'+v.titel+'</strong><br><span style="color:var(--ink3);font-size:11px;">'+v.soll.substring(0,80)+(v.soll.length>80?'\u2026':'')+'</span></div>'
+        +'<div class="pl2-vorlage-acts">'
+        +'<button class="btn bg sm" data-id="'+v.id+'" onclick="pl2UseVorlage(this.dataset.id)">+ \u00dcbernehmen</button>'
+        +'<button class="pl2-vorlage-del" data-id="'+v.id+'" onclick="pl2DeleteVorlage(this.dataset.id)" title="L\u00f6schen">\u2715</button>'
+        +'</div></div>';
+    }).join('');
   }
+  modal.style.display='flex';
+}
+function pl2CloseVorlagenPicker(){
+  var modal = document.getElementById('pl2-vorlagen-modal');
+  if(modal) modal.style.display='none';
+}
+function pl2UseVorlage(tplId){
+  var v = pl2GetVorlagen().find(function(x){ return x.id===tplId; });
+  if(!v) return;
+  var items = pl2GetIndividuell();
+  items.push({ id:'ind_'+Date.now(), txt:v.soll, ref:v.ref||'Individuelle Pr\u00fcfung', sev:v.sev||'m', titel:v.titel });
+  pl2SaveIndividuell(items);
+  pl2CloseVorlagenPicker();
+  pl2Render();
+}
+function pl2DeleteVorlage(tplId){
+  var vorlagen = pl2GetVorlagen().filter(function(v){ return v.id!==tplId; });
+  pl2SaveVorlagen(vorlagen);
+  pl2OpenVorlagenPicker(); // refresh
 }
 
 
