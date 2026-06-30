@@ -324,6 +324,7 @@ textarea{resize:vertical;min-height:72px;}
 .mk-tab.done .mk-tab-dot{background:var(--gr);}
 .mk-tab.active .mk-tab-dot{background:#0f766e;}
 .mk-phase-body{padding:20px;}
+.mk-intro{font-size:13px;color:var(--ink2);line-height:1.65;padding:12px 16px;background:var(--acl);border-left:3px solid var(--ac);border-radius:var(--r);margin-bottom:18px;font-style:italic;}
 .mk-phase-hdr{display:flex;align-items:center;gap:12px;margin-bottom:16px;}
 .mk-phase-icon{width:38px;height:38px;border-radius:var(--rm);background:var(--acl);border:1.5px solid #c8d8ec;display:flex;align-items:center;justify-content:center;color:var(--ac);font-size:16px;flex-shrink:0;}
 .mk-phase-meta h3{font-family:'Fraunces',serif;font-size:15px;font-weight:600;color:var(--ink);margin:0 0 2px;}
@@ -797,8 +798,8 @@ textarea{resize:vertical;min-height:72px;}
       <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="1" y="1" width="6" height="6" rx="1"/><rect x="9" y="1" width="6" height="6" rx="1"/><rect x="1" y="9" width="6" height="6" rx="1"/><rect x="9" y="9" width="6" height="6" rx="1"/></svg><span class="sidebar-show">Dashboard</span>
     </div>
     <div class="snav-lbl">Vorbereitung</div>
-    <div class="ni" id="n-mk" title="Mandatsklärung" onclick="gv('mk')">
-      <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 4h12M2 8h8M2 12h5"/><circle cx="12" cy="12" r="3"/><path d="M11 12l1 1 1.5-1.5"/></svg><span class="sidebar-show">Mandatsklärung</span>
+    <div class="ni" id="n-mk" title="Auftrags- und Zieldefinition" onclick="gv('mk')">
+      <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 4h12M2 8h8M2 12h5"/><circle cx="12" cy="12" r="3"/><path d="M11 12l1 1 1.5-1.5"/></svg><span class="sidebar-show">Auftrags- und Zieldefinition</span>
     </div>
     <div class="ni" id="n-fk" title="Fristenkalender" onclick="gv('fk')">
       <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="1" y="3" width="14" height="12" rx="1"/><path d="M5 1v4M11 1v4M1 7h14"/><rect x="4" y="9" width="2" height="2" rx=".3"/><rect x="7" y="9" width="2" height="2" rx=".3"/></svg><span class="sidebar-show">Fristenkalender</span>
@@ -853,7 +854,7 @@ textarea{resize:vertical;min-height:72px;}
       <div class="tb-sub" id="tbsub">KI-gestützte Bau- &amp; HOAI-Revision · BuiltSmart Hub</div>
     </div>
     <div class="tb-acts">
-      <button class="btn bg sm" onclick="gv('mk')" style="border-color:var(--go);color:var(--go);">Mandatsklärung</button>
+      <button class="btn bg sm" onclick="gv('mk')" style="border-color:var(--go);color:var(--go);">Auftrags- und Zieldefinition</button>
       <button class="btn bg sm" onclick="gv('ki')">KI fragen</button>
       <button class="btn bg sm" onclick="openM('neue')">+ Feststellung</button>
       <button class="btn bgo sm" onclick="gv('rpt')">Bericht generieren</button>
@@ -999,7 +1000,7 @@ textarea{resize:vertical;min-height:72px;}
 
         <div class="rsec" id="rpt-sec-mk" style="display:none;">
           <div class="rsnum">00</div>
-          <div class="rstitle">Mandatsgrundlage &amp; Auftragsklärung</div>
+          <div class="rstitle">Auftrags- und Zieldefinition</div>
           <p style="font-size:13px;line-height:1.8;color:var(--ink2);margin-bottom:14px;" id="rpt-mk-intro">–</p>
           <div id="rpt-mk-content" class="mk-rpt-section"></div>
         </div>
@@ -1105,7 +1106,7 @@ textarea{resize:vertical;min-height:72px;}
     <div class="view" id="view-mk">
       <div class="panel">
         <div class="ph">
-          <div class="pt">Mandatsklärung</div>
+          <div class="pt">Auftrags- und Zieldefinition</div>
           <div class="pc" id="mk-prog-badge">0 / 0 beantwortet</div>
           <div class="mla fl g8">
             <button class="btn bg sm" onclick="mkPrintBlank()">&#128438; Papiervorlage drucken</button>
@@ -1227,7 +1228,7 @@ textarea{resize:vertical;min-height:72px;}
           <li><strong>Feststellungen erfassen</strong> &ndash; strukturiert nach Schwere (Kritisch / Erheblich / Hinweis)</li>
           <li><strong>HOAI &sect; 34 ff. Konformit&auml;t pr&uuml;fen</strong> &ndash; alle Leistungsphasen LP 1&ndash;8</li>
           <li><strong>VOB/B-konforme Dokumentation</strong> &ndash; M&auml;ngel, Fristen, Nachtr&auml;ge</li>
-          <li><strong>Mandatskl&auml;rung</strong> &ndash; strukturierter 7-Phasen-Gespr&auml;chsleitfaden</li>
+          <li><strong>Auftrags- und Zieldefinition</strong> &ndash; strukturierter 7-Phasen-Gespr&auml;chsleitfaden</li>
           <li><strong>Prüflisten Bau- &amp; HOAI-Revision</strong> &ndash; 10 Prüflisten mit 200+ Pr&uuml;fpunkten nach HOAI 2021, VOB/B 2019, BGB und DIN-Normen</li>
           <li><strong>Fristenkalender</strong> &ndash; &Uuml;bersicht aller Fristen mit Ampelsystem</li>
           <li><strong>Revisionsbericht</strong> &ndash; PDF-Export mit Deckblatt, Risikomatrix und Ma&szlig;nahmenplan</li>
@@ -1248,7 +1249,7 @@ textarea{resize:vertical;min-height:72px;}
           <span class="hilfe-ki-tag optional">HOAI-Konformit&auml;tspr&uuml;fung</span>
         </div>
         <div class="hilfe-callout hilfe-callout-green">
-          <strong>Hinweis:</strong> Alle Kernfunktionen &ndash; Feststellungen erfassen, Mandatskl&auml;rung, Pr&uuml;flisten, Fristenkalender, Bericht generieren, Kundenportal exportieren &ndash; funktionieren vollst&auml;ndig <strong>ohne KI und ohne API-Key</strong>. Der API-Key wird ausschlie&szlig;lich f&uuml;r die KI-Formulierungsfunktionen im Bereich &bdquo;KI-Assistent&rdquo; ben&ouml;tigt.
+          <strong>Hinweis:</strong> Alle Kernfunktionen &ndash; Feststellungen erfassen, Auftrags- und Zieldefinition, Pr&uuml;flisten, Fristenkalender, Bericht generieren, Kundenportal exportieren &ndash; funktionieren vollst&auml;ndig <strong>ohne KI und ohne API-Key</strong>. Der API-Key wird ausschlie&szlig;lich f&uuml;r die KI-Formulierungsfunktionen im Bereich &bdquo;KI-Assistent&rdquo; ben&ouml;tigt.
         </div>
       </div>
 
@@ -1318,7 +1319,7 @@ textarea{resize:vertical;min-height:72px;}
         <div class="hilfe-step"><div class="hilfe-step-num">5</div><div class="hilfe-step-txt"><strong>Revisionsbericht generieren und exportieren</strong>Topbar &rarr; &bdquo;Bericht generieren&rdquo; &rarr; PDF exportieren oder Kundenportal-HTML herunterladen.</div></div>
         <h3>Empfohlene Reihenfolge bei neuen Projekten</h3>
         <ul>
-          <li>Mandatskl&auml;rung durchf&uuml;hren &rarr; In Bericht &uuml;bernehmen</li>
+          <li>Auftrags- und Zieldefinition durchf&uuml;hren &rarr; In Bericht &uuml;bernehmen</li>
           <li>Feststellungen erfassen und klassifizieren</li>
           <li>Prüflisten abarbeiten</li>
           <li>Fristen setzen und im Fristenkalender verfolgen</li>
@@ -1338,14 +1339,14 @@ textarea{resize:vertical;min-height:72px;}
           <li><strong>Projektverwaltung</strong> &ndash; Aktives Projekt w&auml;hlen, neu anlegen, importieren/exportieren</li>
           <li><strong>&Uuml;bersicht</strong> &ndash; Dashboard mit KPI-Kacheln und Projektinformationen</li>
           <li><strong>Pr&uuml;fung</strong> &ndash; Feststellungen, Nachverfolgung, KI-Assistent</li>
-          <li><strong>Vorbereitung</strong> &ndash; Mandatskl&auml;rung, Fristenkalender, Pr&uuml;flisten</li>
+          <li><strong>Vorbereitung</strong> &ndash; Auftrags- und Zieldefinition, Fristenkalender, Pr&uuml;flisten</li>
           <li><strong>Abschluss</strong> &ndash; Revisionsbericht</li>
           <li><strong>API-Konfiguration</strong> &ndash; Anthropic API-Key eintragen (Sidebar unten)</li>
         </ul>
         <h3>Topbar (obere Leiste)</h3>
         <ul>
           <li><strong>Aktueller Bereich</strong> &ndash; Titel und Untertitel links</li>
-          <li><strong>Mandatskl&auml;rung</strong> &ndash; Direktzugang (gold hervorgehoben)</li>
+          <li><strong>Auftrags- und Zieldefinition</strong> &ndash; Direktzugang (gold hervorgehoben)</li>
           <li><strong>KI fragen</strong> &ndash; Chat mit KI-Assistent &ouml;ffnen</li>
           <li><strong>+ Feststellung</strong> &ndash; Neue Feststellung schnell erfassen</li>
           <li><strong>Bericht generieren</strong> &ndash; Zum Revisionsbericht wechseln</li>
@@ -1368,7 +1369,7 @@ textarea{resize:vertical;min-height:72px;}
           <span class="hilfe-ki-tag optional">VOB/B-konforme Feststellung</span>
           <span class="hilfe-ki-tag optional">HOAI-konforme Feststellung</span>
         </div>
-        <h3>Mandatskl&auml;rung</h3>
+        <h3>Auftrags- und Zieldefinition</h3>
         <p>7-Phasen-Gespr&auml;chsleitfaden mit aufklappbaren Fragen, Vorschlag-Chips zum Anklicken und Notizfeldern. Ergebnisse flie&szlig;en in Abschnitt 00 des Revisionsberichts.</p>
         <h3>Prüflisten Bau- &amp; HOAI-Revision</h3>
         <p>10 Pr&uuml;flisten mit 200+ Pr&uuml;fpunkten mit verifizierbaren Rechtsquellen. Jeder Punkt mit Muss/Soll/Kann-Kennzeichnung und Paragrafenreferenz. Fortschritt wird pro Projekt gespeichert.</p>
@@ -1390,7 +1391,7 @@ textarea{resize:vertical;min-height:72px;}
         <ul>
           <li><strong>PDF-Export</strong> &ndash; Vollst&auml;ndiger mehrseitiger Bericht mit Deckblatt, Mandatsgrundlage (Abschnitt 00), Risikomatrix, Detailbericht, Ma&szlig;nahmenplan, Unterschriftenblock</li>
           <li><strong>Kundenportal-HTML</strong> &ndash; Standalone-Datei f&uuml;r Auftraggeber; Feststellungen abhaken mit Datum, Dashboard, Filter, Drucken</li>
-          <li><strong>Papiervorlage</strong> &ndash; Druckbarer A4-Bogen der Mandatskl&auml;rung f&uuml;r h&auml;ndisches Ausf&uuml;llen</li>
+          <li><strong>Papiervorlage</strong> &ndash; Druckbarer A4-Bogen der Auftrags- und Zieldefinition f&uuml;r h&auml;ndisches Ausf&uuml;llen</li>
         </ul>
       </div>
 
@@ -1399,7 +1400,7 @@ textarea{resize:vertical;min-height:72px;}
         <h2>6. Typischer Workflow</h2>
         <div class="ch-sub">Empfohlene Vorgehensweise f&uuml;r ein Revisionsprojekt</div>
         <div class="hilfe-step"><div class="hilfe-step-num">1</div><div class="hilfe-step-txt"><strong>Projekt anlegen</strong>Dashboard &rarr; &bdquo;+ Neu&rdquo;: Projektname, Auftraggeber, Leistungsphase, BGF, Pr&uuml;fer, Datum eintragen.</div></div>
-        <div class="hilfe-step"><div class="hilfe-step-num">2</div><div class="hilfe-step-txt"><strong>Mandatskl&auml;rung durchf&uuml;hren</strong>Mandatskl&auml;rung &rarr; alle 7 Phasen mit dem Auftraggeber besprechen, Antworten erfassen &rarr; &bdquo;In Bericht &uuml;bernehmen&rdquo;.</div></div>
+        <div class="hilfe-step"><div class="hilfe-step-num">2</div><div class="hilfe-step-txt"><strong>Auftrags- und Zieldefinition durchf&uuml;hren</strong>Auftrags- und Zieldefinition &rarr; alle 7 Phasen mit dem Auftraggeber besprechen, Antworten erfassen &rarr; &bdquo;In Bericht &uuml;bernehmen&rdquo;.</div></div>
         <div class="hilfe-step"><div class="hilfe-step-num">3</div><div class="hilfe-step-txt"><strong>Feststellungen erfassen</strong>&bdquo;+ Feststellung&rdquo; in der Topbar f&uuml;r jede Feststellung. KI-Assistent f&uuml;r Formulierungen nutzen (optional).</div></div>
         <div class="hilfe-step"><div class="hilfe-step-num">4</div><div class="hilfe-step-txt"><strong>Prüflisten abarbeiten</strong>Pr&uuml;flisten &rarr; relevante Listen ausw&auml;hlen &rarr; Pr&uuml;fpunkte abhaken. Fortschritt wird automatisch gespeichert.</div></div>
         <div class="hilfe-step"><div class="hilfe-step-num">5</div><div class="hilfe-step-txt"><strong>Fristen &uuml;berwachen</strong>Fristenkalender &rarr; &uuml;berf&auml;llige und bald f&auml;llige Feststellungen pr&uuml;fen und eskalieren.</div></div>
@@ -1418,7 +1419,7 @@ textarea{resize:vertical;min-height:72px;}
         <ul>
           <li><strong>Projekte</strong> &ndash; Als JSON im localStorage des Browsers gespeichert</li>
           <li><strong>Pr&uuml;flisten-Fortschritt</strong> &ndash; Im aktiven Projekt gespeichert</li>
-          <li><strong>Mandatskl&auml;rung</strong> &ndash; Antworten und Auswahlen im Projekt gespeichert</li>
+          <li><strong>Auftrags- und Zieldefinition</strong> &ndash; Antworten und Auswahlen im Projekt gespeichert</li>
           <li><strong>API-Key</strong> &ndash; Im localStorage gespeichert (nur lokal, nie &uuml;bertragen)</li>
         </ul>
         <h3>Import &amp; Export</h3>
@@ -1454,7 +1455,7 @@ textarea{resize:vertical;min-height:72px;}
         </ul>
         <h3>Revisionsbericht-Abschnitte</h3>
         <ul>
-          <li><strong>Abschnitt 00</strong> &ndash; Mandatsgrundlage aus der Mandatskl&auml;rung (nur wenn ausgef&uuml;llt)</li>
+          <li><strong>Abschnitt 00</strong> &ndash; Mandatsgrundlage aus der Auftrags- und Zieldefinition (nur wenn ausgef&uuml;llt)</li>
           <li><strong>Abschnitt 01</strong> &ndash; Executive Summary mit KPI-&Uuml;bersicht</li>
           <li><strong>Abschnitt 02</strong> &ndash; Risikomatrix aller Feststellungen tabellarisch</li>
           <li><strong>Abschnitt 03</strong> &ndash; Detailbericht mit Sachverhalt und Empfehlung je Feststellung</li>
@@ -1776,7 +1777,7 @@ function gv(v){
   const el=document.getElementById('view-'+v); if(el) el.classList.add('active');
   const ni=document.getElementById('n-'+({dashboard:'dash',fest:'fest',track:'track',ki:'ki',rpt:'rpt',mk:'mk',fk:'fk',lp:'lp'}[v]||v));
   if(ni) ni.classList.add('active');
-  const T={dashboard:'Dashboard',fest:'Feststellungen',track:'Nachverfolgung',ki:'KI-Assistent',rpt:'Revisionsbericht',mk:'Mandatsklärung',fk:'Fristenkalender',lp:'HOAI LP-Prüflisten'};
+  const T={dashboard:'Dashboard',fest:'Feststellungen',track:'Nachverfolgung',ki:'KI-Assistent',rpt:'Revisionsbericht',mk:'Auftrags- und Zieldefinition',fk:'Fristenkalender',lp:'HOAI LP-Prüflisten'};
   document.getElementById('tbtitle').textContent=T[v]||v;
   if(v==='dashboard') rdDash();
   if(v==='fest') rdFest();
@@ -2812,7 +2813,7 @@ function mkRender(){
     +'<div class="mk-phase-icon">'+p2.icon+'</div>'
     +'<div class="mk-phase-meta"><h3>'+p2.title+'</h3><p>'+p2.sub+'</p></div>'
     +'</div>'
-    +'<div class="mk-items">'
+    +'<p class="mk-intro">Um die Grundlagen der Prüfung gemeinsam zu definieren, bitten wir um eine kurze Einschätzung zu den folgenden Kernpunkten.</p>'+'<div class="mk-items">'
     +p2.items.map((item,idx)=>{
       const chk=mkChecks[mkCurrent][idx];
       const ans=answers[idx]||'';
@@ -2992,7 +2993,7 @@ function mkSaveToProject(){
   p.mandatsklaerungDatum=new Date().toLocaleDateString('de-DE');
   p.mandatsklaerungPct=Math.round(mkTotalDone()/mkTotal()*100)+'%';
   persist();
-  addAkt('Mandatsklärung in Bericht übernommen ('+mkTotalDone()+'/'+mkTotal()+')', 'dg');
+  addAkt('Auftrags- und Zieldefinition in Bericht übernommen ('+mkTotalDone()+'/'+mkTotal()+')', 'dg');
   rdRpt();
   const hint=document.getElementById('mk-prog-badge');
   if(hint){ const orig=hint.textContent; hint.textContent='\u2713 In Revisionsbericht übernommen!'; hint.style.color='var(--gr)'; setTimeout(()=>{ hint.textContent=orig; hint.style.color=''; },2500); }
@@ -3022,7 +3023,7 @@ function mkExport(){
   const blob=new Blob([lines.join('\n')],{type:'text/plain;charset=utf-8'});
   const a=document.createElement('a');
   a.href=URL.createObjectURL(blob);
-  a.download='Mandatsklaerung_'+(AP().name||'Projekt').replace(/[^a-zA-Z0-9]/g,'_')+'.txt';
+  a.download='Auftrags-Zieldefinition_'+(AP().name||'Projekt').replace(/[^a-zA-Z0-9]/g,'_')+'.txt';
   a.click(); URL.revokeObjectURL(a.href);
 }
 
@@ -3107,7 +3108,7 @@ function mkPrintBlank(){
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>SMART Revision – Mandatsklärungsbogen</title>
+<title>SMART Revision – Auftrags- und Zieldefinition</title>
 <style>
   *{box-sizing:border-box;margin:0;padding:0;}
   html,body{background:#fff;font-family:Arial,Helvetica,sans-serif;font-size:11px;color:#111827;}
@@ -3132,7 +3133,7 @@ function mkPrintBlank(){
 
 <div class="print-bar">
   <div>
-    <div class="print-bar-title">SMART Revision · Mandatsklärungsbogen</div>
+    <div class="print-bar-title">SMART Revision · Auftrags- und Zieldefinition</div>
     <div class="print-bar-sub">A4 · zum händischen Ausfüllen · powered by BuiltSmart Hub</div>
   </div>
   <button class="print-btn" onclick="window.print()">🖨&nbsp; Als PDF drucken</button>
@@ -3146,7 +3147,7 @@ function mkPrintBlank(){
     <div>
       <div style="font-size:8px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.4);margin-bottom:5px;">BuiltSmart Hub · © Bernhard Metzger</div>
       <div style="font-size:24px;font-weight:700;color:#fff;letter-spacing:-.01em;line-height:1.1;">SMART Revision</div>
-      <div style="font-size:11px;color:rgba(255,255,255,.65);margin-top:4px;">Mandatsklärungsbogen · Bau- und HOAI-Revision § 34 ff.</div>
+      <div style="font-size:11px;color:rgba(255,255,255,.65);margin-top:4px;">Auftrags- und Zieldefinition · Bau- und HOAI-Revision § 34 ff.</div>
     </div>
     <div style="text-align:right;">
       <div style="font-size:8px;color:rgba(255,255,255,.35);text-transform:uppercase;letter-spacing:.1em;margin-bottom:3px;">Formularstand</div>
@@ -3190,7 +3191,7 @@ ${allPhasesHtml}
 <div class="page-break-before" style="padding-top:22px;border-top:2px solid #1e3a5f;margin-top:10px;">
   <div style="font-size:8px;font-weight:700;text-transform:uppercase;letter-spacing:.12em;color:#6b7280;margin-bottom:16px;">Gesprächsabschluss & Bestätigung</div>
   <div style="background:#f9fafb;border:1px solid #e5e7eb;border-radius:6px;padding:14px 18px;margin-bottom:20px;">
-    <div style="font-size:9px;color:#374151;line-height:1.6;margin-bottom:10px;">Mit Unterzeichnung bestätigen beide Parteien, dass die vorstehenden Fragen im Rahmen des Mandatsklärungsgesprächs erörtert wurden und die Angaben den Gesprächsinhalten entsprechen. Der Mandatsklärungsbogen bildet die Grundlage für das zu erstellende Angebot und den späteren Revisionsbericht.</div>
+    <div style="font-size:9px;color:#374151;line-height:1.6;margin-bottom:10px;">Mit Unterzeichnung bestätigen beide Parteien, dass die vorstehenden Fragen im Rahmen der Auftrags- und Zieldefinition erörtert wurden und die Angaben den Gesprächsinhalten entsprechen. Die Auftrags- und Zieldefinition bildet die Grundlage für das zu erstellende Angebot und den späteren Revisionsbericht.</div>
     <div style="display:grid;grid-template-columns:1fr 32px 1fr;gap:0;margin-top:10px;">
       <div>
         <div style="height:52px;border-bottom:2px solid #374151;"></div>
@@ -3219,7 +3220,7 @@ ${allPhasesHtml}
   <!-- Fußzeile -->
   <div style="border-top:1px solid #e5e7eb;padding-top:8px;display:flex;align-items:center;justify-content:space-between;">
     <div style="font-size:8px;color:#9ca3af;line-height:1.5;">
-      SMART Revision · Mandatsklärungsbogen · Bau- und HOAI-Revision § 34 ff.<br>
+      SMART Revision · Auftrags- und Zieldefinition · Bau- und HOAI-Revision § 34 ff.<br>
       Erstellt mit SMART Revision · powered by BuiltSmart Hub · © Bernhard Metzger · www.built-smart-hub.com
     </div>
     <div style="font-size:8px;color:#9ca3af;text-align:right;white-space:nowrap;">
