@@ -1121,19 +1121,99 @@ textarea{resize:vertical;min-height:72px;}
         <div class="rsec" id="rpt-sec-anlagen">
           <div class="rsnum">09</div>
           <div class="rstitle">Anlagenverzeichnis</div>
-          <p style="font-size:13px;color:var(--ink2);margin-bottom:12px;">Nachfolgend sind die im Rahmen der Revision eingesehenen und geprüften Unterlagen aufgeführt.</p>
+          <p style="font-size:13px;color:var(--ink2);margin-bottom:4px;">Verzeichnis der Unterlagen, die im Rahmen der Revision vorlagen, eingesehen oder angefordert wurden. Ein physischer Anhang ist nicht erforderlich.</p>
+          <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px;margin-top:10px;">
+            <span style="padding:3px 10px;border-radius:10px;font-size:11px;font-weight:600;background:#f0fdf4;color:#15803d;border:1px solid #bbf7d0;">✓ Eingesehen</span>
+            <span style="font-size:11px;color:var(--ink3);align-self:center;">Unterlage lag vor und wurde geprüft, kein Anhang erforderlich</span>
+          </div>
+          <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px;">
+            <span style="padding:3px 10px;border-radius:10px;font-size:11px;font-weight:600;background:#eff6ff;color:#1d4ed8;border:1px solid #bfdbfe;">📎 Als Anlage beigefügt</span>
+            <span style="font-size:11px;color:var(--ink3);align-self:center;">Im Bericht als Referenz enthalten</span>
+          </div>
+          <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:18px;">
+            <span style="padding:3px 10px;border-radius:10px;font-size:11px;font-weight:600;background:#fff7ed;color:#c2410c;border:1px solid #fed7aa;">⏳ Angefordert / Ausstehend</span>
+            <span style="font-size:11px;color:var(--ink3);align-self:center;">Wurde angefordert, noch nicht erhalten</span>
+          </div>
           <table class="rmatrix">
-            <thead><tr><th>#</th><th>Dokument / Unterlage</th><th>Typ</th><th>Stand / Version</th><th>Eingesehen am</th></tr></thead>
+            <thead><tr><th>#</th><th>Dokument / Unterlage</th><th>Typ</th><th>Stand / Version</th><th>Status</th><th>Eingesehen am</th><th style="width:36px;"></th></tr></thead>
             <tbody id="rpt-anlagen-body">
-              <tr><td colspan="5" style="text-align:center;color:var(--ink3);padding:16px;font-style:italic;">Anlagen werden nach Fertigstellung der Prüfung manuell erfasst oder automatisch aus dem Dokumentencenter übernommen.</td></tr>
+              <tr><td colspan="7" style="text-align:center;color:var(--ink3);padding:20px;font-style:italic;">Noch keine Anlagen erfasst. Schaltfläche „+ Anlage hinzufügen" verwenden.</td></tr>
             </tbody>
           </table>
-          <div style="margin-top:14px;" id="rpt-anlagen-add">
-            <button class="btn bg sm" onclick="rptAddAnlage()">+ Anlage hinzufügen</button>
-            <span style="font-size:11px;color:var(--ink3);margin-left:8px;">Fotodokumentation, Protokolle, Gutachten, Verträge, Genehmigungen</span>
+          <div style="margin-top:12px;">
+            <button class="btn bp sm" onclick="rptAddAnlage()">+ Anlage hinzufügen</button>
+            <span style="font-size:11px;color:var(--ink3);margin-left:10px;">Leistungsverzeichnisse · Protokolle · Rechnungen · Gutachten · Verträge · Genehmigungen · Fotos</span>
           </div>
-          <div id="rpt-anlagen-list" style="margin-top:10px;"></div>
         </div>
+
+<!-- ANLAGEN MODAL -->
+<div id="anlagen-modal" style="display:none;position:fixed;inset:0;background:rgba(15,14,12,.55);z-index:9999;display:none;align-items:center;justify-content:center;">
+  <div style="background:#fff;border-radius:10px;padding:26px 28px;width:520px;max-width:95vw;max-height:90vh;overflow-y:auto;box-shadow:0 12px 40px rgba(0,0,0,.22);">
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:20px;">
+      <div style="font-family:'Fraunces',serif;font-size:18px;font-weight:600;color:var(--ink);">Anlage erfassen</div>
+      <button onclick="closeAnlagenModal()" style="border:none;background:none;font-size:18px;cursor:pointer;color:var(--ink3);line-height:1;">✕</button>
+    </div>
+    <div style="display:grid;gap:14px;">
+      <div>
+        <label style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--ink2);display:block;margin-bottom:5px;">Bezeichnung / Dokumentname *</label>
+        <input id="anl-name" type="text" placeholder="z.B. Brandschutzkonzept, Leistungsverzeichnis Rohbau …"
+          style="width:100%;padding:9px 12px;border:1px solid var(--b);border-radius:6px;font-size:13px;font-family:inherit;outline:none;"
+          oninput="this.style.borderColor='var(--ac)'" onblur="this.style.borderColor='var(--b)'">
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
+        <div>
+          <label style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--ink2);display:block;margin-bottom:5px;">Dokumententyp</label>
+          <select id="anl-typ" style="width:100%;padding:9px 12px;border:1px solid var(--b);border-radius:6px;font-size:13px;font-family:inherit;background:#fff;outline:none;">
+            <option>Leistungsverzeichnis</option>
+            <option>Vertrag / Nachtrag</option>
+            <option>Protokoll</option>
+            <option>Rechnung / Abrechnung</option>
+            <option>Gutachten</option>
+            <option>Genehmigung / Bescheid</option>
+            <option>Planunterlage / Zeichnung</option>
+            <option>Foto / Bilddokumentation</option>
+            <option>Schriftwechsel / E-Mail</option>
+            <option>Prüfbericht</option>
+            <option>Sonstiges</option>
+          </select>
+        </div>
+        <div>
+          <label style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--ink2);display:block;margin-bottom:5px;">Stand / Version / Datum</label>
+          <input id="anl-stand" type="text" placeholder="z.B. 15.06.2026 / Rev. 3"
+            style="width:100%;padding:9px 12px;border:1px solid var(--b);border-radius:6px;font-size:13px;font-family:inherit;outline:none;"
+            oninput="this.style.borderColor='var(--ac)'" onblur="this.style.borderColor='var(--b)'">
+        </div>
+      </div>
+      <div>
+        <label style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--ink2);display:block;margin-bottom:8px;">Status der Unterlage</label>
+        <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;" id="anl-status-btns">
+          <button onclick="anlagenSelectStatus('Eingesehen')" data-val="Eingesehen"
+            style="padding:10px 6px;border:2px solid var(--b);border-radius:6px;background:#fff;cursor:pointer;font-size:12px;font-weight:600;color:var(--ink2);transition:all .15s;text-align:center;">
+            ✓ Eingesehen<br><span style="font-size:10px;font-weight:400;opacity:.7;">kein Anhang nötig</span>
+          </button>
+          <button onclick="anlagenSelectStatus('Als Anlage beigefügt')" data-val="Als Anlage beigefügt"
+            style="padding:10px 6px;border:2px solid var(--b);border-radius:6px;background:#fff;cursor:pointer;font-size:12px;font-weight:600;color:var(--ink2);transition:all .15s;text-align:center;">
+            📎 Beigefügt<br><span style="font-size:10px;font-weight:400;opacity:.7;">im Bericht enthalten</span>
+          </button>
+          <button onclick="anlagenSelectStatus('Angefordert')" data-val="Angefordert"
+            style="padding:10px 6px;border:2px solid var(--b);border-radius:6px;background:#fff;cursor:pointer;font-size:12px;font-weight:600;color:var(--ink2);transition:all .15s;text-align:center;">
+            ⏳ Ausstehend<br><span style="font-size:10px;font-weight:400;opacity:.7;">noch nicht erhalten</span>
+          </button>
+        </div>
+      </div>
+      <div>
+        <label style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--ink2);display:block;margin-bottom:5px;">Bemerkung (optional)</label>
+        <input id="anl-bemerkung" type="text" placeholder="z.B. liegt als Papieroriginal vor, angefordert am 10.06.2026 …"
+          style="width:100%;padding:9px 12px;border:1px solid var(--b);border-radius:6px;font-size:13px;font-family:inherit;outline:none;"
+          oninput="this.style.borderColor='var(--ac)'" onblur="this.style.borderColor='var(--b)'">
+      </div>
+    </div>
+    <div style="display:flex;gap:10px;justify-content:flex-end;margin-top:22px;padding-top:16px;border-top:1px solid var(--b);">
+      <button onclick="closeAnlagenModal()" style="padding:8px 18px;border:1px solid var(--b);border-radius:6px;background:#fff;font-size:13px;font-weight:600;cursor:pointer;font-family:inherit;color:var(--ink2);">Abbrechen</button>
+      <button onclick="rptSaveAnlage()" style="padding:8px 22px;border:none;border-radius:6px;background:var(--ac);color:#fff;font-size:13px;font-weight:600;cursor:pointer;font-family:inherit;">Anlage speichern</button>
+    </div>
+  </div>
+</div>
 
         <div class="rsec">
           <div class="rsnum">10</div>
@@ -2142,33 +2222,90 @@ function rdRpt(){
 }
 
 // ── ANLAGEN MANAGEMENT ───────────────────────────────────────────────────────
+var _anlagenStatusSel = 'Eingesehen';
 function rptAddAnlage(){
+  _anlagenStatusSel='Eingesehen';
+  const modal=document.getElementById('anlagen-modal');
+  if(modal){
+    ['anl-name','anl-stand','anl-bemerkung'].forEach(id=>{const el=document.getElementById(id);if(el)el.value='';});
+    const sel=document.getElementById('anl-typ');if(sel)sel.selectedIndex=0;
+    anlagenSelectStatus('Eingesehen');
+    modal.style.display='flex';
+    const ni=document.getElementById('anl-name');if(ni)ni.focus();
+  }
+}
+function anlagenSelectStatus(val){
+  _anlagenStatusSel=val;
+  const colors={
+    'Eingesehen':     {bg:'#f0fdf4',border:'#16a34a',color:'#15803d'},
+    'Als Anlage beigefügt':{bg:'#eff6ff',border:'#1d4ed8',color:'#1d4ed8'},
+    'Angefordert':    {bg:'#fff7ed',border:'#c2410c',color:'#c2410c'}
+  };
+  document.querySelectorAll('#anl-status-btns button').forEach(btn=>{
+    const v=btn.getAttribute('data-val');
+    const cl=colors[v]||{bg:'#fff',border:'var(--b)',color:'var(--ink2)'};
+    if(v===val){
+      btn.style.borderColor=cl.border;
+      btn.style.background=cl.bg;
+      btn.style.color=cl.color;
+    } else {
+      btn.style.borderColor='var(--b)';
+      btn.style.background='#fff';
+      btn.style.color='var(--ink2)';
+    }
+  });
+}
+function rptSaveAnlage(){
+  const name=(document.getElementById('anl-name')||{}).value||'';
+  if(!name.trim()){
+    const el=document.getElementById('anl-name');
+    if(el){el.style.borderColor='var(--re)';el.focus();}
+    return;
+  }
+  const typ=(document.getElementById('anl-typ')||{}).value||'Sonstiges';
+  const stand=(document.getElementById('anl-stand')||{}).value||new Date().toLocaleDateString('de-DE');
+  const bem=(document.getElementById('anl-bemerkung')||{}).value||'';
   const p=AP(); if(!p._anlagen) p._anlagen=[];
-  const name=window.prompt?window.prompt('Dokumentname:',''):null;
-  if(name===null||name.trim()==='') return;
-  const typ=(window.prompt?window.prompt('Typ (PDF, Protokoll, Foto …):','PDF'):'PDF')||'PDF';
-  const stand=(window.prompt?window.prompt('Stand / Version:',new Date().toLocaleDateString('de-DE')):'–')||'–';
-  p._anlagen.push({nr:p._anlagen.length+1,name:name.trim(),typ,stand,datum:new Date().toLocaleDateString('de-DE')});
-  SP(); rdRpt();
+  p._anlagen.push({
+    nr:p._anlagen.length+1,
+    name:name.trim(), typ, stand,
+    status:_anlagenStatusSel,
+    bemerkung:bem.trim(),
+    datum:new Date().toLocaleDateString('de-DE')
+  });
+  SP(); rdRpt(); closeAnlagenModal();
+}
+function closeAnlagenModal(){
+  const modal=document.getElementById('anlagen-modal');
+  if(modal) modal.style.display='none';
 }
 function rptDelAnlage(i){
   const p=AP(); if(!p._anlagen) return;
-  p._anlagen.splice(i,1); SP(); rdRpt();
+  p._anlagen.splice(i,1);
+  p._anlagen.forEach((a,j)=>a.nr=j+1);
+  SP(); rdRpt();
 }
 function rptRenderAnlagen(){
   const p=AP(); const al=p._anlagen||[];
   const tb=document.getElementById('rpt-anlagen-body');
   if(!tb) return;
   if(!al.length){
-    tb.innerHTML='<tr><td colspan="6" style="text-align:center;color:var(--ink3);padding:16px;font-style:italic;">Noch keine Anlagen. → Schaltfläche „+ Anlage hinzufügen"</td></tr>';
+    tb.innerHTML='<tr><td colspan="7" style="text-align:center;color:var(--ink3);padding:20px;font-style:italic;">Noch keine Anlagen erfasst. → „+ Anlage hinzufügen"</td></tr>';
     return;
   }
+  const stBg={
+    'Eingesehen':           'background:#f0fdf4;color:#15803d;border:1px solid #bbf7d0;',
+    'Als Anlage beigefügt': 'background:#eff6ff;color:#1d4ed8;border:1px solid #bfdbfe;',
+    'Angefordert':          'background:#fff7ed;color:#c2410c;border:1px solid #fed7aa;'
+  };
+  const stLabel={'Eingesehen':'✓ Eingesehen','Als Anlage beigefügt':'📎 Beigefügt','Angefordert':'⏳ Ausstehend'};
   tb.innerHTML=al.map((a,i)=>'<tr style="'+(i%2?'background:var(--bgp);':'')+'">'
-    +'<td style="font-family:monospace;font-size:11px;color:var(--ac);">A-'+String(a.nr).padStart(2,'0')+'</td>'
-    +'<td style="font-weight:500;color:var(--ink);">'+a.name+'</td>'
-    +'<td><span class="badge bgy" style="font-size:10px;">'+a.typ+'</span></td>'
+    +'<td style="font-family:monospace;font-size:11px;color:var(--ac);font-weight:700;">A-'+String(a.nr).padStart(2,'0')+'</td>'
+    +'<td style="font-weight:500;color:var(--ink);">'+a.name+(a.bemerkung?'<br><span style="font-size:10.5px;color:var(--ink3);font-weight:400;">'+a.bemerkung+'</span>':'')+'</td>'
+    +'<td style="font-size:11.5px;color:var(--ink2);">'+a.typ+'</td>'
     +'<td style="font-size:11.5px;color:var(--ink3);">'+a.stand+'</td>'
-    +'<td style="font-size:11.5px;color:var(--ink3);">'+a.datum+'</td>'
+    +'<td><span style="padding:2px 9px;border-radius:10px;font-size:10.5px;font-weight:600;'+(stBg[a.status]||stBg['Eingesehen'])+'">'+(stLabel[a.status]||a.status)+'</span></td>'
+    +'<td style="font-size:11px;color:var(--ink3);">'+a.datum+'</td>'
     +'<td><button class="btn bg sm" style="font-size:10px;padding:2px 6px;" onclick="rptDelAnlage('+i+')">✕</button></td></tr>').join('');
 }
 
