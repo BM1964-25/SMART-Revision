@@ -1,0 +1,687 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Leitfaden Baurevision – SMART Revision</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,600;1,9..144,300&family=DM+Sans:wght@300;400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --navy:   #0f1e35;
+  --navy2:  #1e3a5f;
+  --teal:   #0f766e;
+  --gold:   #b8882a;
+  --ink:    #1a1814;
+  --ink2:   #4a4640;
+  --ink3:   #8a857e;
+  --b:      #e0dbd4;
+  --bg:     #f5f3ef;
+  --bgc:    #ffffff;
+  --re:     #c0392b;
+  --or:     #c2410c;
+  --gr:     #15803d;
+}
+
+body {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 13.5px;
+  line-height: 1.65;
+  color: var(--ink);
+  background: var(--bg);
+}
+
+/* ── PRINT BUTTON BAR ── */
+.print-bar {
+  background: var(--navy);
+  color: #fff;
+  padding: 10px 32px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 12px;
+  gap: 16px;
+}
+.print-bar-title { font-weight: 600; font-size: 13px; }
+.print-bar-sub { opacity: .5; font-size: 11px; margin-top: 1px; }
+.print-bar-btns { display: flex; gap: 8px; }
+.pbtn {
+  padding: 6px 16px;
+  border: 1px solid rgba(255,255,255,.3);
+  border-radius: 5px;
+  background: transparent;
+  color: #fff;
+  font-size: 12px;
+  font-weight: 500;
+  cursor: pointer;
+  font-family: inherit;
+  transition: background .15s;
+}
+.pbtn:hover { background: rgba(255,255,255,.12); }
+.pbtn.primary { background: var(--teal); border-color: var(--teal); }
+.pbtn.primary:hover { background: #0a5c56; }
+
+/* ── DOCUMENT ── */
+.doc {
+  max-width: 860px;
+  margin: 32px auto 60px;
+  background: var(--bgc);
+  box-shadow: 0 2px 20px rgba(0,0,0,.08);
+}
+
+/* ── COVER ── */
+.cover {
+  background: linear-gradient(150deg, #0a1528 0%, var(--navy) 55%, #1e3a5f 100%);
+  color: #fff;
+  padding: 56px 56px 44px;
+  position: relative;
+  overflow: hidden;
+}
+.cover::before {
+  content: 'SMART';
+  position: absolute;
+  right: -20px; bottom: -30px;
+  font-family: 'Fraunces', serif;
+  font-size: 160px;
+  color: rgba(255,255,255,.04);
+  line-height: 1;
+  letter-spacing: .05em;
+  pointer-events: none;
+}
+.cover-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(255,255,255,.1);
+  border: 1px solid rgba(255,255,255,.18);
+  border-radius: 20px;
+  padding: 4px 14px;
+  font-size: 11px;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,.65);
+  margin-bottom: 28px;
+}
+.cover-badge span { width: 6px; height: 6px; border-radius: 50%; background: var(--teal); display: inline-block; }
+.cover h1 {
+  font-family: 'Fraunces', serif;
+  font-size: 42px;
+  font-weight: 300;
+  line-height: 1.15;
+  letter-spacing: -.02em;
+  margin-bottom: 8px;
+}
+.cover h1 em { color: var(--gold); font-style: italic; }
+.cover-sub {
+  font-size: 15px;
+  color: rgba(255,255,255,.55);
+  margin-bottom: 40px;
+  font-weight: 300;
+}
+.cover-meta {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0;
+  border-top: 1px solid rgba(255,255,255,.1);
+  padding-top: 24px;
+}
+.cover-meta-item { padding-right: 24px; }
+.cover-meta-lbl { font-size: 9.5px; letter-spacing: .1em; text-transform: uppercase; color: rgba(255,255,255,.35); margin-bottom: 4px; }
+.cover-meta-val { font-size: 13px; color: rgba(255,255,255,.75); font-weight: 500; }
+
+/* ── INTRO ── */
+.intro {
+  padding: 36px 56px 28px;
+  border-bottom: 1px solid var(--b);
+  background: var(--bg);
+}
+.intro p { font-size: 14px; color: var(--ink2); line-height: 1.75; max-width: 680px; }
+.intro strong { color: var(--ink); }
+
+/* ── PHASE BLOCKS ── */
+.phases { padding: 0 56px 48px; }
+
+.phase {
+  display: grid;
+  grid-template-columns: 56px 1fr;
+  gap: 0;
+  margin-bottom: 0;
+  position: relative;
+}
+
+.phase-left {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 28px;
+}
+
+.phase-num {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 13px;
+  font-weight: 500;
+  color: #fff;
+  flex-shrink: 0;
+  z-index: 1;
+}
+
+.phase-line {
+  flex: 1;
+  width: 2px;
+  background: var(--b);
+  margin: 8px 0 0;
+  min-height: 24px;
+}
+
+.phase:last-child .phase-line { display: none; }
+
+.phase-right {
+  padding: 24px 0 32px 24px;
+  border-bottom: 1px solid var(--b);
+}
+.phase:last-child .phase-right { border-bottom: none; }
+
+.phase-tag {
+  display: inline-block;
+  font-size: 9.5px;
+  font-weight: 600;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  padding: 2px 10px;
+  border-radius: 10px;
+  margin-bottom: 8px;
+}
+
+.phase-title {
+  font-family: 'Fraunces', serif;
+  font-size: 20px;
+  font-weight: 600;
+  letter-spacing: -.01em;
+  line-height: 1.2;
+  margin-bottom: 6px;
+}
+
+.phase-sub {
+  font-size: 12px;
+  color: var(--ink3);
+  margin-bottom: 14px;
+  font-style: italic;
+}
+
+.phase-body { display: grid; grid-template-columns: 1fr 1fr; gap: 16px 24px; }
+
+.phase-block h4 {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--ink3);
+  margin-bottom: 8px;
+  padding-bottom: 4px;
+  border-bottom: 1.5px solid var(--b);
+}
+
+.phase-block ul {
+  list-style: none;
+  padding: 0;
+}
+.phase-block ul li {
+  font-size: 12.5px;
+  color: var(--ink2);
+  padding: 3px 0 3px 14px;
+  position: relative;
+  line-height: 1.55;
+}
+.phase-block ul li::before {
+  content: '–';
+  position: absolute;
+  left: 0;
+  color: var(--ink3);
+}
+.phase-block ul li strong { color: var(--ink); font-weight: 600; }
+
+.app-hint {
+  grid-column: 1 / -1;
+  background: #f0f7f6;
+  border-left: 3px solid var(--teal);
+  border-radius: 0 4px 4px 0;
+  padding: 9px 14px;
+  font-size: 12px;
+  color: #0a5c56;
+  line-height: 1.5;
+}
+.app-hint strong { color: var(--teal); }
+
+.nutzen-box {
+  grid-column: 1 / -1;
+  background: var(--bg);
+  border: 1px solid var(--b);
+  border-radius: 4px;
+  padding: 10px 14px;
+  font-size: 12px;
+  color: var(--ink2);
+  line-height: 1.55;
+}
+.nutzen-box strong { color: var(--ink); }
+
+/* Phase colors */
+.p1 .phase-num { background: #374151; }
+.p1 .phase-tag { background: #f1f5f9; color: #475569; }
+.p2 .phase-num { background: var(--navy2); }
+.p2 .phase-tag { background: #dbeafe; color: #1d4ed8; }
+.p3 .phase-num { background: var(--navy2); }
+.p3 .phase-tag { background: #dbeafe; color: #1d4ed8; }
+.p4 .phase-num { background: var(--navy); }
+.p4 .phase-tag { background: #e0e7ff; color: #3730a3; }
+.p5 .phase-num { background: var(--teal); }
+.p5 .phase-tag { background: #d1fae5; color: #065f46; }
+.p5 .phase-title { color: var(--teal); }
+.p6 .phase-num { background: var(--gold); }
+.p6 .phase-tag { background: #fef3c7; color: #92400e; }
+.p7 .phase-num { background: var(--ink3); }
+.p7 .phase-tag { background: #f3f4f6; color: #6b7280; }
+
+/* ── FOOTER ── */
+.doc-footer {
+  background: var(--navy);
+  color: rgba(255,255,255,.45);
+  padding: 18px 56px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 11px;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+.doc-footer strong { color: rgba(255,255,255,.7); }
+
+/* ── PRINT ── */
+@media print {
+  body { background: #fff; }
+  .print-bar { display: none; }
+  .doc { max-width: 100%; margin: 0; box-shadow: none; }
+  .cover { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  .phase { page-break-inside: avoid; }
+  .doc-footer { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  .app-hint { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+}
+
+@media (max-width: 640px) {
+  .cover { padding: 36px 24px 28px; }
+  .phases { padding: 0 20px 36px; }
+  .phase-body { grid-template-columns: 1fr; }
+  .cover-meta { grid-template-columns: 1fr; gap: 12px; }
+  .doc-footer { padding: 14px 20px; }
+  .intro { padding: 24px 24px 20px; }
+}
+</style>
+</head>
+<body>
+
+<div class="print-bar">
+  <div>
+    <div class="print-bar-title">Leitfaden Baurevision &mdash; SMART Revision</div>
+    <div class="print-bar-sub">7 Phasen &middot; Ablauf &middot; Auftraggeber-Nutzen &middot; A4 druckbereit</div>
+  </div>
+  <div class="print-bar-btns">
+    <button class="pbtn primary" onclick="window.print()">&#128438; Als PDF speichern</button>
+    <button class="pbtn" onclick="window.close()">&#10005; Schlie&szlig;en</button>
+  </div>
+</div>
+
+<div class="doc">
+
+  <!-- COVER -->
+  <div class="cover">
+    <div class="cover-badge"><span></span>BuiltSmart Hub &middot; SMART Revision</div>
+    <h1>Leitfaden<br><em>Baurevision</em></h1>
+    <div class="cover-sub">Ablauf &middot; Prüfungsphasen &middot; Nutzen für den Auftraggeber</div>
+    <div class="cover-meta">
+      <div class="cover-meta-item">
+        <div class="cover-meta-lbl">Grundlage</div>
+        <div class="cover-meta-val">HOAI 2021 &middot; VOB/B 2019 &middot; BGB</div>
+      </div>
+      <div class="cover-meta-item">
+        <div class="cover-meta-lbl">Version</div>
+        <div class="cover-meta-val">Stand: 2026</div>
+      </div>
+      <div class="cover-meta-item">
+        <div class="cover-meta-lbl">Herausgeber</div>
+        <div class="cover-meta-val">Bernhard Metzger &middot; BuiltSmart Hub</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- INTRO -->
+  <div class="intro">
+    <p>Die Baurevision dient der unabh&auml;ngigen Pr&uuml;fung von Bauprojekten auf <strong>Ordnungsm&auml;&szlig;igkeit, Wirtschaftlichkeit und technische Qualit&auml;t</strong>. Sie schafft f&uuml;r den Auftraggeber Transparenz, Sicherheit und eine fundierte Grundlage f&uuml;r Entscheidungen und die Abwicklung von Streitf&auml;llen. Dieser Leitfaden beschreibt den typischen Ablauf einer professionellen Baurevision in 7 Phasen &mdash; von der gemeinsamen Auftrags- und Zieldefinition bis zur Nachverfolgung der Ma&szlig;nahmen.</p>
+  </div>
+
+  <!-- PHASES -->
+  <div class="phases">
+
+    <!-- PHASE 1 -->
+    <div class="phase p1">
+      <div class="phase-left">
+        <div class="phase-num">1</div>
+        <div class="phase-line"></div>
+      </div>
+      <div class="phase-right">
+        <div class="phase-tag">Vorbereitung</div>
+        <div class="phase-title">Auftrags- und Zieldefinition</div>
+        <div class="phase-sub">Gemeinsames Gespr&auml;ch zwischen Revisor und Auftraggeber</div>
+        <div class="phase-body">
+          <div class="phase-block">
+            <h4>Kernpunkte des Gespr&auml;chs</h4>
+            <ul>
+              <li><strong>Kontext &amp; Auftraggeber</strong> &mdash; Funktion, Organisation, Projekt&uuml;berblick</li>
+              <li><strong>Anlass &amp; Problemstellung</strong> &mdash; Was hat zur Revision gef&uuml;hrt? Auff&auml;lligkeiten, Risiken, Konflikte</li>
+              <li><strong>Ziel &amp; Erwartung</strong> &mdash; Was soll die Revision leisten? Ergebniserwartung des Auftraggebers</li>
+              <li><strong>Unterlagen &amp; Datenlage</strong> &mdash; Welche Dokumente liegen vor? Was fehlt noch?</li>
+              <li><strong>Umfang &amp; Rahmenbedingungen</strong> &mdash; Leistungsphasen, Gewerke, Zeitraum, Budget</li>
+              <li><strong>Angebotsgrundlage</strong> &mdash; Honorar, Zeitrahmen, Berichtspflichten, Vertraulichkeit</li>
+              <li><strong>Prüf- &amp; Revisionsbericht</strong> &mdash; Form, Empf&auml;nger, Detailtiefe, Sprache</li>
+            </ul>
+          </div>
+          <div class="phase-block">
+            <h4>Nutzen f&uuml;r den Auftraggeber</h4>
+            <ul>
+              <li>Klare Erwartungshaltung wird dokumentiert</li>
+              <li>Kein Interpretationsspielraum &uuml;ber den Pr&uuml;fungsumfang</li>
+              <li>Grundlage f&uuml;r sp&auml;tere Streitf&auml;lle (was war Auftrag?)</li>
+              <li>Auftraggeber formuliert eigene Priorit&auml;ten</li>
+              <li>Erkenntnisse flie&szlig;en direkt in den Revisionsbericht ein</li>
+            </ul>
+            <h4 style="margin-top:14px;">Ergebnis</h4>
+            <ul>
+              <li>Unterzeichnete Auftrags- und Zieldefinition</li>
+              <li>Kl&auml;rung offener Vorfragen</li>
+              <li>Freigabe f&uuml;r Beginn der Pr&uuml;fung</li>
+            </ul>
+          </div>
+          <div class="app-hint">
+            <strong>In SMART Revision:</strong> Vorbereitung &rarr; Auftrags- und Zieldefinition &rarr; 7 Phasen ausf&uuml;llen &rarr; &bdquo;In Bericht&rdquo; &rarr; erscheint automatisch als Abschnitt 00 im Revisionsbericht. Export als Druckvorlage f&uuml;r das Gespr&auml;ch m&ouml;glich.
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- PHASE 2 -->
+    <div class="phase p2">
+      <div class="phase-left">
+        <div class="phase-num">2</div>
+        <div class="phase-line"></div>
+      </div>
+      <div class="phase-right">
+        <div class="phase-tag">Vorbereitung</div>
+        <div class="phase-title">Planung der Pr&uuml;fung</div>
+        <div class="phase-sub">Intern durch den Revisor &mdash; Unterlagen werden angefordert</div>
+        <div class="phase-body">
+          <div class="phase-block">
+            <h4>Aufgaben des Revisors</h4>
+            <ul>
+              <li>Festlegen der <strong>Pr&uuml;flisten</strong> je nach Revisionstyp</li>
+              <li>Bestimmen des Pr&uuml;fungsansatzes (ex-ante / ex-post / ad-hoc)</li>
+              <li>Zusammenstellen der ben&ouml;tigten Unterlagen</li>
+              <li>Setzen von Fristen f&uuml;r die Unterlagen&uuml;bergabe</li>
+              <li>Abstimmen von Terminen mit Beteiligten</li>
+            </ul>
+          </div>
+          <div class="phase-block">
+            <h4>Angeforderte Unterlagen (typisch)</h4>
+            <ul>
+              <li>Leistungsverzeichnisse &amp; Ausschreibungsunterlagen</li>
+              <li>Hauptvertrag inkl. aller Nachtr&auml;ge</li>
+              <li>Protokolle (Bauleitungsbesprechungen, Abnahmen)</li>
+              <li>Rechnungen &amp; Abschl&auml;ge</li>
+              <li>Planunterlagen (aktueller Stand)</li>
+              <li>Gutachten, Pr&uuml;fberichte, Genehmigungen</li>
+              <li>Schriftwechsel mit ausf&uuml;hrenden Firmen</li>
+            </ul>
+          </div>
+          <div class="nutzen-box">
+            <strong>Nutzen f&uuml;r den Auftraggeber:</strong> Transparente Liste aller angeforderten Unterlagen. &Uuml;ber den Upload-Link k&ouml;nnen Dokumente DSGVO-konform und strukturiert eingereicht werden &mdash; kein unorganisierter E-Mail-Versand.
+          </div>
+          <div class="app-hint">
+            <strong>In SMART Revision:</strong> Pr&uuml;fung &rarr; Unterlagen &rarr; Dokumente erfassen (Status: Ausstehend) &rarr; DSGVO-konformen Upload-Link hinterlegen (Nextcloud, Tresorit etc.) &rarr; Kundenportal versenden &rarr; Auftraggeber l&auml;dt &uuml;ber Link hoch.
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- PHASE 3 -->
+    <div class="phase p3">
+      <div class="phase-left">
+        <div class="phase-num">3</div>
+        <div class="phase-line"></div>
+      </div>
+      <div class="phase-right">
+        <div class="phase-tag">Pr&uuml;fung</div>
+        <div class="phase-title">Durchf&uuml;hrung der Revision</div>
+        <div class="phase-sub">Systematische Pr&uuml;fung aller relevanten Bereiche</div>
+        <div class="phase-body">
+          <div class="phase-block">
+            <h4>Pr&uuml;fungshandlungen</h4>
+            <ul>
+              <li><strong>Pr&uuml;flisten abarbeiten</strong> &mdash; Soll/Ist-Vergleich je Pr&uuml;fpunkt</li>
+              <li><strong>Unterlagen pr&uuml;fen</strong> &mdash; Vollst&auml;ndigkeit, Richtigkeit, Plausibilit&auml;t</li>
+              <li><strong>Feststellungen erfassen</strong> &mdash; Sachverhalt, Schwere, Empfehlung</li>
+              <li><strong>Fristen &uuml;berwachen</strong> &mdash; Was ist &uuml;berf&auml;llig, was dringend?</li>
+            </ul>
+          </div>
+          <div class="phase-block">
+            <h4>Befragung von Beteiligten</h4>
+            <ul>
+              <li>Architekten &amp; Fachplaner</li>
+              <li>Bauleitung &amp; Projektsteuerer</li>
+              <li>Ausf&uuml;hrende Firmen (bei Bedarf)</li>
+              <li>Auftraggeber-Vertreter</li>
+            </ul>
+            <h4 style="margin-top:12px;">Pr&uuml;fbereiche (typisch)</h4>
+            <ul>
+              <li>Projektmanagement &amp; Vergabe</li>
+              <li>Planungsleistungen (HOAI LP 1&ndash;9)</li>
+              <li>Bauausf&uuml;hrung &amp; Qualit&auml;t</li>
+              <li>Nachtragsmanagement &amp; Abrechnung</li>
+              <li>Abnahme &amp; Gew&auml;hrleistung</li>
+            </ul>
+          </div>
+          <div class="app-hint">
+            <strong>In SMART Revision:</strong> Pr&uuml;fung &rarr; Pr&uuml;flisten (200+ Pr&uuml;fpunkte, Soll/Ist) &rarr; bei Abweichung &bdquo;Feststellung erstellen&rdquo; &rarr; Pr&uuml;fung &rarr; Feststellungen (bearbeiten, priorisieren) &rarr; Nachverfolgung (Statusboard).
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- PHASE 4 -->
+    <div class="phase p4">
+      <div class="phase-left">
+        <div class="phase-num">4</div>
+        <div class="phase-line"></div>
+      </div>
+      <div class="phase-right">
+        <div class="phase-tag">Berichterstattung</div>
+        <div class="phase-title">Ausarbeitung des Revisionsberichts</div>
+        <div class="phase-sub">Strukturierte Dokumentation aller Ergebnisse</div>
+        <div class="phase-body">
+          <div class="phase-block">
+            <h4>Struktur des Revisionsberichts</h4>
+            <ul>
+              <li>00 &mdash; Auftrags- und Zieldefinition</li>
+              <li>01 &mdash; Pr&uuml;fungsgegenstand &amp; Zielsetzung</li>
+              <li>02 &mdash; Kosten-, Termin- &amp; Nachtrags&uuml;bersicht</li>
+              <li>03 &mdash; Executive Summary (Managementebene)</li>
+              <li>04 &mdash; Risikomatrix &amp; Gesamt&uuml;bersicht</li>
+              <li>05 &mdash; Feststellungen &ndash; Detailbericht</li>
+              <li>06 &mdash; HOAI-Honorarpr&uuml;fung</li>
+              <li>07 &mdash; Ma&szlig;nahmenplan mit Fristen</li>
+              <li>08 &mdash; Gesamtbewertung &amp; Empfehlungen</li>
+              <li>09 &mdash; Anlagenverzeichnis</li>
+              <li>10 &mdash; Schlussbestätigung &amp; Unterschriften</li>
+            </ul>
+          </div>
+          <div class="phase-block">
+            <h4>Nutzen f&uuml;r den Auftraggeber</h4>
+            <ul>
+              <li>Objektive, rechtssichere Dokumentation</li>
+              <li>Management Summary f&uuml;r Vorstand / Gesch&auml;ftsf&uuml;hrung</li>
+              <li>Klare Priorisierung: Kritisch &rarr; Erheblich &rarr; Hinweis</li>
+              <li>Konkreter Handlungsplan mit Fristen</li>
+              <li>Grundlage f&uuml;r Vertragsverhandlungen &amp; Geltendmachung</li>
+              <li>Revisionssichere Beweissicherung</li>
+            </ul>
+          </div>
+          <div class="app-hint">
+            <strong>In SMART Revision:</strong> Abschluss &rarr; Revisionsbericht &rarr; Alle Abschnitte werden automatisch bef&uuml;llt &rarr; &bdquo;KI-Bericht generieren&rdquo; f&uuml;r Executive Summary &rarr; PDF / .docx exportieren.
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- PHASE 5 -->
+    <div class="phase p5">
+      <div class="phase-left">
+        <div class="phase-num">5</div>
+        <div class="phase-line"></div>
+      </div>
+      <div class="phase-right">
+        <div class="phase-tag">Kommunikation</div>
+        <div class="phase-title">Gemeinsame Durchsprache</div>
+        <div class="phase-sub">Revisionsbericht wird mit dem Auftraggeber besprochen</div>
+        <div class="phase-body">
+          <div class="phase-block">
+            <h4>Inhalte der Durchsprache</h4>
+            <ul>
+              <li>Vorstellung der wichtigsten Feststellungen</li>
+              <li>Erkl&auml;rung der Risikobewertung</li>
+              <li>Kl&auml;rung von R&uuml;ckfragen und Einw&auml;nden</li>
+              <li>Festlegen der Ma&szlig;nahmenpriori&auml;ten</li>
+              <li>Bestimmen von Verantwortlichen und Fristen</li>
+              <li>Erste R&uuml;ckmeldung des Auftraggebers</li>
+            </ul>
+          </div>
+          <div class="phase-block">
+            <h4>Nutzen f&uuml;r den Auftraggeber</h4>
+            <ul>
+              <li>Direkter fachlicher Dialog mit dem Revisor</li>
+              <li>Unklarheiten werden sofort gekl&auml;rt</li>
+              <li>Auftraggeber kann Einw&auml;nde einbringen</li>
+              <li>Alle Abstimmungen werden dokumentiert</li>
+              <li>Keine &bdquo;Berichte in die Schublade&rdquo;</li>
+            </ul>
+          </div>
+          <div class="nutzen-box">
+            <strong>Digitale Unterst&uuml;tzung:</strong> Das Kundenportal erm&ouml;glicht die strukturierte R&uuml;ckmeldung des Auftraggebers zu jeder einzelnen Feststellung &mdash; mit Status, Kommentar und direkter E-Mail-Antwort an den Revisor.
+          </div>
+          <div class="app-hint">
+            <strong>In SMART Revision:</strong> Revisionsbericht &rarr; &bdquo;Kundenportal exportieren&rdquo; &rarr; HTML per E-Mail &rarr; Auftraggeber f&uuml;llt R&uuml;ckmeldebogen aus &rarr; &bdquo;R&uuml;ckmeldung senden&rdquo; &rarr; automatische E-Mail an Revisor.
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- PHASE 6 -->
+    <div class="phase p6">
+      <div class="phase-left">
+        <div class="phase-num">6</div>
+        <div class="phase-line"></div>
+      </div>
+      <div class="phase-right">
+        <div class="phase-tag">Abschluss</div>
+        <div class="phase-title">Finalisierung und Versand</div>
+        <div class="phase-sub">Finaler Bericht mit Unterschriften und revisionssichere Ablage</div>
+        <div class="phase-body">
+          <div class="phase-block">
+            <h4>Abschlusshandlungen</h4>
+            <ul>
+              <li>R&uuml;ckmeldungen des Auftraggebers einarbeiten</li>
+              <li>Bericht durch Revisor freigeben</li>
+              <li>Unterschriften einholen (Revisionsst. &amp; Gesch&auml;ftsf&uuml;hrung)</li>
+              <li>Finalen Bericht als PDF versenden</li>
+              <li>Aktenzeichen, Datum und Versandweg dokumentieren</li>
+              <li>Revisionssichere Ablage aller Unterlagen</li>
+            </ul>
+          </div>
+          <div class="phase-block">
+            <h4>Ergebnis f&uuml;r den Auftraggeber</h4>
+            <ul>
+              <li>Rechtssicherer, unterzeichneter Revisionsbericht</li>
+              <li>Vollst&auml;ndiges Anlagenverzeichnis</li>
+              <li>Unterschriftenblock als Nachweis der Kenntnisnahme</li>
+              <li>Grundlage f&uuml;r Vertragsstreitigkeiten und Anspr&uuml;che</li>
+              <li>Verwendbar f&uuml;r Versicherungen und Sachverst&auml;ndige</li>
+            </ul>
+          </div>
+          <div class="app-hint">
+            <strong>In SMART Revision:</strong> Revisionsbericht &rarr; &bdquo;Freigeben&rdquo; &rarr; Unterschriftenblock ausdrucken &rarr; PDF mit Abschnitt 10 (Schlussbestätigung) &rarr; Versand und Ablage.
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- PHASE 7 -->
+    <div class="phase p7">
+      <div class="phase-left">
+        <div class="phase-num">7</div>
+        <div class="phase-line"></div>
+      </div>
+      <div class="phase-right">
+        <div class="phase-tag">Optional</div>
+        <div class="phase-title">Nachverfolgung der Ma&szlig;nahmen</div>
+        <div class="phase-sub">Begleitung des Auftraggebers bis zur vollst&auml;ndigen Abarbeitung</div>
+        <div class="phase-body">
+          <div class="phase-block">
+            <h4>Leistungen in der Nachverfolgung</h4>
+            <ul>
+              <li>&Uuml;bergabe der <strong>Pr&uuml;fliste</strong> als Arbeitsmittel f&uuml;r den Auftraggeber</li>
+              <li>Regelm&auml;&szlig;ige Status-Updates &uuml;ber das Kundenportal</li>
+              <li>Auftraggeber meldet erledigte Ma&szlig;nahmen mit Nachweis</li>
+              <li>Revisor best&auml;tigt Erledigung nach Pr&uuml;fung der Nachweise</li>
+              <li>Optionaler Abschlussbericht / Testat nach vollst&auml;ndiger Abarbeitung</li>
+            </ul>
+          </div>
+          <div class="phase-block">
+            <h4>Nutzen f&uuml;r den Auftraggeber</h4>
+            <ul>
+              <li>Der Revisionsbericht bleibt ein <strong>aktives Steuerungsinstrument</strong></li>
+              <li>Kein &bdquo;Ablegen und Vergessen&rdquo;</li>
+              <li>Revisionssichere Dokumentation der Abarbeitung</li>
+              <li>Nachweis gegen&uuml;ber Versicherungen, Banken, Beh&ouml;rden</li>
+              <li>Vollst&auml;ndige digitale Projektakte am Ende</li>
+            </ul>
+          </div>
+          <div class="nutzen-box">
+            <strong>Das Alleinstellungsmerkmal:</strong> SMART Revision verwandelt den klassischen, statischen Revisionsbericht in ein aktives, digitales Steuerungsinstrument &mdash; mit strukturierter Kommunikation zwischen Revisor und Auftraggeber, l&uuml;ckenloser Nachverfolgung und vollst&auml;ndiger Projektakte.
+          </div>
+          <div class="app-hint">
+            <strong>In SMART Revision:</strong> Revisionsbericht &rarr; Ma&szlig;nahmenplan exportieren &rarr; Kundenportal versenden &rarr; Auftraggeber meldet Erledigungen per R&uuml;ckmeldebogen &rarr; Revisor setzt Status auf &bdquo;Erledigt&rdquo; &rarr; Abschlussdokumentation.
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- phases -->
+
+  <!-- FOOTER -->
+  <div class="doc-footer">
+    <div>
+      <strong>&copy; Bernhard Metzger &middot; BuiltSmart Hub</strong><br>
+      www.built-smart-hub.com &middot; SMART Revision &middot; Stand 2026
+    </div>
+    <div style="text-align:right;">
+      Grundlage: HOAI 2021 &middot; VOB/B 2019 &middot; BGB<br>
+      Vertraulich &middot; Nur f&uuml;r den internen Gebrauch
+    </div>
+  </div>
+
+</div><!-- doc -->
+
+</body>
+</html>
