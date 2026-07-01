@@ -1212,6 +1212,14 @@ textarea{resize:vertical;min-height:72px;}
           style="width:100%;padding:9px 12px;border:1px solid var(--b);border-radius:6px;font-size:13px;font-family:inherit;outline:none;"
           oninput="this.style.borderColor='var(--ac)'" onblur="this.style.borderColor='var(--b)'">
       </div>
+      <div style="background:var(--acl);border:1px solid #c8d8ec;border-radius:8px;padding:14px 16px;">
+        <label style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--ac);display:block;margin-bottom:4px;">&#128279; Upload-Link (DSGVO-konformer Dienst)</label>
+        <div style="font-size:11.5px;color:var(--ink2);margin-bottom:8px;line-height:1.5;">Link zu Nextcloud, Tresorit, SharePoint (EU) o.ä. — erscheint im Kundenportal als Upload-Button für den Auftraggeber.</div>
+        <input id="anl-uplink" type="url" placeholder="https://nextcloud.ihrefirma.de/s/link …"
+          style="width:100%;padding:9px 12px;border:1px solid #c8d8ec;border-radius:6px;font-size:13px;font-family:inherit;outline:none;"
+          oninput="this.style.borderColor='var(--ac)'" onblur="this.style.borderColor='#c8d8ec'">
+        <div style="font-size:10.5px;color:var(--ink3);margin-top:5px;">&#128274; Empfohlen: Nextcloud · Tresorit · SharePoint EU · Strato HiDrive</div>
+      </div>
     </div>
     <div style="display:flex;gap:10px;justify-content:flex-end;margin-top:22px;padding-top:16px;border-top:1px solid var(--b);">
       <button onclick="closeAnlagenModal()" style="padding:8px 18px;border:1px solid var(--b);border-radius:6px;background:#fff;font-size:13px;font-weight:600;cursor:pointer;font-family:inherit;color:var(--ink2);">Abbrechen</button>
@@ -2304,7 +2312,9 @@ function ulRender(){
       return '<tr style="border-bottom:1px solid var(--b);">'
         +'<td style="padding:10px 10px;font-family:monospace;font-size:11px;color:var(--ac);font-weight:700;">A-'+String(a.nr).padStart(2,'0')+'</td>'
         +'<td style="padding:10px 10px;font-weight:500;color:var(--ink);max-width:260px;">'+a.name
-          +(a.bemerkung?'<br><span style="font-size:11px;color:var(--ink3);font-weight:400;">'+a.bemerkung+'</span>':'')+'</td>'
+          +(a.bemerkung?'<br><span style="font-size:11px;color:var(--ink3);font-weight:400;">'+a.bemerkung+'</span>':'')
+        +(a.uplink?'<br><a href="'+a.uplink+'" target="_blank" style="font-size:10.5px;color:var(--ac);font-weight:600;text-decoration:none;">↗ Upload-Link</a>':'')
+        +'</td>'
         +'<td style="padding:10px 10px;font-size:12px;color:var(--ink2);">'+a.typ+'</td>'
         +'<td style="padding:10px 10px;font-size:12px;color:var(--ink3);">'+a.stand+'</td>'
         +'<td style="padding:10px 10px;"><span style="padding:3px 10px;border-radius:10px;font-size:11px;font-weight:600;'+(stBg[a.status]||stBg['Eingesehen'])+';">'+(stLbl[a.status]||a.status)+'</span></td>'
@@ -2325,6 +2335,7 @@ function ulEdit(i){
     const t=document.getElementById('anl-typ'); if(t) t.value=a.typ||'Sonstiges';
     const s=document.getElementById('anl-stand'); if(s) s.value=a.stand||'';
     const b=document.getElementById('anl-bemerkung'); if(b) b.value=a.bemerkung||'';
+    const ul2=document.getElementById('anl-uplink'); if(ul2) ul2.value=a.uplink||'';
     anlagenSelectStatus(a.status||'Eingesehen');
     modal.style.display='flex';
   }
@@ -2419,7 +2430,7 @@ function rptAddAnlage(){
   _anlagenStatusSel='Eingesehen'; _anlagenEditIdx=-1;
   const modal=document.getElementById('anlagen-modal');
   if(modal){
-    ['anl-name','anl-stand','anl-bemerkung'].forEach(id=>{const el=document.getElementById(id);if(el)el.value='';});
+    ['anl-name','anl-stand','anl-bemerkung','anl-uplink'].forEach(id=>{const el=document.getElementById(id);if(el)el.value='';});
     const sel=document.getElementById('anl-typ');if(sel)sel.selectedIndex=0;
     anlagenSelectStatus('Eingesehen');
     modal.style.display='flex';
@@ -2457,14 +2468,15 @@ function rptSaveAnlage(){
   const typ=(document.getElementById('anl-typ')||{}).value||'Sonstiges';
   const stand=(document.getElementById('anl-stand')||{}).value||new Date().toLocaleDateString('de-DE');
   const bem=(document.getElementById('anl-bemerkung')||{}).value||'';
+  const uplink=((document.getElementById('anl-uplink')||{}).value||'').trim();
   const p=AP(); if(!p._anlagen) p._anlagen=[];
   if(_anlagenEditIdx>=0 && p._anlagen[_anlagenEditIdx]){
     const a=p._anlagen[_anlagenEditIdx];
     a.name=name.trim(); a.typ=typ; a.stand=stand;
-    a.status=_anlagenStatusSel; a.bemerkung=bem.trim();
+    a.status=_anlagenStatusSel; a.bemerkung=bem.trim(); a.uplink=uplink;
   } else {
     p._anlagen.push({nr:p._anlagen.length+1,name:name.trim(),typ,stand,
-      status:_anlagenStatusSel,bemerkung:bem.trim(),datum:new Date().toLocaleDateString('de-DE')});
+      status:_anlagenStatusSel,bemerkung:bem.trim(),uplink:uplink,datum:new Date().toLocaleDateString('de-DE')});
   }
   _anlagenEditIdx=-1;
   SP();
@@ -2562,16 +2574,44 @@ function exportKundenportal(){
     :'<p style="color:#9ca3af;font-style:italic;">Keine Feststellungen erfasst.</p>';
 
   const anlagen=p._anlagen||[];
-  const anlagenHtml=anlagen.length?('<table style="width:100%;border-collapse:collapse;font-size:13px;">'
-    +'<thead><tr style="background:#1e3a5f;color:#fff;"><th style="padding:8px 12px;text-align:left;">Nr.</th>'
-    +'<th style="padding:8px 12px;text-align:left;">Dokument</th><th style="padding:8px 12px;text-align:left;">Typ</th>'
-    +'<th style="padding:8px 12px;text-align:left;">Stand</th><th style="padding:8px 12px;text-align:left;">Datum</th></tr></thead><tbody>'
-    +anlagen.map((a,i)=>'<tr style="'+(i%2?'background:#f8fafc;':'')+'">'
-      +'<td style="padding:7px 12px;font-family:monospace;font-size:11px;color:#1e3a5f;">A-'+String(a.nr).padStart(2,'0')+'</td>'
-      +'<td style="padding:7px 12px;font-weight:500;">'+a.name+'</td>'
-      +'<td style="padding:7px 12px;color:#6b7280;">'+a.typ+'</td>'
-      +'<td style="padding:7px 12px;color:#6b7280;">'+a.stand+'</td>'
-      +'<td style="padding:7px 12px;color:#9ca3af;">'+a.datum+'</td></tr>').join('')+'</tbody></table>')
+  const kpStBg={'Eingesehen':'background:#f0fdf4;color:#15803d;border:1px solid #bbf7d0',
+    'Als Anlage beigefügt':'background:#eff6ff;color:#1d4ed8;border:1px solid #bfdbfe',
+    'Angefordert':'background:#fff7ed;color:#c2410c;border:1px solid #fed7aa',
+    'Ausstehend':'background:#fff7ed;color:#c2410c;border:1px solid #fed7aa'};
+  const kpStLbl={'Eingesehen':'&#10003; Eingesehen','Als Anlage beigefügt':'&#128206; Beigefügt',
+    'Angefordert':'&#9203; Ausstehend','Ausstehend':'&#9203; Ausstehend'};
+  const ausstN2=anlagen.filter(a=>a.status==='Ausstehend'||a.status==='Angefordert').length;
+  const anlagenHtml=anlagen.length?(
+    (ausstN2?'<div style="margin-bottom:12px;padding:10px 14px;background:#fffbeb;border:1px solid #fde68a;border-radius:8px;font-size:13px;color:#92400e;">'
+      +'&#9888; '+ausstN2+' Unterlage(n) noch ausstehend &mdash; bitte über den Upload-Link oder per E-Mail einreichen.</div>':'')
+    +'<table style="width:100%;border-collapse:collapse;font-size:13px;">'
+    +'<thead><tr style="background:#1e3a5f;color:#fff;">'
+    +'<th style="padding:9px 12px;text-align:left;font-size:11px;width:60px;">Nr.</th>'
+    +'<th style="padding:9px 12px;text-align:left;font-size:11px;">Dokument / Unterlage</th>'
+    +'<th style="padding:9px 12px;text-align:left;font-size:11px;width:110px;">Typ</th>'
+    +'<th style="padding:9px 12px;text-align:left;font-size:11px;width:130px;">Status</th>'
+    +'<th style="padding:9px 12px;text-align:left;font-size:11px;width:170px;">Aktion</th>'
+    +'</tr></thead><tbody>'
+    +anlagen.map((a,i)=>{
+      const sBg=kpStBg[a.status]||kpStBg['Eingesehen'];
+      const sLb=kpStLbl[a.status]||a.status;
+      const isAus=a.status==='Ausstehend'||a.status==='Angefordert';
+      const aktBtn=a.uplink
+        ?'<a href="'+a.uplink+'" target="_blank" style="display:inline-block;padding:6px 14px;'
+         +'background:#1e3a5f;color:#fff;border-radius:6px;font-size:12px;font-weight:700;text-decoration:none;">'
+         +'&#8593; Dokument hochladen</a>'
+        :(isAus?'<span style="font-size:11.5px;color:#c2410c;">&#9888; Per E-Mail einreichen</span>'
+               :'<span style="font-size:11px;color:#9ca3af;">&mdash;</span>');
+      return '<tr style="'+(i%2?'background:#f8fafc;':'')+'">'
+        +'<td style="padding:9px 12px;font-family:monospace;font-size:11px;color:#1e3a5f;font-weight:700;">A-'+String(a.nr).padStart(2,'0')+'</td>'
+        +'<td style="padding:9px 12px;font-weight:500;color:#111827;">'+a.name
+        +(a.bemerkung?'<br><span style="font-size:11px;color:#6b7280;">'+a.bemerkung+'</span>':'')
+        +'</td>'
+        +'<td style="padding:9px 12px;font-size:12px;color:#6b7280;">'+a.typ+'</td>'
+        +'<td style="padding:9px 12px;"><span style="padding:3px 9px;border-radius:10px;font-size:11px;font-weight:600;'+sBg+';">'+sLb+'</span></td>'
+        +'<td style="padding:9px 12px;">'+aktBtn+'</td>'
+        +'</tr>';
+    }).join('')+'</tbody></table>')
     :'<p style="color:#9ca3af;font-style:italic;">Noch keine Anlagen erfasst.</p>';
 
   const html='<!DOCTYPE html><html lang="de"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">'
