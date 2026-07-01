@@ -1361,8 +1361,8 @@ textarea{resize:vertical;min-height:72px;}
       <div class="hilfe-hdr-title">Hilfe &amp; Bedienungsanleitung</div>
       <div class="hilfe-hdr-sub">SMART Revision &middot; BuiltSmart Hub &middot; &copy; Bernhard Metzger</div>
       <div style="margin-top:7px;display:flex;flex-wrap:wrap;gap:4px;">
-        <span class="hilfe-ki-badge hilfe-ki-yes">&#10003; Ohne KI nutzbar &ndash; Kernfunktionen laufen vollst&auml;ndig ohne API-Key</span>
-        <span class="hilfe-ki-badge hilfe-ki-note">&#9889; KI-Funktionen optional &ndash; erfordern Anthropic API-Key</span>
+        <span class="hilfe-ki-badge hilfe-ki-yes">&#10003; Kernfunktionen ohne KI nutzbar</span>
+        <span class="hilfe-ki-badge hilfe-ki-note">&#9889; KI-Funktionen erfordern Anthropic API-Key</span>
       </div>
     </div>
     <button class="hilfe-close" onclick="closeHilfe()" title="Hilfe schlie&szlig;en">&times;</button>
@@ -1374,14 +1374,14 @@ textarea{resize:vertical;min-height:72px;}
     <nav class="hilfe-nav" id="hilfe-nav">
       <div class="hilfe-nav-item active" onclick="hilfeChapter('ueberblick')" data-ch="ueberblick"><span class="hilfe-nav-icon">&#128196;</span>1. &Uuml;berblick</div>
       <div class="hilfe-nav-item" onclick="hilfeChapter('einrichtung')" data-ch="einrichtung"><span class="hilfe-nav-icon">&#128273;</span>2. Einrichtung &amp; Zugang</div>
-      <div class="hilfe-nav-item" onclick="hilfeChapter('schnellstart')" data-ch="schnellstart"><span class="hilfe-nav-icon">&#9889;</span>3. Schnellstart</div>
-      <div class="hilfe-nav-item" onclick="hilfeChapter('bedienung')" data-ch="bedienung"><span class="hilfe-nav-icon">&#128421;</span>4. Bedienoberfl&auml;che</div>
-      <div class="hilfe-nav-item" onclick="hilfeChapter('funktionen')" data-ch="funktionen"><span class="hilfe-nav-icon">&#11088;</span>5. Wichtige Funktionen</div>
-      <div class="hilfe-nav-item" onclick="hilfeChapter('workflow')" data-ch="workflow"><span class="hilfe-nav-icon">&#128260;</span>6. Typischer Workflow</div>
-      <div class="hilfe-nav-item" onclick="hilfeChapter('eingaben')" data-ch="eingaben"><span class="hilfe-nav-icon">&#9998;</span>7. Eingaben &amp; Daten</div>
-      <div class="hilfe-nav-item" onclick="hilfeChapter('ergebnisse')" data-ch="ergebnisse"><span class="hilfe-nav-icon">&#128202;</span>8. Ergebnisse verstehen</div>
-      <div class="hilfe-nav-item" onclick="hilfeChapter('fehler')" data-ch="fehler"><span class="hilfe-nav-icon">&#128736;</span>9. Fehler &amp; L&ouml;sungen</div>
-      <div class="hilfe-nav-item" onclick="hilfeChapter('version')" data-ch="version"><span class="hilfe-nav-icon">&#128196;</span>10. Version &amp; Hinweise</div>
+      <div class="hilfe-nav-item" onclick="hilfeChapter('workflow')" data-ch="workflow"><span class="hilfe-nav-icon">&#128260;</span>3. Typischer Workflow</div>
+      <div class="hilfe-nav-item" onclick="hilfeChapter('bereiche')" data-ch="bereiche"><span class="hilfe-nav-icon">&#128421;</span>4. Arbeitsbereiche</div>
+      <div class="hilfe-nav-item" onclick="hilfeChapter('unterlagen')" data-ch="unterlagen"><span class="hilfe-nav-icon">&#128196;</span>5. Unterlagen &amp; Dokumente</div>
+      <div class="hilfe-nav-item" onclick="hilfeChapter('kundenportal')" data-ch="kundenportal"><span class="hilfe-nav-icon">&#128101;</span>6. Kundenportal</div>
+      <div class="hilfe-nav-item" onclick="hilfeChapter('bericht')" data-ch="bericht"><span class="hilfe-nav-icon">&#128202;</span>7. Revisionsbericht</div>
+      <div class="hilfe-nav-item" onclick="hilfeChapter('ki')" data-ch="ki"><span class="hilfe-nav-icon">&#11088;</span>8. KI-Funktionen</div>
+      <div class="hilfe-nav-item" onclick="hilfeChapter('datenschutz')" data-ch="datenschutz"><span class="hilfe-nav-icon">&#128274;</span>9. Datenschutz &amp; Datensicherheit</div>
+      <div class="hilfe-nav-item" onclick="hilfeChapter('fehler')" data-ch="fehler"><span class="hilfe-nav-icon">&#128736;</span>10. Fehler &amp; L&ouml;sungen</div>
     </nav>
     <div class="hilfe-content" id="hilfe-content">
 
@@ -1392,312 +1392,262 @@ textarea{resize:vertical;min-height:72px;}
         <div class="hilfe-badge-row">
           <span class="hilfe-badge hilfe-badge-green">&#10003; Kernfunktionen ohne KI</span>
           <span class="hilfe-badge hilfe-badge-blue">KI optional</span>
-          <span class="hilfe-badge hilfe-badge-gold">HOAI &sect; 34 ff. &middot; VOB/B 2019 &middot; BGB</span>
+          <span class="hilfe-badge hilfe-badge-gold">HOAI 2021 &middot; VOB/B 2019 &middot; BGB</span>
         </div>
-        <p><strong>SMART Revision</strong> ist eine KI-gest&uuml;tzte Webanwendung f&uuml;r die professionelle Bau- und HOAI-Revision. Die App unterst&uuml;tzt Revisoren, Gutachter, Bauherren und Investoren bei der strukturierten Erfassung, Bewertung und Nachverfolgung von Revisionsfeststellungen.</p>
-        <h3>Was die App kann</h3>
+        <p><strong>SMART Revision</strong> ist eine KI-gest&uuml;tzte Webanwendung f&uuml;r die professionelle Bau- und HOAI-Revision. Sie unterst&uuml;tzt Revisoren, Gutachter, Bauherren und Investoren bei der strukturierten Erfassung, Bewertung, Nachverfolgung und Kommunikation von Revisionsfeststellungen.</p>
+        <h3>Arbeitsbereiche im &Uuml;berblick</h3>
         <ul>
-          <li><strong>Feststellungen erfassen</strong> &ndash; strukturiert nach Schwere (Kritisch / Erheblich / Hinweis)</li>
-          <li><strong>HOAI &sect; 34 ff. Konformit&auml;t pr&uuml;fen</strong> &ndash; alle Leistungsphasen LP 1&ndash;8</li>
-          <li><strong>VOB/B-konforme Dokumentation</strong> &ndash; M&auml;ngel, Fristen, Nachtr&auml;ge</li>
-          <li><strong>Auftrags- und Zieldefinition</strong> &ndash; strukturierter 7-Phasen-Gespr&auml;chsleitfaden</li>
-          <li><strong>Prüflisten Bau- &amp; HOAI-Revision</strong> &ndash; 10 Prüflisten mit 200+ Pr&uuml;fpunkten nach HOAI 2021, VOB/B 2019, BGB und DIN-Normen</li>
-          <li><strong>Fristenkalender</strong> &ndash; &Uuml;bersicht aller Fristen mit Ampelsystem</li>
-          <li><strong>Revisionsbericht</strong> &ndash; PDF-Export mit Deckblatt, Risikomatrix und Ma&szlig;nahmenplan</li>
-          <li><strong>Kundenportal</strong> &ndash; HTML-Export f&uuml;r Auftraggeber zur Fortschrittskontrolle</li>
-          <li><strong>KI-Assistent (optional)</strong> &ndash; HOAI/VOB-konforme Formulierungen per Claude API</li>
+          <li><strong>Vorbereitung:</strong> Auftrags- und Zieldefinition &middot; Fristenkalender</li>
+          <li><strong>Pr&uuml;fung:</strong> Pr&uuml;flisten (200+ Pr&uuml;fpunkte) &middot; Feststellungen &middot; Nachverfolgung &middot; Unterlagen</li>
+          <li><strong>Abschluss:</strong> Revisionsbericht (10 Abschnitte) &middot; Kundenportal-Export</li>
+          <li><strong>Werkzeuge:</strong> KI-Assistent (optional)</li>
         </ul>
+        <h3>Kommunikation mit dem Auftraggeber</h3>
+        <ul>
+          <li><strong>Kundenportal-Export</strong> &ndash; standalone HTML-Datei per E-Mail an den Auftraggeber</li>
+          <li><strong>R&uuml;ckmeldebogen</strong> &ndash; Auftraggeber bewertet Feststellungen, sendet R&uuml;ckmeldung per E-Mail zur&uuml;ck</li>
+          <li><strong>Upload-Links</strong> &ndash; DSGVO-konforme Links (Nextcloud, Tresorit) f&uuml;r Dokumenten&uuml;bergabe</li>
+        </ul>
+        <div class="hilfe-callout hilfe-callout-green">
+          <strong>Hinweis:</strong> Alle Kernfunktionen laufen <strong>ohne KI und ohne API-Key</strong>. Der API-Key wird ausschlie&szlig;lich f&uuml;r KI-Formulierungsfunktionen ben&ouml;tigt.
+        </div>
         <div class="hilfe-ki-list">
-          <div class="hilfe-ki-list-title">&#9889; KI-unterst&uuml;tzte Funktionen (optional &ndash; erfordern API-Key)</div>
+          <div class="hilfe-ki-list-title">&#9889; KI-unterst&uuml;tzte Funktionen (erfordern API-Key)</div>
           <span class="hilfe-ki-tag optional">Sachverhalt formulieren</span>
           <span class="hilfe-ki-tag optional">Empfehlung formulieren</span>
-          <span class="hilfe-ki-tag optional">HOAI-Feststellung</span>
-          <span class="hilfe-ki-tag optional">VOB/B-Feststellung</span>
-          <span class="hilfe-ki-tag optional">M&auml;ngelr&uuml;ge</span>
-          <span class="hilfe-ki-tag optional">Beweissicherung</span>
-          <span class="hilfe-ki-tag optional">Risikoanalyse</span>
+          <span class="hilfe-ki-tag optional">Vollst&auml;ndige Feststellung</span>
           <span class="hilfe-ki-tag optional">Executive Summary</span>
-          <span class="hilfe-ki-tag optional">Fristenanalyse</span>
-          <span class="hilfe-ki-tag optional">HOAI-Konformit&auml;tspr&uuml;fung</span>
-        </div>
-        <div class="hilfe-callout hilfe-callout-green">
-          <strong>Hinweis:</strong> Alle Kernfunktionen &ndash; Feststellungen erfassen, Auftrags- und Zieldefinition, Pr&uuml;flisten, Fristenkalender, Bericht generieren, Kundenportal exportieren &ndash; funktionieren vollst&auml;ndig <strong>ohne KI und ohne API-Key</strong>. Der API-Key wird ausschlie&szlig;lich f&uuml;r die KI-Formulierungsfunktionen im Bereich &bdquo;KI-Assistent&rdquo; ben&ouml;tigt.
+          <span class="hilfe-ki-tag optional">Gesamtbewertung</span>
+          <span class="hilfe-ki-tag optional">Unterlagen-Vorschlag</span>
+          <span class="hilfe-ki-tag optional">Pr&uuml;flisten KI-Formulierung</span>
         </div>
       </div>
 
-      <!-- 2. EINRICHTUNG & ZUGANG -->
+      <!-- 2. EINRICHTUNG -->
       <div class="hilfe-chapter" id="hch-einrichtung">
         <h2>2. Einrichtung &amp; Zugang</h2>
-        <div class="ch-sub">Lizenzschl&uuml;ssel, API-Key und Warum beides n&ouml;tig ist</div>
-        <div class="hilfe-callout">
-          <strong>Lizenzschl&uuml;ssel und API-Key erf&uuml;llen unterschiedliche Aufgaben:</strong><br>
-          Der <strong>Lizenzschl&uuml;ssel</strong> aktiviert die Nutzung dieser App. Er best&auml;tigt, dass Sie berechtigt sind, die Software zu verwenden.<br><br>
-          Der <strong>API-Key</strong> verbindet die App mit Ihrem Anthropic-Konto. Er ist erforderlich, damit KI-Funktionen ausgef&uuml;hrt werden k&ouml;nnen. Auch bei einer bezahlten App-Lizenz wird ein eigener API-Key ben&ouml;tigt, weil die Nutzung der KI-Modelle technisch und abrechnungstechnisch getrennt &uuml;ber Anthropic erfolgt.
-        </div>
-        <h3>a) Lizenzschl&uuml;ssel aktivieren</h3>
-        <p>Den Lizenzschl&uuml;ssel tragen Sie im Einstellungsbereich der App ein (Sidebar unten &rarr; Einstellungen). Der Lizenzschl&uuml;ssel muss einmalig bei der ersten Nutzung eingegeben werden.</p>
+        <div class="ch-sub">API-Key und Projekteinstellungen</div>
+        <h3>a) API-Key (f&uuml;r KI-Funktionen)</h3>
+        <div class="hilfe-step"><div class="hilfe-step-num">1</div><div class="hilfe-step-txt"><strong>Anthropic Console &ouml;ffnen</strong>Gehen Sie zu <a href="https://console.anthropic.com" target="_blank" style="color:var(--ac)">console.anthropic.com</a></div></div>
+        <div class="hilfe-step"><div class="hilfe-step-num">2</div><div class="hilfe-step-txt"><strong>API-Key erstellen</strong>Men&uuml; &bdquo;API Keys&rdquo; &rarr; &bdquo;Create Key&rdquo; &rarr; Name vergeben &rarr; Key kopieren (beginnt mit sk-ant-&hellip;)</div></div>
+        <div class="hilfe-step"><div class="hilfe-step-num">3</div><div class="hilfe-step-txt"><strong>In der App eintragen</strong>Sidebar unten &rarr; API-Key-Feld &rarr; Einf&uuml;gen &rarr; &bdquo;Verbinden&rdquo;</div></div>
+        <div class="hilfe-callout hilfe-callout-warn"><strong>&#9888;</strong> Der Key wird nur einmal angezeigt &mdash; sofort in einem Passwort-Manager speichern.</div>
+        <h3>b) Projekteinstellungen</h3>
+        <p>Klicken Sie auf <strong>&#9998; Bearbeiten</strong> neben dem Projektnamen. Dort hinterlegen Sie:</p>
         <ul>
-          <li><strong>Was er freischaltet:</strong> Die vollst&auml;ndige Nutzung der App-Funktionen gem&auml;&szlig; Ihrem Lizenzmodell</li>
-          <li><strong>Was er nicht ersetzt:</strong> Den Anthropic API-Key f&uuml;r KI-Funktionen</li>
-          <li><strong>Wo eintragen:</strong> Sidebar &rarr; Einstellungen / API-Konfiguration</li>
-          <li><strong>Lizenzmodell:</strong> Jahreslizenz &euro; 97/Jahr &middot; 7-Tage-Testphase</li>
-        </ul>
-        <h3>b) API-Key erstellen &ndash; Schritt f&uuml;r Schritt</h3>
-        <div class="hilfe-step"><div class="hilfe-step-num">1</div><div class="hilfe-step-txt"><strong>Anthropic Console &ouml;ffnen</strong>Gehen Sie zu <a href="https://console.anthropic.com" target="_blank" style="color:var(--ac)">console.anthropic.com</a> in Ihrem Browser.</div></div>
-        <div class="hilfe-step"><div class="hilfe-step-num">2</div><div class="hilfe-step-txt"><strong>Konto erstellen oder einloggen</strong>Registrieren Sie sich mit E-Mail-Adresse oder melden Sie sich an Ihrem bestehenden Anthropic-Konto an.</div></div>
-        <div class="hilfe-step"><div class="hilfe-step-num">3</div><div class="hilfe-step-txt"><strong>Bereich &bdquo;API Keys&rdquo; &ouml;ffnen</strong>Klicken Sie links im Men&uuml; auf &bdquo;API Keys&rdquo;.</div></div>
-        <div class="hilfe-step"><div class="hilfe-step-num">4</div><div class="hilfe-step-txt"><strong>Neuen API-Key erstellen</strong>Klicken Sie auf &bdquo;Create Key&rdquo;, vergeben Sie einen Namen (z.B. &bdquo;SMART Revision&rdquo;) und best&auml;tigen Sie.</div></div>
-        <div class="hilfe-step"><div class="hilfe-step-num">5</div><div class="hilfe-step-txt"><strong>API-Key kopieren</strong>Kopieren Sie den angezeigten Schl&uuml;ssel sofort. Er beginnt mit &bdquo;sk-ant-&hellip;&rdquo;.</div></div>
-        <div class="hilfe-step"><div class="hilfe-step-num">6</div><div class="hilfe-step-txt"><strong>API-Key in der App eintragen</strong>F&uuml;gen Sie den Schl&uuml;ssel in das API-Key-Feld in der Sidebar (unten) ein und klicken Sie &bdquo;Verbinden&rdquo;.</div></div>
-        <div class="hilfe-callout hilfe-callout-warn">
-          <strong>&#9888; Wichtig:</strong> Der API-Key wird h&auml;ufig nur einmal vollst&auml;ndig angezeigt und sollte sicher gespeichert werden (z.B. in einem Passwort-Manager). Verlieren Sie den Key, m&uuml;ssen Sie einen neuen erstellen.
-        </div>
-        <h3>c) Warum ein API-Key erforderlich ist</h3>
-        <ul>
-          <li>Die App nutzt KI-Funktionen &uuml;ber die Anthropic API (Claude-Modelle)</li>
-          <li>Der API-Key verbindet die App mit Ihrem pers&ouml;nlichen Anthropic-Konto</li>
-          <li>KI-Anfragen werden dadurch Ihrem eigenen Anthropic-Konto zugeordnet und abgerechnet</li>
-          <li>Ohne API-Key k&ouml;nnen KI-Formulierungen und Analysen nicht ausgef&uuml;hrt werden</li>
-          <li>Die Kernfunktionen der App laufen jedoch vollst&auml;ndig ohne API-Key</li>
-        </ul>
-        <h3>d) Warum auch bei bezahltem App-Abo ein API-Key n&ouml;tig ist</h3>
-        <ul>
-          <li><strong>App-Lizenz</strong> bezahlt die Nutzung der Software (BuiltSmart Hub)</li>
-          <li><strong>Anthropic API-Nutzung</strong> wird separat &uuml;ber Ihr Anthropic-Konto abgerechnet</li>
-          <li>Beide Systeme sind technisch und abrechnungstechnisch vollst&auml;ndig getrennt</li>
-          <li>Deshalb ist auch bei bezahlter App-Lizenz ein eigener API-Key erforderlich</li>
-        </ul>
-        <h3>e) Warum Anthropic verwendet wird</h3>
-        <ul>
-          <li><strong>Qualit&auml;t:</strong> Claude-Modelle sind besonders stark bei strukturiertem Arbeiten, Textanalyse und professionellen Workflows</li>
-          <li><strong>L&auml;ngere Dokumente:</strong> Claude eignet sich f&uuml;r komplexe Eingaben und nachvollziehbare, pr&auml;zise Ausgaben</li>
-          <li><strong>Sicherheit:</strong> Anthropic legt gro&szlig;en Wert auf Sicherheit, Zuverl&auml;ssigkeit und verantwortungsvolle KI-Nutzung</li>
-          <li><strong>Kontrolle:</strong> &Uuml;ber den eigenen API-Key behalten Sie volle Kontrolle &uuml;ber Nutzung und Abrechnung</li>
-          <li><strong>Integration:</strong> Die Anthropic API erm&ouml;glicht eine stabile Integration in professionelle Anwendungen</li>
+          <li>Projektname &middot; Auftraggeber &middot; Pr&uuml;fer / Kanzlei</li>
+          <li>Leistungsphase &middot; Pr&uuml;fdatum &middot; Pr&uuml;fungszeitraum</li>
+          <li><strong>E-Mail Revisor</strong> &mdash; Zieladresse f&uuml;r Auftraggeber-R&uuml;ckmeldungen</li>
+          <li><strong>E-Mail Auftraggeber</strong> &mdash; f&uuml;r automatischen Versand (k&uuml;nftig)</li>
+          <li>HOAI-Daten &middot; Aktenzeichen</li>
         </ul>
       </div>
 
-      <!-- 3. SCHNELLSTART -->
-      <div class="hilfe-chapter" id="hch-schnellstart">
-        <h2>3. Schnellstart</h2>
-        <div class="ch-sub">In 5 Schritten zur ersten Revisionsfeststellung</div>
-        <div class="hilfe-callout hilfe-callout-green">
-          <strong>Hinweis:</strong> Schritte 1 und 2 sind nur f&uuml;r KI-Funktionen erforderlich. Alle anderen Funktionen stehen sofort bereit.
-        </div>
-        <div class="hilfe-step"><div class="hilfe-step-num">1</div><div class="hilfe-step-txt"><strong>Lizenzschl&uuml;ssel aktivieren (f&uuml;r vollst&auml;ndigen Zugang)</strong>Sidebar unten &rarr; Einstellungen &rarr; Lizenzschl&uuml;ssel eintragen. Siehe Kapitel 2 &bdquo;Einrichtung &amp; Zugang&rdquo;.</div></div>
-        <div class="hilfe-step"><div class="hilfe-step-num">2</div><div class="hilfe-step-txt"><strong>API-Key eintragen (optional &ndash; nur f&uuml;r KI-Funktionen)</strong>Sidebar unten &rarr; API-Konfiguration &rarr; Schl&uuml;ssel einf&uuml;gen &rarr; &bdquo;Verbinden&rdquo;. Siehe Kapitel 2b.</div></div>
-        <div class="hilfe-step"><div class="hilfe-step-num">3</div><div class="hilfe-step-txt"><strong>Neues Projekt anlegen</strong>Dashboard &rarr; &bdquo;+ Neu&rdquo; &rarr; Projektname, Auftraggeber, Leistungsphase, BGF eintragen &rarr; Speichern.</div></div>
-        <div class="hilfe-step"><div class="hilfe-step-num">4</div><div class="hilfe-step-txt"><strong>Erste Feststellung erfassen</strong>Topbar &rarr; &bdquo;+ Feststellung&rdquo; &rarr; Formular ausf&uuml;llen (Titel, Schwere, Bereich, HOAI-Paragraf, Sachverhalt, Empfehlung, Frist).</div></div>
-        <div class="hilfe-step"><div class="hilfe-step-num">5</div><div class="hilfe-step-txt"><strong>Revisionsbericht generieren und exportieren</strong>Topbar &rarr; &bdquo;Bericht generieren&rdquo; &rarr; PDF exportieren oder Kundenportal-HTML herunterladen.</div></div>
-        <h3>Empfohlene Reihenfolge bei neuen Projekten</h3>
-        <ul>
-          <li>Auftrags- und Zieldefinition durchf&uuml;hren &rarr; In Bericht &uuml;bernehmen</li>
-          <li>Feststellungen erfassen und klassifizieren</li>
-          <li>Prüflisten abarbeiten</li>
-          <li>Fristen setzen und im Fristenkalender verfolgen</li>
-          <li>KI-Assistent f&uuml;r Formulierungen nutzen (optional)</li>
-          <li>Revisionsbericht als PDF exportieren</li>
-          <li>Kundenportal-HTML an Auftraggeber senden</li>
-        </ul>
-      </div>
-
-      <!-- 4. BEDIENOBERFLÄCHE -->
-      <div class="hilfe-chapter" id="hch-bedienung">
-        <h2>4. Bedienoberfl&auml;che</h2>
-        <div class="ch-sub">Aufbau und Navigation der App</div>
-        <h3>Sidebar (linke Navigation)</h3>
-        <ul>
-          <li><strong>SMART Revision Logo</strong> &ndash; Icon und App-Name oben; Toggle-Button zum Einklappen</li>
-          <li><strong>Projektverwaltung</strong> &ndash; Aktives Projekt w&auml;hlen, neu anlegen, importieren/exportieren</li>
-          <li><strong>&Uuml;bersicht</strong> &ndash; Dashboard mit KPI-Kacheln und Projektinformationen</li>
-          <li><strong>Pr&uuml;fung</strong> &ndash; Feststellungen, Nachverfolgung, KI-Assistent</li>
-          <li><strong>Vorbereitung</strong> &ndash; Auftrags- und Zieldefinition, Fristenkalender, Pr&uuml;flisten</li>
-          <li><strong>Abschluss</strong> &ndash; Revisionsbericht</li>
-          <li><strong>API-Konfiguration</strong> &ndash; Anthropic API-Key eintragen (Sidebar unten)</li>
-        </ul>
-        <h3>Topbar (obere Leiste)</h3>
-        <ul>
-          <li><strong>Aktueller Bereich</strong> &ndash; Titel und Untertitel links</li>
-          <li><strong>Auftrags- und Zieldefinition</strong> &ndash; Direktzugang (gold hervorgehoben)</li>
-          <li><strong>KI fragen</strong> &ndash; Chat mit KI-Assistent &ouml;ffnen</li>
-          <li><strong>+ Feststellung</strong> &ndash; Neue Feststellung schnell erfassen</li>
-          <li><strong>Bericht generieren</strong> &ndash; Zum Revisionsbericht wechseln</li>
-          <li><strong>Hilfe</strong> &ndash; Dieses Hilfepanel &ouml;ffnen</li>
-        </ul>
-        <h3>Sidebar einklappen</h3>
-        <p>Der Toggle-Button oben rechts in der Sidebar klappt die Navigation auf Icons zusammen. Der Zustand wird gespeichert. Im eingeklappten Zustand zeigen Tooltips die Namen der Navigationspunkte.</p>
-      </div>
-
-      <!-- 5. WICHTIGE FUNKTIONEN -->
-      <div class="hilfe-chapter" id="hch-funktionen">
-        <h2>5. Wichtige Funktionen</h2>
-        <div class="ch-sub">Alle Kernfunktionen im &Uuml;berblick</div>
-        <h3>Feststellungen</h3>
-        <p>Kern der App. Jede Feststellung hat: ID (automatisch), Titel, Bereich, Schwere (Kritisch/Erheblich/Hinweis), Status, HOAI-Paragraf, Sachverhalt, Empfehlung, Verantwortlichen, Frist und Erl&auml;uterungen.</p>
-        <div class="hilfe-ki-list">
-          <div class="hilfe-ki-list-title">KI-Unterst&uuml;tzung (optional)</div>
-          <span class="hilfe-ki-tag optional">Sachverhalt auto-formulieren</span>
-          <span class="hilfe-ki-tag optional">Empfehlung auto-formulieren</span>
-          <span class="hilfe-ki-tag optional">VOB/B-konforme Feststellung</span>
-          <span class="hilfe-ki-tag optional">HOAI-konforme Feststellung</span>
-        </div>
-        <h3>Auftrags- und Zieldefinition</h3>
-        <p>7-Phasen-Gespr&auml;chsleitfaden mit aufklappbaren Fragen, Vorschlag-Chips zum Anklicken und Notizfeldern. Ergebnisse flie&szlig;en in Abschnitt 00 des Revisionsberichts.</p>
-        <h3>Prüflisten Bau- &amp; HOAI-Revision</h3>
-        <p>10 Pr&uuml;flisten mit 200+ Pr&uuml;fpunkten mit verifizierbaren Rechtsquellen. Jeder Punkt mit Muss/Soll/Kann-Kennzeichnung und Paragrafenreferenz. Fortschritt wird pro Projekt gespeichert.</p>
-        <h3>Fristenkalender</h3>
-        <p>Alle Feststellungsfristen nach &Uuml;berf&auml;lligkeit, Diese Woche, Diesen Monat und Erledigt gruppiert. Ampelfarben und Filteroptionen.</p>
-        <h3>KI-Assistent</h3>
-        <div class="hilfe-ki-list">
-          <div class="hilfe-ki-list-title">&#9889; Alle KI-Funktionen (erfordern API-Key)</div>
-          <span class="hilfe-ki-tag optional">HOAI &sect; 34 ff. Konformit&auml;t</span>
-          <span class="hilfe-ki-tag optional">VOB/B Feststellungen</span>
-          <span class="hilfe-ki-tag optional">Risikoanalyse</span>
-          <span class="hilfe-ki-tag optional">Fristenpr&uuml;fung</span>
-          <span class="hilfe-ki-tag optional">Zusammenfassung</span>
-          <span class="hilfe-ki-tag optional">M&auml;ngelr&uuml;ge</span>
-          <span class="hilfe-ki-tag optional">Beweissicherung</span>
-          <span class="hilfe-ki-tag optional">Executive Summary</span>
-        </div>
-        <h3>Revisionsbericht &amp; Exporte</h3>
-        <ul>
-          <li><strong>PDF-Export</strong> &ndash; Vollst&auml;ndiger mehrseitiger Bericht mit Deckblatt, Mandatsgrundlage (Abschnitt 00), Risikomatrix, Detailbericht, Ma&szlig;nahmenplan, Unterschriftenblock</li>
-          <li><strong>Kundenportal-HTML</strong> &ndash; Standalone-Datei f&uuml;r Auftraggeber; Feststellungen abhaken mit Datum, Dashboard, Filter, Drucken</li>
-          <li><strong>Papiervorlage</strong> &ndash; Druckbarer A4-Bogen der Auftrags- und Zieldefinition f&uuml;r h&auml;ndisches Ausf&uuml;llen</li>
-        </ul>
-      </div>
-
-      <!-- 6. TYPISCHER WORKFLOW -->
+      <!-- 3. WORKFLOW -->
       <div class="hilfe-chapter" id="hch-workflow">
-        <h2>6. Typischer Workflow</h2>
-        <div class="ch-sub">Empfohlene Vorgehensweise f&uuml;r ein Revisionsprojekt</div>
-        <div class="hilfe-step"><div class="hilfe-step-num">1</div><div class="hilfe-step-txt"><strong>Projekt anlegen</strong>Dashboard &rarr; &bdquo;+ Neu&rdquo;: Projektname, Auftraggeber, Leistungsphase, BGF, Pr&uuml;fer, Datum eintragen.</div></div>
-        <div class="hilfe-step"><div class="hilfe-step-num">2</div><div class="hilfe-step-txt"><strong>Auftrags- und Zieldefinition durchf&uuml;hren</strong>Auftrags- und Zieldefinition &rarr; alle 7 Phasen mit dem Auftraggeber besprechen, Antworten erfassen &rarr; &bdquo;In Bericht &uuml;bernehmen&rdquo;.</div></div>
-        <div class="hilfe-step"><div class="hilfe-step-num">3</div><div class="hilfe-step-txt"><strong>Feststellungen erfassen</strong>&bdquo;+ Feststellung&rdquo; in der Topbar f&uuml;r jede Feststellung. KI-Assistent f&uuml;r Formulierungen nutzen (optional).</div></div>
-        <div class="hilfe-step"><div class="hilfe-step-num">4</div><div class="hilfe-step-txt"><strong>Prüflisten abarbeiten</strong>Pr&uuml;flisten &rarr; relevante Listen ausw&auml;hlen &rarr; Pr&uuml;fpunkte abhaken. Fortschritt wird automatisch gespeichert.</div></div>
-        <div class="hilfe-step"><div class="hilfe-step-num">5</div><div class="hilfe-step-txt"><strong>Fristen &uuml;berwachen</strong>Fristenkalender &rarr; &uuml;berf&auml;llige und bald f&auml;llige Feststellungen pr&uuml;fen und eskalieren.</div></div>
-        <div class="hilfe-step"><div class="hilfe-step-num">6</div><div class="hilfe-step-txt"><strong>Revisionsbericht erstellen</strong>&bdquo;Bericht generieren&rdquo; &rarr; KI-Zusammenfassung (optional) &rarr; PDF exportieren.</div></div>
-        <div class="hilfe-step"><div class="hilfe-step-num">7</div><div class="hilfe-step-txt"><strong>Kundenportal versenden</strong>Revisionsbericht &rarr; &bdquo;Kundenportal exportieren&rdquo; &rarr; HTML-Datei per E-Mail an Auftraggeber senden.</div></div>
+        <h2>3. Typischer Workflow</h2>
+        <div class="ch-sub">Vom Auftrag bis zum Kundenportal</div>
+        <div class="hilfe-step"><div class="hilfe-step-num">1</div><div class="hilfe-step-txt"><strong>Projekt anlegen</strong>Sidebar &rarr; &bdquo;+ Neu&rdquo; &rarr; Projektdaten eingeben (Name, Auftraggeber, Pr&uuml;fer, E-Mail-Adressen)</div></div>
+        <div class="hilfe-step"><div class="hilfe-step-num">2</div><div class="hilfe-step-txt"><strong>Auftrags- und Zieldefinition</strong>Vorbereitung &rarr; Auftrags- und Zieldefinition &rarr; 7 Phasen mit dem Auftraggeber durcharbeiten &rarr; &bdquo;In Bericht&rdquo;</div></div>
+        <div class="hilfe-step"><div class="hilfe-step-num">3</div><div class="hilfe-step-txt"><strong>Unterlagen anfordern</strong>Pr&uuml;fung &rarr; Unterlagen &rarr; Bitte erforderliche Dokumente erfassen (Status: Ausstehend) &rarr; Upload-Link hinterlegen</div></div>
+        <div class="hilfe-step"><div class="hilfe-step-num">4</div><div class="hilfe-step-txt"><strong>Pr&uuml;flisten abarbeiten</strong>Pr&uuml;fung &rarr; Pr&uuml;flisten &rarr; Tabs nach Pr&uuml;ffeld &rarr; Soll/Ist ausf&uuml;llen &rarr; Status setzen &rarr; bei Abweichung &bdquo;Feststellung erstellen&rdquo;</div></div>
+        <div class="hilfe-step"><div class="hilfe-step-num">5</div><div class="hilfe-step-txt"><strong>Feststellungen bearbeiten</strong>Pr&uuml;fung &rarr; Feststellungen &rarr; Sachverhalt, Empfehlung, Schwere, Frist, Verantwortlicher</div></div>
+        <div class="hilfe-step"><div class="hilfe-step-num">6</div><div class="hilfe-step-txt"><strong>Fristen &uuml;berwachen</strong>Vorbereitung &rarr; Fristenkalender &rarr; &Uuml;berblick &Uuml;berf&auml;llig / Diese Woche / Diesen Monat</div></div>
+        <div class="hilfe-step"><div class="hilfe-step-num">7</div><div class="hilfe-step-txt"><strong>Revisionsbericht erstellen</strong>Abschluss &rarr; Revisionsbericht &rarr; &bdquo;KI-Bericht generieren&rdquo; (optional) &rarr; PDF oder .docx exportieren</div></div>
+        <div class="hilfe-step"><div class="hilfe-step-num">8</div><div class="hilfe-step-txt"><strong>Kundenportal versenden</strong>Revisionsbericht &rarr; &bdquo;Kundenportal exportieren&rdquo; &rarr; HTML-Datei per E-Mail an Auftraggeber senden</div></div>
+        <div class="hilfe-step"><div class="hilfe-step-num">9</div><div class="hilfe-step-txt"><strong>R&uuml;ckmeldung erhalten</strong>Auftraggeber &ouml;ffnet HTML &rarr; f&uuml;llt R&uuml;ckmeldebogen aus &rarr; klickt &bdquo;R&uuml;ckmeldung senden&rdquo; &rarr; E-Mail geht automatisch an Revisor</div></div>
       </div>
 
-      <!-- 7. EINGABEN & DATEN -->
-      <div class="hilfe-chapter" id="hch-eingaben">
-        <h2>7. Eingaben &amp; Daten</h2>
-        <div class="ch-sub">Wo Daten gespeichert werden und wie Import/Export funktioniert</div>
-        <h3>Datenspeicherung</h3>
+      <!-- 4. ARBEITSBEREICHE -->
+      <div class="hilfe-chapter" id="hch-bereiche">
+        <h2>4. Arbeitsbereiche</h2>
+        <div class="ch-sub">Navigation und Funktionen der einzelnen Bereiche</div>
+        <h3>&#128260; Dashboard</h3>
+        <p>Projektweite Kennzahlen: Feststellungen nach Schwere, Abschlussquote, aktuelle Aktivit&auml;ten. Schnellzugriff auf alle Bereiche.</p>
+        <h3>&#128203; Auftrags- und Zieldefinition</h3>
+        <p>Strukturierter Gespr&auml;chsleitfaden in 7 Phasen. Antworten werden im Projekt gespeichert und erscheinen automatisch als Abschnitt 00 im Revisionsbericht. Export als Textdatei oder Druckvorlage m&ouml;glich.</p>
+        <h3>&#128197; Fristenkalender</h3>
+        <p>Internes Steuerungswerkzeug des Pr&uuml;fers. Zeigt alle Feststellungen mit Frist in Spalten: &Uuml;berf&auml;llig &middot; Diese Woche &middot; Diesen Monat &middot; Sp&auml;ter &middot; Erledigt. Filter- und Klick-auf-Feststellung m&ouml;glich.</p>
+        <h3>&#10003; Pr&uuml;flisten</h3>
+        <p>200+ Pr&uuml;fpunkte in 13 Basis-Listen (PF1&ndash;PF8, IKS, AVA, Prozesse) plus 5 M-REA-Pakete (HOAI, VOB/B, Methodik). Zweispaltig: Sollzustand links / Ist-Zustand rechts. Status: Konform &middot; Abweichung &middot; N/A. Bei Abweichung direkt Feststellung erstellen.</p>
+        <h3>&#9776; Feststellungen</h3>
+        <p>Zentrale Pr&uuml;fungsliste. Jede Feststellung hat: ID, Titel, Schwere (Kritisch / Erheblich / Hinweis), Bereich, Sachverhalt, Empfehlung, Verantwortlicher, Frist, Status, HOAI-Bezug. Filterfunktion und Schnellbearbeitung.</p>
+        <h3>&#9201; Nachverfolgung</h3>
+        <p>Kanban-&auml;hnliche Statusansicht aller Feststellungen: Offen &middot; In Bearbeitung &middot; Erledigt. Drag-and-Drop-Status&auml;nderung.</p>
+        <h3>&#128196; Unterlagen</h3>
+        <p>Zentrales Dokumentenverzeichnis der Pr&uuml;fung. Kein Datei-Upload n&ouml;tig &mdash; Erfassung als Nachweis gen&uuml;gt. Drei Status: &#10003; Eingesehen &middot; &#128206; Als Anlage beigef&uuml;gt &middot; &#9203; Ausstehend. Upload-Link f&uuml;r DSGVO-konformen Dateiempfang vom Auftraggeber. KI-Vorschlag f&uuml;r fehlende Unterlagen. Daten werden automatisch in Abschnitt 09 des Revisionsberichts &uuml;bernommen.</p>
+      </div>
+
+      <!-- 5. UNTERLAGEN -->
+      <div class="hilfe-chapter" id="hch-unterlagen">
+        <h2>5. Unterlagen &amp; Dokumente</h2>
+        <div class="ch-sub">Dokumentenmanagement und &Uuml;bergabe vom Auftraggeber</div>
+        <h3>Grundprinzip</h3>
+        <p>Unterlagen m&uuml;ssen <strong>nicht hochgeladen</strong> werden. Das Anlagenverzeichnis dokumentiert, welche Unterlagen vorlagen oder angefordert wurden &mdash; das ist der klassische Revisionsstandard.</p>
+        <h3>Status einer Unterlage</h3>
+        <ul>
+          <li><strong>&#10003; Eingesehen</strong> &mdash; Dokument lag vor und wurde gepr&uuml;ft, kein Anhang erforderlich</li>
+          <li><strong>&#128206; Als Anlage beigef&uuml;gt</strong> &mdash; Im Revisionsbericht als Referenz enthalten</li>
+          <li><strong>&#9203; Ausstehend</strong> &mdash; Wurde angefordert, noch nicht erhalten</li>
+        </ul>
+        <h3>Upload-Link (DSGVO)</h3>
+        <p>F&uuml;r ausstehende Unterlagen k&ouml;nnen Sie einen <strong>Upload-Link</strong> hinterlegen. Dieser Link erscheint im Kundenportal als blauer Button <em>&bdquo;Dokument hochladen&rdquo;</em>.</p>
         <div class="hilfe-callout">
-          <strong>Alle Daten bleiben lokal.</strong> SMART Revision speichert alle Projektdaten ausschlie&szlig;lich im localStorage Ihres Browsers. Es werden keine Daten an externe Server &uuml;bertragen (au&szlig;er KI-Anfragen an die Anthropic API, wenn Sie den KI-Assistent nutzen).
+          <strong>Empfohlene DSGVO-konforme Dienste:</strong><br>
+          Nextcloud (EU-Server) &middot; Tresorit (Ende-zu-Ende-verschl&uuml;sselt) &middot; SharePoint (EU-Region) &middot; Strato HiDrive<br><br>
+          <strong>Nicht empfohlen:</strong> WeTransfer (US-Server) &middot; Dropbox kostenlos (US-Server) &middot; Google Drive (Metadatenauswertung)
         </div>
+        <h3>KI-Vorschlag f&uuml;r Unterlagen</h3>
+        <p>Der Button <strong>&#10024; KI-Vorschlag</strong> analysiert Ihre Pr&uuml;ffelder und Feststellungen und schl&auml;gt automatisch typischerweise fehlende Unterlagen vor. Sie w&auml;hlen aus, welche &uuml;bernommen werden sollen (Status: Ausstehend).</p>
+        <h3>Verbindung zum Revisionsbericht</h3>
+        <p>Alle erfassten Unterlagen erscheinen automatisch in <strong>Abschnitt 09 (Anlagenverzeichnis)</strong> des Revisionsberichts &mdash; kein erneutes Eingeben.</p>
+      </div>
+
+      <!-- 6. KUNDENPORTAL -->
+      <div class="hilfe-chapter" id="hch-kundenportal">
+        <h2>6. Kundenportal</h2>
+        <div class="ch-sub">Kommunikation mit dem Auftraggeber</div>
+        <h3>Was ist das Kundenportal?</h3>
+        <p>Das Kundenportal ist eine <strong>standalone HTML-Datei</strong>, die der Revisor per E-Mail an den Auftraggeber sendet. Der Auftraggeber &ouml;ffnet die Datei im Browser &mdash; kein Login, keine App, keine Installation n&ouml;tig.</p>
+        <h3>Inhalt des Kundenportals</h3>
         <ul>
-          <li><strong>Projekte</strong> &ndash; Als JSON im localStorage des Browsers gespeichert</li>
-          <li><strong>Pr&uuml;flisten-Fortschritt</strong> &ndash; Im aktiven Projekt gespeichert</li>
-          <li><strong>Auftrags- und Zieldefinition</strong> &ndash; Antworten und Auswahlen im Projekt gespeichert</li>
-          <li><strong>API-Key</strong> &ndash; Im localStorage gespeichert (nur lokal, nie &uuml;bertragen)</li>
+          <li>Projektstatus-Dashboard (Ampel, KPI-Kacheln, Fortschrittsbalken)</li>
+          <li>Alle Feststellungen mit Sachverhalt, Empfehlung, Frist, Status</li>
+          <li>Ma&szlig;nahmenplan mit Abzeichenspalte</li>
+          <li>Anlagenverzeichnis mit Upload-Buttons f&uuml;r ausstehende Unterlagen</li>
+          <li>R&uuml;ckmeldebogen</li>
         </ul>
-        <h3>Import &amp; Export</h3>
+        <h3>R&uuml;ckmeldung des Auftraggebers</h3>
+        <p>Der Auftraggeber f&uuml;llt den <strong>R&uuml;ckmeldebogen</strong> am Ende des Portals aus:</p>
         <ul>
-          <li><strong>Projekt exportieren</strong> &ndash; Sidebar &rarr; &bdquo;&darr; Export&rdquo; &rarr; JSON-Datei herunterladen</li>
-          <li><strong>Projekt importieren</strong> &ndash; Sidebar &rarr; &bdquo;&uarr; Import&rdquo; &rarr; JSON-Datei ausw&auml;hlen</li>
-          <li><strong>PDF-Export</strong> &ndash; Revisionsbericht &rarr; &bdquo;PDF exportieren&rdquo;</li>
-          <li><strong>Kundenportal-HTML</strong> &ndash; Revisionsbericht &rarr; &bdquo;Kundenportal exportieren&rdquo;</li>
-          <li><strong>Prüflisten Export</strong> &ndash; Pr&uuml;flisten &rarr; &bdquo;&darr; Export&rdquo; als Textdatei</li>
+          <li>Pro Feststellung: Status w&auml;hlen (In Bearbeitung / Erledigt / Nicht zutreffend / R&uuml;ckfrage)</li>
+          <li>Kommentar / Sachstand eintragen</li>
+          <li>Allgemeine Anmerkungen</li>
+          <li>Klick auf <strong>&bdquo;R&uuml;ckmeldung senden&rdquo;</strong> &rarr; E-Mail-Programm &ouml;ffnet sich mit vorausgef&uuml;llter Nachricht an den Revisor</li>
         </ul>
         <div class="hilfe-callout hilfe-callout-warn">
-          <strong>&#9888; Wichtig:</strong> Beim L&ouml;schen des Browser-Cache gehen alle lokal gespeicherten Projektdaten verloren. Exportieren Sie wichtige Projekte regelm&auml;&szlig;ig als JSON-Datei.
+          <strong>Voraussetzung:</strong> Im Projektdetail muss die <strong>E-Mail-Adresse des Revisors</strong> hinterlegt sein (&#9998; Bearbeiten &rarr; E-Mail Revisor). Nur dann wird die R&uuml;ckmeldung korrekt adressiert.
         </div>
+        <h3>Dokumenten&uuml;bergabe vom Auftraggeber</h3>
+        <p>F&uuml;r ausstehende Unterlagen mit hinterlegtem Upload-Link sieht der Auftraggeber einen blauen Button <strong>&bdquo;&#8593; Dokument hochladen&rdquo;</strong>. Ein Klick &ouml;ffnet den DSGVO-konformen Upload-Dienst (Nextcloud, Tresorit etc.).</p>
+        <p>Der Revisor erh&auml;lt eine Benachrichtigung vom Upload-Dienst und setzt den Unterlage-Status in der App auf &bdquo;Eingesehen&rdquo;.</p>
+        <h3>Export</h3>
+        <p>Revisionsbericht &rarr; gr&uuml;ner Button <strong>&bdquo;Kundenportal exportieren&rdquo;</strong> &rarr; HTML-Datei wird heruntergeladen &rarr; per E-Mail versenden.</p>
       </div>
 
-      <!-- 8. ERGEBNISSE VERSTEHEN -->
-      <div class="hilfe-chapter" id="hch-ergebnisse">
-        <h2>8. Ergebnisse verstehen</h2>
-        <div class="ch-sub">KPI-Kacheln, Schweregrade und Konformit&auml;tsquote erkl&auml;rt</div>
-        <h3>Dashboard-KPI-Kacheln</h3>
+      <!-- 7. REVISIONSBERICHT -->
+      <div class="hilfe-chapter" id="hch-bericht">
+        <h2>7. Revisionsbericht</h2>
+        <div class="ch-sub">Struktur, Export und Abschnitte</div>
+        <h3>Abschnitte des Berichts</h3>
         <ul>
-          <li><strong style="color:var(--re)">Kritisch</strong> &ndash; Sofortma&szlig;nahmen erforderlich; erhebliche Rechts- oder Qualit&auml;tsrisiken</li>
-          <li><strong style="color:var(--or)">Erheblich</strong> &ndash; Wesentliche M&auml;ngel; kurzfristiger Handlungsbedarf</li>
-          <li><strong style="color:var(--go)">Hinweise</strong> &ndash; Optimierungsbedarf; mittelfristig zu adressieren</li>
-          <li><strong style="color:var(--gr)">Erledigt</strong> &ndash; Feststellungen mit Status &bdquo;Erledigt&rdquo;</li>
-          <li><strong style="color:var(--ac)">Konformit&auml;t %</strong> &ndash; Anteil erledigter Feststellungen an der Gesamtzahl</li>
+          <li><strong>00</strong> Auftrags- und Zieldefinition (aus Vorbereitung)</li>
+          <li><strong>01</strong> Pr&uuml;fungsgegenstand &amp; Zielsetzung</li>
+          <li><strong>02</strong> Kosten-, Termin- &amp; Nachtrags&uuml;bersicht</li>
+          <li><strong>03</strong> Executive Summary (KI-generierbar)</li>
+          <li><strong>04</strong> Risikomatrix &ndash; Gesamt&uuml;bersicht</li>
+          <li><strong>05</strong> Feststellungen &ndash; Detailbericht</li>
+          <li><strong>06</strong> HOAI-Honorarpr&uuml;fung</li>
+          <li><strong>07</strong> Ma&szlig;nahmenplan mit Fristens&uuml;bersicht</li>
+          <li><strong>08</strong> Gesamtbewertung &amp; Empfehlungen (KI-generierbar)</li>
+          <li><strong>09</strong> Anlagenverzeichnis (automatisch aus Unterlagen)</li>
+          <li><strong>10</strong> Schlussbestätigung und Unterschriften</li>
         </ul>
-        <h3>Pr&uuml;flisten-Kennzeichnung</h3>
+        <h3>Export-M&ouml;glichkeiten</h3>
         <ul>
-          <li><strong style="color:var(--re)">Muss</strong> &ndash; Pflichtanforderung nach HOAI 2021 / VOB/B 2019 / BGB; nicht erf&uuml;llt = kritische Feststellung</li>
-          <li><strong style="color:#92400e">Soll</strong> &ndash; Empfehlung nach Best Practice; Abweichung dokumentieren</li>
-          <li><strong style="color:var(--ac)">Kann</strong> &ndash; Optionale Verbesserung; bei Bedarf ber&uuml;cksichtigen</li>
+          <li><strong>PDF exportieren</strong> &mdash; vollst&auml;ndiger Bericht als PDF</li>
+          <li><strong>.docx herunterladen</strong> &mdash; Word-Dokument zur Weiterbearbeitung</li>
+          <li><strong>Kundenportal exportieren</strong> &mdash; standalone HTML f&uuml;r Auftraggeber</li>
+          <li><strong>Ma&szlig;nahmenplan exportieren</strong> &mdash; separates Dokument mit R&uuml;ckmelde-Spalte</li>
+          <li><strong>Drucken</strong> &mdash; Direktdruck aus dem Browser</li>
         </ul>
-        <h3>Revisionsbericht-Abschnitte</h3>
-        <ul>
-          <li><strong>Abschnitt 00</strong> &ndash; Mandatsgrundlage aus der Auftrags- und Zieldefinition (nur wenn ausgef&uuml;llt)</li>
-          <li><strong>Abschnitt 01</strong> &ndash; Executive Summary mit KPI-&Uuml;bersicht</li>
-          <li><strong>Abschnitt 02</strong> &ndash; Risikomatrix aller Feststellungen tabellarisch</li>
-          <li><strong>Abschnitt 03</strong> &ndash; Detailbericht mit Sachverhalt und Empfehlung je Feststellung</li>
-          <li><strong>Abschnitt 04</strong> &ndash; Ma&szlig;nahmenplan mit Verantwortlichen und Fristen</li>
-          <li><strong>Abschnitt 05</strong> &ndash; Schlussbet&auml;tigung und Unterschriftenblock</li>
-        </ul>
+        <h3>KI-Bericht generieren</h3>
+        <p>Der Button <strong>&bdquo;KI-Bericht generieren&rdquo;</strong> erstellt automatisch Executive Summary und Gesamtbewertung auf Basis der erfassten Feststellungen. Erfordert API-Key.</p>
       </div>
 
-      <!-- 9. FEHLER & LÖSUNGEN -->
+      <!-- 8. KI-FUNKTIONEN -->
+      <div class="hilfe-chapter" id="hch-ki">
+        <h2>8. KI-Funktionen</h2>
+        <div class="ch-sub">Was die KI kann und wo sie eingesetzt wird</div>
+        <div class="hilfe-callout">KI-Funktionen sind optional. Alle Kernfunktionen laufen ohne API-Key.</div>
+        <h3>KI in den Pr&uuml;flisten</h3>
+        <p>Pro Pr&uuml;fpunkt gibt es drei KI-Modi:</p>
+        <ul>
+          <li><strong>Ist-Zustand formulieren</strong> &mdash; KI formuliert den Ist-Zustand aus Ihren Stichpunkten</li>
+          <li><strong>Vollst&auml;ndige Feststellung</strong> &mdash; Sachverhalt + Empfehlung in einem Schritt</li>
+          <li><strong>Empfehlung</strong> &mdash; KI empfiehlt Ma&szlig;nahmen zur Behebung</li>
+        </ul>
+        <h3>KI im Feststellungsdialog</h3>
+        <p>Button <strong>&bdquo;KI formulieren&rdquo;</strong> im Neue-Feststellung-Dialog: KI liest Titel, Bereich und Schwere und generiert einen professionellen Sachverhalt und eine Empfehlung.</p>
+        <h3>KI f&uuml;r Unterlagen-Vorschlag</h3>
+        <p>Button <strong>&#10024; KI-Vorschlag</strong> im Unterlagen-Bereich: KI analysiert Pr&uuml;ffelder und Feststellungen und schl&auml;gt fehlende typische Unterlagen vor.</p>
+        <h3>KI f&uuml;r den Revisionsbericht</h3>
+        <p>Button <strong>&bdquo;KI-Bericht generieren&rdquo;</strong>: Erstellt Executive Summary (Abschnitt 03) und Gesamtbewertung (Abschnitt 08) automatisch auf Basis der Projektdaten.</p>
+        <h3>KI-Assistent (freie Konversation)</h3>
+        <p>Werkzeuge &rarr; KI-Assistent: Freie Fragen zum Projekt, HOAI, VOB/B, Risikobewertung. Die KI hat Zugriff auf alle Projektdaten und Feststellungen.</p>
+      </div>
+
+      <!-- 9. DATENSCHUTZ -->
+      <div class="hilfe-chapter" id="hch-datenschutz">
+        <h2>9. Datenschutz &amp; Datensicherheit</h2>
+        <div class="ch-sub">DSGVO, Datenhaltung und sichere Kommunikation</div>
+        <h3>Datenhaltung</h3>
+        <p>Alle Projektdaten werden <strong>ausschlie&szlig;lich lokal im Browser</strong> gespeichert (localStorage). Es gibt keinen Server, keine Cloud-Synchronisation, keine Daten&uuml;bertragung an Dritte &mdash; au&szlig;er bei expliziter Nutzung der KI-Funktionen.</p>
+        <h3>KI und Datenschutz</h3>
+        <p>Bei Nutzung der KI-Funktionen werden Projektdaten an die <strong>Anthropic API</strong> &uuml;bertragen. Anthropic hat mit Nutzern der API eine Datenverarbeitungsvereinbarung (DPA). Keine Daten werden f&uuml;r das Training verwendet (API-Nutzung, Stand 2024).</p>
+        <div class="hilfe-callout hilfe-callout-warn">
+          <strong>Empfehlung:</strong> Keine personenbezogenen Daten (Namen, Adressen von Privatpersonen) in KI-Felder eingeben, die nicht f&uuml;r die Analyse relevant sind.
+        </div>
+        <h3>Dokumenten&uuml;bergabe vom Auftraggeber</h3>
+        <p>F&uuml;r die sichere Dokumenten&uuml;bergabe vom Auftraggeber empfehlen wir DSGVO-konforme Upload-Dienste:</p>
+        <ul>
+          <li><strong>Nextcloud</strong> (selbst gehostet oder EU-Hoster) &mdash; volle Datenkontrolle</li>
+          <li><strong>Tresorit</strong> &mdash; Ende-zu-Ende-verschl&uuml;sselt, Schweizer Recht</li>
+          <li><strong>SharePoint</strong> (EU-Region) &mdash; f&uuml;r Microsoft-365-Nutzer</li>
+          <li><strong>Strato HiDrive</strong> &mdash; deutscher Anbieter, DSGVO-konform</li>
+        </ul>
+        <p><strong>Nicht empfohlen:</strong> WeTransfer (US-Server) &middot; Dropbox kostenlos (US) &middot; Google Drive (Metadatenauswertung) &middot; unverschl&uuml;sselte E-Mail-Anh&auml;nge f&uuml;r vertrauliche Dokumente.</p>
+        <h3>Exportierte Dateien</h3>
+        <p>Alle Exports (PDF, .docx, Kundenportal HTML) sind als <strong>Vertraulich</strong> gekennzeichnet. Der Revisor ist verantwortlich f&uuml;r die sichere &Uuml;bertragung an den Auftraggeber (z.B. verschl&uuml;sselte E-Mail oder SFTP).</p>
+      </div>
+
+      <!-- 10. FEHLER -->
       <div class="hilfe-chapter" id="hch-fehler">
-        <h2>9. Fehler &amp; L&ouml;sungen</h2>
-        <div class="ch-sub">H&auml;ufige Probleme und wie Sie diese beheben</div>
-        <h3>KI-Assistent antwortet nicht</h3>
+        <h2>10. Fehler &amp; L&ouml;sungen</h2>
+        <div class="ch-sub">H&auml;ufige Probleme und ihre L&ouml;sung</div>
+        <h3>KI antwortet nicht / Verbindungsfehler</h3>
         <ul>
-          <li>Pr&uuml;fen Sie, ob ein API-Key eingetragen ist (Sidebar unten)</li>
-          <li>Stellen Sie sicher, dass der Key mit &bdquo;sk-ant-&rdquo; beginnt</li>
-          <li>Pr&uuml;fen Sie Ihr Anthropic-Kontoguthaben unter <a href="https://console.anthropic.com" target="_blank" style="color:var(--ac)">console.anthropic.com</a></li>
-          <li>Pop-up-Blocker k&ouml;nnen KI-Anfragen blockieren &ndash; bitte deaktivieren</li>
+          <li>API-Key pr&uuml;fen: beginnt mit <code>sk-ant-</code></li>
+          <li>Anthropic-Guthaben pr&uuml;fen: <a href="https://console.anthropic.com" target="_blank" style="color:var(--ac)">console.anthropic.com</a></li>
+          <li>&bdquo;Verbindung pr&uuml;fen&rdquo; in der Sidebar klicken</li>
         </ul>
-        <h3>Daten fehlen nach Browser-Neustart</h3>
+        <h3>Daten verschwunden nach Browser-Neustart</h3>
         <ul>
-          <li>Inkognito-Modus / privates Fenster l&ouml;scht localStorage &ndash; normalen Browser verwenden</li>
-          <li>Browser-Cache wurde gel&ouml;scht &ndash; Projekte regelm&auml;&szlig;ig als JSON exportieren</li>
-          <li>Anderer Browser verwendet &ndash; localStorage ist browserspezifisch</li>
+          <li>Daten liegen im localStorage &mdash; niemals Browserdaten l&ouml;schen ohne vorherigen Export</li>
+          <li>Regelm&auml;&szlig;ig &bdquo;&#8595; Export&rdquo; nutzen um Projektdaten als JSON-Datei zu sichern</li>
+          <li>JSON-Datei mit &bdquo;&#8593; Import&rdquo; wiederherstellen</li>
         </ul>
-        <h3>PDF-Export funktioniert nicht</h3>
+        <h3>Kundenportal: R&uuml;ckmeldung-Button &ouml;ffnet kein E-Mail</h3>
         <ul>
-          <li>Pop-ups m&uuml;ssen f&uuml;r diese Seite erlaubt sein</li>
-          <li>Safari: Einstellungen &rarr; Websites &rarr; Pop-ups erlauben</li>
-          <li>Mindestens eine Feststellung muss vorhanden sein</li>
+          <li>Standard-E-Mail-Programm muss im Browser/Betriebssystem konfiguriert sein</li>
+          <li>Als Alternative: R&uuml;ckmeldebogen ausdrucken (&#128438; PDF-Button)</li>
+          <li>E-Mail-Adresse des Revisors im Projektdetail hinterlegen (&#9998; Bearbeiten)</li>
         </ul>
-        <h3>Kundenportal-Download startet nicht</h3>
+        <h3>Upload-Link funktioniert nicht</h3>
         <ul>
-          <li>Pop-ups f&uuml;r diese Seite erlauben (wie PDF-Export)</li>
-          <li>Mindestens eine Feststellung muss im Projekt vorhanden sein</li>
+          <li>Link im Upload-Dienst pr&uuml;fen (Nextcloud / Tresorit): ist der Freigabe-Link noch g&uuml;ltig?</li>
+          <li>Pop-up-Blocker im Browser deaktivieren</li>
+          <li>Link direkt im Browser testen bevor Kundenportal versendet wird</li>
         </ul>
-        <h3>Sidebar ist verschwunden</h3>
+        <h3>Anlagenverzeichnis im Bericht leer</h3>
         <ul>
-          <li>Toggle-Button oben in der Sidebar klicken, um sie wieder auszuklappen</li>
-          <li>Bei schmalen Bildschirmen kann die Sidebar automatisch eingeklappt sein</li>
+          <li>Unterlagen m&uuml;ssen im Bereich <strong>Pr&uuml;fung &rarr; Unterlagen</strong> erfasst werden</li>
+          <li>Revisionsbericht danach neu laden (Bereich wechseln und zur&uuml;ckkehren)</li>
         </ul>
-      </div>
-
-      <!-- 10. VERSION & HINWEISE -->
-      <div class="hilfe-chapter" id="hch-version">
-        <h2>10. Version &amp; Hinweise</h2>
-        <div class="ch-sub">Versionshinweise, Haftungsausschluss und Kontakt</div>
-        <h3>Version</h3>
+        <h3>PDF-Export sieht falsch aus</h3>
         <ul>
-          <li><strong>Produkt:</strong> SMART Revision</li>
-          <li><strong>Hersteller:</strong> BuiltSmart Hub &middot; &copy; Bernhard Metzger</li>
-          <li><strong>Website:</strong> <a href="https://www.built-smart-hub.com" target="_blank" style="color:var(--ac)">www.built-smart-hub.com</a></li>
-          <li><strong>KI-Modell:</strong> Claude Sonnet (Anthropic) &ndash; Stand: 2025/2026</li>
-          <li><strong>Lizenzmodell:</strong> Jahreslizenz &euro; 97/Jahr &middot; 7-Tage-Testphase</li>
-        </ul>
-        <h3>Rechtlicher Hinweis</h3>
-        <div class="hilfe-callout hilfe-callout-warn">
-          <strong>&#9888; Haftungsausschluss:</strong> Die von der App generierten Texte, Formulierungen und Analysen &ndash; insbesondere KI-generierte Inhalte &ndash; ersetzen keine rechtliche oder bautechnische Fachberatung. Alle Ergebnisse sind vom Nutzer eigenverantwortlich zu pr&uuml;fen und anzupassen. BuiltSmart Hub &uuml;bernimmt keine Haftung f&uuml;r die inhaltliche Richtigkeit KI-generierter Ausgaben.
-        </div>
-        <h3>Datenschutz</h3>
-        <ul>
-          <li>Alle Projektdaten verbleiben lokal im Browser (localStorage)</li>
-          <li>KI-Anfragen werden verschl&uuml;sselt an die Anthropic API &uuml;bertragen</li>
-          <li>Es werden keine Daten an BuiltSmart Hub-Server gesendet</li>
-          <li>Anthropic-Datenschutzrichtlinien gelten f&uuml;r KI-Anfragen</li>
-        </ul>
-        <h3>Support &amp; Kontakt</h3>
-        <ul>
-          <li><a href="https://www.built-smart-hub.com" target="_blank" style="color:var(--ac)">www.built-smart-hub.com</a></li>
-          <li>Bei technischen Fragen: Kontaktformular auf der Website</li>
+          <li>Direkt &bdquo;Drucken&rdquo; im Browser nutzen &rarr; &bdquo;Als PDF speichern&rdquo; w&auml;hlen</li>
+          <li>Hintergrundgrafiken im Druckdialog aktivieren</li>
         </ul>
       </div>
 
