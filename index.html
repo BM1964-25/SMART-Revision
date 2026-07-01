@@ -1724,6 +1724,8 @@ textarea{resize:vertical;min-height:72px;}
         <div class="fgr"><label>Prüfer / Kanzlei</label><input id="pe-pf" type="text"></div>
         <div class="fgr"><label>Prüfdatum</label><input id="pe-dt" type="date"></div>
         <div class="fgr full"><label>Leistungsphasen</label><input id="pe-lp" type="text" placeholder="z.B. LP 5–8 HOAI"></div>
+        <div class="fgr"><label>E-Mail Revisor (für Rückmeldungen)</label><input id="pe-rev-email" type="email" placeholder="revisor@kanzlei.de"></div>
+        <div class="fgr"><label>E-Mail Auftraggeber</label><input id="pe-ag-email" type="email" placeholder="auftraggeber@firma.de"></div>
       </div>
     </div>
     <div class="mf"><button class="btn bg" onclick="closeM('pedit')">Abbrechen</button><button class="btn bp" onclick="savePedit()">Speichern</button></div>
@@ -1863,6 +1865,8 @@ function openPedit(id){
   document.getElementById('pe-pf').value=p.pruefer||'';
   document.getElementById('pe-dt').value=p.datum||'';
   document.getElementById('pe-lp').value=p.lp||'';
+  document.getElementById('pe-rev-email').value=p.rev_email||'';
+  document.getElementById('pe-ag-email').value=p.ag_email||'';
   document.getElementById('modal-pedit').dataset.eid=id;
   closeM('plist'); openM('pedit');
 }
@@ -1875,6 +1879,8 @@ function savePedit(){
   p.pruefer=document.getElementById('pe-pf').value;
   p.datum=document.getElementById('pe-dt').value;
   p.lp=document.getElementById('pe-lp').value;
+  p.rev_email=document.getElementById('pe-rev-email').value;
+  p.ag_email=document.getElementById('pe-ag-email').value;
   persist(); closeM('pedit'); rdPSel(); rdMeta(); rdAll(); openM('plist'); rdProjList();
 }
 
@@ -2607,11 +2613,58 @@ function exportKundenportal(){
     +'<div class="pbar-wrap"><div class="pbar" style="width:'+pct+'%;background:'+pbar+';"></div></div></div>'
     +'<div class="sec"><div class="sec-title">Feststellungen ('+d.length+' gesamt)</div>'+findHtml+'</div>'
     +'<div class="sec"><div class="sec-title">Maßnahmenplan</div>'+massnHtml+'</div>'
-    +'<div class="sec"><div class="sec-title">Anlagen</div>'+anlagenHtml+'</div>'
+      const revEmail=p.rev_email||'';
+  const rueckRows=d.map((f,i)=>{
+    const ov=f.frist&&new Date(f.frist)<new Date()&&f.status!=='Erledigt';
+    return '<tr style="border-bottom:1px solid #e5e7eb;">'
+      +'<td style="padding:10px 12px;font-family:monospace;font-size:11px;color:#1e3a5f;font-weight:700;">'+f.id+'</td>'
+      +'<td style="padding:10px 12px;font-size:13px;font-weight:500;color:#111827;max-width:220px;">'+f.titel+'</td>'
+      +'<td style="padding:10px 12px;">'
+      +'<select id="rm-st-'+i+'" style="width:100%;padding:6px 8px;border:1.5px solid #e5e7eb;border-radius:6px;font-size:12px;background:#fff;font-family:inherit;">'
+      +'<option value="">– bitte wählen –</option>'
+      +'<option value="In Bearbeitung">&#9898; In Bearbeitung</option>'
+      +'<option value="Erledigt">&#9989; Erledigt / Umgesetzt</option>'
+      +'<option value="Nicht zutreffend">&#10006; Nicht zutreffend</option>'
+      +'<option value="Rückfrage">&#8265; Rückfrage an Revisor</option>'
+      +'</select></td>'
+      +'<td style="padding:10px 12px;">'
+      +'<input id="rm-ko-'+i+'" type="text" placeholder="Kommentar / Sachstand …" '
+      +'style="width:100%;padding:6px 9px;border:1.5px solid #e5e7eb;border-radius:6px;font-size:12px;font-family:inherit;">'
+      +'</td></tr>';
+  }).join('');
++'<div class="sec"><div class="sec-title">Anlagen</div>'+anlagenHtml+'</div>'
+    +'<div class="sec" id="rm-sec" style="border:2px solid #1e3a5f;">'
+    +'<div class="sec-title" style="color:#1e3a5f;font-size:14px;">&#128274; Rückmeldung an den Revisor</div>'
+    +'<p style="font-size:13px;color:#374151;line-height:1.6;margin-bottom:16px;">'
+    +'Bitte teilen Sie dem Revisor den Bearbeitungsstand der einzelnen Feststellungen mit. '
+    +'Tragen Sie Ihren Status und einen kurzen Kommentar ein und klicken Sie auf <strong>„Rückmeldung senden“</strong>. '
+    +'Ihr E-Mail-Programm öffnet sich mit einer vorausgefüllten Nachricht an den Revisor.'
+    +'</p>'
+    +'<table style="width:100%;border-collapse:collapse;font-size:13px;margin-bottom:18px;">'
+    +'<thead><tr style="background:#1e3a5f;color:#fff;">'
+    +'<th style="padding:10px 12px;text-align:left;font-size:11px;letter-spacing:.06em;width:70px;">ID</th>'
+    +'<th style="padding:10px 12px;text-align:left;font-size:11px;letter-spacing:.06em;">Feststellung</th>'
+    +'<th style="padding:10px 12px;text-align:left;font-size:11px;letter-spacing:.06em;width:180px;">Status</th>'
+    +'<th style="padding:10px 12px;text-align:left;font-size:11px;letter-spacing:.06em;">Kommentar / Sachstand</th>'
+    +'</tr></thead><tbody>'+rueckRows+'</tbody></table>'
+    +'<div style="margin-bottom:16px;">'
+    +'<label style="display:block;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:#374151;margin-bottom:6px;">Allgemeine Anmerkungen (optional)</label>'
+    +'<textarea id="rm-allg" rows="3" placeholder="Weitere Hinweise, Fragen oder Anmerkungen an den Revisor …" '
+    +'style="width:100%;padding:10px 12px;border:1.5px solid #e5e7eb;border-radius:6px;font-size:13px;font-family:inherit;resize:vertical;"></textarea>'
+    +'</div>'
+    +'<div style="display:flex;gap:12px;flex-wrap:wrap;align-items:center;">'
+    +'<button onclick="rmSenden()" style="padding:11px 26px;background:#1e3a5f;color:#fff;border:none;border-radius:7px;font-size:14px;font-weight:700;cursor:pointer;font-family:inherit;">&#9993; Rückmeldung senden</button>'
+    +'<button onclick="rmPdf()" style="padding:11px 20px;background:#fff;color:#1e3a5f;border:2px solid #1e3a5f;border-radius:7px;font-size:14px;font-weight:700;cursor:pointer;font-family:inherit;">🖨 Als PDF drucken</button>'
+    +'<span style="font-size:12px;color:#9ca3af;">Ihr E-Mail-Programm öffnet sich automatisch mit vorausgefülltem Text.</span>'
+    +'</div></div>'
     +'</div>'
     +'<footer>Erstellt durch SMART Revision · BuiltSmart Hub · www.built-smart-hub.com · '+dt+' · Vertraulich – nur für den Auftraggeber'
     +'&nbsp;&nbsp;<button onclick="window.print()" style="border:1px solid rgba(255,255,255,.3);background:transparent;color:rgba(255,255,255,.7);padding:3px 12px;border-radius:4px;cursor:pointer;font-size:11px;">🖨 Drucken / PDF</button>'
-    +'</footer></body></html>';
+    +'</footer>'
+    +'<script>'
+    +"function rmSenden(){\n  const zeilen=[];\n  const ids='+JSON.stringify(d.map(f=>f.id))+';\n  ids.forEach(function(id,i){\n    const st=document.getElementById('rm-st-'+i);\n    const ko=document.getElementById('rm-ko-'+i);\n    if(st&&st.value) zeilen.push(id+': '+st.value+(ko&&ko.value?' – '+ko.value:''));\n  });\n  if(!zeilen.length){ alert('Bitte mindestens eine Rückmeldung ausfüllen.'); return; }\n  const allg=document.getElementById('rm-allg');\n  const body='Rückmeldung zum Revisionsbericht\\n'\n    +'Projekt: '+p.name+'\\n'\n    +'Datum: '+new Date().toLocaleDateString('de-DE')+'\\n\\n'\n    +'FESTSTELLUNGEN:\\n'+zeilen.join('\\n')\n    +(allg&&allg.value?'\\n\\nALLGEMEINE ANMERKUNGEN:\\n'+allg.value:'')+'\\n\\n'\n    +'-- Gesendet über SMART Revision Auftraggeber-Portal --';\n  window.location.href='mailto:'+revEmail+''\n    +'?subject='+encodeURIComponent('Rückmeldung Revisionsbericht – '+p.name+'')\n    +'&body='+encodeURIComponent(body);\n}\nfunction rmPdf(){ window.print(); }\n"
+    +'<\/script>'
+    +'</body></html>';
 
   const bl=new Blob([html],{type:'text/html;charset=utf-8'});
   const url=URL.createObjectURL(bl);
