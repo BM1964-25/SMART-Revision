@@ -993,7 +993,9 @@ textarea{resize:vertical;min-height:72px;}
           <div class="rcsub" id="rsub">Bau- und HOAI-Revision</div>
           <div class="rcmeta">
             <div><div class="rcml">Auftraggeber</div><div class="rcmv" id="rag">–</div></div>
-            <div><div class="rcml">Prüfstelle</div><div class="rcmv" id="rpf">–</div></div>
+            <div><div class="rcml">Prüfstelle / Revisor</div><div class="rcmv" id="rpf">–</div></div>
+            <div><div class="rcml">Prüfungszeitraum</div><div class="rcmv" id="rzt">–</div></div>
+            <div><div class="rcml">Aktenzeichen</div><div class="rcmv" id="raz">–</div></div>
             <div><div class="rcml">Berichtsdatum</div><div class="rcmv" id="rdt">–</div></div>
           </div>
         </div>
@@ -1005,8 +1007,45 @@ textarea{resize:vertical;min-height:72px;}
           <div id="rpt-mk-content" class="mk-rpt-section"></div>
         </div>
 
-        <div class="rsec">
+        <div class="rsec" id="rpt-sec-pruefgeg">
           <div class="rsnum">01</div>
+          <div class="rstitle">Prüfungsgegenstand &amp; Zielsetzung</div>
+          <div class="rfind-body" style="margin-bottom:16px;">
+            <div class="lbl">Prüfungsgegenstand</div>
+            <div class="val" id="rpt-gegenstand">–</div>
+            <div class="lbl">Leistungsphase / Bauabschnitt</div>
+            <div class="val" id="rpt-lp-val">–</div>
+            <div class="lbl">Auftragsgrundlage</div>
+            <div class="val" id="rpt-auftragsgrundlage">–</div>
+            <div class="lbl">Zielsetzung der Prüfung</div>
+            <div class="val">Überprüfung auf Ordnungsmäßigkeit, Wirtschaftlichkeit, Rechtssicherheit und technische Konsistenz gemäß HOAI 2021, VOB/B 2019 und BGB.</div>
+            <div class="lbl">Prüfungsumfang</div>
+            <div class="val" id="rpt-umfang">–</div>
+            <div class="lbl">Nicht Gegenstand der Prüfung</div>
+            <div class="val" id="rpt-nicht-gegenstand">Gerichtsverwertbare Beweisführung; technische Detailnachweise außerhalb des Revisionsmandats.</div>
+          </div>
+        </div>
+
+        <div class="rsec" id="rpt-sec-kosten">
+          <div class="rsnum">08</div>
+          <div class="rstitle">Kosten-, Termin- &amp; Nachtragsübersicht</div>
+          <p style="font-size:13px;color:var(--ink2);margin-bottom:14px;" id="rpt-kosten-intro">Gegenüberstellung von Soll- und Ist-Kosten sowie Übersicht über geprüfte Nachträge.</p>
+          <table class="rmatrix" style="margin-bottom:18px;">
+            <thead><tr><th>Position</th><th>Betrag</th><th>Anmerkung</th></tr></thead>
+            <tbody id="rpt-kosten-body"></tbody>
+          </table>
+          <div class="rfind-body">
+            <div class="lbl">Terminstatus</div>
+            <div class="val" id="rpt-terminstand">–</div>
+            <div class="lbl">Terminverzug</div>
+            <div class="val" id="rpt-terminverzug">–</div>
+            <div class="lbl">Geprüfte Nachträge</div>
+            <div class="val" id="rpt-nachtraege">–</div>
+          </div>
+        </div>
+
+        <div class="rsec">
+          <div class="rsnum">09</div>
           <div class="rstitle">Executive Summary</div>
           <p style="font-size:13px;line-height:1.8;color:var(--ink2);margin-bottom:14px;" id="rsumm">–</p>
           <div class="rskm">
@@ -1035,7 +1074,7 @@ textarea{resize:vertical;min-height:72px;}
         </div>
 
         <div class="rsec">
-          <div class="rsnum">02</div>
+          <div class="rsnum">08</div>
           <div class="rstitle">Risikomatrix – Gesamtübersicht</div>
           <p style="font-size:13px;color:var(--ink2);margin-bottom:12px;">Vollständiger Überblick aller Feststellungen mit Schweregrad, Risiko und Frist:</p>
           <table class="rmatrix">
@@ -1045,13 +1084,13 @@ textarea{resize:vertical;min-height:72px;}
         </div>
 
         <div class="rsec">
-          <div class="rsnum">03</div>
+          <div class="rsnum">09</div>
           <div class="rstitle">Feststellungen – Detailbericht</div>
           <div id="rpt-findings-detail"></div>
         </div>
 
         <div class="rsec">
-          <div class="rsnum">04</div>
+          <div class="rsnum">08</div>
           <div class="rstitle">HOAI-Honorarprüfung</div>
           <p style="font-size:13px;line-height:1.8;color:var(--ink2);margin-bottom:12px;" id="rpt-hoai-intro">–</p>
           <table class="hoai-table" id="rpt-hoai-table"></table>
@@ -1059,7 +1098,7 @@ textarea{resize:vertical;min-height:72px;}
         </div>
 
         <div class="rsec">
-          <div class="rsnum">05</div>
+          <div class="rsnum">09</div>
           <div class="rstitle">Maßnahmenplan mit Fristenübersicht</div>
           <p style="font-size:13px;color:var(--ink2);margin-bottom:12px;">Steuerungs- und Kontrollinstrument der Geschäftsführung. Spalte "Erl." nach Abschluss der Maßnahme abzeichnen.</p>
           <table class="massn-table">
@@ -1069,7 +1108,7 @@ textarea{resize:vertical;min-height:72px;}
         </div>
 
         <div class="rsec">
-          <div class="rsnum">06</div>
+          <div class="rsnum">08</div>
           <div class="rstitle">Gesamtbewertung &amp; Empfehlungen</div>
           <p style="font-size:13px;line-height:1.8;color:var(--ink2);margin-bottom:14px;" id="rpt-gesamt">–</p>
           <div class="alert-box navy">
@@ -1079,8 +1118,25 @@ textarea{resize:vertical;min-height:72px;}
           <div id="rpt-gesamt-ai" style="font-size:13px;line-height:1.8;color:var(--ink2);white-space:pre-wrap;margin-top:14px;"></div>
         </div>
 
+        <div class="rsec" id="rpt-sec-anlagen">
+          <div class="rsnum">09</div>
+          <div class="rstitle">Anlagenverzeichnis</div>
+          <p style="font-size:13px;color:var(--ink2);margin-bottom:12px;">Nachfolgend sind die im Rahmen der Revision eingesehenen und geprüften Unterlagen aufgeführt.</p>
+          <table class="rmatrix">
+            <thead><tr><th>#</th><th>Dokument / Unterlage</th><th>Typ</th><th>Stand / Version</th><th>Eingesehen am</th></tr></thead>
+            <tbody id="rpt-anlagen-body">
+              <tr><td colspan="5" style="text-align:center;color:var(--ink3);padding:16px;font-style:italic;">Anlagen werden nach Fertigstellung der Prüfung manuell erfasst oder automatisch aus dem Dokumentencenter übernommen.</td></tr>
+            </tbody>
+          </table>
+          <div style="margin-top:14px;" id="rpt-anlagen-add">
+            <button class="btn bg sm" onclick="rptAddAnlage()">+ Anlage hinzufügen</button>
+            <span style="font-size:11px;color:var(--ink3);margin-left:8px;">Fotodokumentation, Protokolle, Gutachten, Verträge, Genehmigungen</span>
+          </div>
+          <div id="rpt-anlagen-list" style="margin-top:10px;"></div>
+        </div>
+
         <div class="rsec">
-          <div class="rsnum">07</div>
+          <div class="rsnum">10</div>
           <div class="rstitle">Schlussbestätigung und Unterschriften</div>
           <p style="font-size:13px;color:var(--ink2);margin-bottom:8px;">Mit Unterzeichnung bestätigt die Geschäftsführung die Kenntnisnahme der Feststellungen und Handlungsempfehlungen der Revisionsstelle.</p>
           <div class="sig-block">
@@ -1891,6 +1947,10 @@ function rdRpt(){
   const set=(id,v)=>{const el=document.getElementById(id);if(el)el.textContent=v;};
   const setHTML=(id,v)=>{const el=document.getElementById(id);if(el)el.innerHTML=v;};
   set('rtitle','Revisionsbericht\n'+p.name);
+  const dtVon=p.datum_von?new Date(p.datum_von).toLocaleDateString('de-DE',{day:'2-digit',month:'long',year:'numeric'}):'–';
+  const dtBis=p.datum_bis?new Date(p.datum_bis).toLocaleDateString('de-DE',{day:'2-digit',month:'long',year:'numeric'}):'–';
+  set('rzt',(p.datum_von||p.datum_bis)?(dtVon+' bis '+dtBis):'–');
+  set('raz',p.az||'–');
   set('rsub','Bau- und HOAI-Revision · '+(p.lp||''));
   set('rag',p.auftraggeber||'–');
   set('rpf',p.pruefer||'–');
@@ -1934,6 +1994,36 @@ function rdRpt(){
       mkSec.style.display='none';
     }
   }
+
+  // Abschnitt 01: Prüfungsgegenstand
+  set('rpt-gegenstand',p.pruefgegenstand||('Prüfung der Leistungen gemäß '+(p.lp||'Leistungsphase')+' für das Bauvorhaben '+p.name));
+  set('rpt-lp-val',(p.lp||'–')+(p.bauabschnitt?' · '+p.bauabschnitt:''));
+  set('rpt-auftragsgrundlage',p.auftragsgrundlage||('Auftrags- und Zieldefinition vom '+(p.mandatsklaerungDatum||dt)));
+  set('rpt-umfang',p.pruefumfang||(d.length+' Feststellungen · Prüffelder: '+([...new Set(d.map(f=>f.bereich).filter(Boolean))].join(', ')||'–')));
+  set('rpt-nicht-gegenstand',p.nicht_gegenstand||'Gerichtsverwertbare Beweisführung; technische Detailnachweise außerhalb des Revisionsmandats.');
+  // Abschnitt 02: Kosten & Termin
+  const fmt2=v=>v?('EUR '+Number(v).toLocaleString('de-DE')+',–'):'–';
+  const abwBudget=(p.budget&&p.ist_kosten)?(Number(p.ist_kosten)-Number(p.budget)):null;
+  const abwStr=abwBudget!==null?('EUR '+Math.abs(abwBudget).toLocaleString('de-DE')+',– '+(abwBudget>0?'(Überschreitung ⚠)':'(Unterschreitung ✓)')):'–';
+  const kb=document.getElementById('rpt-kosten-body');
+  if(kb){
+    const kRows=[
+      ['Bewilligtes Gesamtbudget',fmt2(p.budget),'Kostenrahmen laut Auftragserteilung'],
+      ['Ist-Kosten (Stand Berichtsdatum)',fmt2(p.ist_kosten),'Inkl. ausstehender Rechnungen'],
+      ['Abweichung Budget / Ist',abwStr,abwBudget>0?'Handlungsbedarf':'–'],
+      ['Geprüfte Nachtragsvolumen',fmt2(p.nachtraege),'Summe aller eingereichten Nachträge'],
+      ['Berechtigte Nachträge',fmt2(p.nachtraege_ber),'Nach Prüfung anerkannt'],
+      ['Unberechtigte Nachträge',fmt2(p.nachtraege_unber),'Zurückzuweisen'],
+    ];
+    kb.innerHTML=kRows.map((r,i)=>'<tr style="'+(i%2?'background:var(--bgp);':'')+'">'
+      +'<td style="font-weight:600;font-size:12px;color:var(--ink);">'+r[0]+'</td>'
+      +'<td style="font-family:monospace;font-size:12px;font-weight:700;color:var(--ac);">'+r[1]+'</td>'
+      +'<td style="font-size:11px;color:var(--ink3);">'+r[2]+'</td></tr>').join('');
+  }
+  set('rpt-kosten-intro','Soll/Ist-Vergleich der Projektkosten und Übersicht geprüfter Nachträge. Stand: '+dt+'.');
+  set('rpt-terminstand',p.terminstand||'Termindaten unter Projektdetails (✎) hinterlegen.');
+  set('rpt-terminverzug',p.terminverzug||'–');
+  set('rpt-nachtraege',p.nachtraege_beschr||(p.nachtraege?('Gesamtvolumen: '+fmt2(p.nachtraege)):'–'));
 
   // KPIs
   set('rkrit',String(krit.filter(f=>f.status!=='Erledigt').length));
@@ -2045,9 +2135,160 @@ function rdRpt(){
     ? `Partieller Baustopp in betroffenen Bereichen. Krisenabstimmung mit Auftraggeber, Architekt und Tragwerksplaner innerhalb 5 Werktagen. Honorarkorrektur EUR ${p.hoai_differenz?Number(p.hoai_differenz).toLocaleString('de-DE'):0},– geltend machen.`
     : `Kontinuierliche Nachverfolgung der offenen Feststellungen. Nächste Revisionsrunde in KW ${new Date().toLocaleDateString('de-DE',{week:'numeric'})}.`);
 
+  rptRenderAnlagen();
   // Update badge
   const badge=document.getElementById('rpt-badge');
   if(badge){ badge.textContent='Entwurf'; badge.className='badge bgy'; }
+}
+
+// ── ANLAGEN MANAGEMENT ───────────────────────────────────────────────────────
+function rptAddAnlage(){
+  const p=AP(); if(!p._anlagen) p._anlagen=[];
+  const name=window.prompt?window.prompt('Dokumentname:',''):null;
+  if(name===null||name.trim()==='') return;
+  const typ=(window.prompt?window.prompt('Typ (PDF, Protokoll, Foto …):','PDF'):'PDF')||'PDF';
+  const stand=(window.prompt?window.prompt('Stand / Version:',new Date().toLocaleDateString('de-DE')):'–')||'–';
+  p._anlagen.push({nr:p._anlagen.length+1,name:name.trim(),typ,stand,datum:new Date().toLocaleDateString('de-DE')});
+  SP(); rdRpt();
+}
+function rptDelAnlage(i){
+  const p=AP(); if(!p._anlagen) return;
+  p._anlagen.splice(i,1); SP(); rdRpt();
+}
+function rptRenderAnlagen(){
+  const p=AP(); const al=p._anlagen||[];
+  const tb=document.getElementById('rpt-anlagen-body');
+  if(!tb) return;
+  if(!al.length){
+    tb.innerHTML='<tr><td colspan="6" style="text-align:center;color:var(--ink3);padding:16px;font-style:italic;">Noch keine Anlagen. → Schaltfläche „+ Anlage hinzufügen"</td></tr>';
+    return;
+  }
+  tb.innerHTML=al.map((a,i)=>'<tr style="'+(i%2?'background:var(--bgp);':'')+'">'
+    +'<td style="font-family:monospace;font-size:11px;color:var(--ac);">A-'+String(a.nr).padStart(2,'0')+'</td>'
+    +'<td style="font-weight:500;color:var(--ink);">'+a.name+'</td>'
+    +'<td><span class="badge bgy" style="font-size:10px;">'+a.typ+'</span></td>'
+    +'<td style="font-size:11.5px;color:var(--ink3);">'+a.stand+'</td>'
+    +'<td style="font-size:11.5px;color:var(--ink3);">'+a.datum+'</td>'
+    +'<td><button class="btn bg sm" style="font-size:10px;padding:2px 6px;" onclick="rptDelAnlage('+i+')">✕</button></td></tr>').join('');
+}
+
+// ── KUNDENPORTAL EXPORT ──────────────────────────────────────────────────────
+function exportKundenportal(){
+  const p=AP(); const d=D();
+  const dt=p.datum?new Date(p.datum).toLocaleDateString('de-DE',{day:'2-digit',month:'long',year:'numeric'}):new Date().toLocaleDateString('de-DE',{day:'2-digit',month:'long',year:'numeric'});
+  const erl=d.filter(f=>f.status==='Erledigt').length;
+  const kritN=d.filter(f=>f.schwere==='Kritisch'&&f.status!=='Erledigt').length;
+  const erhN=d.filter(f=>f.schwere==='Erheblich'&&f.status!=='Erledigt').length;
+  const hiN=d.filter(f=>f.schwere==='Hinweis'&&f.status!=='Erledigt').length;
+  const pct=d.length>0?Math.round(erl/d.length*100):0;
+  const pbar=pct>=80?'#16a34a':pct>=50?'#ca8a04':'#dc2626';
+  const ampel=kritN>0?'🔴 Kritischer Handlungsbedarf':d.filter(f=>f.status!=='Erledigt').length>0?'🟡 Maßnahmen erforderlich':'🟢 Projekt stabil';
+  const sCol={Kritisch:'background:#fef2f2;color:#b91c1c;border:1px solid #fca5a5',Erheblich:'background:#fff7ed;color:#c2410c;border:1px solid #fed7aa',Hinweis:'background:#fefce8;color:#a16207;border:1px solid #fde68a'};
+  const stCol={Offen:'background:#f1f5f9;color:#475569','In Bearbeitung':'background:#eff6ff;color:#1d4ed8',Erledigt:'background:#f0fdf4;color:#15803d'};
+  const badge=s=>'<span style="padding:2px 9px;border-radius:10px;font-size:11px;font-weight:600;'+(sCol[s]||'background:#f1f5f9;color:#374151')+';border:1px solid #e5e7eb;">'+s+'</span>';
+  const stbadge=s=>'<span style="padding:2px 9px;border-radius:10px;font-size:11px;font-weight:500;'+(stCol[s]||stCol['Offen'])+'">'+s+'</span>';
+  const fs2=v=>v?new Date(v).toLocaleDateString('de-DE'):'–';
+  const ov2=(v,s)=>v&&new Date(v)<new Date()&&s!=='Erledigt';
+
+  const findHtml=d.map(f=>'<div style="border:1px solid #e5e7eb;border-radius:8px;margin-bottom:14px;overflow:hidden;">'
+    +'<div style="padding:12px 16px;background:#f8fafc;border-bottom:1px solid #e5e7eb;display:flex;align-items:center;gap:10px;flex-wrap:wrap;">'
+    +'<span style="font-family:monospace;font-size:11px;color:#1e3a5f;font-weight:700;">'+f.id+'</span>'
+    +'<span style="font-weight:600;font-size:14px;color:#111827;flex:1;">'+f.titel+'</span>'
+    +badge(f.schwere)+stbadge(f.status)+'</div>'
+    +'<div style="padding:14px 16px;display:grid;grid-template-columns:130px 1fr;gap:6px 14px;font-size:13px;">'
+    +'<div style="color:#6b7280;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;">Bereich</div><div>'+f.bereich+'</div>'
+    +'<div style="color:#6b7280;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;">Verantwortlich</div><div>'+(f.verantw||'–')+'</div>'
+    +'<div style="color:#6b7280;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;">Frist</div>'
+    +'<div style="color:'+(ov2(f.frist,f.status)?'#dc2626;font-weight:700':'#111827')+';">'+fs2(f.frist)+(ov2(f.frist,f.status)?' · ⚠ Überfällig':'')+'</div>'
+    +'<div style="color:#6b7280;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;border-top:1px solid #f3f4f6;padding-top:8px;">Sachverhalt</div>'
+    +'<div style="line-height:1.6;border-top:1px solid #f3f4f6;padding-top:8px;">'+(f.beschr||'–')+'</div>'
+    +'<div style="color:#6b7280;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;">Empfehlung</div>'
+    +'<div style="line-height:1.6;">'+(f.empf||'–')+'</div>'
+    +'</div></div>').join('');
+
+  const massnHtml=d.length?('<table style="width:100%;border-collapse:collapse;font-size:13px;">'
+    +'<thead><tr style="background:#1e3a5f;color:#fff;">'
+    +'<th style="padding:9px 12px;text-align:left;font-size:11px;letter-spacing:.06em;">ID</th>'
+    +'<th style="padding:9px 12px;text-align:left;font-size:11px;letter-spacing:.06em;">Maßnahme</th>'
+    +'<th style="padding:9px 12px;text-align:left;font-size:11px;letter-spacing:.06em;">Verantw.</th>'
+    +'<th style="padding:9px 12px;text-align:left;font-size:11px;letter-spacing:.06em;">Frist</th>'
+    +'<th style="padding:9px 12px;text-align:left;font-size:11px;letter-spacing:.06em;">Status</th>'
+    +'<th style="padding:9px 12px;text-align:center;font-size:11px;">Erl.</th></tr></thead><tbody>'
+    +d.map((f,i)=>'<tr style="'+(i%2?'background:#f8fafc;':'')+'">'
+      +'<td style="padding:8px 12px;font-family:monospace;font-size:11px;color:#1e3a5f;font-weight:700;">'+f.id+'</td>'
+      +'<td style="padding:8px 12px;font-size:12px;">'+(f.empf||'–')+'</td>'
+      +'<td style="padding:8px 12px;font-size:12px;color:#6b7280;">'+(f.verantw||'–')+'</td>'
+      +'<td style="padding:8px 12px;font-size:12px;color:'+(ov2(f.frist,f.status)?'#dc2626;font-weight:700':'#374151')+';">'+fs2(f.frist)+'</td>'
+      +'<td style="padding:8px 12px;">'+stbadge(f.status)+'</td>'
+      +'<td style="padding:8px 12px;text-align:center;"><span style="display:inline-block;width:16px;height:16px;border:1.5px solid #d1d5db;border-radius:3px;"></span></td>'
+      +'</tr>').join('')+'</tbody></table>')
+    :'<p style="color:#9ca3af;font-style:italic;">Keine Feststellungen erfasst.</p>';
+
+  const anlagen=p._anlagen||[];
+  const anlagenHtml=anlagen.length?('<table style="width:100%;border-collapse:collapse;font-size:13px;">'
+    +'<thead><tr style="background:#1e3a5f;color:#fff;"><th style="padding:8px 12px;text-align:left;">Nr.</th>'
+    +'<th style="padding:8px 12px;text-align:left;">Dokument</th><th style="padding:8px 12px;text-align:left;">Typ</th>'
+    +'<th style="padding:8px 12px;text-align:left;">Stand</th><th style="padding:8px 12px;text-align:left;">Datum</th></tr></thead><tbody>'
+    +anlagen.map((a,i)=>'<tr style="'+(i%2?'background:#f8fafc;':'')+'">'
+      +'<td style="padding:7px 12px;font-family:monospace;font-size:11px;color:#1e3a5f;">A-'+String(a.nr).padStart(2,'0')+'</td>'
+      +'<td style="padding:7px 12px;font-weight:500;">'+a.name+'</td>'
+      +'<td style="padding:7px 12px;color:#6b7280;">'+a.typ+'</td>'
+      +'<td style="padding:7px 12px;color:#6b7280;">'+a.stand+'</td>'
+      +'<td style="padding:7px 12px;color:#9ca3af;">'+a.datum+'</td></tr>').join('')+'</tbody></table>')
+    :'<p style="color:#9ca3af;font-style:italic;">Noch keine Anlagen erfasst.</p>';
+
+  const html='<!DOCTYPE html><html lang="de"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">'
+    +'<title>Revisionsbericht – '+p.name+'</title>'
+    +'<style>*{box-sizing:border-box;margin:0;padding:0;}body{font-family:-apple-system,BlinkMacSystemFont,sans-serif;background:#f3f4f6;color:#111827;font-size:14px;line-height:1.5;}'
+    +'.hdr{background:linear-gradient(135deg,#0a1a30,#1e3a5f);color:#fff;padding:28px 32px;display:flex;align-items:flex-start;justify-content:space-between;gap:20px;flex-wrap:wrap;}'
+    +'.hdr-meta{display:flex;gap:10px;flex-wrap:wrap;}.meta-box{background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.18);border-radius:6px;padding:10px 14px;}'
+    +'.meta-lbl{font-size:10px;opacity:.5;text-transform:uppercase;letter-spacing:.08em;}.meta-val{font-size:13px;font-weight:600;margin-top:2px;}'
+    +'.main{max-width:1100px;margin:0 auto;padding:24px 20px;}'
+    +'.sec{background:#fff;border:1px solid #e5e7eb;border-radius:10px;padding:22px 26px;margin-bottom:18px;}'
+    +'.sec-title{font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:#1e3a5f;border-bottom:2px solid #e5e7eb;padding-bottom:9px;margin-bottom:16px;}'
+    +'.kpi-row{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:10px;margin-bottom:16px;}'
+    +'.kpi{border-radius:8px;padding:14px;text-align:center;}.kpi-n{font-size:30px;font-weight:700;line-height:1;}'
+    +'.kpi-l{font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:.06em;opacity:.7;margin-top:4px;}'
+    +'.pbar-wrap{background:#e5e7eb;border-radius:6px;height:8px;margin-bottom:5px;}'
+    +'.pbar{height:8px;border-radius:6px;}'
+    +'.ampel{display:inline-block;padding:6px 14px;border-radius:16px;font-size:13px;font-weight:600;background:#f0fdf4;color:#15803d;margin-bottom:14px;}'
+    +'footer{background:#1e3a5f;color:rgba(255,255,255,.5);text-align:center;padding:18px;font-size:11px;margin-top:28px;}'
+    +'@media print{body{background:#fff;}.sec{box-shadow:none;page-break-inside:avoid;}}'
+    +'</style></head><body>'
+    +'<div class="hdr"><div><div style="font-size:10px;opacity:.4;letter-spacing:.12em;text-transform:uppercase;margin-bottom:5px;">BuiltSmart Hub · SMART Revision · Vertraulich</div>'
+    +'<div style="font-size:22px;font-weight:700;letter-spacing:-.02em;line-height:1.15;">Revisionsbericht</div>'
+    +'<div style="font-size:13px;opacity:.6;margin-top:3px;">'+p.name+'</div></div>'
+    +'<div class="hdr-meta">'
+    +'<div class="meta-box"><div class="meta-lbl">Auftraggeber</div><div class="meta-val">'+(p.auftraggeber||'–')+'</div></div>'
+    +'<div class="meta-box"><div class="meta-lbl">Prüfer</div><div class="meta-val">'+(p.pruefer||'–')+'</div></div>'
+    +'<div class="meta-box"><div class="meta-lbl">Berichtsdatum</div><div class="meta-val">'+dt+'</div></div>'
+    +'</div></div>'
+    +'<div class="main">'
+    +'<div class="sec"><div class="sec-title">Projektstatus &amp; Kennzahlen</div>'
+    +'<div class="ampel">'+ampel+'</div>'
+    +'<div class="kpi-row">'
+    +'<div class="kpi" style="background:#fef2f2;"><div class="kpi-n" style="color:#dc2626;">'+kritN+'</div><div class="kpi-l" style="color:#dc2626;">Kritisch</div></div>'
+    +'<div class="kpi" style="background:#fff7ed;"><div class="kpi-n" style="color:#ea580c;">'+erhN+'</div><div class="kpi-l" style="color:#ea580c;">Erheblich</div></div>'
+    +'<div class="kpi" style="background:#fefce8;"><div class="kpi-n" style="color:#ca8a04;">'+hiN+'</div><div class="kpi-l" style="color:#ca8a04;">Hinweise</div></div>'
+    +'<div class="kpi" style="background:#f0fdf4;"><div class="kpi-n" style="color:#16a34a;">'+erl+'</div><div class="kpi-l" style="color:#16a34a;">Erledigt</div></div>'
+    +'</div>'
+    +'<div style="font-size:12px;color:#6b7280;margin-bottom:5px;">Bearbeitungsfortschritt: <strong style="color:#111827;">'+pct+'%</strong> ('+erl+' von '+d.length+' Feststellungen erledigt)</div>'
+    +'<div class="pbar-wrap"><div class="pbar" style="width:'+pct+'%;background:'+pbar+';"></div></div></div>'
+    +'<div class="sec"><div class="sec-title">Feststellungen ('+d.length+' gesamt)</div>'+findHtml+'</div>'
+    +'<div class="sec"><div class="sec-title">Maßnahmenplan</div>'+massnHtml+'</div>'
+    +'<div class="sec"><div class="sec-title">Anlagen</div>'+anlagenHtml+'</div>'
+    +'</div>'
+    +'<footer>Erstellt durch SMART Revision · BuiltSmart Hub · www.built-smart-hub.com · '+dt+' · Vertraulich – nur für den Auftraggeber'
+    +'&nbsp;&nbsp;<button onclick="window.print()" style="border:1px solid rgba(255,255,255,.3);background:transparent;color:rgba(255,255,255,.7);padding:3px 12px;border-radius:4px;cursor:pointer;font-size:11px;">🖨 Drucken / PDF</button>'
+    +'</footer></body></html>';
+
+  const bl=new Blob([html],{type:'text/html;charset=utf-8'});
+  const url=URL.createObjectURL(bl);
+  const a=document.createElement('a');
+  a.href=url; a.download=(p.name||'Revisionsbericht').replace(/[\s\/\\:*?"<>|]/g,'_')+'_Auftraggeber.html';
+  document.body.appendChild(a); a.click();
+  setTimeout(()=>{document.body.removeChild(a);URL.revokeObjectURL(url);},500);
+  if(typeof addAkt==='function') addAkt('Auftraggeber-Portal exportiert ('+d.length+' Feststellungen)');
 }
 
 // ── REPORT AI GENERATION ──
