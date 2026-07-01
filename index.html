@@ -815,6 +815,11 @@ textarea{resize:vertical;min-height:72px;}
     <div class="ni" id="n-track" title="Nachverfolgung" onclick="gv('track')">
       <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="8" cy="8" r="7"/><path d="M8 4v4l3 2"/></svg><span class="sidebar-show">Nachverfolgung</span>
     </div>
+    <div class="ni" id="n-unterlagen" title="Unterlagen" onclick="gv('unterlagen')">
+      <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 2h7l3 3v9a1 1 0 01-1 1H3a1 1 0 01-1-1V3a1 1 0 011-1z"/><path d="M10 2v3h3M5 7h6M5 10h4"/></svg>
+      <span class="sidebar-show">Unterlagen</span>
+      <span class="nbadge sidebar-show" id="nbadge-unterlagen" style="display:none;background:rgba(202,138,4,.85);">0</span>
+    </div>
     <div class="snav-lbl">Abschluss</div>
     <div class="ni" id="n-rpt" title="Revisionsbericht" onclick="gv('rpt')">
       <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="1" width="12" height="14" rx="1"/><path d="M5 5h6M5 8h6M5 11h4"/></svg><span class="sidebar-show">Revisionsbericht</span>
@@ -1255,6 +1260,28 @@ textarea{resize:vertical;min-height:72px;}
         </div>
         <div class="mk-phase-nav" id="mk-phase-nav"></div>
         <div class="mk-phase-body" id="mk-phase-body"></div>
+      </div>
+    </div>
+
+    <!-- UNTERLAGEN -->
+    <div class="view" id="view-unterlagen">
+      <div class="panel">
+        <div class="ph">
+          <div class="pt">Unterlagen</div>
+          <div class="pc" id="ul-count">0 Einträge</div>
+          <div class="mla fl g8">
+            <button class="btn bg sm" onclick="ulFilter('alle')" id="ulf-alle" style="font-weight:700;">Alle</button>
+            <button class="btn bg sm" onclick="ulFilter('Ausstehend')" id="ulf-aus">⏳ Ausstehend</button>
+            <button class="btn bg sm" onclick="ulFilter('Eingesehen')" id="ulf-ein">✓ Eingesehen</button>
+            <button class="btn bg sm" onclick="ulFilter('Als Anlage beigefügt')" id="ulf-bei">📎 Beigefügt</button>
+            <button class="btn bp sm" onclick="rptAddAnlage()">+ Unterlage erfassen</button>
+          </div>
+        </div>
+        <div style="padding:0 20px 8px;font-size:12.5px;color:var(--ink2);line-height:1.6;background:var(--acl);border-bottom:1px solid var(--b);">
+          Zentrale Dokumentenliste der Prüfung. Unterlagen müssen <strong>nicht</strong> hochgeladen werden — es genügt die Erfassung als Nachweis, dass eine Unterlage vorlag oder angefordert wurde.
+          Das Anlagenverzeichnis im Revisionsbericht wird <strong>automatisch</strong> aus diesen Daten befüllt.
+        </div>
+        <div id="ul-body" style="padding:16px 20px;"></div>
       </div>
     </div>
 
@@ -1911,9 +1938,9 @@ function gv(v){
   document.querySelectorAll('.view').forEach(e=>e.classList.remove('active'));
   document.querySelectorAll('.ni').forEach(e=>e.classList.remove('active'));
   const el=document.getElementById('view-'+v); if(el) el.classList.add('active');
-  const ni=document.getElementById('n-'+({dashboard:'dash',fest:'fest',track:'track',ki:'ki',rpt:'rpt',mk:'mk',fk:'fk',lp:'lp'}[v]||v));
+  const ni=document.getElementById('n-'+({dashboard:'dash',fest:'fest',track:'track',unterlagen:'unterlagen',ki:'ki',rpt:'rpt',mk:'mk',fk:'fk',lp:'lp'}[v]||v));
   if(ni) ni.classList.add('active');
-  const T={dashboard:'Dashboard',fest:'Feststellungen',track:'Nachverfolgung',ki:'KI-Assistent',rpt:'Revisionsbericht',mk:'Auftrags- und Zieldefinition',fk:'Fristenkalender',lp:'HOAI LP-Prüflisten'};
+  const T={dashboard:'Dashboard',fest:'Feststellungen',track:'Nachverfolgung',unterlagen:'Unterlagen',ki:'KI-Assistent',rpt:'Revisionsbericht',mk:'Auftrags- und Zieldefinition',fk:'Fristenkalender',lp:'HOAI LP-Prüflisten'};
   document.getElementById('tbtitle').textContent=T[v]||v;
   if(v==='dashboard') rdDash();
   if(v==='fest') rdFest();
@@ -1921,6 +1948,7 @@ function gv(v){
   if(v==='rpt') rdRpt();
   if(v==='mk') mkRender();
   if(v==='fk') fkRender();
+  if(v==='unterlagen') ulRender();
   if(v==='lp') pl2Render();
 }
 
@@ -2221,10 +2249,84 @@ function rdRpt(){
   if(badge){ badge.textContent='Entwurf'; badge.className='badge bgy'; }
 }
 
+// ── UNTERLAGEN (zentral, shared mit Anlagenverzeichnis) ──────────────────────
+var _ulFilter='alle';
+function ulFilter(f){
+  _ulFilter=f;
+  ['alle','Ausstehend','Eingesehen','Als Anlage beigefügt'].forEach(k=>{
+    const id={'alle':'ulf-alle','Ausstehend':'ulf-aus','Eingesehen':'ulf-ein','Als Anlage beigefügt':'ulf-bei'}[k];
+    const el=document.getElementById(id); if(!el) return;
+    el.style.fontWeight=k===f?'700':'400';
+    el.style.borderColor=k===f?'var(--ac)':'var(--b)';
+  });
+  ulRender();
+}
+function ulRender(){
+  const p=AP(); const al=(p._anlagen||[]);
+  const filtered=_ulFilter==='alle'?al:al.filter(a=>a.status===_ulFilter);
+  const ausstN=al.filter(a=>a.status==='Ausstehend').length;
+  const badge=document.getElementById('nbadge-unterlagen');
+  if(badge){ badge.textContent=ausstN; badge.style.display=ausstN>0?'':'none'; }
+  const cnt=document.getElementById('ul-count');
+  if(cnt) cnt.textContent=al.length+' Einträge'+(ausstN?' · '+ausstN+' ausstehend':'');
+  const body=document.getElementById('ul-body');
+  if(!body) return;
+  const stBg={'Eingesehen':'background:#f0fdf4;color:#15803d;border:1px solid #bbf7d0',
+    'Als Anlage beigefügt':'background:#eff6ff;color:#1d4ed8;border:1px solid #bfdbfe',
+    'Angefordert':'background:#fff7ed;color:#c2410c;border:1px solid #fed7aa',
+    'Ausstehend':'background:#fff7ed;color:#c2410c;border:1px solid #fed7aa'};
+  const stLbl={'Eingesehen':'✓ Eingesehen','Als Anlage beigefügt':'📎 Beigefügt',
+    'Angefordert':'⏳ Ausstehend','Ausstehend':'⏳ Ausstehend'};
+  if(!filtered.length){
+    body.innerHTML='<div style="text-align:center;padding:40px;color:var(--ink3);font-style:italic;">'
+      +(_ulFilter==='alle'?'Noch keine Unterlagen erfasst. → „+ Unterlage erfassen"':'Keine Unterlagen in dieser Kategorie.')+'</div>';
+    return;
+  }
+  body.innerHTML='<table style="width:100%;border-collapse:collapse;font-size:13px;">'
+    +'<thead><tr style="border-bottom:2px solid var(--b);">'
+    +'<th style="padding:9px 10px;text-align:left;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--ink3);">Nr.</th>'
+    +'<th style="padding:9px 10px;text-align:left;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--ink3);">Bezeichnung</th>'
+    +'<th style="padding:9px 10px;text-align:left;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--ink3);">Typ</th>'
+    +'<th style="padding:9px 10px;text-align:left;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--ink3);">Stand</th>'
+    +'<th style="padding:9px 10px;text-align:left;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--ink3);">Status</th>'
+    +'<th style="padding:9px 10px;text-align:left;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--ink3);">Erfasst am</th>'
+    +'<th style="width:60px;"></th>'
+    +'</tr></thead><tbody>'
+    +filtered.map((a,i)=>{
+      const origIdx=(p._anlagen||[]).indexOf(a);
+      return '<tr style="border-bottom:1px solid var(--b);">'
+        +'<td style="padding:10px 10px;font-family:monospace;font-size:11px;color:var(--ac);font-weight:700;">A-'+String(a.nr).padStart(2,'0')+'</td>'
+        +'<td style="padding:10px 10px;font-weight:500;color:var(--ink);max-width:260px;">'+a.name
+          +(a.bemerkung?'<br><span style="font-size:11px;color:var(--ink3);font-weight:400;">'+a.bemerkung+'</span>':'')+'</td>'
+        +'<td style="padding:10px 10px;font-size:12px;color:var(--ink2);">'+a.typ+'</td>'
+        +'<td style="padding:10px 10px;font-size:12px;color:var(--ink3);">'+a.stand+'</td>'
+        +'<td style="padding:10px 10px;"><span style="padding:3px 10px;border-radius:10px;font-size:11px;font-weight:600;'+(stBg[a.status]||stBg['Eingesehen'])+';">'+(stLbl[a.status]||a.status)+'</span></td>'
+        +'<td style="padding:10px 10px;font-size:11.5px;color:var(--ink3);">'+a.datum+'</td>'
+        +'<td style="padding:10px 10px;display:flex;gap:5px;">'
+        +'<button class="btn bg sm" style="font-size:10px;padding:2px 7px;" onclick="ulEdit('+origIdx+')">✎</button>'
+        +'<button class="btn bg sm" style="font-size:10px;padding:2px 7px;" onclick="rptDelAnlage('+origIdx+');ulRender()">✕</button>'
+        +'</td></tr>';
+    }).join('')+'</tbody></table>';
+}
+function ulEdit(i){
+  const p=AP(); const a=(p._anlagen||[])[i]; if(!a) return;
+  _anlagenStatusSel=a.status||'Eingesehen';
+  _anlagenEditIdx=i;
+  const modal=document.getElementById('anlagen-modal');
+  if(modal){
+    const n=document.getElementById('anl-name'); if(n) n.value=a.name||'';
+    const t=document.getElementById('anl-typ'); if(t) t.value=a.typ||'Sonstiges';
+    const s=document.getElementById('anl-stand'); if(s) s.value=a.stand||'';
+    const b=document.getElementById('anl-bemerkung'); if(b) b.value=a.bemerkung||'';
+    anlagenSelectStatus(a.status||'Eingesehen');
+    modal.style.display='flex';
+  }
+}
+
 // ── ANLAGEN MANAGEMENT ───────────────────────────────────────────────────────
 var _anlagenStatusSel = 'Eingesehen';
 function rptAddAnlage(){
-  _anlagenStatusSel='Eingesehen';
+  _anlagenStatusSel='Eingesehen'; _anlagenEditIdx=-1;
   const modal=document.getElementById('anlagen-modal');
   if(modal){
     ['anl-name','anl-stand','anl-bemerkung'].forEach(id=>{const el=document.getElementById(id);if(el)el.value='';});
@@ -2255,6 +2357,7 @@ function anlagenSelectStatus(val){
     }
   });
 }
+var _anlagenEditIdx=-1;
 function rptSaveAnlage(){
   const name=(document.getElementById('anl-name')||{}).value||'';
   if(!name.trim()){
@@ -2266,14 +2369,20 @@ function rptSaveAnlage(){
   const stand=(document.getElementById('anl-stand')||{}).value||new Date().toLocaleDateString('de-DE');
   const bem=(document.getElementById('anl-bemerkung')||{}).value||'';
   const p=AP(); if(!p._anlagen) p._anlagen=[];
-  p._anlagen.push({
-    nr:p._anlagen.length+1,
-    name:name.trim(), typ, stand,
-    status:_anlagenStatusSel,
-    bemerkung:bem.trim(),
-    datum:new Date().toLocaleDateString('de-DE')
-  });
-  SP(); rdRpt(); closeAnlagenModal();
+  if(_anlagenEditIdx>=0 && p._anlagen[_anlagenEditIdx]){
+    const a=p._anlagen[_anlagenEditIdx];
+    a.name=name.trim(); a.typ=typ; a.stand=stand;
+    a.status=_anlagenStatusSel; a.bemerkung=bem.trim();
+  } else {
+    p._anlagen.push({nr:p._anlagen.length+1,name:name.trim(),typ,stand,
+      status:_anlagenStatusSel,bemerkung:bem.trim(),datum:new Date().toLocaleDateString('de-DE')});
+  }
+  _anlagenEditIdx=-1;
+  SP();
+  if(document.getElementById('view-unterlagen')&&document.getElementById('view-unterlagen').classList.contains('active')) ulRender();
+  if(document.getElementById('view-rpt')&&document.getElementById('view-rpt').classList.contains('active')) rdRpt();
+  else rptRenderAnlagen();
+  closeAnlagenModal();
 }
 function closeAnlagenModal(){
   const modal=document.getElementById('anlagen-modal');
@@ -2283,7 +2392,9 @@ function rptDelAnlage(i){
   const p=AP(); if(!p._anlagen) return;
   p._anlagen.splice(i,1);
   p._anlagen.forEach((a,j)=>a.nr=j+1);
-  SP(); rdRpt();
+  SP();
+  if(document.getElementById('view-unterlagen')&&document.getElementById('view-unterlagen').classList.contains('active')) ulRender();
+  rptRenderAnlagen();
 }
 function rptRenderAnlagen(){
   const p=AP(); const al=p._anlagen||[];
